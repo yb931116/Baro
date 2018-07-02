@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="authority">
+	
+	
+	<select id="list" resultType="Map" parameterType="Map">
+	    select 
+			 AUTHORITY_ID 
+			, NAME 
+			, DESCRIPTION 
+			, USE_YN 
+			, REGISTRY_DATE 
+			, MODIFIER_SEQ 
+			, MODIFY_DATE
+		from CIP_AUTHORITY
+		<![CDATA[
+		where 1 = 1
+		]]>
+		order by NAME
+	</select>
+	
+</mapper>
