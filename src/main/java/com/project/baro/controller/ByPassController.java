@@ -1,9 +1,9 @@
 package com.project.baro.controller;
 
-import org.springframework.stereotype.Controller;
+/*import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-@Controller
+*/
+//@Controller
 public class ByPassController {
 	
 	
@@ -11,10 +11,10 @@ public class ByPassController {
 	 * method default�� GET
 	 */
 	
-	@RequestMapping(value = "/*")
+/*	@RequestMapping(value = "/*")
 	public void byPass() {	
 		
-	}
+	}*/
 	
 
 }

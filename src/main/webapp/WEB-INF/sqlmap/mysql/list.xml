@@ -4,26 +4,17 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="member">
+<mapper namespace="list">
 	<select id="list" resultType="Map" parameterType="Map">
 	    select 
-			MEMBER_SEQ <!-- 회원_SEQ -->
-			, MEMBER_ID <!-- 회원 ID -->
-			, PASSWORD <!-- 암호 -->
-			, CRYPT_PASSWORD	<!-- 암호화된 암호 -->
-			, NAME <!-- 명칭 -->
-			, EMAIL <!-- EMAIL -->
-			, CELLPHONE <!-- 휴대폰번호 -->
-			, ORGANIZATION_SEQ <!-- 조직 일련번호 -->
-			, REGISTER_SEQ <!-- 등록자SEQ -->
-			, REGISTRY_DATE <!-- 등록일자 -->
-			, MODIFIER_SEQ <!-- 수정자_SEQ -->
-			, MODIFY_DATE <!-- 수정일자 -->
-		from CIP_MEMBER
+			business_no <!-- 회원_SEQ -->
+			, business_name <!-- 회원 ID -->
+			, business_uid <!-- 암호 -->
+		from projectdb.business
 		<![CDATA[
 		where 1 = 1
 		]]>
-		order by NAME
+		order by business_no
 	</select>
 
 	<select id="read" resultType="Map" parameterType="Map">
