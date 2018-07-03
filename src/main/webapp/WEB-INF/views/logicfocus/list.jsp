@@ -7,7 +7,17 @@
 	<div class="main-panel">
 		<div class="content" style="background-color: white;">
 			<div class="container-fluid">
-				<table class="table table-striped mt-4">
+			
+			<div class = float-left >
+			<div class = "col-md-1 mb-3">
+				<a href="<c:url value='/logicfocus/insert'/>">
+				<button class = "btn btn-default" >
+				프로젝트 생성</button>
+				</a>
+			</div>
+			
+			</div>
+				<table class="table mt-4 table-hover">
 					<thead>
 						<tr>
 							<th scope="col">#</th>
@@ -17,11 +27,11 @@
 							<th scope="col">해결된 문제</th>
 						</tr>
 					</thead>
+					
 					<tbody>
 						<c:forEach items="${resultList}" var="resultData" varStatus="loop">
-							<tr
-								class="${(loop.index+1)%2 == 2 ? 'odd gradeX' : 'even gradeC'}">
-								<td>${resultData.business_no}</td>
+							<tr>
+								<td class="business_no">${resultData.business_no}</td>
 								<td>${resultData.business_name}</td>
 								<td>Jsn</td>
 								<td>10</td>
@@ -29,10 +39,28 @@
 							</tr>
 						</c:forEach>
 					</tbody>
+					
 				</table>
 
 			</div>
 		</div>
 	</div>
-
 </body>
+
+<script>
+ 	$(function() {
+ 		$("tr").click(function(){
+ 			var el =  $(this).find(".business_no");
+ 			var form = document.createElement("form");
+ 			var hidden = document.createElement("input");
+ 			hidden.setAttribute("type","hidden");
+ 			hidden.setAttribute("value",el.text());
+ 			form.appendChild(hidden);
+ 			form.setAttribute("method","POST");
+ 			form.setAttribute("action","<c:url value= '/logicfocus/read'/>");
+ 			$(document.body).append(form);
+ 			form.submit();
+ 		});
+	}); 
+
+</script>
