@@ -16,5 +16,10 @@ public class ByPassController {
 		
 	}
 	
+	@RequestMapping(value = "/*/*")
+	public void byPass2() {	
+		
+	}
+	
 
 }
