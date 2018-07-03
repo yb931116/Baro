@@ -22,7 +22,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.project.baro" />
-	
+<!-- 	
 	<beans:bean id="tilesViewResolver"
 		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
 		<beans:bean id="tilesConfigurer"
@@ -36,5 +36,5 @@
 		value="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerF
 		actory" />
 	</beans:bean>
-	
+	 -->
 </beans:beans>

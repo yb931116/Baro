@@ -8,6 +8,7 @@
 <h1>
 	Hello world!  
 </h1>
+<button onclick="/test">MySql Test!</button>
 
 <P>  The time on the server is ${serverTime}. </P>
 </body>
