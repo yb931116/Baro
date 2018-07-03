@@ -42,7 +42,7 @@
 					</div>
 					<ul class="nav">
 						<li class="nav-item">
-							<a href="">
+							<a href="<c:url value='/index'/>">
 								<i class="la la-dashboard"></i>
 								<p>Main</p>
 								<span class="badge badge-count">5</span>
@@ -50,7 +50,7 @@
 						</li>
 						
 						<li class="nav-item">
-							<a href="">
+							<a href="<c:url value='/logicfocus/list'/>">
 								<i class="la la-dashboard"></i>
 								<p>List</p>
 								<span class="badge badge-count">5</span>
