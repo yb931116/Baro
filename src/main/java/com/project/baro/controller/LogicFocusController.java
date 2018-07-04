@@ -18,7 +18,7 @@ import com.project.baro.service.LogicFocusService;
 @Controller
 public class LogicFocusController {
 	
-	private final static String MAPPING = "logicfocus/";
+	private final static String MAPPING = "/logicfocus/";
 	
 	@Autowired
 	private LogicFocusService service;
@@ -40,10 +40,13 @@ public class LogicFocusController {
 			resultList=(List)service.getList(paramMap);
 		}else if("/read/detail".equalsIgnoreCase(action)) {
 			viewName = viewName.replaceFirst("/", "");
+			viewName = "logicfocus/popup";
 		}else if("/insert/problem".equalsIgnoreCase(action)) {
 			viewName = viewName.replaceFirst("/", "");
+			viewName = "logicfocus/popup";
 		}else if("/insert/answer".equalsIgnoreCase(action)) {
 			viewName = viewName.replaceFirst("/", "");
+			viewName = "logicfocus/popup";
 		}
 		/*else if ("update".equalsIgnoreCase(action)) {
 			resultMap = (Map<String, Object>) service.getObject(paramMap);
