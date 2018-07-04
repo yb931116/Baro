@@ -111,9 +111,9 @@
 		
 		if(element.text()!=null ){
 			url= "<c:url value='/logicfocus/read/detail?ORIGINAL_NO="+no.text()+"'/>";
-		}if else(td.hasClass("colPro")){
+		}else if(td.hasClass("colPro")){
 			url= "<c:url value='/logicfocus/insert/problem?ORIGINAL_NO="+no.text()+"' />";
-		}if else(td.hasClass("colAns")){
+		}else if(td.hasClass("colAns")){
 			url= "<c:url value='/logicfocus/insert/answer?ORIGINAL_NO="+no.text()+"' />";
 			
 		}

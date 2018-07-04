@@ -18,7 +18,7 @@ import com.project.baro.service.LogicFocusService;
 @Controller
 public class LogicFocusController {
 	
-	private final static String MAPPING = "/logicfocus/";
+	private final static String MAPPING = "logicfocus/";
 	
 	@Autowired
 	private LogicFocusService service;

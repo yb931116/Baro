@@ -9,7 +9,7 @@
 	    select 
 			business_no <!-- 회원_SEQ -->
 			, business_name <!-- 회원 ID -->
-			, business_uid <!-- 암호 -->
+			, business_user_id <!-- 암호 -->
 		from projectdb.business
 		<![CDATA[
 		where 1 = 1

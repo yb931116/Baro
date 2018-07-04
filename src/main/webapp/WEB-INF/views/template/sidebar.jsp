@@ -7,7 +7,7 @@
 				<div class="scrollbar-inner sidebar-wrapper">
 					<div class="user">
 						<div class="photo">
-							<img src="resources/img/profile.jpg">
+							<img src="<c:url value='/resources/img/profile.jpg'/>">
 						</div>
 						<div class="info">
 							<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -42,7 +42,7 @@
 					</div>
 					<ul class="nav">
 						<li class="nav-item">
-							<a href="<c:url value='/index'/>">
+							<a href="<c:url value='/'/>">
 								<i class="la la-dashboard"></i>
 								<p>Main</p>
 								<span class="badge badge-count">5</span>
