@@ -6,7 +6,7 @@
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header">
-				<div class="card-title">Base Form Control</div>
+				<div class="card-title">문제 제기</div>
 			</div>
 			<div class="card-body">
 
