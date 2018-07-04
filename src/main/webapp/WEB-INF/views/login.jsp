@@ -21,7 +21,7 @@
 								<div class="col-md-6">
 									<p>
 										비밀번호 <input type="password" class="form-control"
-											placeholder="패스워드를 입력하세요" id = "password" name="pw">
+											placeholder="패스워드를 입력하세요" id = "password" name="password">
 									</p>
 									<label class="form-check-label">
 										<input class="form-check-input" type="checkbox" value="">
@@ -33,7 +33,7 @@
 								 
 							<div class="card-footer">
 
-									<button class="btn btn-default btn-xs">회원가입</button>
+									<a href="<c:url value = '/signup'/>"><button class="btn btn-default btn-xs">회원가입</button></a>
 									<button class="btn btn-default btn-xs">아이디찾기</button>
 									<button class="btn btn-default btn-xs">비밀번호찾기</button>
 									<div class=float-right> 

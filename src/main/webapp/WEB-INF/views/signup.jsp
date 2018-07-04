@@ -47,7 +47,7 @@
 							<div class="card-body">
 								<div class="col-md-6">
 									<p>아이디 <input type="text" class="form-control"
-										placeholder="아이디를 입력하세요" id = "text" name="id">
+										placeholder="6자 이상 영문과 숫자를 입력해주세요." id = "text" name="id">
 									</p> 		
 										<button class="btn btn-default btn-xs">중복확인</button>
 								</div>
@@ -55,21 +55,21 @@
 								<div class="col-md-6">
 									<p>
 										비밀번호 <input type="password" class="form-control"
-											placeholder="패스워드를 입력하세요" id = "password" name="pw">
+											placeholder="8~20자 이내 영문과 숫자를 입력해주세요." id = "password" name="pw">
 									</p>
 								</div>
 								<hr>
 								<div class="col-md-6">
 									<p>
 										비밀번호확인 <input type="password" class="form-control"
-											placeholder="패스워드를 입력하세요" id = "password2" name="pw2">
+											placeholder="패스워드를 재입력하세요" id = "password2" name="pw2">
 									</p>
 								</div>
 								<hr>
 								<div class="col-md-8">
 									<p>
 										이메일 <input type="email" class="form-control"
-											placeholder="이메일을 입력하세요" id = "email" name="email">
+											placeholder="이메일 형식에 맞춰 입력하세요" id = "email" name="email">
 									</p>
 								</div>
 								<hr>
