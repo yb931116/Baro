@@ -8,7 +8,7 @@
 			<div class="container-fluid">
 				<h4 class="page-title">로그인</h4>
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-8">
 						<div class="card"> 
 							<div class="card-body">
 								<div class="col-md-6">
@@ -32,14 +32,14 @@
 								<hr>
 								 
 							<div class="card-footer">
+
 									<button class="btn btn-default btn-xs">회원가입</button>
 									<button class="btn btn-default btn-xs">아이디찾기</button>
 									<button class="btn btn-default btn-xs">비밀번호찾기</button>
-									<div class="col-md-8">
 									<div class=float-right> 
 										<button class="btn btn-default">로그인</button> 
 									</div>
-									</div>
+									
 								
 							</div>	 
 						</div>

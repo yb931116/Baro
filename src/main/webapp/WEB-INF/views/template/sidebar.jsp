@@ -22,13 +22,8 @@
 							<div class="collapse in" id="collapseExample" aria-expanded="true" style="">
 								<ul class="nav">
 									<li>
-										<a href="#profile">
-											<span class="link-collapse">My Profile</span>
-										</a>
-									</li>
-									<li>
-										<a href="#edit">
-											<span class="link-collapse">Edit Profile</span>
+										<a href="<c:url value='/mypage'/>">
+											<span class="link-collapse">My Page</span>
 										</a>
 									</li>
 									<li>
@@ -53,6 +48,20 @@
 							<a href="<c:url value='/logicfocus/list'/>">
 								<i class="la la-dashboard"></i>
 								<p>List</p>
+								<span class="badge badge-count">5</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="<c:url value='/login'/>">
+								<i class="la la-dashboard"></i>
+								<p>Login</p>
+								<span class="badge badge-count">5</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="<c:url value='/signup'/>">
+								<i class="la la-dashboard"></i>
+								<p>Signup</p>
 								<span class="badge badge-count">5</span>
 							</a>
 						</li>
