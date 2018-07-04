@@ -46,10 +46,10 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="col-md-6">
-									<p>
-										아이디 <input type="text" class="form-control"
-											placeholder="아이디를 입력하세요" id = "text" name="id">
-									</p>
+									<p>아이디 <input type="text" class="form-control"
+										placeholder="아이디를 입력하세요" id = "text" name="id">
+									</p> 		
+										<button class="btn btn-default btn-xs">중복확인</button>
 								</div>
 								<hr>
 								<div class="col-md-6">
