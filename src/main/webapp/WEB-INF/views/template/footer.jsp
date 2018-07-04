@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
-<footer class="footer">
+<footer class="footer" style="background-color: #dee2e6;">
 					<div class="container-fluid">
 						<nav class="pull-left">
 							<ul class="nav">
