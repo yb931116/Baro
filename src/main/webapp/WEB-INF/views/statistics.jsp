@@ -63,13 +63,19 @@ var fn_statistics = function(params) {
 							"<th scope='col'>참여한 프로젝트</th>"+
 						"</tr>"+
 					"</thead>"+
-					
 					"<tbody><tr><td>yb931116</td><td>유병욱</td><td>21</td><td>32</td><td>8</td></tr>"+
 					"<tr><td>rudxor456</td><td>오경택</td><td>4</td><td>11</td><td>3</td></tr><tr>"+
 					"<td>gmlrjs95020</td><td>김희건</td><td>34</td><td>8</td><td>9</td></tr>"+
 					"</tbody></table>";
 					}else if(condition=="individual"){
-						tableTag="<form><input type='text' placehold='아이디 검색'></form>";
+						tableTag="<form class='navbar-left navbar-form nav-search mr-md-3 form-inline'  style='width: 400px;' action=''>"+
+						"<div class='input-group'>"+
+						"<input type='text' placeholder='아이디 검색' class='form-control'>"+
+						"<div class='input-group-append'>"+
+							"<span class='input-group-text'>"+
+								"<i class='la la-search search-icon'></i></span></div></div>"+
+								"<button type='button' class='btn btn-primary btn-sm' onclick='statistics_individual()'>"+
+								"검색</button></form>";
 					}else if(condition=="project"){
 						tableTag="<label>프로젝트명: 창의적 공헌실적의 DB화</label>"+
 						"<table class='table mt-4 table-hover'>"+
@@ -79,13 +85,12 @@ var fn_statistics = function(params) {
 							"<th scope='col'>성명</th>"+
 							"<th scope='col'>제기한 문제</th>"+
 							"<th scope='col'>제안한 해결책</th>"+
-							"<th scope='col'>참여한 프로젝트</th>"+
 						"</tr>"+
 					"</thead>"+
 					
-					"<tbody><tr><td>yb931116</td><td>유병욱</td><td>21</td><td>32</td><td>8</td></tr>"+
-					"<tr><td>rudxor456</td><td>오경택</td><td>4</td><td>11</td><td>3</td></tr><tr>"+
-					"<td>gmlrjs95020</td><td>김희건</td><td>34</td><td>8</td><td>9</td></tr>"+
+					"<tbody><tr><td>yb931116</td><td>유병욱</td><td>5</td><td>13</td></tr>"+
+					"<tr><td>rudxor456</td><td>오경택</td><td>0</td><td>4</td></tr><tr>"+
+					"<td>gmlrjs95020</td><td>김희건</td><td>18</td><td>5</td></tr>"+
 					"</tbody></table>";
 					}
 					
@@ -105,6 +110,59 @@ var fn_statistics = function(params) {
      fn_statistics();
   }
 	/*========= END OF Ajax  ===========*/
+	
+	
+	var fn_individual = function(params) {
+	
+		var condition= $("#squareSelect").val();
+		
+		
+     $.ajax({
+              type : "POST",
+              url : null,
+              data : params, 
+              dataType: "text",
+              cache : false,
+              success : function(data) {
+            	  var tableTag="";
+            	  
+            	  tableTag="<table class='table mt-4 table-hover'>"+
+					"<thead>"+
+						"<tr>"+
+							"<th scope='col'>아이디</th>"+
+							"<th scope='col'>성명</th>"+
+							"<th scope='col'>제기한 문제</th>"+
+							"<th scope='col'>제안한 해결책</th>"+
+							"<th scope='col'>참여한 프로젝트</th>"+
+						"</tr>"+
+					"</thead>"+
+					"<tbody><tr><td>yb931116</td><td>유병욱</td><td>21</td><td>32</td><td>8</td></tr>"+
+					"</tbody></table>";
+
+					$('#statistics_content').html("<form class='navbar-left navbar-form nav-search mr-md-3 form-inline'  style='width: 400px;' action=''>"+
+							"<div class='input-group'>"+
+							"<input type='text' placeholder='아이디 검색' class='form-control'>"+
+							"<div class='input-group-append'>"+
+								"<span class='input-group-text'>"+
+									"<i class='la la-search search-icon'></i></span></div></div>"+
+									"<button type='button' class='btn btn-primary btn-sm' onclick='statistics_individual()'>"+
+									"검색</button></form>");
+				  $('#statistics_content').html($('#statistics_content').html()+tableTag);
+				
+              },
+              error : function(xhr,status, exception) {
+                 alert("Failure \n ("+ status + ")");
+                 return false;
+              }
+           });
+  }
+
+
+  function statistics_individual() {
+     fn_individual();
+  }
+	
+	
 	
 </script>
 
