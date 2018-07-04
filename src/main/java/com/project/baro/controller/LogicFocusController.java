@@ -38,15 +38,6 @@ public class LogicFocusController {
 		// divided depending on action value
 		if ("list".equalsIgnoreCase(action)) {
 			resultList=(List)service.getList(paramMap);
-		}else if("/read/detail".equalsIgnoreCase(action)) {
-			viewName = viewName.replaceFirst("/", "");
-			viewName = "logicfocus/popup";
-		}else if("/insert/problem".equalsIgnoreCase(action)) {
-			viewName = viewName.replaceFirst("/", "");
-			viewName = "logicfocus/popup";
-		}else if("/insert/answer".equalsIgnoreCase(action)) {
-			viewName = viewName.replaceFirst("/", "");
-			viewName = "logicfocus/popup";
 		}
 		/*else if ("update".equalsIgnoreCase(action)) {
 			resultMap = (Map<String, Object>) service.getObject(paramMap);
@@ -74,6 +65,50 @@ public class LogicFocusController {
 		modelandView.addObject("resultList", resultList);
 		return modelandView;
 	}
+	
+	@RequestMapping(value="/logicfocus/read/{action}", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView read(@RequestParam Map<String, Object> paramMap, @PathVariable String action,
+			ModelAndView modelandView) {
+		
+		String viewName = "logicfocus/popup" ;
+		String forwardView = (String) paramMap.get("forwardView") ;
 
+		Map<String, Object> resultMap = new HashMap<String, Object>() ;
+		List<Object> resultList = new ArrayList<Object>();
+	
+		
+		if(forwardView != null){
+			viewName = forwardView;
+		}
+		
+		modelandView.setViewName(viewName);
+		
+		modelandView.addObject("paramMap", paramMap);
+		modelandView.addObject("resultMap", resultMap);
+		modelandView.addObject("resultList", resultList);
+		return modelandView;
+	}
 
+	@RequestMapping(value="/logicfocus/insert/{action}", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView insert(@RequestParam Map<String, Object> paramMap, @PathVariable String action,
+			ModelAndView modelandView) {
+	
+		String viewName = "logicfocus/popup" ;
+		String forwardView = (String) paramMap.get("forwardView") ;
+
+		Map<String, Object> resultMap = new HashMap<String, Object>() ;
+		List<Object> resultList = new ArrayList<Object>();
+		
+		
+		if(forwardView != null){
+			viewName = forwardView;
+		}
+		
+		modelandView.setViewName(viewName);
+		
+		modelandView.addObject("paramMap", paramMap);
+		modelandView.addObject("resultMap", resultMap);
+		modelandView.addObject("resultList", resultList);
+		return modelandView;
+	}
 }
