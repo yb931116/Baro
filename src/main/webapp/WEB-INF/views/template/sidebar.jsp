@@ -56,7 +56,14 @@
 								<span class="badge badge-count">5</span>
 							</a>
 						</li>
-
+						
+						<li class="nav-item">
+							<a href="<c:url value='/statistics'/>">
+								<i class="la la-dashboard"></i>
+								<p>통계</p>
+								<span class="badge badge-count">5</span>
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>

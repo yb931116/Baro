@@ -4,8 +4,8 @@
 	
 <body>
 
-	<div class="main-panel">
-		<div class="content" style="background-color: white;">
+	<div class="main-panel" style="background-color: white;">
+		<div class="content">
 			<div class="container-fluid">
 			
 			<div class = float-left >
@@ -54,8 +54,9 @@
  			var form = document.createElement("form");
  			var hidden = document.createElement("input");
  			hidden.setAttribute("type","hidden");
+ 			hidden.setAttribute("name","business_no");
  			hidden.setAttribute("value",el.text());
- 			form.appendChild(hidden);
+ 			form.append(hidden);
  			form.setAttribute("method","POST");
  			form.setAttribute("action","<c:url value= '/logicfocus/read'/>");
  			$(document.body).append(form);
