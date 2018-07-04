@@ -38,7 +38,14 @@ public class LogicFocusController {
 		// divided depending on action value
 		if ("list".equalsIgnoreCase(action)) {
 			resultList=(List)service.getList(paramMap);
-		} /*else if ("update".equalsIgnoreCase(action)) {
+		}else if("/read/detail".equalsIgnoreCase(action)) {
+			viewName = viewName.replaceFirst("/", "");
+		}else if("/insert/problem".equalsIgnoreCase(action)) {
+			viewName = viewName.replaceFirst("/", "");
+		}else if("/insert/answer".equalsIgnoreCase(action)) {
+			viewName = viewName.replaceFirst("/", "");
+		}
+		/*else if ("update".equalsIgnoreCase(action)) {
 			resultMap = (Map<String, Object>) service.getObject(paramMap);
 			paramMap.put("action", action);
 		} else if ("merge".equalsIgnoreCase(action)) {
@@ -49,9 +56,7 @@ public class LogicFocusController {
 			resultList = (List<Object>) service.getList(paramMap);
 		} else if ("delete".equalsIgnoreCase(action)) {
 			resultList = (List<Object>) service.deleteObject(paramMap);
-		} else if("crawling".equalsIgnoreCase(action)) {
-			resultList = (List)cService.getListMIT(paramMap);
-		}else if("list_pagination".equalsIgnoreCase(action)) {
+		} *//*else if("list_pagination".equalsIgnoreCase(action)) {
 			resultMap = (Map<String, Object>)service.getListPagination(paramMap);
 		}*/
 		

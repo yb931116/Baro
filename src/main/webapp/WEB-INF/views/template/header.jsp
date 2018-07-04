@@ -20,7 +20,6 @@
 	<script type="text/javascript" src="<c:url value='/resources/js/plugin/chart-circle/circles.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/js/ready.min.js'/>"></script>
-	<!-- 모달  javascript-->
 	<script type="text/javascript" src="<c:url value='/resources/js/common.js'/>"></script>
 	<link type="text/css" rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css'/>">
 	<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i'/>">
