@@ -48,50 +48,20 @@
 		</where>
 	</select>
 
-	<insert id="merge" parameterType="Map">
-	    INSERT INTO CIP_MEMBER (
-			MEMBER_SEQ <!-- 회원_SEQ -->
-			, MEMBER_ID <!-- 회원 ID -->
-			, PASSWORD <!-- 암호 -->
-			, CRYPT_PASSWORD	<!-- 암호화된 암호 -->
-			, NAME <!-- 명칭 -->
-			, EMAIL <!-- EMAIL -->
-			, CELLPHONE <!-- 휴대폰번호 -->
-			, ORGANIZATION_SEQ <!-- 조직 일련번호 -->
-			, REGISTER_SEQ <!-- 등록자SEQ -->
-			, REGISTRY_DATE <!-- 등록일자 -->
-			, MODIFIER_SEQ <!-- 수정자_SEQ -->
-			, MODIFY_DATE <!-- 수정일자 -->
+	<insert id="insert" parameterType="Map">
+	    INSERT INTO projectdb.business (
+			business_no
+			, business_name
+			, business_user_id
 		)
 		values(
-			#{MEMBER_SEQ} <!-- 회원_SEQ -->
-			, #{MEMBER_ID} <!-- 회원 ID -->
-			, #{PASSWORD} <!-- 암호 -->
-			, #{CRYPT_PASSWORD}	<!-- 암호화된 암호 -->
-			, #{NAME} <!-- 명칭 -->
-			, #{EMAIL} <!-- EMAIL -->
-			, #{CELLPHONE} <!-- 휴대폰번호 -->
-			, #{ORGANIZATION_SEQ} <!-- 조직 일련번호 -->
-			, #{REGISTER_SEQ} <!-- 등록자SEQ -->
-			, sysdate() <!-- 등록일자 -->
-			, #{REGISTER_SEQ} <!-- 수정자_SEQ -->
-			, sysdate() <!-- 수정일자 -->
+			(select 
+			max(business_no)+1 
+			from 
+			( select business_no from  `projectdb`.`business`) as business_no)
+			, #{business_name}
+			, uuid()
 		)
-		ON DUPLICATE KEY UPDATE 
-			MEMBER_ID = #{MEMBER_ID} <!-- 회원 ID -->
-			, PASSWORD = #{PASSWORD} <!-- 암호 -->
-			, CRYPT_PASSWORD = #{CRYPT_PASSWORD}	<!-- 암호화된 암호 -->
-			, NAME = #{NAME} <!-- 명칭 -->
-			, EMAIL = #{EMAIL} <!-- EMAIL -->
-			, CELLPHONE = #{CELLPHONE} <!-- 휴대폰번호 -->
-			, ORGANIZATION_SEQ = #{ORGANIZATION_SEQ} <!-- 조직 일련번호 -->
-			, MODIFIER_SEQ = #{MODIFIER_SEQ} <!-- 수정자_SEQ -->
-			, MODIFY_DATE = sysdate() <!-- 수정일자 -->
-	    <!-- selectKey resultType="int" keyProperty="cnt" order="BEFORE">
-			SELECT count(1)
-			FROM CIP_MEMBER
-			WHERE MEMBER_SEQ = #{MEMBER_SEQ}
-		</selectKey -->
 
 	</insert>
 

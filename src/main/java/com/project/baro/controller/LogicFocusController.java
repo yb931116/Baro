@@ -1,3 +1,6 @@
+/*Sidebar의  List 메뉴와 관련된 Controller임.
+ * 
+*/
 package com.project.baro.controller;
 
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ public class LogicFocusController {
    private LogicFocusService service;
    
    
+   // Sidebar의 List 메뉴에서 접근할 수 있는 가장 깊은(3 depth) URI인 read와 insert 내의 popup Modal 관련 Method
       @RequestMapping(value="/logicfocus/read/{action}", method = { RequestMethod.GET, RequestMethod.POST })
       public ModelAndView read(@RequestParam Map<String, Object> paramMap, @PathVariable String action,
             ModelAndView modelandView) {
@@ -70,6 +74,7 @@ public class LogicFocusController {
          return modelandView;
       }
    
+      //Sidebar의 List 메뉴에서 접근 할 수 있는 2 depth URI인 list와 read 관련 method
    @RequestMapping(value = MAPPING+"{action}", method = { RequestMethod.GET, RequestMethod.POST })
    public ModelAndView actionMethod(@RequestParam Map<String, Object> paramMap, @PathVariable String action,
          ModelAndView modelandView) {
@@ -84,16 +89,13 @@ public class LogicFocusController {
       // divided depending on action value
       if ("list".equalsIgnoreCase(action)) {
          resultList=(List)service.getList(paramMap);
-      }else if("/read/detail".equalsIgnoreCase(action)) {
-         viewName = viewName.replaceFirst("/", "");
-         viewName = "logicfocus/popup";
-      }else if("/insert/problem".equalsIgnoreCase(action)) {
-         viewName = viewName.replaceFirst("/", "");
-         viewName = "logicfocus/popup";
-      }else if("/insert/answer".equalsIgnoreCase(action)) {
-         viewName = viewName.replaceFirst("/", "");
-         viewName = "logicfocus/popup";
-      }
+      }else if ("edit".equalsIgnoreCase(action)) {
+       }else if ("insert".equalsIgnoreCase(action)) {
+          service.saveObject(paramMap);
+          viewName=MAPPING+"list";
+          resultList=(List)service.getList(paramMap);
+       }
+      
       /*else if ("update".equalsIgnoreCase(action)) {
          resultMap = (Map<String, Object>) service.getObject(paramMap);
          paramMap.put("action", action);

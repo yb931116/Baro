@@ -9,6 +9,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="card">
+								<form action="<c:url value='/logicfocus/insert'/>" method="POST">
 									<div class="card-header">
 											<div class="col-md-9">
 												<p>해당 사업명
@@ -35,11 +36,12 @@
 									<div class="card-footer">
 										<div class = float-right>
 											<div class = "col-md-1">
-												<button class = "btn btn-default">작성하기</button>
+												<button type="submit" class = "btn btn-default">작성하기</button>
 											</div>
 										</div>
 										
 									</div>
+									</form>
 								</div>
 							</div>
 						</div>
