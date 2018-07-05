@@ -31,8 +31,9 @@
 					
 				</div>
 				<div class="card-action">
-					<button class="btn btn-success">확인</button>
-					<button class="btn btn-danger">취소</button>
+					<button class="btn btn-success mr-3">확인</button>
+					<button class="btn btn-danger" data-dismiss="modal"
+					aria-hidden="true">취소</button>
 				</div>
 			</div>
 		</div>

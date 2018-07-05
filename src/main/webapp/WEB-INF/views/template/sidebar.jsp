@@ -60,7 +60,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<c:url value='/signup'/>">
+							<a href="<c:url value='/signup/signup'/>">
 								<i class="la la-dashboard"></i>
 								<p>Signup</p>
 								<span class="badge badge-count">5</span>
