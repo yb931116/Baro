@@ -23,20 +23,27 @@
       });
       //비밀번호 확인 입력 창
       $("#password2").blur(function(e) {
-         if ($("#password").val() != $("#password2").val()) {
+         if ($("#password").val() != $("#password2").val() && $("#password2").val().length != 0) {
             alert("[PW 입력오류 : 패스워드가 일치하지 않습니다. 재입력하세요.");
          }
       });
       //이메일 입력 창
       $("#email").blur(function(e) {
          if (re_mail.test($("#email").val()) != true && $("#email").val().length != 0) {
-            alert("[이메일 입력오류 : ]");
+            alert("[이메일 입력오류 : 이메일 형식에 맞게 입력해 주세요.]");
+         }
+      });
+      //전화번호 입력 창
+      $("#tel").blur(function(e) {
+         if (re_tel.test($("#tel").val()) != true && $("#tel").val().length != 0) {
+            alert("[전화번호 입력오류 : 숫자만 입력해 주세요.]");
          }
       });
    });
 </script>
 
 <body>
+<form class="form-horizontal" role="form" action = "<c:url value ='/signup/insert'/>" method="POST">
 	<div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">
@@ -47,57 +54,58 @@
 							<div class="card-body">
 								<div class="col-md-6">
 									<p>아이디 <input type="text" class="form-control"
-										placeholder="6자 이상 영문과 숫자를 입력해주세요." id = "text" name="id">
+										placeholder="6자 이상 영문과 숫자를 입력해주세요." id = "text" name="ID">
 									</p> 		
-										<button class="btn btn-default btn-xs">중복확인</button>
+										<button class="btn btn-default btn-xs" type = "submit" formaction = "<c:url value ='/signup/IdCheckForm'/>">중복확인</button>
+										
 								</div>
 								<hr>
 								<div class="col-md-6">
 									<p>
 										비밀번호 <input type="password" class="form-control"
-											placeholder="8~20자 이내 영문과 숫자를 입력해주세요." id = "password" name="pw">
+											placeholder="8~20자 이내 영문과 숫자를 입력해주세요." id = "password" name="PW">
 									</p>
 								</div>
 								<hr>
 								<div class="col-md-6">
 									<p>
 										비밀번호확인 <input type="password" class="form-control"
-											placeholder="패스워드를 재입력하세요" id = "password2" name="pw2">
+											placeholder="패스워드를 재입력하세요" id = "password2" name="PW2">
 									</p>
 								</div>
 								<hr>
 								<div class="col-md-8">
 									<p>
 										이메일 <input type="email" class="form-control"
-											placeholder="이메일 형식에 맞춰 입력하세요" id = "email" name="email">
+											placeholder="이메일 형식에 맞춰 입력하세요" id = "email" name="EMAIL">
 									</p>
 								</div>
 								<hr>
 								<div class="col-md-3">
 									<p>
 										이름 <input type="text" class="form-control"
-											placeholder="이름을 입력하세요" id = "name" name="name">
+											placeholder="이름을 입력하세요" id = "name" name="NAME">
 									</p>
 								</div>
 								<hr>
 								<div class="col-md-4">
 									<p>
 										휴대폰 번호 <input type="tel" class="form-control"
-											placeholder="전화번호를 입력하세요" id = "tel" name="tel">
+											placeholder="'-'을 제외한 숫자만 입력하세요" id = "tel" name="TEL">
 									</p>	 
 								</div>
 								<hr>
 								<div class="col-md-10">
 									<p>
 										주소 <input type="text" class="form-control"
-											placeholder="주소를 입력하세요" id = "address" name="address	">
+											placeholder="주소를 입력하세요" id = "address" name="ADDRESS">
 									</p>	 
 								</div>
 								<hr>
 								<div class="col-md-10">
 									<p>
 										상세주소 <input type="text" class="form-control"
-											placeholder="상세주소를 입력하세요" id = "address" name="address_detail">
+											placeholder="상세주소를 입력하세요" id = "address_detail" name="ADDRESS_DETAIL">
 									</p>	 
 								</div>
 							</div>
@@ -106,7 +114,7 @@
 							<div class="card-footer">
 								<div class=float-right>
 									<div class="col-md-1">
-										<button class="btn btn-default">회원가입</button>
+										<button class="btn btn-default" type = "submit">회원가입</button>
 									</div>
 								</div>
 
@@ -117,4 +125,5 @@
 			</div>
 		</div>
 	</div>
+	</form>
 </body>
