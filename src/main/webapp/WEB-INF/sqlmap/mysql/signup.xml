@@ -11,5 +11,8 @@
 		VALUES(#{USER_ID}, #{ID},#{PW},#{NAME},#{EMAIL},#{TEL},#{ADDRESS}, #{ADDRESS_DETAIL})
 	</insert>
 	
+	<select id="readID" resultType="Map" parameterType="Map">
+		SELECT ID FROM USER_INFO WHERE ID = #{ID}		
+	</select>
 	
 </mapper>

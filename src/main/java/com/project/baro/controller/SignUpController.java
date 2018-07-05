@@ -36,13 +36,9 @@ public class SignUpController {
 		
 		if("signup".equalsIgnoreCase(action)){
 			viewName= "/"+action;
-			
 		}else if("insert".equalsIgnoreCase(action)) {
 			service.signup_insert("",paramMap);
 			viewName= "/index";
-
-		}else if("IdCheckForm".equalsIgnoreCase(action)) {
-			viewName= "/"+action;
 		}
 		
 		if(forwardView != null){

@@ -31,4 +31,11 @@ public class SignupService {
 		
 		return resultData;
 	}
+	public Object signup_idcheck(String sqlMapId, Map<String, Object> paramMap) {
+		sqlMapId = "signup.readID";
+		Object resultData = dao.getObject(sqlMapId, paramMap);
+		
+		
+		return resultData;
+	}
 }
