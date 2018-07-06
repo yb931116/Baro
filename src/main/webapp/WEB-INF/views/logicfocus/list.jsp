@@ -10,7 +10,7 @@
 			
 			<div class = float-left >
 			<div class = "col-md-1 mb-3">
-				<a href="<c:url value='/logicfocus/insert'/>">
+				<a href="<c:url value='/logicfocus/edit'/>">
 				<button class = "btn btn-default" >
 				프로젝트 생성</button>
 				</a>
@@ -31,7 +31,8 @@
 					<tbody>
 						<c:forEach items="${resultList}" var="resultData" varStatus="loop">
 							<tr>
-								<td class="business_no">${resultData.business_no}</td>
+								<td class="business_no" style="display:none;" >${resultData.business_no}</td>
+								<td>${loop.index+1}</td>
 								<td>${resultData.business_name}</td>
 								<td>Jsn</td>
 								<td>10</td>

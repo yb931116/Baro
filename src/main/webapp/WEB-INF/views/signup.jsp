@@ -10,8 +10,8 @@
       var re_mail = /^([\w\.-]+)@([a-z\d\.-]+)\.([a-z\.]{2,6})$/; // 이메일 검사식
       var re_tel = /^[0-9]{8,11}$/; // 전화번호 검사식
       //아이디 입력 창
-      $("#text").blur(function(e) {
-         if (re_id.test($("#text").val()) != true && $("#text").val().length != 0 ) {
+      $("#id").blur(function(e) {
+         if (re_id.test($("#id").val()) != true && $("#id").val().length != 0 ) {
             alert("[ID 입력오류 : 6자 이상 영문과 숫자를 입력해주세요.]");
          }
       });
@@ -52,11 +52,13 @@
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-body">
-								<div class="col-md-6">
-									<p>아이디 <input type="text" class="form-control"
-										placeholder="6자 이상 영문과 숫자를 입력해주세요." id = "text" name="ID">
-									</p> 		
-										<button class="btn btn-default btn-xs" type = "submit" formaction = "<c:url value ='/signup/IdCheckForm'/>">중복확인</button>
+								<div class="col-md-12">
+									아이디
+									<div class ="form-inline"> 
+									<input type="text" class="form-control col-md-6"
+									placeholder="6자 이상 영문과 숫자를 입력해주세요." id = "id" name="ID"><label id = "id_check">abc</label>
+									</div> 		
+									<button class="btn btn-default btn-xs" type = "button" onclick="IdCheck()">중복확인</button>
 										
 								</div>
 								<hr>
@@ -127,3 +129,40 @@
 	</div>
 	</form>
 </body>
+
+<script>
+
+
+function IdCheck(){
+	
+	var ID = $("#id").val(); 
+	$.ajax({
+	    type : "POST",
+	    url : "<c:url value='/ws/idcheck'/>",
+	    data : {"ID" : ID} 
+	  	  		, 
+	    dataType: "json",
+	    cache : false,
+	    success : function(data) {
+	       		$("#id_check").text("아이디가 존재합니다.");	    		
+	    },
+	  
+	    error : function(xhr,status, exception) {
+ 	    		$("#id_check").text("사용 가능한 아이디입니다.");
+			return false;	      
+	    }
+	 });
+	
+	
+}
+</script>
+
+
+
+
+
+
+
+
+
+
