@@ -99,12 +99,8 @@
 						
 						<c:choose>
 							<c:when test="${principalName eq null}">
-<<<<<<< HEAD
-								<li class="nav-item"><a class="profile-pic" href = "<c:url value='/login/login'/>"><span>Login</span></a></li>
-								
-=======
+
 								<li class="nav-item"><a class="dropdown-toggle profile-pic" href = "<c:url value='/login/login'/>" aria-expanded="false"><span>Login</span></a></li>
->>>>>>> branch 'master' of https://github.com/yb931116/Baro.git
 							</c:when>
 						
 						
