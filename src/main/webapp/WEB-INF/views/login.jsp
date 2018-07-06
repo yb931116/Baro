@@ -3,6 +3,7 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <body>
+<form class="form-horizontal" role="form" action="<c:url value ='/j_spring_security_check'/>" method="POST">
 	<div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">
@@ -14,7 +15,7 @@
 								<div class="col-md-6">
 									<p>
 										아이디 <input type="text" class="form-control"
-											placeholder="아이디를 입력하세요" id = "text" name="id">
+											placeholder="아이디를 입력하세요" id = "id" name="id">
 									</p>
 								</div>
 								
@@ -33,12 +34,15 @@
 								 
 							<div class="card-footer">
 
-									<a href="<c:url value = '/signup'/>"><button class="btn btn-default btn-xs">회원가입</button></a>
-									<button class="btn btn-default btn-xs">아이디찾기</button>
-									<button class="btn btn-default btn-xs">비밀번호찾기</button>
+									<a href="<c:url value = '/signup/signup'/>"><button class="btn btn-default btn-xs" type = "button">회원가입</button></a>
+									<button class="btn btn-default btn-xs" type = "button">아이디찾기</button>
+									<button class="btn btn-default btn-xs" type = "button">비밀번호찾기</button>
 									<div class=float-right> 
-										<button class="btn btn-default">로그인</button> 
+										<button class="btn btn-default" type = "submit">로그인</button> 
 									</div>
+									<c:if test="${paramMap.fail eq true}">
+										<span style="color:red">아이디와 비밀번호를 확인하세요.</span>
+									</c:if>
 									
 								
 							</div>	 
@@ -48,6 +52,8 @@
 			</div>
 		</div>
 	</div>
+	</div>
+	</form>
 </body>
 
 

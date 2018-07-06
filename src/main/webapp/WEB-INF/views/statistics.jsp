@@ -64,9 +64,9 @@ var fn_statistics = function(params) {
 						"</tr>"+
 					"</thead>"+
 					"<tbody><tr><td>inhog</td><td>임인호</td><td>8</td><td>43</td><td>11</td></tr>"+
-					"<tbody><tr><td>clap8965</td><td>박수형</td><td>0</td><td>1</td><td>1</td></tr>"+
-					"<tbody><tr><td>aniaml1256</td><td>이봉오</td><td>87</td><td>44</td><td>21</td></tr>"+
-					"<tbody><tr><td>yb931116</td><td>유병욱</td><td>21</td><td>32</td><td>8</td></tr>"+
+					"<tr><td>clap8965</td><td>박수형</td><td>0</td><td>1</td><td>1</td></tr>"+
+					"<tr><td>aniaml1256</td><td>이봉오</td><td>87</td><td>44</td><td>21</td></tr>"+
+					"<tr><td>yb931116</td><td>유병욱</td><td>21</td><td>32</td><td>8</td></tr>"+
 					"<tr><td>rudxor456</td><td>오경택</td><td>4</td><td>11</td><td>3</td></tr>"+
 					"<tr><td>gmlrjs95020</td><td>김희건</td><td>34</td><td>8</td><td>9</td></tr>"+
 					"</tbody></table>";

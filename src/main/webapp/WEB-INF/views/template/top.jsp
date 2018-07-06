@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<c:set var="principalName" value="${pageContext.request.userPrincipal.name}"/>
     
     
 		<div class="main-header">
@@ -16,16 +17,6 @@
 			<nav class="navbar navbar-header navbar-expand-lg">
 				<div class="container-fluid">
 					
-					<form class="navbar-left navbar-form nav-search mr-md-3" action="">
-						<div class="input-group">
-							<input type="text" placeholder="Search ..." class="form-control">
-							<div class="input-group-append">
-								<span class="input-group-text">
-									<i class="la la-search search-icon"></i>
-								</span>
-							</div>
-						</div>
-					</form>
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 						<li class="nav-item dropdown hidden-caret">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -95,28 +86,60 @@
 								</li>
 							</ul>
 						</li>
+						
+						
+<%-- 						<c:choose> --%>
+<%--       						<c:when test="${principalName eq null}"> --%>
+      			
+<%--       						</c:when> --%>
+<%--       						<c:otherwise> --%>
+<%-- 								<li><a href="<c:url value='#'/>">${principalName}</a></li> --%>
+<%-- 							</c:otherwise> --%>
+<%--       					</c:choose> --%>
+						
+						<c:choose>
+							<c:when test="${principalName eq null}">
+
+								<li class="nav-item"><a class="dropdown-toggle profile-pic" href = "<c:url value='/login/login'/>" aria-expanded="false"><span>Login</span></a></li>
+							</c:when>
+						
+						
+						<c:otherwise>
+						
 						<li class="nav-item dropdown">
-							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="<c:url value='/resources/img/profile.jpg'/>" alt="user-img" width="36" class="img-circle"><span >Hizrian</span></span> </a>
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> 
+								<span>
+									${principalName}
+								</span> 
+							</a>
 							<ul class="dropdown-menu dropdown-user">
 								<li>
-									<div class="user-box">
-										<div class="u-img"><img src="<c:url value='/resources/img/profile.jpg'/>" alt="user"></div>
+									<div class="user-box"> 
+										
 										<div class="u-text">
-											<h4>Hizrian</h4>
-											<p class="text-muted">hello@themekita.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+											<h4>${principalName}</h4> 
+											<p class="text-muted">hello@themekita.com</p>
 										</div>
-									</li>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#"><i class="ti-user"></i> My Profile</a>
+									</div>
+								</li>
+									<div class="dropdown-divider">
+									</div>
+									<a class="dropdown-item" href="<c:url value='/mypage'/>"><i class="ti-user"></i> My Page</a>
 									<a class="dropdown-item" href="#"></i> My Balance</a>
 									<a class="dropdown-item" href="#"><i class="ti-email"></i> Inbox</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="#"><i class="ti-settings"></i> Account Setting</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#"><i class="fa fa-power-off"></i> Logout</a>
+									<a class="dropdown-item" href="<c:url value='/j_spring_security_logout'/>"><i class="fa fa-power-off"></i> Logout</a>
 								</ul>
 								<!-- /.dropdown-user -->
 							</li>
+							</c:otherwise>
+							
+							
+							</c:choose>
+							
+
 						</ul>
 					</div>
 				</nav>

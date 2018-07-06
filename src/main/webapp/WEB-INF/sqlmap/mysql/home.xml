@@ -4,17 +4,17 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="home">
+<mapper namespace="list">
 	<select id="list" resultType="Map" parameterType="Map">
 	    select 
-			business_no <!-- 회원_SEQ -->
-			, business_name <!-- 회원 ID -->
-			, business_user_id <!-- 암호 -->
+			 business_name 
+			, business_user_id 
 		from projectdb.business
 		<![CDATA[
 		where 1 = 1
 		]]>
 		order by business_no
+		Limit 2;
 	</select>
 
 	<select id="read" resultType="Map" parameterType="Map">
