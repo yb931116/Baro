@@ -56,9 +56,9 @@
 									아이디
 									<div class ="form-inline"> 
 									<input type="text" class="form-control col-md-6"
-									placeholder="6자 이상 영문과 숫자를 입력해주세요." id = "id" name="ID"><label id = "id_check">abc</label>
+									placeholder="6자 이상 영문과 숫자를 입력해주세요." id = "id" name="ID"><label class="ml-1" id = "id_check"></label>
 									</div> 		
-									<button class="btn btn-default btn-xs" type = "button" onclick="IdCheck()">중복확인</button>
+									<button class="btn btn-default btn-xs mt-1" type = "button" onclick="IdCheck()">중복확인</button>
 										
 								</div>
 								<hr>
