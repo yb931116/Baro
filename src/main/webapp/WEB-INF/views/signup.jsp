@@ -53,6 +53,7 @@
 </script>
 
 <body>
+
 	<form class="form-horizontal" role="form"
 		action="<c:url value ='/signup/insert'/>" method="POST">
 		<div class="main-panel">
@@ -71,8 +72,11 @@
 												id="id_input" class="text-danger"></label>
 										</div>	
 									<button class="btn btn-default btn-xs" type = "button" onclick="IdCheck()">중복확인</button><label id = "id_check"></label>										
-									</div> 		
-								
+
+									
+										
+								</div>
+
 								<hr>
 									<div class="col-md-12">
 										<p>비밀번호</p>
