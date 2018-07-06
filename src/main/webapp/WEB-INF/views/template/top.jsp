@@ -120,7 +120,7 @@
 											<p class="text-muted">hello@themekita.com</p>
 										</div>
 									</div>
-									</li>
+								</li>
 									<div class="dropdown-divider">
 									</div>
 									<a class="dropdown-item" href="<c:url value='/mypage'/>"><i class="ti-user"></i> My Page</a>
@@ -138,9 +138,7 @@
 							
 							</c:choose>
 							
-							
-							
-							
+
 						</ul>
 					</div>
 				</nav>
