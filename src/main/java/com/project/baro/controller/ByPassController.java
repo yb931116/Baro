@@ -17,8 +17,7 @@ public class ByPassController {
 	}
 	
 	@RequestMapping(value = "/*/*")
-	public String byPass2() {	
-		return "/*/*";
+	public void byPass2() {	
 	}
 
 	

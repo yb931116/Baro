@@ -100,6 +100,7 @@
 						<c:choose>
 							<c:when test="${principalName eq null}">
 								<li class="nav-item"><a class="profile-pic" href = "<c:url value='/login/login'/>"><span>Login</span></a></li>
+								
 							</c:when>
 						
 						
