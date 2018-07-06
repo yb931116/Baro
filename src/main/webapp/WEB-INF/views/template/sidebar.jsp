@@ -5,36 +5,7 @@
     
 			<div class="sidebar">
 				<div class="scrollbar-inner sidebar-wrapper">
-					<div class="user">
-						<div class="photo">
-							<img src="<c:url value='/resources/img/profile.jpg'/>">
-						</div>
-						<div class="info">
-							<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-								<span>
-									Hizrian
-									<span class="user-level">Administrator</span>
-									<span class="caret"></span>
-								</span>
-							</a>
-							<div class="clearfix"></div>
-
-							<div class="collapse in" id="collapseExample" aria-expanded="true" style="">
-								<ul class="nav">
-									<li>
-										<a href="<c:url value='/mypage'/>">
-											<span class="link-collapse">My Page</span>
-										</a>
-									</li>
-									<li>
-										<a href="#settings">
-											<span class="link-collapse">Settings</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
+					
 					<ul class="nav">
 						<li class="nav-item">
 							<a href="<c:url value='/'/>">
@@ -53,7 +24,7 @@
 						</li>
 
 						<li class="nav-item">
-							<a href="<c:url value='/login'/>">
+							<a href="<c:url value='/login/login'/>">
 								<i class="la la-dashboard"></i>
 								<p>Login</p>
 								<span class="badge badge-count">5</span>

@@ -11,6 +11,11 @@
 		VALUES(#{USER_ID}, #{ID},#{PW},#{NAME},#{EMAIL},#{TEL},#{ADDRESS}, #{ADDRESS_DETAIL})
 	</insert>
 	
+	<insert id="insert_authority_rel">
+		INSERT INTO
+		authority_rel(user_id, authority_id)
+		VALUES(#{USER_ID}, '1')
+	</insert>
 	<select id="readID" resultType="Map" parameterType="Map">
 		SELECT ID FROM USER_INFO WHERE ID = #{ID}		
 	</select>
