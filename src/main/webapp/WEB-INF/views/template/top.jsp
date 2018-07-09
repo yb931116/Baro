@@ -6,7 +6,7 @@
     
 		<div class="main-header">
 			<div class="logo-header">
-				<a href="<c:url value='/index'/>" class="logo">
+				<a href="<c:url value='/'/>" class="logo">
 					Ready Dashboard
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
