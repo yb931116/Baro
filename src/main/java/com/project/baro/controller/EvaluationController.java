@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class LoginController {
-	private final static String MAPPING = "/login";
+public class EvaluationController {
+	private final static String MAPPING = "/evaluation";
 	
 	@RequestMapping(value = MAPPING+"{action}", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView actionMethod(@RequestParam Map<String, Object> paramMap ,@PathVariable String action,
@@ -25,11 +25,7 @@ public class LoginController {
 		List<Object> resultList = new ArrayList<Object>();
 		
 		if("".equalsIgnoreCase(action)){
-
-			viewName= "/login";
-		}else if("/findID".equalsIgnoreCase(action)) {
-			viewName = "/id_find_popup";
-
+			//TODO 서비스 연동 필요
 		}
 		
 		modelandView.setViewName(viewName);

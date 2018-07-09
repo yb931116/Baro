@@ -10,6 +10,7 @@ public class ByPassController {
 	/**
 	 * method default�� GET
 	 */
+
 	
 	@RequestMapping(value = "/index")
 	public String byPass() {	
@@ -27,6 +28,6 @@ public class ByPassController {
 	}
 
 
-	
+
 
 }

@@ -35,8 +35,10 @@ public class SignUpController {
 		List<Object> resultList = new ArrayList<Object>();
 		
 		if("".equalsIgnoreCase(action)){
+
 			viewName= "/signup";
-		}else if("insert".equalsIgnoreCase(action)) {
+		}else if("/insert".equalsIgnoreCase(action)) {
+
 			service.signup_insert("",paramMap);
 			viewName= "/index";
 		}
