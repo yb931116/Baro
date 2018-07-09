@@ -35,7 +35,7 @@
 							<div class="card-footer">
 
 									<a href="<c:url value = '/signup/signup'/>"><button class="btn btn-default btn-xs" type = "button">회원가입</button></a>
-									<button class="btn btn-default btn-xs" type = "button">아이디찾기</button>
+									<button class="btn btn-default btn-xs" type = "button" id = "findID">아이디찾기</button>
 									<button class="btn btn-default btn-xs" type = "button">비밀번호찾기</button>
 									<div class=float-right> 
 										<button class="btn btn-default" type = "submit">로그인</button> 
@@ -50,10 +50,28 @@
 					</div>
 				</div>
 			</div>
+			<div class="modal fade" id="myModal"></div>
 		</div>
 	</div>
 	</div>
 	</form>
 </body>
 
+<script>
+//Modal
+$(document).ready(function() {
+   $("#findID").click(function() {
+      fn_selectContentsPop($(this));
+   });
+});
 
+var fn_selectContentsPop = function() {
+  
+   var url ;
+   
+   url= "<c:url value='/login/findId'/>";
+   common.layerPopup(url, "#myModal");
+};
+
+
+</script>

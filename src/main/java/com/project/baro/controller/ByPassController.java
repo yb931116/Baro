@@ -11,15 +11,21 @@ public class ByPassController {
 	 * method default�� GET
 	 */
 	
-	@RequestMapping(value = "/*")
-	public void byPass() {	
-		
+	@RequestMapping(value = "/index")
+	public String byPass() {	
+		return "/index";
 	}
 	
-	@RequestMapping(value = "/*/*")
+	@RequestMapping(value = "/statistics")
 	public String byPass2() {	
-		return "/*/*";
+		return "/statistics";
 	}
+	
+	@RequestMapping(value = "/mypage")
+	public String byPass3() {	
+		return "/mypage";
+	}
+
 
 	
 

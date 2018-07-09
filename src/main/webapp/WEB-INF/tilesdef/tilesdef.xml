@@ -18,7 +18,12 @@
    	</definition>
 	
 	
-	<definition name="*" extends="layout.user">
+<!-- 	<definition name="*" extends="layout.user"> -->
+<!-- 		 <put-attribute name="layout.title" value="{1}" />  -->
+<!-- 		<put-attribute name="layout.body" value="/WEB-INF/views/{1}.jsp" /> -->
+<!-- 	</definition> -->
+	
+	<definition name="*" template="/WEB-INF/views/template/layout_popup.jsp">
 		 <put-attribute name="layout.title" value="{1}" /> 
 		<put-attribute name="layout.body" value="/WEB-INF/views/{1}.jsp" />
 	</definition>

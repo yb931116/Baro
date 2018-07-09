@@ -8,15 +8,17 @@
    
    	<http use-expressions="true">
     	<!-- return boolean -->
-    	<form-login login-page="/login/login" login-processing-url="/j_spring_security_check" authentication-failure-url="/login/login?fail=true" default-target-url="/" always-use-default-target="true" username-parameter="id" password-parameter="password"/>
+    	<form-login login-page="/login" login-processing-url="/j_spring_security_check" authentication-failure-url="/login/login?fail=true" default-target-url="/" always-use-default-target="true" username-parameter="id" password-parameter="password"/>
     	<logout logout-success-url="/" logout-url="/j_spring_security_logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
     	<csrf disabled = "true"/>
     	
     	<intercept-url pattern="/resources/**" access="permitAll()"/>
     	<intercept-url pattern="/" access="permitAll()"/>
+    	<intercept-url pattern="/index" access="permitAll()"/>
+    	<intercept-url pattern="/login" access="permitAll()"/>
+    	<intercept-url pattern="/signup" access="permitAll()"/>
     	<intercept-url pattern="/*" access="hasRole('ROLE_USER')"/>
-    	<intercept-url pattern="/login/login" access="permitAll()"/>
-    	<intercept-url pattern="/signup/signup" access="permitAll()"/>
+    	<intercept-url pattern="/login/findId" access="permitAll()"/>
     	<intercept-url pattern="/*/*" access="hasRole('ROLE_USER')"/>
     	<intercept-url pattern="/*/*/*" access="hasRole('ROLE_USER')"/>
 <!--     	<intercept-url pattern="/*/*" access="hasRole('ROLE_USER')"/> -->
