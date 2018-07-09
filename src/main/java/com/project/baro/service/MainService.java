@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.project.baro.dao.ShareDao;
 
 @Service
-public class HomeService {
+public class MainService {
 	@Autowired ShareDao dao;
 	
 	public Object getList(Object dataMap) {

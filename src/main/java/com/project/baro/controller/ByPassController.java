@@ -11,11 +11,7 @@ public class ByPassController {
 	 * method default�� GET
 	 */
 
-	
-	@RequestMapping(value = "/index")
-	public String byPass() {	
-		return "/index";
-	}
+
 	
 	@RequestMapping(value = "/statistics")
 	public String byPass2() {	

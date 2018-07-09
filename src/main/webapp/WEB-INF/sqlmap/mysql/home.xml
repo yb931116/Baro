@@ -6,14 +6,13 @@
     
 <mapper namespace="list">
 	<select id="list" resultType="Map" parameterType="Map">
-	    select 
-			 business_name 
-			, business_user_id 
-		from projectdb.business
-		<![CDATA[
-		where 1 = 1
-		]]>
-		order by business_no
+		
+		 select 
+		 	b.business_no as business_no
+			 ,b.business_name as business_name
+			, u.name as user_name
+		from projectdb.business b, projectdb.user_info u
+        where b.business_user_id= u.user_id
 		Limit 2;
 	</select>
 

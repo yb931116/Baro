@@ -26,20 +26,74 @@
 								<div class="mb-5">&nbsp</div>
 								<div class="mb-5">&nbsp</div>
 							<!--------------------->
-							
-						 <div class="row">
-						  <div class="col-md-6">
-							 <div class="card">
-							 ????
-							 </div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">
+										최근 생성된 프로젝트
+									</div>
+								</div>
+								<table class="table mt-4 table-hover">
+									<thead>
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">프로젝트명</th>
+											<th scope="col">생성자</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<c:forEach items="${resultList}" var="resultData"
+											varStatus="loop">
+											<tr>
+												<td class="business_no" style="display: none;">${resultData.business_no}</td>
+												<td>${loop.index+1}</td>
+												<td>${resultData.business_name}</td>
+												<td>${resultData.user_name}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+
+								</table>
+							</div>
 						</div>
-						 <div class="col-md-6">
-							 <div class="card">
-							 ????
-							 </div>
-						   </div>
-						  </div>
+
+
+						<div class="col-md-6">
+							<div class="card">
+							<div class="card-header">
+									<div class="card-title">
+										인기 프로젝트
+									</div>
+								</div>
+								<table class="table mt-4 table-hover">
+									<thead>
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">프로젝트명</th>
+											<th scope="col">생성자</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<c:forEach items="${resultList}" var="resultData"
+											varStatus="loop">
+											<tr>
+												<td class="business_no" style="display: none;">${resultData.business_no}</td>
+												<td>${loop.index+1}</td>
+												<td>${resultData.business_name}</td>
+												<td>${resultData.user_name}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+
+								</table>
+							</div>
+						</div>
 					</div>
+				</div>
 				</div>
 
 			</div>
