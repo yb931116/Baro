@@ -9,10 +9,21 @@
       $("#tel").blur(function(e) {
          if (re_tel.test($("#tel").val()) != true && $("#tel").val().length != 0) {
             $("#tel_input").text("전화번호 입력오류 : 길이에 맞춰 숫자만 입력해 주세요.");
+         }else if($("#tel").val()==''){
+        	 $("#tel_input").text("전화번호를 입력하세요"); 
          }else{
         	 $("#tel_input").text(""); 
          }
       });
+		//이름 입력 창
+      $("#name").blur(function(e) {
+    	 if($("#name").val()==''){ 
+    		 $("#name_input").text("이름을 입력하세요");
+    	 }else{
+        	 $("#name_input").text(""); 
+         }
+      });
+		
 	});
      </script>
 
@@ -26,7 +37,7 @@
 								<div class="col-md-12">
 									<p>
 										이름 <input type="text" class="form-control"
-											placeholder="이름을 입력하세요" id = "name" name="NAME">
+											placeholder="이름을 입력하세요" id = "name" name="NAME"><label id = "name_input" class = "text-danger"></label>
 									</p>
 								</div>
 								
@@ -55,7 +66,7 @@
 							</div> 
 						</div>
 						<div class="card-action">
-							<button class="btn btn-success mr-3">확인</button>
+							<button class="btn btn-success mr-3" type = "button" onclick = "IdFind()">확인</button>
 							<button class="btn btn-danger" data-dismiss="modal"
 								aria-hidden="true">취소</button>
 								
@@ -65,5 +76,13 @@
 				</div>
 			</div>
 
+<script>
+	function IdFind(){
+	
+		
+	
+	}
+
+</script>
 
 	
