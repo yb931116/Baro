@@ -1,5 +1,8 @@
 package com.project.baro.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,15 +12,15 @@ import com.project.baro.dao.ShareDao;
 public class MainService {
 	@Autowired ShareDao dao;
 	
-	public Object getRecentList(Object dataMap) {
+	public Object getLists(Object dataMap) {
+		Map<String, Object> resultMap = new HashMap<>();
 		String sqlMapId = "home.recentList";
-		Object resultObject = dao.getList(sqlMapId, dataMap);
-		return resultObject;
+		resultMap.put("recentList", dao.getList(sqlMapId, dataMap));
+		
+		sqlMapId="home.hotList";
+		resultMap.put("hotList", dao.getList(sqlMapId, dataMap));
+		return resultMap;
 	}
 	
-	public Object getHotList(Object dataMap) {
-		String sqlMapId = "home.hotList";
-		Object resultObject = dao.getList(sqlMapId, dataMap);
-		return resultObject;
-	}
+
 }

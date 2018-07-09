@@ -45,7 +45,7 @@
 									</thead>
 
 									<tbody>
-										<c:forEach items="${resultList}" var="resultData"
+										<c:forEach items="${resultMap.recentList}" var="resultData"
 											varStatus="loop">
 											<tr>
 												<td class="business_no" style="display: none;">${resultData.business_no}</td>
@@ -78,7 +78,7 @@
 									</thead>
 
 									<tbody>
-										<c:forEach items="${resultList}" var="resultData"
+										<c:forEach items="${resultMap.hotList}" var="resultData"
 											varStatus="loop">
 											<tr>
 												<td class="business_no" style="display: none;">${resultData.business_no}</td>
