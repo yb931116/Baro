@@ -9,10 +9,15 @@ import com.project.baro.dao.ShareDao;
 public class MainService {
 	@Autowired ShareDao dao;
 	
-	public Object getList(Object dataMap) {
-		String sqlMapId = "home.list";
+	public Object getRecentList(Object dataMap) {
+		String sqlMapId = "home.recentList";
 		Object resultObject = dao.getList(sqlMapId, dataMap);
 		return resultObject;
 	}
 	
+	public Object getHotList(Object dataMap) {
+		String sqlMapId = "home.hotList";
+		Object resultObject = dao.getList(sqlMapId, dataMap);
+		return resultObject;
+	}
 }

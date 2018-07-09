@@ -42,7 +42,7 @@ public ModelAndView home(@RequestParam Map<String, Object> paramMap ,Locale loca
 	
 	Map<String,Object> resultMap = new HashMap<String, Object>();
 	List<Object> resultList = new ArrayList<Object>();
-	resultList = (List)service.getList(paramMap);
+	resultList = (List)service.getRecentList(paramMap);
 	
 	modelandView.setViewName("/index");
 	modelandView.addObject("paramMap",paramMap);
@@ -58,7 +58,7 @@ public ModelAndView actionMethod(@RequestParam Map<String, Object> paramMap ,@Pa
 		String viewName="/"+action;
 		Map<String,Object> resultMap = new HashMap<String, Object>();
 		List<Object> resultList = new ArrayList<Object>();
-		resultList = (List)service.getList(paramMap);
+		resultList = (List)service.getRecentList(paramMap);
 		
 		
 		modelandView.setViewName(viewName);
