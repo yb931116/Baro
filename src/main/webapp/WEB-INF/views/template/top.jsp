@@ -100,7 +100,7 @@
 						<c:choose>
 							<c:when test="${principalName eq null}">
 
-								<li class="nav-item"><a class="dropdown-toggle profile-pic" href = "<c:url value='/login/login'/>" aria-expanded="false"><span>Login</span></a></li>
+								<li class="nav-item"><a class="dropdown-toggle profile-pic" href = "<c:url value='/login/index'/>" aria-expanded="false"><span>Login</span></a></li>
 							</c:when>
 						
 						

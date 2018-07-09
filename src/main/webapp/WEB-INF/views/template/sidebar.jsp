@@ -24,14 +24,14 @@
 						</li>
 
 						<li class="nav-item">
-							<a href="<c:url value='/login'/>">
+							<a href="<c:url value='/login/index'/>">
 								<i class="la la-dashboard"></i>
 								<p>Login</p>
 								<span class="badge badge-count">5</span>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<c:url value='/signup'/>">
+							<a href="<c:url value='/signup/index'/>">
 								<i class="la la-dashboard"></i>
 								<p>Signup</p>
 								<span class="badge badge-count">5</span>
