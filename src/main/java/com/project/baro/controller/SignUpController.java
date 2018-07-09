@@ -19,7 +19,7 @@ import com.project.baro.service.SignupService;
 
 @Controller
 public class SignUpController {
-	private final static String MAPPING = "/signup/";
+	private final static String MAPPING = "/signup";
 	
 	@Autowired
 	private SignupService service;
@@ -34,9 +34,8 @@ public class SignUpController {
 		Map<String, Object> resultMap = new HashMap<String, Object>() ;
 		List<Object> resultList = new ArrayList<Object>();
 		
-		if("signup".equalsIgnoreCase(action)){
-			viewName= "/"+action;
-		}else if("insert".equalsIgnoreCase(action)) {
+		if("".equalsIgnoreCase(action)){
+		}else if("/insert".equalsIgnoreCase(action)) {
 			service.signup_insert("",paramMap);
 			viewName= "/index";
 		}

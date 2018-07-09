@@ -10,15 +10,7 @@ public class ByPassController {
 	/**
 	 * method default�� GET
 	 */
-	
-	@RequestMapping(value = "/*")
-	public void byPass() {	
-		
-	}
-	
-	@RequestMapping(value = "/*/*")
-	public void byPass2() {	
-	}
+
 
 	
 

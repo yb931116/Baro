@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
-	private final static String MAPPING = "/login/";
+	private final static String MAPPING = "/login";
 	
 	@RequestMapping(value = MAPPING+"{action}", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView actionMethod(@RequestParam Map<String, Object> paramMap ,@PathVariable String action,
@@ -24,9 +24,7 @@ public class LoginController {
 		Map<String,Object> resultMap = new HashMap<String, Object>();
 		List<Object> resultList = new ArrayList<Object>();
 		
-		if("login".equalsIgnoreCase(action)){
-//			resultList = (List<Object>) service.getList("board.read",paramMap);
-			viewName= "/"+action;
+		if("".equalsIgnoreCase(action)){
 		}
 		
 		modelandView.setViewName(viewName);
