@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.baro.service.LoginService;
 import com.project.baro.service.SignupService;
 
 
@@ -24,6 +25,8 @@ public class RestWSController {
 	
 	@Autowired
 	private SignupService signupservice;
+	@Autowired
+	private LoginService loginservice;
 	
 	@RequestMapping(value = MAPPING+"{action}",
 	method = { RequestMethod.GET, RequestMethod.POST },
@@ -32,6 +35,8 @@ public class RestWSController {
 		Map resultMap = new HashMap<>();
 		if("idcheck".equalsIgnoreCase(action)) {
 			resultMap = (Map)signupservice.signup_idcheck("", paramMap);
+		}else if("idfind".equalsIgnoreCase(action)) {
+			resultMap = (Map)loginservice.login_idfind("", paramMap);
 		}
 			
 	return resultMap;

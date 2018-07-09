@@ -53,9 +53,9 @@
 								 
 							<div class="card-footer">
 
-									
+									<label id = "id_find"></label>
 									<div class=float-right> 
-										<button class="btn btn-default" type = "submit">아이디 찾기</button> 
+										<button class="btn btn-default" type = "button" onclick = "IdFind()">아이디 찾기</button> 
 									</div>
 							<!-- c 태그 확인 필요 -->
 							<c:if test="${paramMap.fail eq true}"> 
@@ -66,7 +66,7 @@
 							</div> 
 						</div>
 						<div class="card-action">
-							<button class="btn btn-success mr-3" type = "button" onclick = "IdFind()">확인</button>
+							<button class="btn btn-success mr-3" type = "button" >확인</button>
 							<button class="btn btn-danger" data-dismiss="modal"
 								aria-hidden="true">취소</button>
 								
@@ -78,10 +78,43 @@
 
 <script>
 	function IdFind(){
-	
+		
+			var NAME = $("#name").val();
+			var TEL = $("#tel").val();
+			var re_id = /^[a-z0-9_-]{6,30}$/; // 아이디 검사식
+			
+// 			if($("#name").val() == ''){
+// 				$("#id_find").text("아이디를 입력하세요.");
+// 			}else if(re_id.test($("#id").val()) != true && $("#id").val().length != 0 ) {
+// 		        $("#id_input").text("6자 이상 영문과 숫자를 입력해주세요.");   
+// 			}else{
+				$.ajax({
+				    type : "POST",
+				    url : "<c:url value='/ws/idfind'/>",
+				    data : {
+				    	"NAME" : NAME,
+				    	"TEL" : TEL	
+				    } 
+				  	  		, 
+				    dataType: "json",
+				    cache : false,
+				    success : function(data) {
+				       		$("#id_find").text("찾음"+data.ID);
+				       		
+				    },
+				  
+				    error : function(xhr,status, exception) {
+				    		
+			 	    		$("#id_find").text("아이디가 존재하지 않습니다.");
+						return false;	      
+				    }
+				 });
+// 			}
+			
+		}
 		
 	
-	}
+	
 
 </script>
 

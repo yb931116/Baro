@@ -8,7 +8,7 @@
    
    	<http use-expressions="true">
     	<!-- return boolean -->
-    	<form-login login-page="/login" login-processing-url="/j_spring_security_check" authentication-failure-url="/login/login?fail=true" default-target-url="/" always-use-default-target="true" username-parameter="id" password-parameter="password"/>
+    	<form-login login-page="/login/index" login-processing-url="/j_spring_security_check" authentication-failure-url="/login/login?fail=true" default-target-url="/" always-use-default-target="true" username-parameter="id" password-parameter="password"/>
     	<logout logout-success-url="/" logout-url="/j_spring_security_logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
     	<csrf disabled = "true"/>
     	
@@ -21,6 +21,7 @@
     	<intercept-url pattern="/login/findID" access="permitAll()"/>
     	<intercept-url pattern="/login/findPW" access="permitAll()"/>
     	<intercept-url pattern="/signup/index" access="permitAll()"/>
+    	<intercept-url pattern="/ws/*" access="permitAll()"/>
     	<intercept-url pattern="/*/*" access="hasRole('ROLE_USER')"/>
     	<intercept-url pattern="/*/*/*" access="hasRole('ROLE_USER')"/>
 <!--     	<intercept-url pattern="/*/*" access="hasRole('ROLE_USER')"/> -->
