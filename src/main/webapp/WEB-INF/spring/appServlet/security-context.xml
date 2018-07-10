@@ -15,23 +15,15 @@
     	<intercept-url pattern="/resources/**" access="permitAll()"/>
     	<intercept-url pattern="/" access="permitAll()"/>
     	<intercept-url pattern="/index" access="permitAll()"/>
-    	
     	<intercept-url pattern="/*" access="hasRole('ROLE_USER')"/>
-    	<intercept-url pattern="/login/index" access="permitAll()"/>
-    	<intercept-url pattern="/login/findID" access="permitAll()"/>
-    	<intercept-url pattern="/login/findPW" access="permitAll()"/>
+    	<intercept-url pattern="/login/*" access="permitAll()"/>
     	<intercept-url pattern="/signup/index" access="permitAll()"/>
+    	<intercept-url pattern="/signup/insert" access="permitAll()"/>
     	<intercept-url pattern="/ws/*" access="permitAll()"/>
     	<intercept-url pattern="/*/*" access="hasRole('ROLE_USER')"/>
     	<intercept-url pattern="/*/*/*" access="hasRole('ROLE_USER')"/>
 <!--     	<intercept-url pattern="/*/*" access="hasRole('ROLE_USER')"/> -->
 <!--   		<intercept-url pattern="/resources/**" access="permitAll()"/> -->
-<!--   		<intercept-url pattern="/*/subscribeManage" access="hasRole('ROLE_ADMIN')"/> -->
-<!--   		<intercept-url pattern="/signUp/insert" access="permitAll()"/> -->
-<!--   		<intercept-url pattern="/*/insert" access="hasRole('ROLE_ADMIN')"/> -->
-<!--   		<intercept-url pattern="/*/*/insert" access="hasRole('ROLE_ADMIN')"/> -->
-<!--   		<intercept-url pattern="/*/edit" access="hasRole('ROLE_ADMIN')"/> -->
-<!--   		<intercept-url pattern="/*/*/edit" access="hasRole('ROLE_ADMIN')"/> -->
 <!--   		<intercept-url pattern="/*/*/*" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/> -->
 	</http>
 	

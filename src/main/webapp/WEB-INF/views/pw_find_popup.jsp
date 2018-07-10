@@ -6,16 +6,6 @@
 		var re_id = /^[a-z0-9_-]{6,30}$/; // 아이디 검사식
 		var re_mail = /^([\w\.-]+)@([a-z\d\.-]+)\.([a-z\.]{2,6})$/; // 이메일 검사식
 		
-// 		//아이디 입력 창
-// 	      $("#id").blur(function(e) {
-// 	         if (re_id.test($("#id").val()) != true && $("#id").val().length != 0 ) {
-// 	            $("#id_input").text("6자 이상 영문과 숫자를 입력해주세요.");
-// 	         }else{
-// 	        	$("#id_input").text(""); 
-// 	         }
-// 	      });
-		
-		
 		//이메일 입력 창
 		    $("#email").blur(function(e) {
 		    	if($("#email").val()==''){
@@ -68,20 +58,17 @@
 								 
 							<div class="card-footer">
 
-									
+									<label id = "pw_find"></label>
 									<div class=float-right> 
-										<button class="btn btn-default" type = "submit">비밀번호 찾기</button> 
+										<button class="btn btn-default" type = "button" onclick = "pwFind()">비밀번호 찾기</button> 
 									</div>
-										<!-- c 태그 확인 필요 -->
-										<c:if test="${paramMap.fail eq true}"> 
-													<span style="color:red">아이디와 이메일을 확인하세요.</span>
-										</c:if>
+										
 									
 								
 							</div> 
 						</div>
 						<div class="card-action">
-							<button class="btn btn-success mr-3" type = "button">확인</button>
+							<button class="btn btn-success mr-3" data-dismiss="modal" aria-hidden="true">확인</button>
 							<button class="btn btn-danger" data-dismiss="modal"
 								aria-hidden="true">취소</button>
 								
@@ -90,3 +77,44 @@
 					</div>
 				</div>
 			</div>
+	<script>
+	function pwFind(){
+		
+			var ID = $("#pw_find_id").val();
+			var EMAIL = $("#email").val();
+			
+			
+			$.ajax({
+			    type : "POST",
+			    url : "<c:url value='/ws/pwfind'/>",
+			    data : {
+			    	"ID" : ID,
+			    	"EMAIL" : EMAIL	
+			    } 
+			  	  		, 
+			    dataType: "json",
+			    cache : false,
+			    success : function(data) {
+			       		$("#pw_find").text("비밀번호 : "+data.PW);
+			       		
+			       		
+			    },
+			  
+			    error : function(xhr,status, exception) {
+			    		
+		 	    		$("#pw_find").text("입력하신 정보에 해당하는 비밀번호가 존재하지 않습니다.");
+					return false;	      
+			    }
+			 });
+	}
+		
+	
+	
+
+</script>
+			
+			
+			
+			
+			
+			

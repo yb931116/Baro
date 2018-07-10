@@ -33,10 +33,14 @@ public class RestWSController {
 	produces = "application/json") // 미디어 타입 관련 응답 생성
 	public Object actionMethod(@RequestParam Map<String, Object> paramMap, @PathVariable String action) {
 		Map resultMap = new HashMap<>();
-		if("idcheck".equalsIgnoreCase(action)) {
+		if("idcheck".equalsIgnoreCase(action)) {	// 아이디 중복체크
 			resultMap = (Map)signupservice.signup_idcheck("", paramMap);
-		}else if("idfind".equalsIgnoreCase(action)) {
+		}else if("idfind".equalsIgnoreCase(action)) {	// 아이디 찾기
 			resultMap = (Map)loginservice.login_idfind("", paramMap);
+			
+		}else if("pwfind".equalsIgnoreCase(action)) {	// 비밀번호 찾기
+			resultMap = (Map)loginservice.login_pwfind("", paramMap);
+			
 		}
 			
 	return resultMap;

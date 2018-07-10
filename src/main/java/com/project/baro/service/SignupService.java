@@ -22,13 +22,14 @@ public class SignupService {
 //		if("".equals(uniqueSequence)){
 //			uniqueSequence = commonUtil.getUniqueSequence();
 //		}
-		if(uniqueSequence == null) {
+		if(uniqueSequence == null || "".equals(uniqueSequence) ) {
 			uniqueSequence = commonUtil.getUniqueSequence();
 		}
 		paramMap.put("USER_ID", uniqueSequence);
 		String sqlId ="signup.insert"; 
 		Object resultData = dao.saveObject(sqlId,paramMap);
-		
+		String sqlId2 ="signup.insert_authority_rel"; 
+		dao.saveObject(sqlId2,paramMap);
 		return resultData;
 	}
 	public Object signup_idcheck(String sqlMapId, Map<String, Object> paramMap) {

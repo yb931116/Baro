@@ -28,7 +28,7 @@
      </script>
 
 
-
+	<form action = "<c:url value = '/login/findID'/>" role="form" method="POST">
 				<h4 class="page-title">아이디 찾기</h4>
 				<div class="row">
 					<div class="col-md-12">
@@ -65,8 +65,9 @@
 								
 							</div> 
 						</div>
+
 						<div class="card-action">
-							<button class="btn btn-success mr-3" type = "button" >확인</button>
+							<button class="btn btn-success mr-3" type = "submit">확인</button>
 							<button class="btn btn-danger" data-dismiss="modal"
 								aria-hidden="true">취소</button>
 								
@@ -75,6 +76,7 @@
 					</div>
 				</div>
 			</div>
+			</form>
 
 <script>
 	function IdFind(){
@@ -83,11 +85,7 @@
 			var TEL = $("#tel").val();
 			var re_id = /^[a-z0-9_-]{6,30}$/; // 아이디 검사식
 			
-// 			if($("#name").val() == ''){
-// 				$("#id_find").text("아이디를 입력하세요.");
-// 			}else if(re_id.test($("#id").val()) != true && $("#id").val().length != 0 ) {
-// 		        $("#id_input").text("6자 이상 영문과 숫자를 입력해주세요.");   
-// 			}else{
+
 				$.ajax({
 				    type : "POST",
 				    url : "<c:url value='/ws/idfind'/>",
@@ -99,7 +97,8 @@
 				    dataType: "json",
 				    cache : false,
 				    success : function(data) {
-				       		$("#id_find").text("찾음"+data.ID);
+				       		$("#id_find").text("아이디가 존재 합니다 : "+data.ID);
+				       		
 				       		
 				    },
 				  
@@ -109,7 +108,6 @@
 						return false;	      
 				    }
 				 });
-// 			}
 			
 		}
 		

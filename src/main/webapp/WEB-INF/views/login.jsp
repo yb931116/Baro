@@ -15,7 +15,7 @@
 								<div class="col-md-6">
 									<p>
 										아이디 <input type="text" class="form-control"
-											placeholder="아이디를 입력하세요" id = "id" name="id">
+											placeholder="아이디를 입력하세요" id = "id" name="id" value = "${resultMap.ID}">
 									</p>
 								</div>
 								
@@ -74,7 +74,7 @@
 	  
 	   var url ;
 	   
-	   url= "<c:url value='/login/findID'/>"; 
+	   url= "<c:url value='/login/open_findID'/>"; 
 	   common.layerPopup(url, "#myModal"); 
 	};
 	
@@ -89,7 +89,7 @@
 	  
 	   var url ;
 	   
-	   url= "<c:url value='/login/findPW'/>"; 
+	   url= "<c:url value='/login/open_findPW'/>"; 
 	   common.layerPopup(url, "#myModal1"); 
 	};
 

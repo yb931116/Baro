@@ -11,6 +11,12 @@
 		WHERE NAME = #{NAME} and TEL = #{TEL}
 	</select>
 	
+	<select id="findPW" resultType="Map" parameterType="Map">
+		SELECT PW
+		FROM user_info
+		WHERE ID = #{ID} and EMAIL = #{EMAIL}
+	</select>
+	
 	
 	
 </mapper>

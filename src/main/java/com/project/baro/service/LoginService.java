@@ -19,6 +19,11 @@ public class LoginService {
 			sqlMapId = "login.findID";
 			Object resultData = dao.getObject(sqlMapId, paramMap);
 			
+			return resultData;
+		}
+		public Object login_pwfind(String sqlMapId, Map<String, Object> paramMap) {
+			sqlMapId = "login.findPW";
+			Object resultData = dao.getObject(sqlMapId, paramMap);
 			
 			return resultData;
 		}
