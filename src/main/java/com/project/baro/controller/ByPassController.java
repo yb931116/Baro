@@ -22,6 +22,11 @@ public class ByPassController {
 	public String byPass3() {	
 		return "/mypage";
 	}
+	
+	@RequestMapping(value = "/group")
+	public String byPass4() {	
+		return "/group";
+	}
 
 
 

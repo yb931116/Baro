@@ -211,7 +211,7 @@ function IdCheck(){
       //전화번호 입력 창
       $("#tel").blur(function(e) {
          if (re_tel.test($("#tel").val()) != true && $("#tel").val().length != 0) {
-            $("#tel_input").text("전화번호 입력오류 : 숫자만 입력해 주세요.");
+            $("#tel_input").text("전화번호 입력오류 : 숫자만 입력해 주세요(11자리).");
             tel_flag = "false";
          }else{
         	 $("#tel_input").text("");
