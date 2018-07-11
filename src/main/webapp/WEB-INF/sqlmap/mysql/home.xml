@@ -12,7 +12,7 @@
 			 ,b.business_name as business_name
 			, u.name as user_name
 		from projectdb.business b, projectdb.user_info u
-        where b.business_user_id= u.user_id
+        where b.user_id= u.user_id
 		Limit 2;
 	</select>
 	
@@ -23,7 +23,7 @@
 		,b.business_name as business_name
 		, u.name as user_name
 		from projectdb.business b, projectdb.user_info u
-        where b.business_user_id= u.user_id
+        where b.user_id= u.user_id
         order by b.business_name
 		Limit 2;
 	</select>
@@ -63,7 +63,7 @@
 	    INSERT INTO projectdb.business (
 			business_no
 			, business_name
-			, business_user_id
+			, user_id
 		)
 		values(
 			(select 

@@ -7,66 +7,36 @@
 <mapper namespace="list">
 	<select id="list" resultType="Map" parameterType="Map">
 	    select 
-			business_no <!-- 회원_SEQ -->
-			, business_name <!-- 회원 ID -->
-			, business_user_id <!-- 암호 -->
+			business_no <!-- 프로젝트_SEQ -->
+			, business_name <!-- 프로젝트명 -->
+			, user_id <!-- 프로젝트 생성자 ID -->
 		from projectdb.business
 		<![CDATA[
 		where 1 = 1
 		]]>
 		order by business_no
 	</select>
+	
+		<select id="search" resultType="Map" parameterType="Map">
+	    select 
+			business_no <!-- 프로젝트_SEQ -->
+			, business_name <!-- 프로젝트명 -->
+			, user_id <!-- 프로젝트 생성자 ID -->
+		from projectdb.business
+		<![CDATA[
+		where 1 = 1
+		and business_name = #{business_name}
+		]]>
+		order by business_no
+	</select>
+	
 
 	<select id="read" resultType="Map" parameterType="Map">
-		select 
-			MEMBER_SEQ <!-- 회원_SEQ -->
-			, MEMBER_ID <!-- 회원 ID -->
-			, PASSWORD <!-- 암호 -->
-			, CRYPT_PASSWORD	<!-- 암호화된 암호 -->
-			, MEMBER.NAME <!-- 명칭 -->
-			, EMAIL <!-- EMAIL -->
-			, CELLPHONE <!-- 휴대폰번호 -->
-			, MEMBER.ORGANIZATION_SEQ <!-- 조직 일련번호 -->
-			, REGISTER_SEQ <!-- 등록자SEQ -->
-			, REGISTRY_DATE <!-- 등록일자 -->
-			, MODIFIER_SEQ <!-- 수정자_SEQ -->
-			, MODIFY_DATE <!-- 수정일자 -->
-			, ORGANIZATION.NAME ORGANIZATION_NAME
-		from CIP_MEMBER MEMBER
-			, CIP_ORGANIZATION ORGANIZATION 
-		<where>
-		    and MEMBER.ORGANIZATION_SEQ = ORGANIZATION.ORGANIZATION_SEQ
-			and MEMBER_SEQ = #{MEMBER_SEQ}
-		    <!-- choose>	using by CustomizeUserDetailsService.java
-		        <when test="MEMBER_ID != null">
-					and MEMBER_ID = #{MEMBER_ID}
-		        </when>
-		        <when test="MEMBER_SEQ != null">
-					and MEMBER_SEQ = #{MEMBER_SEQ}
-		        </when>
-		    </choose-->
-		</where>
 	</select>
 
 	<insert id="insert" parameterType="Map">
-	    INSERT INTO projectdb.business (
-			business_no
-			, business_name
-			, business_user_id
-		)
-		values(
-			(select 
-			max(business_no)+1 
-			from 
-			( select business_no from  `projectdb`.`business`) as business_no)
-			, #{business_name}
-			, uuid()
-		)
-
 	</insert>
 
 	<delete id="delete" parameterType="Map">
-		delete from CIP_MEMBER
-		where MEMBER_SEQ = #{MEMBER_SEQ}
 	</delete>
 </mapper>

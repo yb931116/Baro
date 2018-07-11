@@ -4,22 +4,20 @@
     
     
 			<div class="sidebar">
-				<div class="scrollbar-inner sidebar-wrapper">
+				<div class="sidebar-wrapper">
 					
 					<ul class="nav">
 						<li class="nav-item">
 							<a href="<c:url value='/'/>">
-								<i class="la la-dashboard"></i>
+								<i class="la la-search"></i>
 								<p>Main</p>
-								<span class="badge badge-count">5</span>
 							</a>
 						</li>
 						
 						<li class="nav-item">
 							<a href="<c:url value='/logicfocus/list'/>">
-								<i class="la la-dashboard"></i>
+								<i class="la la-list-ul"></i>
 								<p>List</p>
-								<span class="badge badge-count">5</span>
 							</a>
 						</li>
 
@@ -27,30 +25,26 @@
 							<a href="<c:url value='/login/index'/>">
 								<i class="la la-dashboard"></i>
 								<p>Login</p>
-								<span class="badge badge-count">5</span>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="<c:url value='/signup/index'/>">
 								<i class="la la-dashboard"></i>
 								<p>Signup</p>
-								<span class="badge badge-count">5</span>
 							</a>
 						</li>
 
 				
 						<li class="nav-item">
 							<a href="<c:url value='/statistics'/>">
-								<i class="la la-dashboard"></i>
+								<i class="la la-bar-chart"></i>
 								<p>통계</p>
-								<span class="badge badge-count">5</span>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="<c:url value='/evaluation'/>">
-								<i class="la la-dashboard"></i>
+								<i class="la la-check-square"></i>
 								<p>평가</p>
-								<span class="badge badge-count">5</span>
 							</a>
 						</li>
 

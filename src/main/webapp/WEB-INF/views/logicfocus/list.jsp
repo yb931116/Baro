@@ -17,6 +17,18 @@
 			</div>
 			
 			</div>
+			
+			<form class="col-md-3 mb-3 nav-search ml-md-auto" action="">
+						<div class="input-group">
+							<input type="text" placeholder="프로젝트명 검색" class="form-control">
+							<div class="input-group-append">
+								<span class="input-group-text">
+									<i class="la la-search search-icon"></i>
+								</span>
+							</div>
+						</div>
+					</form>
+					
 				<table class="table mt-4 table-hover">
 					<thead>
 						<tr>
