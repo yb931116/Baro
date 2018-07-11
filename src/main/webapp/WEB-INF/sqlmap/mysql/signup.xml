@@ -7,8 +7,8 @@
 <mapper namespace="signup">
 	<insert id="insert" parameterType="Map">
 		INSERT INTO 
-		USER_INFO(USER_ID, ID, PW, NAME, EMAIL, TEL, ADDRESS, ADDRESS_DETAIL) 
-		VALUES(#{USER_ID}, #{ID},#{PW},#{NAME},#{EMAIL},#{TEL},#{ADDRESS}, #{ADDRESS_DETAIL})
+		USER_INFO(USER_ID, ID, PW, NAME, EMAIL, TEL, ADDRESS, ADDRESS_DETAIL,generated_date) 
+		VALUES(#{USER_ID}, #{ID},#{PW},#{NAME},#{EMAIL},#{TEL},#{ADDRESS}, #{ADDRESS_DETAIL}, now())
 	</insert>
 	
 	<insert id="insert_authority_rel">
