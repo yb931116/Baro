@@ -8,7 +8,7 @@
    
    	<http use-expressions="true">
     	<!-- return boolean -->
-    	<form-login login-page="/login/index" login-processing-url="/j_spring_security_check" authentication-failure-url="/login/login?fail=true" default-target-url="/" always-use-default-target="true" username-parameter="id" password-parameter="password"/>
+    	<form-login login-page="/login/index" login-processing-url="/j_spring_security_check" authentication-failure-url="/login/index?fail=true" default-target-url="/" always-use-default-target="true" username-parameter="id" password-parameter="password"/>
     	<logout logout-success-url="/" logout-url="/j_spring_security_logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
     	<csrf disabled = "true"/>
     	
