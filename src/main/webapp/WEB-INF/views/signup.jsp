@@ -133,7 +133,6 @@ function IdCheck(){
 		    },
 		  
 		    error : function(xhr,status, exception) {
-		    		
 	 	    		$("#id_check").text("사용 가능한 아이디입니다.");
 				return false;	      
 		    }
