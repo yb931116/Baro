@@ -18,14 +18,13 @@
 			
 			</div>
 			
-			<form class="col-md-3 mb-3 nav-search ml-md-auto" action="">
+			<form class="col-md-4 mb-3 nav-search ml-md-auto" action="<c:url value='/logicfocus/list'/>">
 						<div class="input-group">
-							<input type="text" placeholder="프로젝트명 검색" class="form-control">
-							<div class="input-group-append">
-								<span class="input-group-text">
-									<i class="la la-search search-icon"></i>
-								</span>
-							</div>
+							<input type="text" name="business_name" placeholder="프로젝트명 검색" class="form-control">
+							<input type="hidden" name="search" value="true">
+						<button class="btn btn-primary btn-sm">
+						<i class="la la-search search-icon" style="color:white;">
+						</i></button>
 						</div>
 					</form>
 					
@@ -34,7 +33,8 @@
 						<tr>
 							<th scope="col">#</th>
 							<th scope="col">프로젝트명</th>
-							<th scope="col">생성자</th>
+							<th scope="col">생성자 ID</th>
+							<th scope="col">생성자명</th>
 							<th scope="col">제기된 문제</th>
 							<th scope="col">해결된 문제</th>
 						</tr>
@@ -46,7 +46,8 @@
 								<td class="business_no" style="display:none;" >${resultData.business_no}</td>
 								<td>${loop.index+1}</td>
 								<td>${resultData.business_name}</td>
-								<td>Jsn</td>
+								<td>${resultData.id}</td>
+								<td>${resultData.name}</td>
 								<td>10</td>
 								<td>6</td>
 							</tr>

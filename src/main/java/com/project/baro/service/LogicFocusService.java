@@ -15,18 +15,21 @@ public class LogicFocusService {
 	ShareDao dao;
 	
 	public Object getList(Object dataMap) {
-		String sqlMapId = "list.list";
-		Object resultObject = dao.getList(sqlMapId, dataMap);
+		String sqlMapId;
+		Object resultObject = null;
+		
+		if(((Map)dataMap).get("search")==null){
+			sqlMapId = "list.list";
+			resultObject = dao.getList(sqlMapId, dataMap);
+		}else if(((Map)dataMap).get("search").equals("true")) {
+			sqlMapId = "list.search";
+			resultObject = dao.getList(sqlMapId, dataMap);
+		}
+		
 		return resultObject;
 	}
 	
-/*	public Object getObject(Object dataMap) {
-		String sqlMapId = "member.read";
 
-		Object resultObject = dao.getObject(sqlMapId, dataMap);
-		
-		return resultObject;
-	}*/
 
 	public Object saveObject(Map<String, Object> dataMap) {
 		

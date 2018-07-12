@@ -31,9 +31,14 @@
 
 					</div>
 					<div class="card-action">
-						<button class="btn btn-danger" data-dismiss="modal"
+						<button class="btn btn-success mr-3" data-dismiss="modal"
 							aria-hidden="true">확인</button>
 						<button id="insertbutton" class="btn btn-default ml-8">추가</button>
+						<i class="la la-star-o ratingstar"></i>
+						<i class="la la-star-o ratingstar"></i>
+						<i class="la la-star-o ratingstar"></i>
+						<i class="la la-star-o ratingstar"></i>
+						<i class="la la-star-o ratingstar"></i>
 					</div>
 				</div>
 			</div>
@@ -83,5 +88,32 @@
 			$("#detail").addClass("col-md-6");
 			$("#insert").css("display","block")
 		});
+
+		$(".ratingstar").hover(function(){
+			var ratingstar = $(".ratingstar");
+			var r_length = ratingstar.length;
+			var me = $(this);
+			var i =0;
+			while(i<r_length){
+				ratingstar.eq(i).removeClass("la la-star-o");
+				ratingstar.eq(i).addClass("la la-star");
+				if($(".ratingstar")[i]==$(this)[0]){
+					break;
+				}
+				i++;
+			}
+				i++;
+			while(i<r_length){
+				ratingstar.eq(i).removeClass("la la-star");
+				ratingstar.eq(i).addClass("la la-star-o");
+				i++;
+			}
+			
+		});
+		
+		$(".ratingstar").click(function(){
+			$(".ratingstar").off();
+		});
+	
 	});
 </script>

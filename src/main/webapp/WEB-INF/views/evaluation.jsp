@@ -42,6 +42,7 @@ th, td {
 				<div class="row justify-content-md-center">
 					<table class="table-bordered col-lg-12" id="evaluation">
 						<tr>
+							<th>번호</th>
 							<th>ID</th>
 							<th class="name">이름</th>
 							<th>문제점 건수</th>
@@ -53,7 +54,11 @@ th, td {
 						</tr>
 					</table>
 					<div class="row justify-content-md-center mt-3 col-lg-5">
-						<input type="text" class="form-control col-lg-8 mr-2">
+						<select>
+<!-- 							<option value="name">이름</option> -->
+ 							<option value="ID">아이디</option> 
+						</select> 
+						<input type="text" id="text" class="form-control col-lg-8 mr-2">
 						<button id="plus" class="btn btn-default">추가</button>
 					</div>
 				</div>
@@ -64,29 +69,63 @@ th, td {
 
 <script>
 	$(function() {
-		$("#plus")
-				.click(
-						function() {
-							var html = $("#evaluation").html();
-							$("#evaluation")
-									.html(
-											html
-													+ "<tr>"
-													+ "	<td>1</td>"
-													+ "	<td class=\"name\">유병욱</td>"
-													+ "	<td class=\"pronum\">28</td>"
-													+ "	<td class=\"proscore\"></td>"
-													+ "	<td class=\"ansnum\">20</td>"
-													+ "	<td class=\"ansscore\"></td>"
-													+ "	<td class=\"sum\"></td>"
-													+ "	<td style='text-align:center;'><i class=\"minus la la-minus-circle iconsize20\"></i></td>"
-													+ "</tr>" + "<tr>");
-						});
+
+
+		$("#plus").click(function(){
+				var text = $("#text").val();
+				var type;
+				if($("select").val() == "name"){
+					type = "name";
+				}else{
+					type = "ID";
+				}
+				var num = 1;
+				
+				$.ajax({
+					type : "POST",
+				    url : "<c:url value='/ws/evaluation'/>",
+				    data : {"type" : type,
+				    		"text":text}, 
+				    dataType: "json",
+				    cache : false,
+				    success : function(data) {
+						for(var i = 0 ; i < num ; i++){
+							if($(".ID").eq(i).text() == data.ID){
+								alert("이미 등록되었습니다.")
+								return false;
+							}
+						}
+				    	
+				    	var html = $("#evaluation").html();
+						$("#evaluation").html(
+							html
+							+ "<tr>"
+							+ "	<td>"+ num +"</td>"
+							+ "	<td class=\"ID\">"+data.ID+"</td>"
+							+ "	<td class=\"name\">"+data.NAME+"</td>"
+							+ "	<td class=\"pronum\">"+data.PRONUM+"</td>"
+							+ "	<td class=\"proscore\"></td>"
+							+ "	<td class=\"ansnum\">"+data.ANSNUM+"</td>"
+							+ "	<td class=\"ansscore\"></td>"
+							+ "	<td class=\"sum\"></td>"
+							+ "	<td style='text-align:center;'><i class=\"minus la la-minus-circle iconsize20\"></i></td>"
+							+ "</tr>" + "<tr>");
+						num++;
+			    	},
+				  
+				    error : function(xhr,status, exception) {
+						alert("해당하는 ID가 없습니다.");
+				    	return false;
+				    }
+			    });
+
 		$(document).on("click", ".minus", function() {
 			$(this).parent().parent().remove();
+		
+		});	
 		});
-	});
 
+	});
 	function apply() {
 
 		var pro = $(".pronum");
