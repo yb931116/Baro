@@ -17,7 +17,7 @@
 		VALUES(#{USER_ID}, '1')
 	</insert>
 	<select id="readID" resultType="Map" parameterType="Map">
-		SELECT ID FROM USER_INFO WHERE ID = #{ID}		
+		SELECT ID, NAME FROM USER_INFO WHERE ID = #{ID}		
 	</select>
 	
 </mapper>

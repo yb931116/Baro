@@ -29,7 +29,7 @@ public class SignUpController {
 			ModelAndView modelandView) {
 		
 		String viewName = MAPPING + action ;
-		String forwardView = (String) paramMap.get("forwardView") ;
+		String forwardView = (String) paramMap.get("forwardView");
 
 		Map<String, Object> resultMap = new HashMap<String, Object>() ;
 		List<Object> resultList = new ArrayList<Object>();
