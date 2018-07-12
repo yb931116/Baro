@@ -7,19 +7,19 @@
     <mapper namespace="group">
     
     <insert id="member_insert" parameterType ="Map">
-		INSERT ALL
-			<foreach collection="ID_LIST" item = "item" index="index">
-				INTO GROUPING_MEMBER(
+<!-- 		INSERT ALL -->
+			INSERT INTO GROUPING_MEMBER(
 					GROUP_NO	
 					,USER_ID 		
-				)values(
+				)values
+			<foreach collection="ID_LIST" item = "item" index="index"  separator=" , ">
+				(
 					#{GROUP_NO}
 					,(SELECT USER_ID
 					  FROM USER_INFO
 				      WHERE ID = #{item})	 
 				)
 			</foreach>
-			SELECT 1 FROM DUAL
 	</insert>
 	
 		<insert id="insert" parameterType="Map">
