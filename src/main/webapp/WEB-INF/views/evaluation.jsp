@@ -69,7 +69,7 @@ th, td {
 
 <script>
 	$(function() {
-<<<<<<< HEAD
+
 		$("#plus").click(function(){
 				var text = $("#text").val();
 				var type;
@@ -117,25 +117,7 @@ th, td {
 				    	return false;
 				    }
 			    });
-=======
-		$("#plus")
-				.click(
-						function() {
-							var html = $("#evaluation").html();
-							$("#evaluation").html(
-											html
-													+ "<tr>"
-													+ "	<td>1</td>"
-													+ "	<td class=\"name\">유병욱</td>"
-													+ "	<td class=\"pronum\">28</td>"
-													+ "	<td class=\"proscore\"></td>"
-													+ "	<td class=\"ansnum\">20</td>"
-													+ "	<td class=\"ansscore\"></td>"
-													+ "	<td class=\"sum\"></td>"
-													+ "	<td style='text-align:center;'><i class=\"minus la la-minus-circle iconsize20\"></i></td>"
-													+ "</tr>" + "<tr>");
-						});
->>>>>>> branch 'master' of https://github.com/yb931116/Baro.git
+
 		$(document).on("click", ".minus", function() {
 			$(this).parent().parent().remove();
 		
