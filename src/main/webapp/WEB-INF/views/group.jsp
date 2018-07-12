@@ -18,22 +18,21 @@
 											class="col-md-9 form-control" placeholder="그룹명을 입력하세요"
 											id="group_name" name="group_name">
 									</p>
+									
 								</div>
 
 								<div class="col-md-12">
 									<p class="form-inline">
-										<span class="col-md-2">그룹원</span> <input type="password"
+										<span class="col-md-2">그룹원</span> <input type="text"
 											class="col-md-8 form-control" placeholder="ID를 입력하세요"
 											id="group_member" name="group_member">
 										<button id="plus" class="col-md-1 btn btn-default btn-xs"
 											type="button">추가</button>
 									</p>
-									<label class="form-check-label"> <input
-										class="form-check-input" type="checkbox" value="">
-
-									</label>
+									<label id = "id_check"></label>
+									
 								</div>
-
+</div>
 
 
 								<div class="card-footer">
@@ -59,7 +58,7 @@
 
 
 								</div>
-							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -75,16 +74,50 @@
 		$("#plus")
 				.click(
 						function() {
-							var html = $("#group_table").html();
-							$("#group_table")
-									.html(
-											html
-													+ "<tr>"
-													+ "	<td>1</td>"
-													+ "	<td>dbquddnr</td>"
-													+ "	<td>유병욱</td>"
-													+ "	<td style='text-align:center;'><i class=\"minus la la-minus-circle iconsize20\"></i></td>"
-													+ "</tr>" + "<tr>")
+							var ID = $("#group_member").val();
+							$.ajax({
+							    type : "POST",
+							    url : "<c:url value='/ws/idcheck'/>",
+							    data : {"ID" : ID} 
+							  	  		, 
+							    dataType: "json",
+							    cache : false,
+							    success : function(data) {
+							    	var html = $("#group_table").html();
+							    	
+										$("#group_table")
+												.html(
+														html
+																+ "<tr>"
+																+ "	<td>1</td>"
+																+ "	<td>dbquddnr</td>"
+																+ "	<td>유병욱</td>"
+																+ "	<td style='text-align:center;'><i class=\"minus la la-minus-circle iconsize20\"></i></td>"
+																+ "</tr>" + "<tr>")
+							    	
+							       		
+							    },
+							  
+							    error : function(xhr,status, exception) {
+							    		
+						 	    		$("#id_check").text("아이디가 존재하지 않습니다.");
+									return false;	      
+							    }
+							 });
+							
+							
+							
+							
+// 							var html = $("#group_table").html();
+// 							$("#group_table")
+// 									.html(
+// 											html
+// 													+ "<tr>"
+// 													+ "	<td>1</td>"
+// 													+ "	<td>dbquddnr</td>"
+// 													+ "	<td>유병욱</td>"
+// 													+ "	<td style='text-align:center;'><i class=\"minus la la-minus-circle iconsize20\"></i></td>"
+// 													+ "</tr>" + "<tr>")
 						});
 		$(document).on("click", ".minus", function() {
 			$(this).parent().parent().remove();
