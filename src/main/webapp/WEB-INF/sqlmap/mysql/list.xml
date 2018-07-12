@@ -25,7 +25,7 @@
 		from projectdb.business
 		<![CDATA[
 		where 1 = 1
-		and business_name = #{business_name}
+		and business_name like CONCAT('%',#{business_name},'%')
 		]]>
 		order by business_no
 	</select>

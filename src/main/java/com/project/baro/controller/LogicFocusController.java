@@ -95,21 +95,7 @@ public class LogicFocusController {
           viewName=MAPPING+"list";
           resultList=(List)service.getList(paramMap);
        }
-      
-      /*else if ("update".equalsIgnoreCase(action)) {
-         resultMap = (Map<String, Object>) service.getObject(paramMap);
-         paramMap.put("action", action);
-      } else if ("merge".equalsIgnoreCase(action)) {
-         service.saveObject(paramMap);
-      } else if ("read".equalsIgnoreCase(action)) {
-         resultMap = (Map<String, Object>) service.getObject(paramMap);
-      } else if ("list".equalsIgnoreCase(action)) {
-         resultList = (List<Object>) service.getList(paramMap);
-      } else if ("delete".equalsIgnoreCase(action)) {
-         resultList = (List<Object>) service.deleteObject(paramMap);
-      } *//*else if("list_pagination".equalsIgnoreCase(action)) {
-         resultMap = (Map<String, Object>)service.getListPagination(paramMap);
-      }*/
+
       
       if(forwardView != null){
          viewName = forwardView;

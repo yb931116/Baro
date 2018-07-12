@@ -68,8 +68,7 @@ th, td {
 				.click(
 						function() {
 							var html = $("#evaluation").html();
-							$("#evaluation")
-									.html(
+							$("#evaluation").html(
 											html
 													+ "<tr>"
 													+ "	<td>1</td>"
@@ -80,7 +79,7 @@ th, td {
 													+ "	<td class=\"ansscore\"></td>"
 													+ "	<td class=\"sum\"></td>"
 													+ "	<td style='text-align:center;'><i class=\"minus la la-minus-circle iconsize20\"></i></td>"
-													+ "</tr>" + "<tr>")
+													+ "</tr>" + "<tr>");
 						});
 		$(document).on("click", ".minus", function() {
 			$(this).parent().parent().remove();
