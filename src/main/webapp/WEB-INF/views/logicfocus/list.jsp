@@ -33,7 +33,8 @@
 						<tr>
 							<th scope="col">#</th>
 							<th scope="col">프로젝트명</th>
-							<th scope="col">생성자</th>
+							<th scope="col">생성자 ID</th>
+							<th scope="col">생성자명</th>
 							<th scope="col">제기된 문제</th>
 							<th scope="col">해결된 문제</th>
 						</tr>
@@ -45,7 +46,8 @@
 								<td class="business_no" style="display:none;" >${resultData.business_no}</td>
 								<td>${loop.index+1}</td>
 								<td>${resultData.business_name}</td>
-								<td>Jsn</td>
+								<td>${resultData.id}</td>
+								<td>${resultData.name}</td>
 								<td>10</td>
 								<td>6</td>
 							</tr>

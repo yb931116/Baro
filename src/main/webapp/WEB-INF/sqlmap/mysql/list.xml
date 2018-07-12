@@ -7,25 +7,29 @@
 <mapper namespace="list">
 	<select id="list" resultType="Map" parameterType="Map">
 	    select 
-			business_no <!-- 프로젝트_SEQ -->
-			, business_name <!-- 프로젝트명 -->
-			, user_id <!-- 프로젝트 생성자 ID -->
-		from projectdb.business
+			b.business_no business_no <!-- 프로젝트_SEQ -->
+			, b.business_name business_name <!-- 프로젝트명 -->
+			, u.id id <!-- 프로젝트 생성자 ID -->
+			,u.name name
+		from projectdb.business b, projectdb.user_info u
 		<![CDATA[
-		where 1 = 1
+		where 1 = 1 
+		and b.user_id=u.user_id
 		]]>
-		order by business_no
+		order by b.business_no
 	</select>
 	
 		<select id="search" resultType="Map" parameterType="Map">
 	    select 
-			business_no <!-- 프로젝트_SEQ -->
-			, business_name <!-- 프로젝트명 -->
-			, user_id <!-- 프로젝트 생성자 ID -->
-		from projectdb.business
+			b.business_no business_no <!-- 프로젝트_SEQ -->
+			, b.business_name business_name <!-- 프로젝트명 -->
+			, u.id id <!-- 프로젝트 생성자 ID -->
+			,u.name name
+		from projectdb.business b, projectdb.user_info u
 		<![CDATA[
 		where 1 = 1
-		and business_name like CONCAT('%',#{business_name},'%')
+		and b.user_id=u.user_id 
+		and b.business_name like CONCAT('%',#{business_name},'%')
 		]]>
 		order by business_no
 	</select>
