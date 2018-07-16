@@ -12,7 +12,7 @@
 					GROUP_NO	
 					,USER_ID 		
 				)values
-			<foreach collection="ID_LIST" item = "item" index="index"  separator=" , ">
+			<foreach collection="ID_LIST" item = "item" index="index"  separator=",">
 				(
 					#{GROUP_NO}
 					,(SELECT USER_ID
