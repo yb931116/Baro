@@ -22,11 +22,9 @@ common.layerPopup = function(url, values, id){
 	$.ajax({
         type : "POST",
         url : url,
-        data : values,
         cache: false,
         success : function(data) {
         	common.popupCallback(data, id);
-        	console.log(values.get(0));
 	    },
         error : function(xhr, status, exception){
         	alert("전송에 실패하였습니다. \n ("+status+")");
