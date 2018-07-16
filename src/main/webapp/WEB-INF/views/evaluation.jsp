@@ -70,6 +70,7 @@ th, td {
 <script>
 	$(function() {
 
+
 		$("#plus").click(function(){
 				var text = $("#text").val();
 				var type;

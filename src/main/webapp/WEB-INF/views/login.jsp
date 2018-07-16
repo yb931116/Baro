@@ -30,7 +30,10 @@
 									</label>
 								</div>
 									
-								<hr>
+								 
+									<c:if test="${paramMap.fail eq true}">
+										<span class="col-md-1" style="color:red">아이디와 비밀번호를 확인하세요.</span>
+									</c:if>
 								 
 							<div class="card-footer">
 
@@ -40,9 +43,6 @@
 									<div class=float-right> 
 										<button class="btn btn-default" type = "submit">로그인</button> 
 									</div>
-									<c:if test="${paramMap.fail eq true}">
-										<span style="color:red">아이디와 비밀번호를 확인하세요.</span>
-									</c:if>
 									
 								
 							</div>	 
