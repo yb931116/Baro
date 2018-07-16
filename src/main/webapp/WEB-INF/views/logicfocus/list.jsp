@@ -36,7 +36,7 @@
 							<th scope="col">생성자 ID</th>
 							<th scope="col">생성자명</th>
 							<th scope="col">제기된 문제</th>
-							<th scope="col">해결된 문제</th>
+							<th scope="col">제안된 해결책</th>
 						</tr>
 					</thead>
 					
@@ -48,8 +48,8 @@
 								<td>${resultData.business_name}</td>
 								<td>${resultData.id}</td>
 								<td>${resultData.name}</td>
-								<td>10</td>
-								<td>6</td>
+								<td>${resultData.problem_sum}</td>
+								<td>${resultData.anwser_sum}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
