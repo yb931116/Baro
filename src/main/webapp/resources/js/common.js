@@ -18,13 +18,15 @@ common.MSG_FOR_ALERT = 'MSG_FOR_ALERT';
 /**
  * 공통 레이어 팝업
  */
-common.layerPopup = function(url, id){
+common.layerPopup = function(url, values, id){
 	$.ajax({
         type : "POST",
         url : url,
+        data : values,
         cache: false,
         success : function(data) {
         	common.popupCallback(data, id);
+        	console.log(values.get(0));
 	    },
         error : function(xhr, status, exception){
         	alert("전송에 실패하였습니다. \n ("+status+")");
