@@ -48,6 +48,24 @@
 								<p>그룹</p>
 							</a>
 						</li>
+						<li class="nav-item dropdown">
+							<a class = "dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+								<i class="la la-male"></i>
+								<p>관리자</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="<c:url value='/group/index'/>">
+								<i class="la la-group"></i>
+								<p>관리자 그룹 삭제</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="<c:url value='/authority_setting/index'/>">
+								<i class="la la-group"></i>
+								<p>관리자 회원 권한 전환</p>
+							</a>
+						</li>
 
 					</ul>
 				</div>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="authority_setting">
+	<select id="list" resultType="Map" parameterType="Map">
+		SELECT ID, NAME, generated_date, authority_name 
+		FROM user_info INNER JOIN authority_rel
+		ON user_info.user_id = authority_rel.user_id
+		INNER JOIN authority
+		ON authority_rel.authority_id = authority.authority_id;	
+	</select>
+
+
+</mapper>
