@@ -55,18 +55,20 @@
 							<td class="colPro layerModal">
 								<input class= "original_no" type = "hidden" value ="${resultMap.ProList[loop.index].original_no}">
 								<input class = "source_no" type = "hidden" value ="${resultMap.ProList[loop.index].source_no}">
+								<input class = "summary" type = "hidden" value ="${resultMap.ProList[loop.index].summary}">
 								<input class = "contents" type = "hidden" value ="${resultMap.ProList[loop.index].contents}">
 								${resultMap.ProList[loop.index].summary}
 							</td>
 							<td class="colAns layerModal">
 								<input class= "original_no" type = "hidden" value ="${resultMap.AnsList[loop.index].original_no}">
 								<input class = "source_no" type = "hidden" value ="${resultMap.AnsList[loop.index].source_no}">
+								<input class = "summary" type = "hidden" value ="${resultMap.AnsList[loop.index].summary}">
 								<input class = "contents" type = "hidden" value ="${resultMap.ProList[loop.index].contents}">
 								${resultMap.AnsList[loop.index].summary}
 							</td>
 							<th scope="row" class="colNum"></th>
-							<td class="colPro layerModal"></td>
-							<td class="colAns layerModal"></td>
+							<td class="colPro layerModal "></td>
+							<td class="colAns layerModal "></td>
 							<th scope="row" class="colNum"></th>
 						</tr>
 					</c:forEach>
@@ -86,6 +88,12 @@
 			$(this).css('background-color', 'white');
 		});
 		
+		for(var i = 0 ; i < $(".source_no").length ; i++){
+			for(var j = 0; j < $(".original_no").length ; j++){
+				if($(".source_no") == $(".original_no"))
+					
+				}
+		}
 		
 	});
 
