@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="list">
+	<select id="list" resultType="Map" parameterType="Map">
+	    select 
+			b.business_no business_no <!-- 프로젝트_SEQ -->
+			, b.business_name business_name <!-- 프로젝트명 -->
+			, u.id id <!-- 프로젝트 생성자 ID -->
+			,u.name name
+			
+			,(select count(*)
+		   	 from logic l
+			 where l.business_no = b.business_no and
+			 l.category="problem") problem_sum  
+			 
+			 ,(select count(*)
+			  from logic l
+			  where l.business_no = b.business_no and
+			  l.category="answer") anwser_sum
+			  
+		from projectdb.business b, projectdb.user_info u
+		<![CDATA[
+		where 1 = 1 
+		and b.user_id=u.user_id
+		]]>
+		order by b.business_no
+	</select>
+	
+		<select id="search" resultType="Map" parameterType="Map">
+	    select 
+			b.business_no business_no <!-- 프로젝트_SEQ -->
+			, b.business_name business_name <!-- 프로젝트명 -->
+			, u.id id <!-- 프로젝트 생성자 ID -->
+			,u.name name
+			
+			,(select count(*)
+		   	 from logic l
+			 where l.business_no = b.business_no and
+			 l.category="problem") problem_sum  
+			 
+			 ,(select count(*)
+			  from logic l
+			  where l.business_no = b.business_no and
+			  l.category="answer") anwser_sum
+			  
+		from projectdb.business b, projectdb.user_info u
+		<![CDATA[
+		where 1 = 1
+		and b.user_id=u.user_id 
+		and b.business_name like CONCAT('%',#{business_name},'%')
+		]]>
+		order by business_no
+	</select>
+	
+
+	<select id="read" resultType="Map" parameterType="Map">
+	</select>
+
+	<insert id="insert" parameterType="Map">
+	</insert>
+
+	<delete id="delete" parameterType="Map">
+	</delete>
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="group">
+    
+    <insert id="member_insert" parameterType ="Map">
+<!-- 		INSERT ALL -->
+			INSERT INTO GROUPING_MEMBER(
+					GROUP_NO	
+					,USER_ID 		
+				)values
+			<foreach collection="ID_LIST" item = "item" index="index"  separator=" , ">
+				(
+					#{GROUP_NO}
+					,(SELECT USER_ID
+					  FROM USER_INFO
+				      WHERE ID = #{item})	 
+				)
+			</foreach>
+	</insert>
+	
+		<insert id="insert" parameterType="Map">
+	    INSERT INTO GROUPING (
+			GROUP_NO 
+			, GROUP_NAME 
+			, GENERATING_DATE 
+			, USER_ID 
+			 
+		)
+		values
+		(
+			#{GROUP_NO}  
+			, #{group_name} 
+			, now()
+			, (SELECT USER_ID
+				 FROM USER_INFO
+				 WHERE ID = #{ID})			
+		)
+	</insert>
+	</mapper>

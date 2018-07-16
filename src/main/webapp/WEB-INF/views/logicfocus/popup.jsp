@@ -28,18 +28,27 @@
 								class="form-control-file" id="FormControlFile"
 								disabled="disabled">
 						</div>
-
 					</div>
-					<div class="card-action">
-						<button class="btn btn-success mr-3" data-dismiss="modal"
+					
+					<div class="card-action row">
+						<div class="col-6">
+						<button class="btn btn-success mr-2" data-dismiss="modal"
 							aria-hidden="true">확인</button>
-						<button id="insertbutton" class="btn btn-default ml-8">추가</button>
-						<i class="la la-star-o ratingstar"></i>
-						<i class="la la-star-o ratingstar"></i>
-						<i class="la la-star-o ratingstar"></i>
-						<i class="la la-star-o ratingstar"></i>
-						<i class="la la-star-o ratingstar"></i>
+						<button id="insertbutton" class="btn btn-default ml-6">추가</button>
+						</div>
+						<div class=" col-6">
+							<label class="pull-right">이 항목을 평가해주세요.</label>
+							<div id="upDown" class="pull-right">
+								<button class="btn btn-primary btn-sm">
+								<i style="font-size: 22" class="la la-thumbs-up"></i>
+								</button>
+								<button class="btn btn-primary btn-sm">
+								<i style="font-size: 22" class="la la-thumbs-down"></i>
+								</button>
+								</div>
+						</div>
 					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -87,32 +96,6 @@
 			$("#detail").removeClass("col-md-12");
 			$("#detail").addClass("col-md-6");
 			$("#insert").css("display","block")
-		});
-
-		$(".ratingstar").hover(function(){
-			var ratingstar = $(".ratingstar");
-			var r_length = ratingstar.length;
-			var me = $(this);
-			var i =0;
-			while(i<r_length){
-				ratingstar.eq(i).removeClass("la la-star-o");
-				ratingstar.eq(i).addClass("la la-star");
-				if($(".ratingstar")[i]==$(this)[0]){
-					break;
-				}
-				i++;
-			}
-				i++;
-			while(i<r_length){
-				ratingstar.eq(i).removeClass("la la-star");
-				ratingstar.eq(i).addClass("la la-star-o");
-				i++;
-			}
-			
-		});
-		
-		$(".ratingstar").click(function(){
-			$(".ratingstar").off();
 		});
 	
 	});
