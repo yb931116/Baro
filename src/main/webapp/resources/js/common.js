@@ -19,9 +19,14 @@ common.MSG_FOR_ALERT = 'MSG_FOR_ALERT';
  * 공통 레이어 팝업
  */
 common.layerPopup = function(url, values, id){
+	
+	jQuery.ajaxSettings.traditional = true;
+	
 	$.ajax({
         type : "POST",
         url : url,
+        data: {"original_no" : values[0], "source_no" : values[1], 
+        	"summary" : values[2], "contents" : values[3]},
         cache: false,
         success : function(data) {
         	common.popupCallback(data, id);
@@ -34,6 +39,8 @@ common.layerPopup = function(url, values, id){
 };
 
 common.layerPopupParam = function(url, id, params){
+	
+	
 	$.ajax({
         type : "POST",
         url : url,

@@ -12,15 +12,17 @@
 
 					<div class="form-group">
 
+			<!--1. Original_no    2. Source_no  3. summary 4. contents  -->
+			
 						<div class="form-group">
 							<label for="comment">Summary</label>
 							<textarea class="form-control" disabled="disabled"
-								id="detailsummary" rows="2"></textarea>
+								id="detailsummary" rows="2">${resultMap.original_summary}</textarea>
 						</div>
 						<div class="form-group">
 							<label for="comment">Detail</label>
 							<textarea class="form-control" disabled="disabled"
-								id="detailcomment" rows="5"></textarea>
+								id="detailcomment" rows="5">${resultMap.contents}</textarea>
 						</div>
 
 						<div class="form-group">

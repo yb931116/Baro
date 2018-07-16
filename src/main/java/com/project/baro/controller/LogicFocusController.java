@@ -28,7 +28,8 @@ public class LogicFocusController {
 
 	// Sidebar의 List 메뉴에서 접근할 수 있는 가장 깊은(3 depth) URI인 read와 insert 내의 popup Modal
 	// 관련 Method
-	@RequestMapping(value = "/logicfocus/read/{action}", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/logicfocus/read/{action}", method = { RequestMethod.GET, RequestMethod.POST }
+					, produces = "application/json")
 	public ModelAndView read(@RequestParam Map<String, Object> paramMap, @PathVariable String action,
 			ModelAndView modelandView) {
 
@@ -36,8 +37,8 @@ public class LogicFocusController {
 		String forwardView = (String) paramMap.get("forwardView");
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		List<Object> resultList = new ArrayList<Object>();
-
+		
+		resultMap = paramMap;
 		if (forwardView != null) {
 			viewName = forwardView;
 		}
@@ -46,7 +47,6 @@ public class LogicFocusController {
 
 		modelandView.addObject("paramMap", paramMap);
 		modelandView.addObject("resultMap", resultMap);
-		modelandView.addObject("resultList", resultList);
 		return modelandView;
 	}
 
