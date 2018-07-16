@@ -30,11 +30,13 @@
 						</div>
 					</div>
 					
-					<div class="card-action row">
-						<div class="col-6">
+					<div class="card-action row py-3">
+						<div class="col-6 d-flex align-items-center h100">
+						<div id="popupLeftButtons">
 						<button class="btn btn-success mr-2" data-dismiss="modal"
 							aria-hidden="true">확인</button>
 						<button id="insertbutton" class="btn btn-default ml-6">추가</button>
+						</div>
 						</div>
 						<div class=" col-6">
 							<label class="pull-right">이 항목을 평가해주세요.</label>
@@ -95,7 +97,8 @@
 			var html = $("#modal").html();
 			$("#detail").removeClass("col-md-12");
 			$("#detail").addClass("col-md-6");
-			$("#insert").css("display","block")
+			$("#insert").css("display","block");
+			$("#popupLeftButtons").html("");
 		});
 	
 	});
