@@ -1,5 +1,6 @@
 package com.project.baro.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class GroupService {
 		}
 		paramMap.put("GROUP_NO", uniqueSequence);
 		paramMap.put("ID", ID);
+		
+		
 		String sqlId = "group.insert";
 		Object resultData = dao.saveObject(sqlId,paramMap);
 		String sqlId2 = "group.member_insert";

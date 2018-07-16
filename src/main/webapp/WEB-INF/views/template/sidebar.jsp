@@ -42,6 +42,12 @@
 								<p>평가</p>
 							</a>
 						</li>
+						<li class="nav-item">
+							<a href="<c:url value='/group/index'/>">
+								<i class="la la-group"></i>
+								<p>그룹</p>
+							</a>
+						</li>
 
 					</ul>
 				</div>
