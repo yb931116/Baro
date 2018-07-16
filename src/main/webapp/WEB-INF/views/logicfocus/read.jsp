@@ -100,8 +100,8 @@
 		var no = td.find(".colNum");
 		var url="<c:url value='/logicfocus/read/detail'/>";
 		var values = [td.find(".original_no"), 
-					 td.find(".source_no")
-					 td.find(".summary")
+					 td.find(".source_no"),
+					 td.find(".summary"),
 					 td.find(".contents")];
 		
 		common.layerPopup(url,values,"#myModal");
