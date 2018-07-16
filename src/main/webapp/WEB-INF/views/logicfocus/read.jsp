@@ -14,7 +14,7 @@
 
 .table>tbody>tr>td, .table>tbody>tr>th {
 	height: 150px;
-}
+} 
 
 .colPro {
 	width: 300px;
@@ -53,9 +53,17 @@
 						<tr>
 							<th scope="row" class="colNum">${loop.index+1}</th>
 							<td class="colPro layerModal">
+								<input class= "original_no" type = "hidden" value ="${resultMap.ProList[loop.index].original_no}">
+								<input class = "source_no" type = "hidden" value ="${resultMap.ProList[loop.index].source_no}">
+								<input class = "contents" type = "hidden" value ="${resultMap.ProList[loop.index].contents}">
 								${resultMap.ProList[loop.index].summary}
 							</td>
-							<td class="colAns layerModal">${resultMap.AnsList[loop.index].summary}</td>
+							<td class="colAns layerModal">
+								<input class= "original_no" type = "hidden" value ="${resultMap.AnsList[loop.index].original_no}">
+								<input class = "source_no" type = "hidden" value ="${resultMap.AnsList[loop.index].source_no}">
+								<input class = "contents" type = "hidden" value ="${resultMap.ProList[loop.index].contents}">
+								${resultMap.AnsList[loop.index].summary}
+							</td>
 							<th scope="row" class="colNum"></th>
 							<td class="colPro layerModal"></td>
 							<td class="colAns layerModal"></td>
@@ -73,9 +81,9 @@
 	// 테이블 hover
 	$(function() {
 		$("td").hover(function() {
-			$(this).css('background-color', '#ebedf2')
+			$(this).css('background-color', '#ebedf2');
 		}, function() {
-			$(this).css('background-color', 'white')
+			$(this).css('background-color', 'white');
 		});
 		
 		
@@ -89,20 +97,13 @@
 	});
 
 	var fn_selectContentsPop = function(td) {
-		var tr = td.parent();
-		var no = tr.find(".colNum");
-		var url;
-
-		if (td.text() != "") {
-			url = "<c:url value='/logicfocus/read/detail?ORIGINAL_NO="
-					+ no.text() + "'/>";
-		} else if (td.hasClass("colPro")) {
-			url = "<c:url value='/logicfocus/insert/problem?ORIGINAL_NO="
-					+ no.text() + "' />";
-		} else if (td.hasClass("colAns")) {
-			url = "<c:url value='/logicfocus/insert/answer?ORIGINAL_NO="
-					+ no.text() + "' />";
-		}
-		common.layerPopup(url, "#myModal");
+		var no = td.find(".colNum");
+		var url="<c:url value='/logicfocus/read/detail'/>";
+		var values = [td.find(".original_no"), 
+					 td.find(".source_no")
+					 td.find(".summary")
+					 td.find(".contents")];
+		
+		common.layerPopup(url,values,"#myModal");
 	};
 </script>
