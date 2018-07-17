@@ -16,8 +16,8 @@
 	<update id = "update" parameterType="Map">
 		<foreach collection="authority_setting" item="item" index="index" separator=";">
         	UPDATE authority_rel 
-        	SET authority_id = (SELECT authority_id FROM authority WHERE authority_name = #{item.authority[index]} ) 
-			WHERE user_id = (SELECT user_id FROM user_info WHERE id = #{item.list[index]})
+        	SET authority_id = (SELECT authority_id FROM authority WHERE authority_name = #{item.Authority} ) 
+			WHERE user_id = (SELECT user_id FROM user_info WHERE id = #{item.ID})
     	</foreach>
     				
 	</update>

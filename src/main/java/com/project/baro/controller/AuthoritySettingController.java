@@ -41,6 +41,8 @@ public class AuthoritySettingController {
 		}
 		
 		
+		
+		
 		modelandView.setViewName(viewName);
 		modelandView.addObject("paramMap",paramMap);
 		modelandView.addObject("resultMap",resultMap);
