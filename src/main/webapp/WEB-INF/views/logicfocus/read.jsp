@@ -74,6 +74,29 @@
 							<th scope="row" class="colNum destination"></th>
 						</tr>
 					</c:forEach>
+						<tr class = "line">
+							<th class="colNum origin">${loop.index+1}</th>
+							<td  class="colPro layerModal originalPro">
+								<input class= "original_no" type = "hidden" value ="${resultMap.ProList[loop.index].original_no}">
+								<input class = "source_no" type = "hidden" value ="${resultMap.ProList[loop.index].source_no}">
+								<input class = "summary" type = "hidden" value ="${resultMap.ProList[loop.index].summary}">
+								<input class = "contents" type = "hidden" value ="${resultMap.ProList[loop.index].contents}">
+								<input class = "category" type = "hidden" value ="${resultMap.ProList[loop.index].category}">
+								${resultMap.ProList[loop.index].summary}
+							</td>
+							<td class="colAns layerModal originalAns">
+								<input class= "original_no" type = "hidden" value ="${resultMap.AnsList[loop.index].original_no}">
+								<input class = "source_no" type = "hidden" value ="${resultMap.AnsList[loop.index].source_no}">
+								<input class = "summary" type = "hidden" value ="${resultMap.AnsList[loop.index].summary}">
+								<input class = "contents" type = "hidden" value ="${resultMap.AnsList[loop.index].contents}">
+								<input class = "category" type = "hidden" value ="${resultMap.AnsList[loop.index].category}">
+								${resultMap.AnsList[loop.index].summary}
+							</td>
+							<th scope="row" class="colNum source"></th>
+							<td class="colPro layerModal depPro"></td>
+							<td class="colAns layerModal depAns"></td>
+							<th scope="row" class="colNum destination"></th>
+						</tr>
 				</tbody>
 			</table>
 			<div class="modal fade" id="myModal"></div>
@@ -106,7 +129,7 @@
 				for(var k=0 ; k < dest.length ; k++){
 					temp_des = temp_des + dest[k] + "<br>";
 				}
-				$trLine.eq(i).find(".destination").text(temp_des);
+				$trLine.eq(i).find(".destination").html(temp_des+1);
 			}
 		}
 		

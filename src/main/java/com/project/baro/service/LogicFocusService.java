@@ -1,6 +1,8 @@
 package com.project.baro.service;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +63,7 @@ public class LogicFocusService {
 				}
 				if(insert == false) {
 					ProList.add(temp_Pro);
-					AnsList.add("nothing");
+					AnsList.add(new HashMap<>());
 				}
 			}
 			insert = false;
@@ -73,7 +75,10 @@ public class LogicFocusService {
 		resultMap.put("business_name", ((Map) dataMap).get("business_name"));
 		resultMap.put("ProList", ProList);
 		resultMap.put("AnsList", AnsList);
-
+		for(int i =0 ; i < ProList.size() ; i++) {
+			System.out.println("Proble:"+((Map)ProList.get(i)));
+			System.out.println("Answer:"+((Map)AnsList.get(i)));
+		}
 		return resultMap;
 	}
 }
