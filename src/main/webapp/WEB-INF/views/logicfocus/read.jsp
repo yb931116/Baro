@@ -73,28 +73,14 @@
 							<th scope="row" class="colNum destination"></th>
 						</tr>
 					</c:forEach>
-						<tr class = "line">
-							<th class="colNum origin">${loop.index+1}</th>
-							<td  class="colPro layerModal originalPro">
-								<input class= "original_no" type = "hidden" value ="${resultMap.ProList[loop.index].original_no}">
-								<input class = "source_no" type = "hidden" value ="${resultMap.ProList[loop.index].source_no}">
-								<input class = "summary" type = "hidden" value ="${resultMap.ProList[loop.index].summary}">
-								<input class = "contents" type = "hidden" value ="${resultMap.ProList[loop.index].contents}">
-								<input class = "category" type = "hidden" value ="${resultMap.ProList[loop.index].category}">
-								${resultMap.ProList[loop.index].summary}
-							</td>
-							<td class="colAns layerModal originalAns">
-								<input class= "original_no" type = "hidden" value ="${resultMap.AnsList[loop.index].original_no}">
-								<input class = "source_no" type = "hidden" value ="${resultMap.AnsList[loop.index].source_no}">
-								<input class = "summary" type = "hidden" value ="${resultMap.AnsList[loop.index].summary}">
-								<input class = "contents" type = "hidden" value ="${resultMap.AnsList[loop.index].contents}">
-								<input class = "category" type = "hidden" value ="${resultMap.AnsList[loop.index].category}">
-								${resultMap.AnsList[loop.index].summary}
-							</td>
-							<th scope="row" class="colNum source"></th>
-							<td class="colPro layerModal depPro"></td>
-							<td class="colAns layerModal depAns"></td>
-							<th scope="row" class="colNum destination"></th>
+						<tr >
+							<th class="colNum origin"></th>
+							<td  class=" layerModal "></td>
+							<td class=" layerModal "></td>
+							<th scope="row" class="colNum "></th>
+							<td class=" layerModal "></td>
+							<td class=" layerModal "></td>
+							<th scope="row" class="colNum "></th>
 						</tr>
 				</tbody>
 			</table>
@@ -112,12 +98,13 @@
 			var count =0;
 			var dest = new Array();
 			for(var j = 0; j < $trLine.length ; j++){
+				if($trLine.eq(j).find(".colPro").find(".source_no").val()=="" || $trLine.eq(j).find(".colPro").find(".source_no").val()==null){
+					continue;
+				}
 				if($trLine.eq(i).find(".colAns").find(".original_no").val() == $trLine.eq(j).find(".colPro").find(".source_no").val()){
 					dest.push(j);
-					if(j==5){
-						console.log($trLine.eq(i).find(".colAns").find(".original_no").val());
-						console.log($trLine.eq(j).find(".colPro").find(".source_no").val());
-					}
+/* 					console.log((i+1)+"번째 ans의 orignal: "+ $trLine.eq(i).find(".colAns").find(".original_no").val());
+					console.log((j+1)+"번째 pro의 source: "+ $trLine.eq(j).find(".colPro").find(".source_no").val()); */
 				}
 			}
 			if(dest.length==0){
@@ -129,9 +116,9 @@
 			}else{
 				var temp_des = new String();
 				for(var k=0 ; k < dest.length ; k++){
-					temp_des = temp_des + dest[k] + "<br>";
+					temp_des = temp_des + (dest[k]+1) + "<br>";
 				}
-				$trLine.eq(i).find(".destination").html(temp_des+1);
+				$trLine.eq(i).find(".destination").html(temp_des);
 			}
 		}
 		
