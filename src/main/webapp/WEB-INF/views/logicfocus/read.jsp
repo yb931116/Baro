@@ -138,8 +138,7 @@
 	});
 
 	var fn_selectContentsPop = function(td) {
-		var business_no = ${resultMap.business_no};
-		console.log(business_no);
+		var business_no = "${resultMap.business_no}";
 		var no = td.find(".colNum");
 		var url="<c:url value='/logicfocus/read/detail'/>";
 		var values = [td.find(".original_no").val(), 
