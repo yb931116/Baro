@@ -22,7 +22,7 @@
 			  where l.business_no = b.business_no and
 			  l.category="answer") anwser_sum
 			  
-		from projectdb.business b, projectdb.user_info u
+		from business b, user_info u
 		<![CDATA[
 		where 1 = 1 
 		and b.user_id=u.user_id
@@ -47,7 +47,7 @@
 			  where l.business_no = b.business_no and
 			  l.category="answer") anwser_sum
 			  
-		from projectdb.business b, projectdb.user_info u
+		from business b, user_info u
 		<![CDATA[
 		where 1 = 1
 		and b.user_id=u.user_id 
