@@ -48,7 +48,6 @@
 					</tr>
 				</thead>
 				<tbody>
-
 					<c:forEach items="${resultMap.ProList}" varStatus="loop">
 						<tr class = "line">
 							<th class="colNum origin">${loop.index+1}</th>
@@ -115,7 +114,7 @@
 			for(var j = 0; j < $trLine.length ; j++){
 				if($trLine.eq(i).find(".colAns").find(".original_no").val() == $trLine.eq(j).find(".colPro").find(".source_no").val()){
 					dest.push(j);
-					console.log(i,j);
+					console.log($trLine.eq(5).find(".colPro").find(".source_no").val());
 				}
 			}
 			if(dest.length==0){
@@ -155,7 +154,8 @@
 					 td.find(".source_no").val(),
 					 td.find(".summary").val(),
 					 td.find(".contents").val(),
-					 td.find(".category").val()];
+					 td.find(".category").val(),
+					 ${resultMap.business_no}];
 		
 		common.layerPopup(url,values,"#myModal");
 	};
