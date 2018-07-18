@@ -51,12 +51,13 @@
 
 					<c:forEach items="${resultMap.ProList}" varStatus="loop">
 						<tr>
-							<th scope="row" class="colNum">${loop.index+1}</th>
-							<td class="colPro layerModal">
+							<th class="colNum">${loop.index+1}</th>
+							<td id = "colPro" class="colPro layerModal">
 								<input class= "original_no" type = "hidden" value ="${resultMap.ProList[loop.index].original_no}">
 								<input class = "source_no" type = "hidden" value ="${resultMap.ProList[loop.index].source_no}">
 								<input class = "summary" type = "hidden" value ="${resultMap.ProList[loop.index].summary}">
 								<input class = "contents" type = "hidden" value ="${resultMap.ProList[loop.index].contents}">
+								<input class = "category" type = "hidden" value ="${resultMap.ProList[loop.index].category}">
 								${resultMap.ProList[loop.index].summary}
 							</td>
 							<td class="colAns layerModal">
@@ -64,11 +65,15 @@
 								<input class = "source_no" type = "hidden" value ="${resultMap.AnsList[loop.index].source_no}">
 								<input class = "summary" type = "hidden" value ="${resultMap.AnsList[loop.index].summary}">
 								<input class = "contents" type = "hidden" value ="${resultMap.AnsList[loop.index].contents}">
+<<<<<<< HEAD
+=======
+								<input class = "category" type = "hidden" value ="${resultMap.AnsList[loop.index].category}">
+>>>>>>> branch 'master' of https://github.com/yb931116/Baro.git
 								${resultMap.AnsList[loop.index].summary}
 							</td>
 							<th scope="row" class="colNum"></th>
-							<td class="colPro layerModal "></td>
-							<td class="colAns layerModal "></td>
+							<td class="colPro layerModal depPro"></td>
+							<td class="colAns layerModal depAns"></td>
 							<th scope="row" class="colNum"></th>
 						</tr>
 					</c:forEach>
@@ -87,6 +92,35 @@
 		}, function() {
 			$(this).css('background-color', 'white');
 		});
+<<<<<<< HEAD
+=======
+		var $Pro_Original_no = $(".colPro").find(".original_no");
+		var $Pro_Source_no = $(".colPro").find(".source_no");
+		var $Ans_Original_no = $(".colAns").find(".original_no");
+		var $Ans_Source_no = $(".colAns").find(".source_no");
+		
+		for(var i = 0 ; i < $Ans_Original_no.length ; i++){
+			var count =0;
+			var depPro = new Array();
+			var depAns = new Array();
+			for(var j = 0; j < $Pro_Original_no.length ; j++){
+				if($Ans_Original_no[i].val() == $Pro_Source_no[j].val()){
+						indexs.add($Pro_Source_no[j]);
+				}
+			}
+			if(indexs.length==0){
+				$Ans_Original_no[i].parent().find(".depPro").text("");
+				$Ans_Original_no[i].parent().find(".depAns").text("");
+			}else if(indexs.length==1){
+				indexs[0].parent().clone().appendTo(".depPro");
+				indexs[0].parent().parent().find(".colAns").clone().appendTo(".dep");
+				
+			}else{
+				$Ans_Original_no[i].parent().find(".depPro").text("");
+			}
+		}
+		
+>>>>>>> branch 'master' of https://github.com/yb931116/Baro.git
 	});
 
 	//   Modal
@@ -102,7 +136,8 @@
 		var values = [td.find(".original_no").val(), 
 					 td.find(".source_no").val(),
 					 td.find(".summary").val(),
-					 td.find(".contents").val()];
+					 td.find(".contents").val(),
+					 td.find(".category").val()];
 		
 		common.layerPopup(url,values,"#myModal");
 	};

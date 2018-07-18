@@ -6,12 +6,81 @@
     
 <mapper namespace="authority_setting">
 	<select id="list" resultType="Map" parameterType="Map">
-		SELECT ID, NAME, generated_date, authority_name 
+		SELECT user_info.USER_ID, ID, NAME, generated_date, authority_name 
 		FROM user_info INNER JOIN authority_rel
 		ON user_info.user_id = authority_rel.user_id
 		INNER JOIN authority
 		ON authority_rel.authority_id = authority.authority_id;	
 	</select>
+	
+	<update id="update">
+
+	update authority_rel
+		set 
+			authority_id = CASE
+			<foreach collection="authoritySettingList" item="item" index="index">
+			when user_id=(select user_id from user_info where id=#{item.ID}) then (select authority_id from authority where authority_name = #{item.Authority})
+			</foreach>
+		End
+	
+	where 
+		user_id in
+		(select user_id from user_info where id in( 
+			<foreach collection="authoritySettingList" item="item" index="index" separator=",">
+				#{item.ID}	
+			</foreach>
+	));
+    
+	
+	</update>
+
+<!-- 	
+	<insert id="update"  parameterType="Map" >
+      INSERT INTO
+      authority_rel(
+      user_id
+      ,authority_id
+      )
+      VALUES
+      <foreach collection="authoritySettingList" item="item" index="index" separator=",">
+      (
+      	(select user_id from user_info where id= #{item.ID})
+      , (SELECT authority_id FROM authority WHERE authority_name = #{item.Authority} )
+      )
+      </foreach>
+      ON DUPLICATE KEY
+      UPDATE
+		user_id = VALUES(user_id)
+        ,authority_id = VALUES(authority_id)
+     
+      </insert>
+ -->	
+	
+	
+<!-- 	<update id = "update" parameterType="Map">
+		<foreach collection="authoritySettingList" item="item" index="index" separator=";">
+        	UPDATE authority_rel 
+        	SET authority_id = (SELECT authority_id FROM authority WHERE authority_name = #{item.Authority} ) 
+			WHERE user_id = (SELECT user_id FROM user_info WHERE id = #{item.ID})
+    	</foreach>
+    				
+	</update> -->
+	
+<!-- 	   <insert id="member_insert" parameterType ="Map"> -->
+
+<!-- 			INSERT INTO GROUPING_MEMBER( -->
+<!-- 					GROUP_NO	 -->
+<!-- 					,USER_ID 		 -->
+<!-- 				)values -->
+<!-- 			<foreach collection="ID_LIST" item = "item" index="index"  separator=","> -->
+<!-- 				( -->
+<!-- 					#{GROUP_NO} -->
+<!-- 					,(SELECT USER_ID -->
+<!-- 					  FROM USER_INFO -->
+<!-- 				      WHERE ID = #{item})	  -->
+<!-- 				) -->
+<!-- 			</foreach> -->
+<!-- 	</insert> -->
 
 
 </mapper>

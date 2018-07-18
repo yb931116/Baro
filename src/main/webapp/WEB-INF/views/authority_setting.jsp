@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <body>
+<form class="form-horizontal" role="form" id = authority_setting action="<c:url value ='/authority_setting/update'/>" method="POST">>
 	<div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">
@@ -33,16 +34,18 @@
 										<c:forEach items="${resultList}" var="resultData" varStatus="loop">
 										<tr>
 											<td>${loop.index+1}</td>
+											
 											<td>${resultData.ID}</td>
 											<td>${resultData.NAME}</td>
 											<td>${resultData.generated_date}</td>
-											<td>${resultData.authority_name}</td>
+											<td class="originAuth">${resultData.authority_name}</td>
 											<td>
-												<select class="form-control input-square" id="squareSelect">
-													<option>준회원</option>
-													<option>정회원</option>	
+												<select class="form-control input-square Auth" name="authority" form="authority_setting">
+													<option value='준회원'>준회원</option>
+													<option value='정회원'>정회원</option>	
 												</select>
 											</td>
+											<input type = "hidden" name = 'list' value='${resultData.ID}'>
 										</tr>
 										</c:forEach>
 										
@@ -53,7 +56,7 @@
 								</table>
 								<div class="card-footer">
 									<div class = "float-right col-md-2">
-										<button class="btn btn-default" type="button">권한변경</button>
+										<button class="btn btn-default" id = "authority_button" type="button">권한변경</button>
 									</div>
 								</div>
 							</div>
@@ -70,24 +73,28 @@
 			</div>
 		</div>
 	</div>
+	</form>
 </body>
 
 
 <script>
 
 $(function() {
-	$("#group_button").click(function() {
-		if ($(".id").eq(0).text() == '') {
-				$("#group_make").text("그룹원을 추가하지 않았습니다.");
-				event.preventDefault();
+	$("#authority_button").click(function() {
+
+		var length = $(".originAuth").length;
+		for(var i = 0 ; i < length ; i++){
+			if($(".originAuth").eq(i).text()==$(".Auth").eq(i).val()){
+				$(".originAuth").eq(i).parent().remove();
+				length--;
+				i--;
+			}
 		}
-		else if ($("#group_name").val() == '') {
-				$("#group_make").text("그룹명을 입력하지 않았습니다.");
-				event.preventDefault();
-		}else {
-			$("#make_group").submit();
-		}
+			$("#authority_setting").submit();
+
 	});
+	
+	
 });
 
 </script>
