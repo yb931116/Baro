@@ -13,7 +13,8 @@
 
 	</select>
 
-	<insert id="merge" parameterType="Map">
+	<insert id="insert" parameterType="Map">
+		INSERT INTO logic 
 	</insert>
 
 	<insert id="insert" parameterType="Map">

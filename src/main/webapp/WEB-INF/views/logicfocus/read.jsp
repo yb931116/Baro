@@ -63,7 +63,7 @@
 								<input class= "original_no" type = "hidden" value ="${resultMap.AnsList[loop.index].original_no}">
 								<input class = "source_no" type = "hidden" value ="${resultMap.AnsList[loop.index].source_no}">
 								<input class = "summary" type = "hidden" value ="${resultMap.AnsList[loop.index].summary}">
-								<input class = "contents" type = "hidden" value ="${resultMap.ProList[loop.index].contents}">
+								<input class = "contents" type = "hidden" value ="${resultMap.AnsList[loop.index].contents}">
 								${resultMap.AnsList[loop.index].summary}
 							</td>
 							<th scope="row" class="colNum"></th>
@@ -87,14 +87,6 @@
 		}, function() {
 			$(this).css('background-color', 'white');
 		});
-		
-		for(var i = 0 ; i < $(".source_no").length ; i++){
-			for(var j = 0; j < $(".original_no").length ; j++){
-				if($(".source_no") == $(".original_no"))
-					
-				}
-		}
-		
 	});
 
 	//   Modal

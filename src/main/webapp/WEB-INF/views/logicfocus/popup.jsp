@@ -17,12 +17,12 @@
 						<div class="form-group">
 							<label for="comment">Summary</label>
 							<textarea class="form-control" disabled="disabled"
-								id="detailsummary" rows="2">${resultMap.original_summary}</textarea>
+								id="detailsummary" rows="4">${resultMap.summary}</textarea>
 						</div>
 						<div class="form-group">
 							<label for="comment">Detail</label>
 							<textarea class="form-control" disabled="disabled"
-								id="detailcomment" rows="5">${resultMap.contents}</textarea>
+								id="detailcomment" rows="6">${resultMap.contents}</textarea>
 						</div>
 
 						<div class="form-group">
@@ -66,11 +66,11 @@
 			<div class='form-group'>
 				<div class='form-group'>
 					<label for='comment'>표에 표시 할 내용을 간단히 작성하세요.</label>
-					<textarea class='form-control' id='comment' rows='2'></textarea>
+					<textarea class='form-control' id='comment' rows='4'></textarea>
 				</div>
 				<div class='form-group'>
 					<label for='comment'>상세 설명을 입력하세요.</label>
-					<textarea class='form-control' id='comment' rows='5'></textarea>
+					<textarea class='form-control' id='comment' rows='6'></textarea>
 				</div>
 				<div class='form-group'>
 					<label for='FormControlFile'>증빙 사진파일</label> <input type='file'
