@@ -114,7 +114,10 @@
 			for(var j = 0; j < $trLine.length ; j++){
 				if($trLine.eq(i).find(".colAns").find(".original_no").val() == $trLine.eq(j).find(".colPro").find(".source_no").val()){
 					dest.push(j);
-					console.log($trLine.eq(5).find(".colPro").find(".source_no").val());
+					if(j==5){
+						console.log($trLine.eq(i).find(".colAns").find(".original_no").val());
+						console.log($trLine.eq(j).find(".colPro").find(".source_no").val());
+					}
 				}
 			}
 			if(dest.length==0){
@@ -148,6 +151,8 @@
 	});
 
 	var fn_selectContentsPop = function(td) {
+		var business_no = ${resultMap.business_no};
+		console.log(business_no);
 		var no = td.find(".colNum");
 		var url="<c:url value='/logicfocus/read/detail'/>";
 		var values = [td.find(".original_no").val(), 
@@ -155,7 +160,7 @@
 					 td.find(".summary").val(),
 					 td.find(".contents").val(),
 					 td.find(".category").val(),
-					 ${resultMap.business_no}];
+					 business_no];  
 		
 		common.layerPopup(url,values,"#myModal");
 	};
