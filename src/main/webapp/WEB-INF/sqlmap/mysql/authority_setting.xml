@@ -13,14 +13,58 @@
 		ON authority_rel.authority_id = authority.authority_id;	
 	</select>
 	
-	<update id = "update" parameterType="Map">
-		<foreach collection="authority_setting" item="item" index="index" separator=";">
+	<update id="update">
+
+	update authority_rel
+		set 
+			authority_id = CASE
+			<foreach collection="authoritySettingList" item="item" index="index">
+			when user_id=(select user_id from user_info where id=#{item.ID}) then (select authority_id from authority where authority_name = #{item.Authority})
+			</foreach>
+		End
+	
+	where 
+		user_id in
+		(select user_id from user_info where id in( 
+			<foreach collection="authoritySettingList" item="item" index="index" separator=",">
+				#{item.ID}	
+			</foreach>
+	));
+    
+	
+	</update>
+
+<!-- 	
+	<insert id="update"  parameterType="Map" >
+      INSERT INTO
+      authority_rel(
+      user_id
+      ,authority_id
+      )
+      VALUES
+      <foreach collection="authoritySettingList" item="item" index="index" separator=",">
+      (
+      	(select user_id from user_info where id= #{item.ID})
+      , (SELECT authority_id FROM authority WHERE authority_name = #{item.Authority} )
+      )
+      </foreach>
+      ON DUPLICATE KEY
+      UPDATE
+		user_id = VALUES(user_id)
+        ,authority_id = VALUES(authority_id)
+     
+      </insert>
+ -->	
+	
+	
+<!-- 	<update id = "update" parameterType="Map">
+		<foreach collection="authoritySettingList" item="item" index="index" separator=";">
         	UPDATE authority_rel 
         	SET authority_id = (SELECT authority_id FROM authority WHERE authority_name = #{item.Authority} ) 
 			WHERE user_id = (SELECT user_id FROM user_info WHERE id = #{item.ID})
     	</foreach>
     				
-	</update>
+	</update> -->
 	
 <!-- 	   <insert id="member_insert" parameterType ="Map"> -->
 
