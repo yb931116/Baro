@@ -50,9 +50,9 @@
 				<tbody>
 
 					<c:forEach items="${resultMap.ProList}" varStatus="loop">
-						<tr>
-							<th class="colNum">${loop.index+1}</th>
-							<td id = "colPro" class="colPro layerModal">
+						<tr class = "line">
+							<th class="colNum origin">${loop.index+1}</th>
+							<td  class="colPro layerModal originalPro">
 								<input class= "original_no" type = "hidden" value ="${resultMap.ProList[loop.index].original_no}">
 								<input class = "source_no" type = "hidden" value ="${resultMap.ProList[loop.index].source_no}">
 								<input class = "summary" type = "hidden" value ="${resultMap.ProList[loop.index].summary}">
@@ -60,7 +60,7 @@
 								<input class = "category" type = "hidden" value ="${resultMap.ProList[loop.index].category}">
 								${resultMap.ProList[loop.index].summary}
 							</td>
-							<td class="colAns layerModal">
+							<td class="colAns layerModal originalAns">
 								<input class= "original_no" type = "hidden" value ="${resultMap.AnsList[loop.index].original_no}">
 								<input class = "source_no" type = "hidden" value ="${resultMap.AnsList[loop.index].source_no}">
 								<input class = "summary" type = "hidden" value ="${resultMap.AnsList[loop.index].summary}">
@@ -68,10 +68,10 @@
 								<input class = "category" type = "hidden" value ="${resultMap.AnsList[loop.index].category}">
 								${resultMap.AnsList[loop.index].summary}
 							</td>
-							<th scope="row" class="colNum"></th>
+							<th scope="row" class="colNum source"></th>
 							<td class="colPro layerModal depPro"></td>
 							<td class="colAns layerModal depAns"></td>
-							<th scope="row" class="colNum"></th>
+							<th scope="row" class="colNum destination"></th>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -83,40 +83,41 @@
 
 <script>
 	// 테이블 hover
-	$(function() {
-		$("td").hover(function() {
-			$(this).css('background-color', '#ebedf2');
-		}, function() {
-			$(this).css('background-color', 'white');
-		});
-		var $Pro_Original_no = $(".colPro").find(".original_no");
-		var $Pro_Source_no = $(".colPro").find(".source_no");
-		var $Ans_Original_no = $(".colAns").find(".original_no");
-		var $Ans_Source_no = $(".colAns").find(".source_no");
+	$(function() {		
+		var $trLine = $(".line")
 		
-		for(var i = 0 ; i < $Ans_Original_no.length ; i++){
+		for(var i = 0 ; i < $trLine.length ; i++){
 			var count =0;
-			var depPro = new Array();
-			var depAns = new Array();
-			for(var j = 0; j < $Pro_Original_no.length ; j++){
-				if($Ans_Original_no[i].val() == $Pro_Source_no[j].val()){
-						indexs.add($Pro_Source_no[j]);
+			var dest = new Array();
+			for(var j = 0; j < $trLine.length ; j++){
+				if($trLine.eq(i).find(".colAns").find(".original_no").val() == $trLine.eq(j).find(".colPro").find(".source_no").val()){
+					dest.push(j);
+					console.log(i,j);
 				}
 			}
-			if(indexs.length==0){
-				$Ans_Original_no[i].parent().find(".depPro").text("");
-				$Ans_Original_no[i].parent().find(".depAns").text("");
-			}else if(indexs.length==1){
-				indexs[0].parent().clone().appendTo(".depPro");
-				indexs[0].parent().parent().find(".colAns").clone().appendTo(".dep");
-				
+			if(dest.length==0){
+				// 부정적 파생문제점이 없을때
+			}else if(dest.length==1){
+				$trLine.eq(i).find(".depPro").html($trLine.eq(dest[0]).find(".originalPro").html());
+				$trLine.eq(i).find(".depAns").html($trLine.eq(dest[0]).find(".originalAns").html());
+				$trLine.eq(i).find(".destination").text(dest[0]+1);
 			}else{
-				$Ans_Original_no[i].parent().find(".depPro").text("");
+				var temp_des = new String();
+				for(var k=0 ; k < dest.length ; k++){
+					temp_des = temp_des + dest[k] + "<br>";
+				}
+				$trLine.eq(i).find(".destination").text(temp_des);
 			}
 		}
 		
 	});
 
+	$("td").hover(function() {
+		$(this).css('background-color', '#ebedf2');
+	}, function() {
+		$(this).css('background-color', 'white');
+	});
+	
 	//   Modal
 	$(document).ready(function() {
 		$(".layerModal").click(function() {
