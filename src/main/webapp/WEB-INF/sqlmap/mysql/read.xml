@@ -17,9 +17,6 @@
 		INSERT INTO logic 
 	</insert>
 
-	<insert id="insert" parameterType="Map">
-	</insert>
-
 	<update id="update" parameterType="Map">
 	</update>
 
