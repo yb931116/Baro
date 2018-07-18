@@ -92,35 +92,7 @@
 		}, function() {
 			$(this).css('background-color', 'white');
 		});
-<<<<<<< HEAD
-=======
-		var $Pro_Original_no = $(".colPro").find(".original_no");
-		var $Pro_Source_no = $(".colPro").find(".source_no");
-		var $Ans_Original_no = $(".colAns").find(".original_no");
-		var $Ans_Source_no = $(".colAns").find(".source_no");
-		
-		for(var i = 0 ; i < $Ans_Original_no.length ; i++){
-			var count =0;
-			var depPro = new Array();
-			var depAns = new Array();
-			for(var j = 0; j < $Pro_Original_no.length ; j++){
-				if($Ans_Original_no[i].val() == $Pro_Source_no[j].val()){
-						indexs.add($Pro_Source_no[j]);
-				}
-			}
-			if(indexs.length==0){
-				$Ans_Original_no[i].parent().find(".depPro").text("");
-				$Ans_Original_no[i].parent().find(".depAns").text("");
-			}else if(indexs.length==1){
-				indexs[0].parent().clone().appendTo(".depPro");
-				indexs[0].parent().parent().find(".colAns").clone().appendTo(".dep");
-				
-			}else{
-				$Ans_Original_no[i].parent().find(".depPro").text("");
-			}
-		}
-		
->>>>>>> branch 'master' of https://github.com/yb931116/Baro.git
+
 	});
 
 	//   Modal
