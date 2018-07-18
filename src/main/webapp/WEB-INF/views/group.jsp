@@ -7,7 +7,6 @@
 	<div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">
-				<h4 class="page-title">그룹만들기</h4>
 				<div class="row">
 					<div class="col-md-10">
 						<div class="card">
