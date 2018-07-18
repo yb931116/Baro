@@ -61,6 +61,20 @@
 	</select>
 
 	<insert id="insert" parameterType="Map">
+		INSERT INTO business
+		(
+			business_no,
+			business_name,
+			generating_date,
+			user_id
+		)
+		VALUES
+		(
+			uuid(),
+			#{business_name},
+			now(),
+			(select user_id from user_info where id = #{id})
+		);
 	</insert>
 
 	<delete id="delete" parameterType="Map">
