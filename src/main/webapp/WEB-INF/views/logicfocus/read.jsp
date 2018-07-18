@@ -65,10 +65,7 @@
 								<input class = "source_no" type = "hidden" value ="${resultMap.AnsList[loop.index].source_no}">
 								<input class = "summary" type = "hidden" value ="${resultMap.AnsList[loop.index].summary}">
 								<input class = "contents" type = "hidden" value ="${resultMap.AnsList[loop.index].contents}">
-<<<<<<< HEAD
-=======
 								<input class = "category" type = "hidden" value ="${resultMap.AnsList[loop.index].category}">
->>>>>>> branch 'master' of https://github.com/yb931116/Baro.git
 								${resultMap.AnsList[loop.index].summary}
 							</td>
 							<th scope="row" class="colNum"></th>
