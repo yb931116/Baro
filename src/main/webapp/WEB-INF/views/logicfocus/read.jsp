@@ -113,9 +113,11 @@
 				$trLine.eq(i).find(".depPro").html($trLine.eq(dest[0]).find(".originalPro").html());
 				$trLine.eq(i).find(".depAns").html($trLine.eq(dest[0]).find(".originalAns").html());
 				$trLine.eq(i).find(".destination").text(dest[0]+1);
+				$trLine.eq(dest[0]).find(".source").text(i+1);
 			}else{
 				var temp_des = new String();
 				for(var k=0 ; k < dest.length ; k++){
+				$trLine.eq(dest[k]).find(".source").text(k+1);
 					temp_des = temp_des + (dest[k]+1) + "<br>";
 				}
 				$trLine.eq(i).find(".destination").html(temp_des);
