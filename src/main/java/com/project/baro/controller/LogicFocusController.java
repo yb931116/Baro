@@ -33,10 +33,18 @@ public class LogicFocusController {
 	public ModelAndView read(@RequestParam Map<String, Object> paramMap, @PathVariable String action,
 			ModelAndView modelandView) {
 
-		String viewName = "logicfocus/popup";
 		String forwardView = (String) paramMap.get("forwardView");
-
 		Map<String, Object> resultMap = new HashMap<String, Object>();
+		String viewName;
+		
+		if ("insert".equalsIgnoreCase(action)) {
+			service.saveProject(paramMap);
+			resultMap = (Map)service.getProject(paramMap);
+		
+		}
+		
+
+		viewName = "logicfocus/popup";
 		
 		resultMap = paramMap;
 		if (forwardView != null) {
@@ -79,22 +87,29 @@ public class LogicFocusController {
 
 		String viewName = MAPPING + action;
 		String forwardView = (String) paramMap.get("forwardView");
-
+		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<Object> resultList = new ArrayList<Object>();
-
+		
 		// divided depending on action value
 		if ("list".equalsIgnoreCase(action)) {
 			resultList = (List) service.getList(paramMap);
 		} else if ("edit".equalsIgnoreCase(action)) {
 		} else if ("insert".equalsIgnoreCase(action)) {
-			service.saveObject(paramMap);
+			service.saveProject(paramMap);
 			viewName = MAPPING + "list";
 			resultList = (List) service.getList(paramMap);
+			
+			}else if ("logicInsert".equalsIgnoreCase(action)) {
+				service.saveLogic(paramMap);
+				resultMap = (Map)service.getProject(paramMap);
+				viewName = MAPPING + "read";
+			
+			
 		} else if ("read".equalsIgnoreCase(action)) {
 			resultMap = (Map)service.getProject(paramMap);
 		}
-
+		
 		if (forwardView != null) {
 			viewName = forwardView;
 		}

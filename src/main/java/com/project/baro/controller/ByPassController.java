@@ -13,11 +13,6 @@ public class ByPassController {
 
 
 	
-	@RequestMapping(value = "/statistics")
-	public String byPass2() {	
-		return "/statistics";
-	}
-	
 	@RequestMapping(value = "/mypage")
 	public String byPass3() {	
 		return "/mypage";
@@ -27,7 +22,6 @@ public class ByPassController {
 //	public String byPass4() {	
 //		return "/group";
 //	}
-
 
 
 

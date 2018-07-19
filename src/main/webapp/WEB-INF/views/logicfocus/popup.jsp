@@ -56,6 +56,17 @@
 				</div>
 			</div>
 		</div>
+		
+		<c:if test="${resultMap.category eq 'problem'}">
+				<c:set var="category"
+				value="answer" />
+		</c:if>
+							
+		<c:if test="${resultMap.category eq 'answer'}">
+				<c:set var="category"
+				value="problem" />
+		</c:if>
+	
 
 <div class='col-md-6' style="display:none" id='insert' >
 	<div class='card'>
@@ -63,25 +74,32 @@
 			<div class='card-title'>제기</div>
 		</div>
 		<div class='card-body'>
+		<form action="<c:url value='/logicfocus/logicInsert'/>" method="post">
 			<div class='form-group'>
 				<div class='form-group'>
 					<label for='comment'>표에 표시 할 내용을 간단히 작성하세요.</label>
-					<textarea class='form-control' id='comment' rows='4'></textarea>
+					<input class='form-control row-4' name='summary' id ='summary'>
 				</div>
 				<div class='form-group'>
-					<label for='comment'>상세 설명을 입력하세요.</label>
-					<textarea class='form-control' id='comment' rows='6'></textarea>
+					<label for='contents'>상세 설명을 입력하세요.</label>
+					<input class='form-control row-6' id ='contents' name='contents'>
+					<input type="hidden" value="${resultMap.business_no}"  name="business_no">
+					<input type="hidden" value="${pageContext.request.userPrincipal.name}"  name="id">
+					<input type="hidden" value='${category}' name="category">
+					<input type="hidden" value="${resultMap.original_no}"  name="original_no">
+					<input type="hidden" value="${resultMap.source_no}"  name="source_no">
 				</div>
 				<div class='form-group'>
-					<label for='FormControlFile'>증빙 사진파일</label> <input type='file'
-						class='form-control-file' id='FormControlFile'>
+					<label for='FormControlFile'>증빙 사진파일</label> 
+					<input type='file' class='form-control-file' id='FormControlFile'>
 				</div>
 			</div>
 			<div class='card-action'>
-				<button class='btn btn-success mr-3'>확인</button>
-				<button class='btn btn-danger' data-dismiss='modal'
+				<button type="submit" class='btn btn-success mr-3'>확인</button>
+				<button type="button" class='btn btn-danger' data-dismiss='modal'
 					aria-hidden='true'>취소</button>
 			</div>
+			</form>
 		</div>
 	</div>
 </div>
@@ -94,6 +112,9 @@
 
 <script>
 	$(function() {
+		
+		console.log("${resultMap.category}");
+		
 		$("#insertbutton").click(function() {
 			$(".modal-dialog").css("max-width", "1000px");
 			var html = $("#modal").html();

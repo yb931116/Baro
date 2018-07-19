@@ -14,7 +14,28 @@
 	</select>
 
 	<insert id="insert" parameterType="Map">
-		INSERT INTO logic 
+		INSERT INTO logic
+		(
+			original_no,
+			business_no,
+			summary,
+			contents,
+			category,
+			generating_date,
+			source_no,
+			user_id
+		)
+		VALUES
+			(uuid(),
+			#{business_no},
+			#{summary},
+			#{contents},
+			#{category},
+			now(),
+			#{original_no},
+			(select user_id from user_info where id = #{id})
+		)
+		 
 	</insert>
 
 	<update id="update" parameterType="Map">
