@@ -33,7 +33,7 @@
 			#{category},
 			now(),
 			#{original_no},
-			#{user_id}
+			(select user_id from user_info where id = #{id})
 		)
 		 
 	</insert>

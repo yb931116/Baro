@@ -27,7 +27,7 @@ common.layerPopup = function(url, values, id){
         url : url,
         data: {"original_no" : values[0], "source_no" : values[1], 
         	"summary" : values[2], "contents" : values[3]
-        , "type" : values[4], "business_no" : values[5]},
+        , "category" : values[4], "business_no" : values[5]},
         cache: false,
         success : function(data) {
         	common.popupCallback(data, id);

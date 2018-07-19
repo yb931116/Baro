@@ -38,7 +38,7 @@ public class LogicFocusController {
 		String viewName;
 		
 		if ("insert".equalsIgnoreCase(action)) {
-			service.saveObject(paramMap);
+			service.saveProject(paramMap);
 			resultMap = (Map)service.getProject(paramMap);
 		
 		}
@@ -96,9 +96,16 @@ public class LogicFocusController {
 			resultList = (List) service.getList(paramMap);
 		} else if ("edit".equalsIgnoreCase(action)) {
 		} else if ("insert".equalsIgnoreCase(action)) {
-			service.saveObject(paramMap);
+			service.saveProject(paramMap);
 			viewName = MAPPING + "list";
 			resultList = (List) service.getList(paramMap);
+			
+			}else if ("logicInsert".equalsIgnoreCase(action)) {
+				service.saveLogic(paramMap);
+				resultMap = (Map)service.getProject(paramMap);
+				viewName = MAPPING + "read";
+			
+			
 		} else if ("read".equalsIgnoreCase(action)) {
 			resultMap = (Map)service.getProject(paramMap);
 		}

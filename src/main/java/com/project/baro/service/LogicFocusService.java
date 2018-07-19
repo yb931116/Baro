@@ -33,9 +33,17 @@ public class LogicFocusService {
 		return resultObject;
 	}
 
-	public Object saveObject(Map<String, Object> dataMap) {
+	public Object saveProject(Map<String, Object> dataMap) {
 
 		String sqlMapId = "list.insert";
+		Object resultObject = dao.saveObject(sqlMapId, dataMap);
+
+		return resultObject;
+	}
+	
+	public Object saveLogic(Map<String, Object> dataMap) {
+
+		String sqlMapId = "read.insert";
 		Object resultObject = dao.saveObject(sqlMapId, dataMap);
 
 		return resultObject;
