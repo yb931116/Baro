@@ -7,18 +7,15 @@
 		<div class="main-panel">
 			<div class="content">
 				<div class="container-fluid">
-
-
-
-<!-- =============================================================================================== -->
-
 					<h4 class="page-title">내가 만든 그룹</h4>
 					<c:forEach items="${groupNames}" var="groupName" varStatus="loop">
+					<form class="form-horizontal delete_form" action = "<c:url value ='/group/delete'/>" role="form" method="POST">
 					<div class="row">
 						<div class="col-md-10">
 							<div class="card">
 								<div class="card-header">
 											<h6 class="col-md-12">${groupName.group_name}</h6>
+											<input type='hidden' name='group_name' value='${groupName.group_name}'>
 								</div>
 								<div class="card-body">
 									<div class="col-md-12">
@@ -66,18 +63,7 @@
 											</tbody>
 										</table>
 
-
-
-
-
-
-
 									</div>
-
-									
-									
-									
-									
 								</div>
 
 
@@ -86,13 +72,14 @@
 
 
 
-																		<input type='hidden' name='ID_LIST' value='dummy_data'>
+										<input type='hidden' name='ID_LIST' value='dummy_data'> <!-- 더미데이터 삽입 -->
 									<div class=float-right>
 										<label class="modify_group_make"></label>
-										<button class="btn btn-default" class="group_modify"
+										<button class="btn btn-default group_modify"
 											type="button">수정하기</button>
-										<button class="btn btn-default" id="group_delete"
+										<button class="btn btn-default group_delete"
 											type="button">그룹삭제</button>
+											<input type='hidden' name='ID' value='${pageContext.request.userPrincipal.name}'> <!-- 그룹 리스트 다시 보여줄때 필요한 parameter 위한 hidden -->
 									</div>
 
 
@@ -102,6 +89,7 @@
 							</div>
 						</div>
 					</div>
+					</form>
 	</c:forEach>
 
 
@@ -110,8 +98,8 @@
 			</div>
 		</div>
 	
-</body>
 
+</body>
 <script>
 
 	
@@ -129,7 +117,7 @@
 							var flag = "true";
 							var $button = $(this);
 							var $count = $(this).closest(".card-body").find(".table_index").length;
-							console.log($(this).closest(".card-body"));
+							
 							$.ajax({
 										type : "POST",
 										url : "<c:url value='/ws/idcheck'/>",
@@ -181,7 +169,7 @@
 
 											$(this).closest(".modify_id_check")
 											$(".modify_id_check")		
-											console.log($button);
+											
 											$button.closest(".card-body").find(".modify_id_check")
 											.text(
 													"아이디가 존재하지 않습니다.");
@@ -196,47 +184,43 @@
 				var $count = $(this).closest(".card-body").find(".table_index").length;
 				$count = $count - 1;
 				var $table = $(this).closest(".card-body").find(".modify_group_table");
-				console.log($table);
-				console.log($table.find(".table_index"));
 				$(this).parent().parent().remove();
-				console.log($count);
 				for (var i = 0; i <= $count; i++) {
 					$table.find(".table_index").eq(i).text(i+1);
 				}
-
 			});
 		
 		
 	});
 		
-		$(function() {
-			$(".group_modify").click(function() {
-				if ($(".id").eq(0).text() == '') {
-					$(".modify_group_make").text("그룹원을 추가하지 않았습니다.");
-					event.preventDefault();
-				} else if ($("#group_name").val() == '') {
-					$(".modify_group_make").text("그룹명을 입력하지 않았습니다.");
-					event.preventDefault();
-				} else {
-					$("#make_group").submit();	// form 관련 수정해야함.
-				}
+	$(function() {
+			$(".group_delete").click(function() {
+					 $(this).closest(".delete_form").submit();
 			});
-		});
+	});
 		
-
-// 			$(function() { 
-// 				var $delete_button = $(this);
-// 				$(document).on("click", $delete_button.closest(".modify_group_table").find(".minus"), function() {
-			
-// 				$count = $count - 1;
-// 				$(this).parent().parent().remove();
-	
-// 				for (var i = 0; i < $count; i++) {
-// 					$(".count").eq(i).text(i + 1);
-// 				}
-	
+// 	$(function() {
+// 			$(".group_modify").click(function() {
+// 				var $ID = $(this).closest(".modify_group_table");//.find(".id").val();
+// 				console.log($ID)
+// 				$.ajax({
+// 					type : "POST",
+// 					url : "<c:url value='/ws/group_update'/>",
+// 					data : {
+// 						"ID" : $ID
+// 					},
+// 					dataType : "json",
+// 					cache : false,
+// 					success : function(data) {
+						
+// 					},
+// 					error : function(xhr, status, exception) {
+						
+// 					}
 // 				});
 // 			});
+// 	});
+		
 		
 		
 </script>
