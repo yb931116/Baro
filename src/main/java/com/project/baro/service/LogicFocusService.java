@@ -18,6 +18,7 @@ public class LogicFocusService {
 	@Autowired
 	ShareDao dao;
 
+	//프로젝트 List의 전체 목록 및 검색결과 탐색 Method
 	public Object getList(Object dataMap) {
 		String sqlMapId;
 		Object resultObject = null;
@@ -33,6 +34,7 @@ public class LogicFocusService {
 		return resultObject;
 	}
 
+	//프로젝트 insert Method
 	public Object saveProject(Map<String, Object> dataMap) {
 
 		String sqlMapId = "list.insert";
@@ -40,15 +42,25 @@ public class LogicFocusService {
 
 		return resultObject;
 	}
-	
+
+	//논심표 insert Method
 	public Object saveLogic(Map<String, Object> dataMap) {
 
 		String sqlMapId = "read.insert";
+		
+		if(((Map)dataMap).get("original_no")==null||
+				((Map)dataMap).get("original_no").equals("")) {
+			((Map)dataMap).put("source_no", null);
+		}else {
+			((Map)dataMap).put("source_no", ((Map)dataMap).get("original_no"));
+		}
+		
 		Object resultObject = dao.saveObject(sqlMapId, dataMap);
-
+		
 		return resultObject;
 	}
 
+	//논심표 data loading Method
 	public Object getProject(Object dataMap) {
 		String SqlMapId = "read.list";
 		List resultObject = (List) dao.getList(SqlMapId, dataMap);

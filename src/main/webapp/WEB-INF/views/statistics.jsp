@@ -33,11 +33,13 @@
 
 
 <script type="text/javascript">
-function fn_button(){
- 
-	console.log("클릭!!"); 
+
+var searchResult = new Array();
+
+function fn_searchButton(){
+	
+	searchResult = new Array();
   	var size = "${fn:length(resultList)}"; 
-  	console.log("size:"+size);
  	var List_ID = new Array();
  	var List_NAME = new Array();
  	var List_PRO = new Array();
@@ -52,20 +54,41 @@ function fn_button(){
 	 	List_PROJECT.push("${item.PROJECTNUM}");
  	</c:forEach>
  	
- 	
   	for(var i = 0 ; i < size ; i++){
-		if($("#searchid").val() == List_ID[i]){
-			$(".id").text(List_ID[i]);
-			$(".name").text(List_NAME[i]);
-			$(".problem").text(List_PRO[i]);
-			$(".answer").text(List_ANS[i]);
-			$(".project").text(List_PROJECT[i]); 
+		if(List_ID[i].indexOf($("#searchid").val())>-1){
+			searchResult.push(i);
 		}  
 	}  
-	
-	
+  	console.log(searchResult);
+  	var tableTag = "<thead>"
+		+ "					<tr>"
+		+ "						<th scope = 'col'>아이디</th>"
+		+ "						<th scope = 'col'>성명 </th>"
+		+ "						<th scope = 'col'>제기한 문제</th>"
+		+ "						<th scope = 'col'>제안한 해결책</th>"
+		+ "						<th scope = 'col'>참여한 프로젝트</th>"
+		+ "					</tr>"
+		+ "				</thead>"
+		+ "				<tbody>";
+		console.log(tableTag);
 		
+		for(var i=0; i<searchResult.length;i++){
+			tableTag= tableTag 
+			+ "						<tr>"
+			+ "							<th scope = 'col'>"+List_ID[searchResult[i]]+"</th>"
+			+ "							<th scope = 'col'>"+List_NAME[searchResult[i]]+"</th>"
+			+ "							<th scope = 'col'>"+List_PRO[searchResult[i]]+"</th>"
+			+ "							<th scope = 'col'>"+List_ANS[searchResult[i]]+"</th>"
+			+ "							<th scope = 'col'>"+List_PROJECT[searchResult[i]]+"</th>"
+			+ "						</tr>";
+			console.log(List_ID[searchResult[i]]);
+		}
+		
+			tableTag= tableTag + "	</tbody>";
+	$("#individualTable").html(tableTag);
 	
+	console.log("what");
+			
 };
 
 /*========= 조건 별 Ajax ===========*/
@@ -93,32 +116,17 @@ function fn_statistics(){
 					+ "							<th scope = 'col'>${resultData.PRONUM}</th>"
 					+ "							<th scope = 'col'>${resultData.ANSNUM}</th>"
 					+ "							<th scope = 'col'>${resultData.PROJECTNUM}</th>"
-					+ "						</tr>" + "					</c:forEach>				" + "				</tbody>"
+					+ "						</tr>" + "					</c:forEach>" 
+					+ "				</tbody>"
 					+ "				</table>";
 		} else if (condition == "individual") {
-
+ 
 			tableTag ="<div class='input-group col-lg-5 pl-0'>"
 					+ "<input id = 'searchid' type='text' placeholder='아이디 검색' class='form-control'  >"
-					+ "<button id ='search' type='button' class='btn btn-primary btn-sm' onclick='fn_button()'>검색</button>"
+					+ "<button id ='search' type='button' class='btn btn-primary btn-sm' onclick='fn_searchButton()'>검색</button>"
 					+ "</div>"
-					+ "<table class='table mt-4 table-hover'>"
-					+ "<thead>"
-					+ "<tr>"
-					+ "<th scope='col'>아이디</th>"
-					+ "<th scope='col'>성명</th>"
-					+ "<th scope='col'>제기한 문제</th>"
-					+ "<th scope='col'>제안한 해결책</th>"
-					+ "<th scope='col'>참여한 프로젝트</th>"
-					+ "</tr>"
-					+ "</thead>"
-					+ "<tbody>"
-					+ "<td class='id' scope='col'></td>"
-					+ "<td class='name' scope='col'></td>"
-					+ "<td class='problem' scope='col'> </td>"
-					+ "<td class='answer' scope='col'> </td>"
-					+ "<td class='project' scope='col'> </td>"
-					+ "</tbody>"
-					+ "</table>";
+					+ "<table id='individualTable' class='table mt-4 table-hover'>"
+					+ "				</table>";
 
 			$('#statistics_content').html(tableTag);
 
