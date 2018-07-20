@@ -113,23 +113,22 @@
 
 									<div class="u-text">
 										<h4>${principalName}</h4>
-										<p class="text-muted">hello@themekita.com</p>
 									</div>
 								</div>
 							</li>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="<c:url value='/mypage'/>"><i
 								class="ti-user"></i> My Page</a>
-							<a class="dropdown-item" href="#"></i> My Balance</a>
-							<a class="dropdown-item" href="#"><i class="ti-email"></i>
-								Inbox</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#"><i class="ti-settings"></i>
-								Account Setting</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item"
+							<a class="dropdown-item" 
 								href="<c:url value='/j_spring_security_logout'/>"><i
 								class="fa fa-power-off"></i> Logout</a>
+<!-- 							<a class="dropdown-item" href="#"></i> My Balance</a> -->
+<!-- 							<a class="dropdown-item" href="#"><i class="ti-email"></i> -->
+<!-- 								Inbox</a> -->
+<!-- 							<div class="dropdown-divider"></div> -->
+<!-- 							<a class="dropdown-item" href="#"><i class="ti-settings"></i> -->
+<!-- 								Account Setting</a> -->
+<!-- 							<div class="dropdown-divider"></div> -->
 						</ul> <!-- /.dropdown-user --></li>
 
 				</c:if>

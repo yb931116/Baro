@@ -41,6 +41,7 @@
 											<td class="originAuth">${resultData.authority_name}</td>
 											<td>
 												<select class="form-control input-square Auth" name="authority" form="authority_setting">
+													<option value ='권한입력'>권한입력</option>
 													<option value='준회원'>준회원</option>
 													<option value='정회원'>정회원</option>	
 												</select>
@@ -48,7 +49,8 @@
 											<input type = "hidden" name = 'list' value='${resultData.ID}'>
 										</tr>
 										</c:forEach>
-										
+											<input type='hidden' name = 'authority' value='dummy_authority' >
+											<input type = "hidden" name = 'list' value='dummy_ID'>
 
 										
 									</tbody>
@@ -84,14 +86,17 @@ $(function() {
 
 		var length = $(".originAuth").length;
 		for(var i = 0 ; i < length ; i++){
-			if($(".originAuth").eq(i).text()==$(".Auth").eq(i).val()){
+			if($(".originAuth").eq(i).text()==$(".Auth").eq(i).val() || $(".Auth").eq(i).val() == '권한입력'){
 				$(".originAuth").eq(i).parent().remove();
 				length--;
 				i--;
 			}
 		}
-			$("#authority_setting").submit();
+		$(".main-panel").css("visibility","hidden")
 
+		 
+			$("#authority_setting").submit();
+ 
 	});
 	
 	

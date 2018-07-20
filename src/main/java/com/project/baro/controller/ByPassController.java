@@ -18,10 +18,10 @@ public class ByPassController {
 		return "/mypage";
 	}
 	
-	@RequestMapping(value = "/group")
-	public String byPass4() {	
-		return "/group";
-	}
+//	@RequestMapping(value = "/group")
+//	public String byPass4() {	
+//		return "/group";
+//	}
 
 
 
