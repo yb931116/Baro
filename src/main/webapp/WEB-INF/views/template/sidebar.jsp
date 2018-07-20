@@ -55,7 +55,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<c:url value='/group/index?ID=${pageContext.request.userPrincipal.name}'/>">
+							<a href="<c:url value='/group/list?ID=${pageContext.request.userPrincipal.name}'/>">
 								<i class="la la-group"></i>
 								<p>관리자 그룹 삭제</p>
 							</a>

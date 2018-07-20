@@ -39,6 +39,11 @@ public class GroupService {
 	public Object getGroupList(String string, Object paramMap) {
 		String sqlMapId = "group.list";
 		Object resultData = dao.getList(sqlMapId, paramMap); 
+		for(int i = 0 ; i < ((List<Object>)resultData).size(); i ++) {			
+			if( ((Map<String, Object>)((List<Object>)resultData).get(i)).get("id").equals("dummy_data")) {
+				((List<Object>)resultData).remove(i);
+			}
+		}
 		
 		return resultData;	
 	}
@@ -46,7 +51,6 @@ public class GroupService {
 	public Object getGroupNameList(String string, Object paramMap) {
 		String sqlMapId = "group.groupname_list";
 		Object resultData = dao.getList(sqlMapId, paramMap);
-		
 		return resultData;
 	}
 
