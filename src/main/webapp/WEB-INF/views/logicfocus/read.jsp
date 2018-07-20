@@ -75,11 +75,11 @@
 					</c:forEach>
 						<tr >
 							<th class="colNum origin"></th>
-							<td  class=" layerModal "></td>
-							<td class=" layerModal "></td>
+							<td class=" layerModal able"></td>
+							<td class=" layerModal disable"></td>
 							<th scope="row" class="colNum "></th>
-							<td class=" layerModal "></td>
-							<td class=" layerModal "></td>
+							<td class=" layerModal disable"></td>
+							<td class=" layerModal disable"></td>
 							<th scope="row" class="colNum "></th>
 						</tr>
 				</tbody>
@@ -90,40 +90,68 @@
 </div>
 
 <script>
+
 	// 테이블 hover
-	$(function() {		
-		var $trLine = $(".line")
+	$(function() {
+
 		
-		for(var i = 0 ; i < $trLine.length ; i++){
-			var count =0;
+		var $trLine = $(".line")
+
+		for (var i = 0; i < $trLine.length; i++) {
+			var count = 0;
 			var dest = new Array();
-			for(var j = 0; j < $trLine.length ; j++){
-				if($trLine.eq(j).find(".colPro").find(".source_no").val()=="" || $trLine.eq(j).find(".colPro").find(".source_no").val()==null){
+			for (var j = 0; j < $trLine.length; j++) {
+				if ($trLine.eq(j).find(".colPro").find(".source_no").val() == ""
+						|| $trLine.eq(j).find(".colPro").find(".source_no")
+								.val() == null) {
 					continue;
 				}
-				if($trLine.eq(i).find(".colAns").find(".original_no").val() == $trLine.eq(j).find(".colPro").find(".source_no").val()){
+				if ($trLine.eq(i).find(".colAns").find(".original_no").val() == $trLine
+						.eq(j).find(".colPro").find(".source_no").val()) {
 					dest.push(j);
-/* 					console.log((i+1)+"번째 ans의 orignal: "+ $trLine.eq(i).find(".colAns").find(".original_no").val());
-					console.log((j+1)+"번째 pro의 source: "+ $trLine.eq(j).find(".colPro").find(".source_no").val()); */
+					/* 					console.log((i+1)+"번째 ans의 orignal: "+ $trLine.eq(i).find(".colAns").find(".original_no").val());
+					 console.log((j+1)+"번째 pro의 source: "+ $trLine.eq(j).find(".colPro").find(".source_no").val()); */
 				}
 			}
-			if(dest.length==0){
+			if (dest.length == 0) {
 				// 부정적 파생문제점이 없을때
-			}else if(dest.length==1){
-				$trLine.eq(i).find(".depPro").html($trLine.eq(dest[0]).find(".originalPro").html());
-				$trLine.eq(i).find(".depAns").html($trLine.eq(dest[0]).find(".originalAns").html());
-				$trLine.eq(i).find(".destination").text(dest[0]+1);
-				$trLine.eq(dest[0]).find(".source").text(i+1);
-			}else{
+			} else if (dest.length == 1) {
+				$trLine.eq(i).find(".depPro").html(
+						$trLine.eq(dest[0]).find(".originalPro").html());
+				$trLine.eq(i).find(".depAns").html(
+						$trLine.eq(dest[0]).find(".originalAns").html());
+				$trLine.eq(i).find(".destination").text(dest[0] + 1);
+				$trLine.eq(dest[0]).find(".source").text(i + 1);
+			} else {
 				var temp_des = new String();
-				for(var k=0 ; k < dest.length ; k++){
-				$trLine.eq(dest[k]).find(".source").text(k+1);
-					temp_des = temp_des + (dest[k]+1) + "<br>";
+				for (var k = 0; k < dest.length; k++) {
+					$trLine.eq(dest[k]).find(".source").text(k + 1);
+					temp_des = temp_des + (dest[k] + 1) + "<br>";
 				}
 				$trLine.eq(i).find(".destination").html(temp_des);
 			}
 		}
 		
+		$(".layerModal").click(function() {
+			fn_selectContentsPop($(this));
+		});
+		 
+	 	var td = $("td");
+ 		for(var i=0 ; i<td.length; i++){
+			if(td.eq(i).hasClass("disable")){
+				td.eq(i).off();
+			}
+			if (td.eq(i).hasClass("able")) {
+				continue;
+			}
+			if (td.eq(i).find(".original_no").val() == "" || td.eq(i).find(".original_no").val() == null) {
+				if(td.eq(i).hasClass("originalAns") || td.eq(i).hasClass("depAns")){
+					if(td.eq(i).prev().find("original_no").val()=="" || td.eq(i).prev().find("original_no").val()==null ){
+				td.eq(i).off(); 
+					}
+				}
+			}
+		}
 	});
 
 	$("td").hover(function() {
@@ -131,25 +159,44 @@
 	}, function() {
 		$(this).css('background-color', 'white');
 	});
-	
+
 	//   Modal
-	$(document).ready(function() {
-		$(".layerModal").click(function() {
-			fn_selectContentsPop($(this));
-		});
-	});
 
 	var fn_selectContentsPop = function(td) {
 		var business_no = "${resultMap.business_no}";
 		var no = td.find(".colNum");
-		var url="<c:url value='/logicfocus/read/detail'/>";
-		var values = [td.find(".original_no").val(), 
-					 td.find(".source_no").val(),
-					 td.find(".summary").val(),
-					 td.find(".contents").val(),
-					 td.find(".category").val(),
-					 business_no];  
-		
-		common.layerPopup(url,values,"#myModal");
+		var url = "<c:url value='/logicfocus/read/detail'/>";
+		var values=[null,null,null,null,"problem",business_no];
+
+		if (td.find(".original_no").val() == "" || td.find(".original_no").val() == null) {
+			if (td.hasClass("originalPro")) {
+
+			} else if (td.hasClass("originalAns") || td.hasClass("depAns")) {
+
+				values = [ td.prev().find(".original_no").val(),
+						td.prev().find(".source_no").val(),
+						td.prev().find(".summary").val(),
+						td.prev().find(".contents").val(),
+						td.prev().find(".category").val(), business_no ];
+
+			} else if (td.hasClass("depPro")) {
+
+				values = [ td.find(".original_no").val(),
+						td.prev().prev().find(".source_no").val(),
+						td.prev().prev().find(".summary").val(),
+						td.prev().prev().find(".contents").val(),
+						td.prev().prev().find(".category").val(), business_no ];
+			
+			} 
+
+		} else {
+			values = [ td.find(".original_no").val(),
+					td.find(".source_no").val(), td.find(".summary").val(),
+					td.find(".contents").val(), td.find(".category").val(),
+					business_no ];
+		}
+
+
+		common.layerPopup(url, values, "#myModal");
 	};
 </script>
