@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.baro.component.MapParamCollector;
 import com.project.baro.service.EvaluationService;
 import com.project.baro.service.GroupService;
 import com.project.baro.service.LoginService;
@@ -31,8 +32,9 @@ public class RestWSController {
 
 	@RequestMapping(value = MAPPING + "{action}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json") // 미디어 타입 관련 응답 생성
-	public Object actionMethod(@RequestParam Map<String, Object> paramMap, @PathVariable String action) {
+	public Object actionMethod(MapParamCollector paramMethodMap,@RequestParam Map<String, Object> paramMap, @PathVariable String action) {
 		Map resultMap = new HashMap<>();
+		Map<Object,Object> paramMap2 = paramMethodMap.getMap();
 		if ("idcheck".equalsIgnoreCase(action)) { // 아이디 중복체크
 			resultMap = (Map) signupservice.signup_idcheck("", paramMap);
 		} else if ("idfind".equalsIgnoreCase(action)) { // 아이디 찾기
@@ -46,11 +48,13 @@ public class RestWSController {
 				resultMap = (Map) evaluationService.SearchByID("", paramMap);
 			else if (((String) (paramMap.get("type"))).equalsIgnoreCase("NAME"))
 				resultMap = (Map) evaluationService.SearchByName("", paramMap);
-
 		}
-//		else if ("group_update".equalsIgnoreCase(action)) {
-//			resultMap = (Map) groupservice.group_update("", paramMap);
-//		}
+		else if ("group_update".equalsIgnoreCase(action)) {
+			groupservice.group_update("", paramMap2);
+		}else if ("group_delete".equalsIgnoreCase(action)) {
+			groupservice.group_delete("", paramMap);
+		}
+		
 
 		return resultMap;
 
