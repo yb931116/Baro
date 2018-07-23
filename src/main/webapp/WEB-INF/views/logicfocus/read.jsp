@@ -165,42 +165,110 @@
 	var fn_selectContentsPop = function(td) {
 		var business_no = "${resultMap.business_no}";
 		var url = "<c:url value='/logicfocus/read/detail'/>";
-		var values=[null,null,null,null,"answer",business_no];
-
+		var values;
+		var source_values;
+/*
 		if (td.find(".original_no").val() == "" || td.find(".original_no").val() == null) {
 			if (td.hasClass("originalPro")) {
 
 			} else if (td.hasClass("originalAns") || td.hasClass("depAns")) {
 
-				values = [ td.prev().find(".original_no").val(),
-						td.prev().find(".source_no").val(),
-						td.prev().find(".summary").val(),
-						td.prev().find(".contents").val(),
-						"answer", business_no ];
+				source_values = [ td.prev().find(".original_no").val(),
+								  td.prev().find(".source_no").val(),
+								  td.prev().find(".summary").val(),
+							 	  td.prev().find(".contents").val(),
+								  td.prev().find(".category").val(),
+								  business_no ];
+				values[4]="answer"; // 확인해봐야함
 
 			} else if (td.hasClass("depPro")) {
 
-				values = [ td.prev().prev().find(".original_no").val(),
-						td.prev().prev().find(".source_no").val(),
-						td.prev().prev().find(".summary").val(),
-						td.prev().prev().find(".contents").val(),
-						"problem", business_no ];
-			
+				source_values = [ td.prev().prev().find(".original_no").val(),
+								  td.prev().prev().find(".source_no").val(),
+								  td.prev().prev().find(".summary").val(),
+								  td.prev().prev().find(".contents").val(),
+								  td.prev().prev().find(".category").val(), 
+								  business_no ];
+				values[4]="problem";
 			} 
 
 		} else {
-/* 			values = [ td.prev().find(".original_no").val(),
-				td.prev().find(".source_no").val(),
-				td.prev().find(".summary").val(),
-				td.prev().find(".contents").val(),
-				td.prev().find(".category").val(), business_no ]; */
-			values = [ td.find(".original_no").val(),
-				td.find(".source_no").val(),
-				td.find(".summary").val(),
-				td.find(".contents").val(),
-				td.find(".category").val(), business_no ];
+
+			values = [td.find(".original_no").val(),
+					  td.find(".source_no").val(),
+					  td.find(".summary").val(),
+					  td.find(".contents").val(),
+					  td.find(".category").val(), 
+					  business_no ];
+			
+			if(td.hasClass("originalAns") || td.hasClass("depAns")){
+				source_value = [td.prev().prev().find(".original_no").val(),
+							    td.prev().prev().find(".source_no").val(),
+							    td.prev().prev().find(".summary").val(),
+							    td.prev().prev().find(".contents").val(),
+							    td.prev().prev().find(".category").val(), 
+							    business_no ];
+			}else if(td.hasClass("depPro")){
+				source_values = [ td.prev().prev().find(".original_no").val(),
+					  td.prev().prev().find(".source_no").val(),
+					  td.prev().prev().find(".summary").val(),
+					  td.prev().prev().find(".contents").val(),
+					  td.prev().prev().find(".category").val(), 
+					  business_no ];
+			}
 		}
-		console.log(values);
-		common.layerPopup(url, values, "#myModal");
+		
+		*/
+		values = [td.find(".original_no").val(),
+			  td.find(".source_no").val(),
+			  td.find(".summary").val(),
+			  td.find(".contents").val(),
+			  td.find(".category").val(), 
+			  business_no ];
+		
+		if(td.hasClass("orignalPro")){
+			
+			values[4] = "problem";
+		}else if(td.hasClass("originalAns") || td.hasClass("depAns")){
+			source_values= {"original_no" : td.prev().find(".original_no").val(),
+							"source_no" :  td.prev().find(".source_no").val(),
+							"summary" : td.prev().find(".summary").val(),
+							"contents" : td.prev().find(".contents").val(),
+							"category" : td.prev().find(".category").val(),
+							"business_no" : business_no};
+			values = {"source_no": td.prev().find(".original_no").val(),
+					  "category" : "answer"};
+			
+			/* 
+			values[2] = td.prev().find(".original_no").val();
+			values[4] = "answer"; */
+			console.log(source_values);
+			console.log(values);
+			
+		}else if(td.hasClass("depPro")){
+			/* source_values = [ td.prev().prev().find(".original_no").val(),
+							  td.prev().prev().find(".source_no").val(),
+							  td.prev().prev().find(".summary").val(),
+							  td.prev().prev().find(".contents").val(),
+							  td.prev().prev().find(".category").val(), 
+							  business_no ]; */
+			source_values= {"original_no" : td.prev().prev().find(".original_no").val(),
+							"source_no" :  td.prev().prev().find(".source_no").val(),
+							"summary" : td.prev().prev().find(".summary").val(),
+							"contents" : td.prev().prev().find(".contents").val(),
+							"category" : td.prev().prev().find(".category").val(),
+							"business_no" : business_no}
+					
+			values = {"source_no": td.prev().prev().find(".original_no").val(),
+					  "category" : "answer"}; 
+			console.log(source_values);
+			console.log(values);
+			/* values[2] = td.prev().prev().find(".original_no").val();
+			values[4] = "problem"; */
+		}
+		
+		
+
+		common.layerPopup(url, source_values ,values, "#myModal");
 	};
 </script>
