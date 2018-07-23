@@ -40,7 +40,7 @@ public class LogicFocusController {
 		if ("insert".equalsIgnoreCase(action)) {
 			service.saveProject(paramMap);
 			resultMap = (Map)service.getProject(paramMap);
-		
+			
 		}
 		
 
@@ -52,7 +52,6 @@ public class LogicFocusController {
 		}
 
 		modelandView.setViewName(viewName);
-
 		modelandView.addObject("paramMap", paramMap);
 		modelandView.addObject("resultMap", resultMap);
 		return modelandView;
@@ -100,11 +99,11 @@ public class LogicFocusController {
 			viewName = MAPPING + "list";
 			resultList = (List) service.getList(paramMap);
 			
-			}else if ("logicInsert".equalsIgnoreCase(action)) {
-				service.saveLogic(paramMap);
-				resultMap = (Map)service.getProject(paramMap);
-				viewName = MAPPING + "read";
-			
+		}else if ("logicInsert".equalsIgnoreCase(action)) {
+			service.saveLogic(paramMap);
+			resultMap = (Map)service.getProject(paramMap);
+			viewName = MAPPING + "read";
+			modelandView.addObject("redirect:"+"/logicfocus/read");
 			
 		} else if ("read".equalsIgnoreCase(action)) {
 			resultMap = (Map)service.getProject(paramMap);

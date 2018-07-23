@@ -12,7 +12,7 @@
 
 					<div class="form-group">
 
-			<!--1. Original_no    2. Source_no  3. summary 4. contents  -->
+			<!--1. original_no    2. Source_no  3. summary 4. contents  -->
 			
 						<div class="form-group">
 							<label for="comment">Summary</label>
@@ -77,13 +77,13 @@
 		<form action="<c:url value='/logicfocus/logicInsert'/>" method="post">
 			<div class='form-group'>
 				<div class='form-group'>
-					<label for='comment'>표에 표시 할 내용을 간단히 작성하세요.</label>
-					<input class='form-control row-4' name='summary' id ='summary'>
+					<label for='summary'>표에 표시 할 내용을 간단히 작성하세요.</label>
+					<input class='form-control' name='summary' id ='summary'>
 				</div>
 				<div class='form-group'>
 					<label for='contents'>상세 설명을 입력하세요.</label>
-					<input class='form-control row-6' id ='contents' name='contents'>
-					<input type="hidden" value="${resultMap.business_no}"  name="business_no">
+					<input class='form-control' id ='contents' name='contents'>
+			 		<input type="hidden" value="${resultMap.business_no}"  name="business_no">
 					<input type="hidden" value="${pageContext.request.userPrincipal.name}"  name="id">
 					<input type="hidden" value='${category}' name="category">
 					<input type="hidden" value="${resultMap.original_no}"  name="original_no">
@@ -95,7 +95,7 @@
 				</div>
 			</div>
 			<div class='card-action'>
-				<button type="submit" class='btn btn-success mr-3'>확인</button>
+				<button id="submit" class='btn btn-success mr-3'>확인</button>
 				<button type="button" class='btn btn-danger' data-dismiss='modal'
 					aria-hidden='true'>취소</button>
 			</div>
@@ -113,8 +113,6 @@
 <script>
 	$(function() {
 		
-		console.log("${resultMap.category}");
-		
 		$("#insertbutton").click(function() {
 			$(".modal-dialog").css("max-width", "1000px");
 			var html = $("#modal").html();
@@ -123,6 +121,13 @@
 			$("#insert").css("display","block");
 			$("#popupLeftButtons").html("");
 		});
+
+	document.addEventListener('keydown', function(event) {
+	    if (event.keyCode === 13) {
+	        event.preventDefault();
+	    }
+	}, true);
 	
-	});
+		});
+		
 </script>
