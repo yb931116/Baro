@@ -1,8 +1,6 @@
 package com.project.baro.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.baro.service.EvaluationService;
+import com.project.baro.service.GroupService;
 import com.project.baro.service.LoginService;
 import com.project.baro.service.SignupService;
 
@@ -27,6 +26,8 @@ public class RestWSController {
 	private LoginService loginservice;
 	@Autowired
 	private EvaluationService evaluationService;
+	@Autowired
+	private GroupService groupservice;
 
 	@RequestMapping(value = MAPPING + "{action}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json") // 미디어 타입 관련 응답 생성
@@ -47,6 +48,9 @@ public class RestWSController {
 				resultMap = (Map) evaluationService.SearchByName("", paramMap);
 
 		}
+//		else if ("group_update".equalsIgnoreCase(action)) {
+//			resultMap = (Map) groupservice.group_update("", paramMap);
+//		}
 
 		return resultMap;
 
