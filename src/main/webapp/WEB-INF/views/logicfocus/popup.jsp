@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <body>
 	<div class="row" id="modal">
-		<div class="col-md-12" id="detail">
+	
+		<div class="col-md-12" id="detail" style="display: none;">
 			<div class="card">
 				<div class="card-header">
 					<div class="card-title">상세</div>
@@ -17,12 +18,12 @@
 						<div class="form-group">
 							<label for="comment">Summary</label>
 							<textarea class="form-control" disabled="disabled"
-								id="detailsummary" rows="4">${resultMap.summary}</textarea>
+								id="detailsummary" rows="4">${resultMap.values.summary}</textarea>
 						</div>
 						<div class="form-group">
 							<label for="comment">Detail</label>
 							<textarea class="form-control" disabled="disabled"
-								id="detailcomment" rows="6">${resultMap.contents}</textarea>
+								id="detailcomment" rows="6">${resultMap.values.contents}</textarea>
 						</div>
 
 						<div class="form-group">
@@ -34,10 +35,10 @@
 					
 					<div class="card-action row py-3">
 						<div class="col-6 d-flex align-items-center h100">
-						<div id="popupLeftButtons">
+						<div id="readLeftButtons">
 						<button class="btn btn-success mr-2" data-dismiss="modal"
 							aria-hidden="true">확인</button>
-						<button id="insertbutton" class="btn btn-default ml-6">추가</button>
+						<button id="insertButton" class="btn btn-default ml-6">추가</button>
 						</div>
 						</div>
 						<div class=" col-6">
@@ -57,18 +58,18 @@
 			</div>
 		</div>
 		
-		<c:if test="${resultMap.category eq 'problem'}">
+		<c:if test="${resultMap.values.category eq 'problem'}">
 				<c:set var="category"
 				value="answer" />
 		</c:if>
 							
-		<c:if test="${resultMap.category eq 'answer'}">
+		<c:if test="${resultMap.values.category eq 'answer'}">
 				<c:set var="category"
 				value="problem" />
 		</c:if>
 	
 
-<div class='col-md-6' style="display:none" id='insert' >
+<div class='col-md-12' style="display:none" id='insert' >
 	<div class='card'>
 		<div class='card-header'>
 			<div class='card-title'>제기</div>
@@ -83,7 +84,7 @@
 				<div class='form-group'>
 					<label for='contents'>상세 설명을 입력하세요.</label>
 					<input class='form-control' id ='contents' name='contents'>
-			 		<input type="hidden" value="${resultMap.business_no}"  name="business_no">
+			 		<input type="hidden" value="${resultMap.source_values.business_no}"  name="business_no">
 					<input type="hidden" value="${pageContext.request.userPrincipal.name}"  name="id">
 					<input type="hidden" value='${category}' name="category">
 					<input type="hidden" value="${resultMap.original_no}"  name="original_no">
@@ -95,9 +96,10 @@
 				</div>
 			</div>
 			<div class='card-action'>
-				<button id="submit" class='btn btn-success mr-3'>확인</button>
+				<button id="submit" class='btn btn-success'>확인</button>
 				<button type="button" class='btn btn-danger' data-dismiss='modal'
 					aria-hidden='true'>취소</button>
+					<button id="readPrevious" class="btn btn-default ml-6 pull-right">이전 항목 보기</button>
 			</div>
 			</form>
 		</div>
@@ -113,15 +115,30 @@
 <script>
 	$(function() {
 		
-		$("#insertbutton").click(function() {
-			$(".modal-dialog").css("max-width", "1000px");
-			var html = $("#modal").html();
-			$("#detail").removeClass("col-md-12");
-			$("#detail").addClass("col-md-6");
-			$("#insert").css("display","block");
-			$("#popupLeftButtons").html("");
-		});
+		if(${category}=="")
+			
 
+			$("#insertButton").click(function() {
+				$(".modal-dialog").css("max-width", "1000px");
+				var html = $("#modal").html();
+				$("#detail").removeClass("col-md-12");
+				$("#detail").addClass("col-md-6");
+				$("#insert").css("display","block");
+				$("#readLeftButtons").html("");
+				$("#readPrevious").css("display","none");
+			});
+			
+			$("#readPrevious").click(function() {
+				$(".modal-dialog").css("max-width", "1000px");
+				var html = $("#modal").html();
+				$("#insert").removeClass("col-md-12");
+				$("#insert").addClass("col-md-6");
+				$("#detail").css("display","block");
+				$("#readLeftButtons").html("");
+				$("#readPrevious").css("display","none");
+			});
+			
+			
 	document.addEventListener('keydown', function(event) {
 	    if (event.keyCode === 13) {
 	        event.preventDefault();

@@ -18,16 +18,22 @@ common.MSG_FOR_ALERT = 'MSG_FOR_ALERT';
 /**
  * 공통 레이어 팝업
  */
-common.layerPopup = function(url, values, id){
+common.layerPopup = function(url, source_values, values, id){
+	var all ={
+			"values": {values} ,
+			"source_values": {source_values},
+			"asdf": "asdfasdf"
+	};
 	
-	jQuery.ajaxSettings.traditional = true;
+	console.log(values);
+	console.log(source_values);
+	console.log(all);
 	
 	$.ajax({
         type : "POST",
         url : url,
-        data: {"original_no" : values[0], "source_no" : values[1], 
-        	"summary" : values[2], "contents" : values[3]
-        , "category" : values[4], "business_no" : values[5]},
+        data: all,
+        traditional : true,
         cache: false,
         success : function(data) {
         	common.popupCallback(data, id);

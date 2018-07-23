@@ -165,8 +165,9 @@
 	var fn_selectContentsPop = function(td) {
 		var business_no = "${resultMap.business_no}";
 		var url = "<c:url value='/logicfocus/read/detail'/>";
-		var values;
-		var source_values;
+		var values={};
+		var source_values={};
+		var test=[];
 /*
 		if (td.find(".original_no").val() == "" || td.find(".original_no").val() == null) {
 			if (td.hasClass("originalPro")) {
@@ -267,8 +268,9 @@
 			values[4] = "problem"; */
 		}
 		
-		
+		test.push(values);
+		console.log(test);
 
-		common.layerPopup(url, source_values ,values, "#myModal");
+		common.layerPopup(url, source_values ,test, "#myModal");
 	};
 </script>

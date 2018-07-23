@@ -48,11 +48,12 @@ public class LogicFocusService {
 
 		String sqlMapId = "read.insert";
 		
-		if(((Map)dataMap).get("original_no")==null||
-				((Map)dataMap).get("original_no").equals("")) {
-			((Map)dataMap).put("source_no", null);
+		if(   ((Map)(((Map)dataMap).get("source_values"))).get("original_no")==null||
+				((Map)(((Map)dataMap).get("source_values"))).get("original_no").equals("")) {
+			((Map)(((Map)dataMap).get("values"))).put("source_no", null);
 		}else {
-			((Map)dataMap).put("source_no", ((Map)dataMap).get("original_no"));
+			((Map)(((Map)dataMap).get("values"))).
+			put("source_no", ((Map)(((Map)dataMap).get("source_values"))).get("original_no"));
 		}
 		
 		Object resultObject = dao.saveObject(sqlMapId, dataMap);
