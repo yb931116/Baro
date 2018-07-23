@@ -9,13 +9,13 @@
 				<div class="container-fluid">
 					<h4 class="page-title">내가 만든 그룹</h4>
 					<c:forEach items="${groupNames}" var="groupName" varStatus="loop">
-					<form class="form-horizontal delete_form" action = "<c:url value ='/group/delete'/>" role="form" method="POST">
+					<form class="form-horizontal list_form"  action = "<c:url value ='/group/list?ID=${pageContext.request.userPrincipal.name}'/>" role="form" method="POST">
 					<div class="row">
 						<div class="col-md-10">
 							<div class="card">
 								<div class="card-header">
 											<h6 class="col-md-12">${groupName.group_name}</h6>
-											<input type='hidden' name='group_name' value='${groupName.group_name}'>
+											<input type='hidden' class = group_name name='group_name' value='${groupName.group_name}'>
 								</div>
 								<div class="card-body">
 									<div class="col-md-12">
@@ -106,13 +106,13 @@
 	
 	
 	
-	// 그룹 수정 관련 그룹원 추가 버튼////////////////////////////////////////////////////////////////////////////////
+	// 그룹 수정 
 	
-// 	var $count = 0;
+
 	
 	$(function() {
 		$(".modify_plus").click(function() {
-// 							var ID = $(".modify_group_member").val();
+
 							var ID = $(this).closest(".card-body").find(".modify_group_member").val();
 							var flag = "true";
 							var $button = $(this);
@@ -128,7 +128,7 @@
 										cache : false,
 										success : function(data) { 
 											for (var i = 0; i < $count; i++) {
-// 												if ($(".id").eq(i).text() == $(".modify_group_member").val()) {
+
 												if ($button.closest(".card-body").find(".id").eq(i).text() == $button.closest(".card-body").find(".modify_group_member").val()) {
 													$button.closest(".card-body").find(".modify_id_check") 
 															.text(
@@ -139,11 +139,11 @@
 											}
 
 											if (flag == "true") {
-// 												var html = $(".modify_group_table")
+
 												var html = $button.closest(".card-body").find(".modify_group_table").html();
 												$count = $count + 1;
 												$(".modify_id_check").text("");
-// 												$(".modify_group_table")
+
 												$button.closest(".card-body").find(".modify_group_table")
 														.html(
 																html
@@ -151,7 +151,7 @@
 																		+ "	<td class = 'table_index'>"
 																		+ $count
 																		+ "</td>"
-																		+ "	<td class = 'id'><input type='hidden' id = 'ID_LIST' name = 'ID_LIST' value="+data.ID+" >"
+																		+ "	<td class = 'id'>"
 																		+ data.ID
 																		+ "</td>"
 																		+ "	<td>"
@@ -190,36 +190,81 @@
 				}
 			});
 		
-		
-	});
-		
-	$(function() {
 			$(".group_delete").click(function() {
 					 $(this).closest(".delete_form").submit();
 			});
-	});
+			$(".group_modify").click(function() {
+				var ID_LIST = [];
+				for(var i = 0; i < $(this).closest('.card').find('.id').length; i++){
+					ID_LIST.push($(this).closest('.card').find('.id').eq(i).text());
+				}
+				ID_LIST.push("dummy_data");
+
+				console.log(ID_LIST); 
+				console.log(ID_LIST.length); 
+				
+ 
+
+				var GROUP_NAME = $(this).closest(".card").find(".group_name").val();
+
+				var button = $(this);
+				$.ajax({
+					type : "POST",
+					url : "<c:url value='/ws/group_update'/>",
+					data : {
+						"group_name" : GROUP_NAME,
+						"ID_LIST" : ID_LIST
+					},
+					traditional:true,
+					dataType : "json",
+					cache : false,
+					success : function(data) {
+
+						button.closest(".list_form").submit();
+
+
+					},
+					error : function(xhr, status, exception) {
+
+
+								 
+					}
+				});
+			});
+	
+	//그룹 삭제하기 
+			$(".group_delete").click(function() {
+			 
+				
+				var GROUP_NAME = $(this).closest(".card").find(".group_name").val();
+				var button = $(this);
+				$.ajax({
+					type : "POST",
+					url : "<c:url value='/ws/group_delete'/>",
+					data : {
+						"group_name" : GROUP_NAME,
+					},
+					traditional:true,
+					dataType : "json",
+					cache : false,
+					success : function(data) {
+						
+						button.closest(".list_form").submit();
+						
+						
+					},
+					error : function(xhr, status, exception) {
+						
+					}
+				});
+			});
+
+	
 		
-// 	$(function() {
-// 			$(".group_modify").click(function() {
-// 				var $ID = $(this).closest(".modify_group_table");//.find(".id").val();
-// 				console.log($ID)
-// 				$.ajax({
-// 					type : "POST",
-// 					url : "<c:url value='/ws/group_update'/>",
-// 					data : {
-// 						"ID" : $ID
-// 					},
-// 					dataType : "json",
-// 					cache : false,
-// 					success : function(data) {
-						
-// 					},
-// 					error : function(xhr, status, exception) {
-						
-// 					}
-// 				});
-// 			});
-// 	});
+		});
+
+	
+
 		
 		
 		
