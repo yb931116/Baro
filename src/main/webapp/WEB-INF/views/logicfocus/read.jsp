@@ -166,7 +166,7 @@
 		var business_no = "${resultMap.business_no}";
 		var no = td.find(".colNum");
 		var url = "<c:url value='/logicfocus/read/detail'/>";
-		var values=[null,null,null,null,"problem",business_no];
+		var values=[null,null,null,null,"answer",business_no];
 
 		if (td.find(".original_no").val() == "" || td.find(".original_no").val() == null) {
 			if (td.hasClass("originalPro")) {
