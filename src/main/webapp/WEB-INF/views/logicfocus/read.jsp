@@ -33,8 +33,7 @@
 <div class="main-panel">
 	<div class="content customContent">
 		<div class="container-fluid">
-			<div class="card-sub">이름아 나와라</div>
-
+			<h4>${resultMap.business_name}</h4>
 			<table class="table customTable">
 				<thead>
 					<tr>
@@ -141,8 +140,12 @@
  		for(var i=0 ; i<td.length; i++){
 			if (td.eq(i).find(".original_no").val() == "" || td.eq(i).find(".original_no").val() == null) {
 				if(td.eq(i).hasClass("originalAns") || td.eq(i).hasClass("depAns")){
-					if(td.eq(i).prev().find("original_no").val()=="" || td.eq(i).prev().find("original_no").val()==null ){
-					 	td.eq(i).off(); 
+					if(td.eq(i).prev().find(".original_no").val()=="" || td.eq(i).prev().find(".original_no").val()==null ){
+						td.eq(i).off(); 
+					}
+				}else if (td.eq(i).hasClass("depPro")){
+					if(td.eq(i).prev().prev().find(".original_no").val()=="" || td.eq(i).prev().prev().find(".original_no").val()==null){
+						td.eq(i).off();		
 					}
 				}
 			
@@ -161,7 +164,6 @@
 
 	var fn_selectContentsPop = function(td) {
 		var business_no = "${resultMap.business_no}";
-		var no = td.find(".colNum");
 		var url = "<c:url value='/logicfocus/read/detail'/>";
 		var values=[null,null,null,null,"answer",business_no];
 
@@ -174,26 +176,31 @@
 						td.prev().find(".source_no").val(),
 						td.prev().find(".summary").val(),
 						td.prev().find(".contents").val(),
-						td.prev().find(".category").val(), business_no ];
+						"answer", business_no ];
 
 			} else if (td.hasClass("depPro")) {
 
-				values = [ td.find(".original_no").val(),
+				values = [ td.prev().prev().find(".original_no").val(),
 						td.prev().prev().find(".source_no").val(),
 						td.prev().prev().find(".summary").val(),
 						td.prev().prev().find(".contents").val(),
-						td.prev().prev().find(".category").val(), business_no ];
+						"problem", business_no ];
 			
 			} 
 
 		} else {
+/* 			values = [ td.prev().find(".original_no").val(),
+				td.prev().find(".source_no").val(),
+				td.prev().find(".summary").val(),
+				td.prev().find(".contents").val(),
+				td.prev().find(".category").val(), business_no ]; */
 			values = [ td.find(".original_no").val(),
-					td.find(".source_no").val(), td.find(".summary").val(),
-					td.find(".contents").val(), td.find(".category").val(),
-					business_no ];
+				td.find(".source_no").val(),
+				td.find(".summary").val(),
+				td.find(".contents").val(),
+				td.find(".category").val(), business_no ];
 		}
-
-
+		console.log(values);
 		common.layerPopup(url, values, "#myModal");
 	};
 </script>
