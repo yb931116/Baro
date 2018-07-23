@@ -93,7 +93,11 @@
 
 	// 테이블 hover
 	$(function() {
-
+		$("td").hover(function() {
+			$(this).css('background-color', '#ebedf2');
+		}, function() {
+			$(this).css('background-color', 'white');
+		});
 		
 		var $trLine = $(".line")
 
@@ -101,13 +105,10 @@
 			var count = 0;
 			var dest = new Array();
 			for (var j = 0; j < $trLine.length; j++) {
-				if ($trLine.eq(j).find(".colPro").find(".source_no").val() == ""
-						|| $trLine.eq(j).find(".colPro").find(".source_no")
-								.val() == null) {
+				if ($trLine.eq(j).find(".colPro").find(".source_no").val() == ""|| $trLine.eq(j).find(".colPro").find(".source_no").val() == null) {
 					continue;
 				}
-				if ($trLine.eq(i).find(".colAns").find(".original_no").val() == $trLine
-						.eq(j).find(".colPro").find(".source_no").val()) {
+				if ($trLine.eq(i).find(".colAns").find(".original_no").val() == $trLine.eq(j).find(".colPro").find(".source_no").val()) {
 					dest.push(j);
 					/* 					console.log((i+1)+"번째 ans의 orignal: "+ $trLine.eq(i).find(".colAns").find(".original_no").val());
 					 console.log((j+1)+"번째 pro의 source: "+ $trLine.eq(j).find(".colPro").find(".source_no").val()); */
@@ -138,26 +139,22 @@
 		 
 	 	var td = $("td");
  		for(var i=0 ; i<td.length; i++){
+			if (td.eq(i).find(".original_no").val() == "" || td.eq(i).find(".original_no").val() == null) {
+				if(td.eq(i).hasClass("originalAns") || td.eq(i).hasClass("depAns")){
+					if(td.eq(i).prev().find("original_no").val()=="" || td.eq(i).prev().find("original_no").val()==null ){
+					 	td.eq(i).off(); 
+					}
+				}
+			
+			}
 			if(td.eq(i).hasClass("disable")){
 				td.eq(i).off();
 			}
 			if (td.eq(i).hasClass("able")) {
 				continue;
 			}
-			if (td.eq(i).find(".original_no").val() == "" || td.eq(i).find(".original_no").val() == null) {
-				if(td.eq(i).hasClass("originalAns") || td.eq(i).hasClass("depAns")){
-					if(td.eq(i).prev().find("original_no").val()=="" || td.eq(i).prev().find("original_no").val()==null ){
-				td.eq(i).off(); 
-					}
-				}
-			}
-		}
-	});
 
-	$("td").hover(function() {
-		$(this).css('background-color', '#ebedf2');
-	}, function() {
-		$(this).css('background-color', 'white');
+		}
 	});
 
 	//   Modal
