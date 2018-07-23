@@ -64,11 +64,14 @@ public class GroupService {
 		
 	}
 
-//	public Object group_update(String string, Object paramMap) {
-//		String sqlMapId = "group.group_update";
-//		Object resultData = dao.saveObject(sqlMapId,paramMap);
-//		return resultData;
-//	}
+	public Object group_update(String string, Object paramMap) {
+		
+		String sqlMapId = "group.group_member_delete";
+		dao.deleteObject(sqlMapId, paramMap);
+		sqlMapId = "group.group_update";
+		Object resultData = dao.saveObject(sqlMapId,paramMap);
+		return resultData;
+	}
 
 //	public Object login_idfind(String sqlMapId, Map<String, Object> paramMap) {
 //		sqlMapId = "login.findID";

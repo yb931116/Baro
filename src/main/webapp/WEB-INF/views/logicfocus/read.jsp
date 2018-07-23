@@ -231,41 +231,49 @@
 			
 			values[4] = "problem";
 		}else if(td.hasClass("originalAns") || td.hasClass("depAns")){
-			source_values= {"original_no" : td.prev().find(".original_no").val(),
+
+			source_values = [ td.prev().prev().find(".original_no").val(),
+				  td.prev().find(".source_no").val(),
+				  td.prev().find(".summary").val(),
+				  td.prev().find(".contents").val(),
+				  td.prev().find(".category").val(), 
+				  business_no ]; 
+			
+			/* source_values= {"original_no" : td.prev().find(".original_no").val(),
 							"source_no" :  td.prev().find(".source_no").val(),
 							"summary" : td.prev().find(".summary").val(),
 							"contents" : td.prev().find(".contents").val(),
 							"category" : td.prev().find(".category").val(),
-							"business_no" : business_no};
-			values = {"source_no": td.prev().find(".original_no").val(),
-					  "category" : "answer"};
+							"business_no" : business_no}; */
+			/* values = {"source_no": td.prev().find(".original_no").val(),
+					  "category" : "answer"}; */
 			
-			/* 
+			 
 			values[2] = td.prev().find(".original_no").val();
-			values[4] = "answer"; */
+			values[4] = "answer"; 
 			console.log(source_values);
 			console.log(values);
 			
 		}else if(td.hasClass("depPro")){
-			/* source_values = [ td.prev().prev().find(".original_no").val(),
+			source_values = [ td.prev().prev().find(".original_no").val(),
 							  td.prev().prev().find(".source_no").val(),
 							  td.prev().prev().find(".summary").val(),
 							  td.prev().prev().find(".contents").val(),
 							  td.prev().prev().find(".category").val(), 
-							  business_no ]; */
-			source_values= {"original_no" : td.prev().prev().find(".original_no").val(),
+							  business_no ]; 
+/* 			source_values= {"original_no" : td.prev().prev().find(".original_no").val(),
 							"source_no" :  td.prev().prev().find(".source_no").val(),
 							"summary" : td.prev().prev().find(".summary").val(),
 							"contents" : td.prev().prev().find(".contents").val(),
 							"category" : td.prev().prev().find(".category").val(),
 							"business_no" : business_no}
-					
-			values = {"source_no": td.prev().prev().find(".original_no").val(),
-					  "category" : "answer"}; 
+ */					
+/* 			values = {"source_no": td.prev().prev().find(".original_no").val(),
+					  "category" : "answer"};  */
+			values[2] = td.prev().prev().find(".original_no").val();
+			values[4] = "problem"; 
 			console.log(source_values);
 			console.log(values);
-			/* values[2] = td.prev().prev().find(".original_no").val();
-			values[4] = "problem"; */
 		}
 		
 		test.push(values);
