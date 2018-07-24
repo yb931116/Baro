@@ -35,18 +35,19 @@ public class LogicFocusController {
 
 		String forwardView = (String) paramMap.get("forwardView");
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		String viewName;
+		String viewName = "";
 		
-		if ("insert".equalsIgnoreCase(action)) {
+		if ("detail".equalsIgnoreCase(action)) {
+			resultMap = paramMap;
+			viewName = "logicfocus/popup";
+		}
+		else if ("insert".equalsIgnoreCase(action)) {
 			service.saveProject(paramMap);
 			resultMap = (Map)service.getProject(paramMap);
-			
+			viewName = "logicfocus/read";
 		}
 		
-
-		viewName = "logicfocus/popup";
 		
-		resultMap = paramMap;
 		if (forwardView != null) {
 			viewName = forwardView;
 		}
