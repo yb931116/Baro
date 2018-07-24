@@ -85,7 +85,7 @@ th, td {
 				}else{
 					type = "ID";
 				}
-				var num = 1;
+				var num = $(".ID").length+1;
 				
 				$.ajax({
 					type : "POST",
@@ -98,6 +98,7 @@ th, td {
 						for(var i = 0 ; i < num ; i++){
 							if($(".ID").eq(i).text() == data.ID){
 								alert("이미 등록되었습니다.")
+								console.log($(".ID").eq(i).text() + " : " + data.ID );
 								return false;
 							}
 						}
