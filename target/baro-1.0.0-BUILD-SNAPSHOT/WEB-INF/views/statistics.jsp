@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 	
 <body>
-
 	<div class="main-panel" style="background-color: white;">
 		<div class="content">
 			<div class="container-fluid">
@@ -11,7 +11,7 @@
 
 		<!-- 조건을 선택하면 Ajax가 동작하여 조건 별 테이블이 표시됨 -->
 			<label for="squareSelect">통계표시 조건을 선택하세요.</label>
-				<select name="statistics_condition" onchange="statistics_function()"
+				<select name="statistics_condition" onchange="fn_statistics()"
 				class="form-control input-square mb-3" id="squareSelect" style="width: 300px;">
 					<option>선택하세요</option>
 					<option value="whole">전체</option>
@@ -24,148 +24,126 @@
 				</div>
 				
 				
+				
+				
 			</div>
 		</div>
 	</div>
 </body>
 
+
 <script type="text/javascript">
+function fn_button(){
+ 
+	console.log("클릭!!"); 
+  	var size = "${fn:length(resultList)}"; 
+  	console.log("size:"+size);
+ 	var List_ID = new Array();
+ 	var List_NAME = new Array();
+ 	var List_PRO = new Array();
+ 	var List_ANS = new Array();
+ 	var List_PROJECT = new Array();
+ 	
+ 	<c:forEach items="${resultList}" var="item">
+	 	List_ID.push("${item.ID}");
+	 	List_NAME.push("${item.NAME}");
+	 	List_PRO.push("${item.PRONUM}");
+	 	List_ANS.push("${item.ANSNUM}");
+	 	List_PROJECT.push("${item.PROJECTNUM}");
+ 	</c:forEach>
+ 	
+ 	
+  	for(var i = 0 ; i < size ; i++){
+		if($("#searchid").val() == List_ID[i]){
+			$(".id").text(List_ID[i]);
+			$(".name").text(List_NAME[i]);
+			$(".problem").text(List_PRO[i]);
+			$(".answer").text(List_ANS[i]);
+			$(".project").text(List_PROJECT[i]); 
+		}  
+	}  
+	
+	
+		
+	
+};
 
 /*========= 조건 별 Ajax ===========*/
-var fn_statistics = function(params) {
+function fn_statistics(){
 	
-		var condition= $("#squareSelect").val();
-		
-		
-     $.ajax({
-              type : "POST",
-              url : null,
-              data : params, 
-              dataType: "text",
-              cache : false,
-              success : function(data) {
-            	  var tableTag="";
-            	  
-					/* $.each(data , function(i, item) {
-						tableTag+="<label class='.checkbox-inline' >";
-						tableTag+="<input type='checkbox' name='AUTHORITY_ID' value='" +item.AUTHORITY_ID+"'>"+item.NAME;
-						tableTag+="&nbsp&nbsp&nbsp&nbsp&nbsp</label>";
-					}); */
-					
-					if(condition=="whole"){
-						tableTag="<table class='table mt-4 table-hover'>"+
-					"<thead>"+
-						"<tr>"+
-							"<th scope='col'>아이디</th>"+
-							"<th scope='col'>성명</th>"+
-							"<th scope='col'>제기한 문제</th>"+
-							"<th scope='col'>제안한 해결책</th>"+
-							"<th scope='col'>참여한 프로젝트</th>"+
-						"</tr>"+
-					"</thead>"+
-					"<tbody><tr><td>inhog</td><td>임인호</td><td>8</td><td>43</td><td>11</td></tr>"+
-					"<tr><td>clap8965</td><td>박수형</td><td>0</td><td>1</td><td>1</td></tr>"+
-					"<tr><td>aniaml1256</td><td>이봉오</td><td>87</td><td>44</td><td>21</td></tr>"+
-					"<tr><td>yb931116</td><td>유병욱</td><td>21</td><td>32</td><td>8</td></tr>"+
-					"<tr><td>rudxor456</td><td>오경택</td><td>4</td><td>11</td><td>3</td></tr>"+
-					"<tr><td>gmlrjs95020</td><td>김희건</td><td>34</td><td>8</td><td>9</td></tr>"+
-					"</tbody></table>";
-					}else if(condition=="individual"){
-						tableTag="<form class='navbar-left navbar-form nav-search mr-md-3 form-inline'  style='width: 400px;' action=''>"+
-						"<div class='input-group'>"+
-						"<input type='text' placeholder='아이디 검색' class='form-control'>"+
-						"<div class='input-group-append'>"+
-							"<span class='input-group-text'>"+
-								"<i class='la la-search search-icon'></i></span></div></div>"+
-								"<button type='button' class='btn btn-primary btn-sm' onclick='statistics_individual()'>"+
-								"검색</button></form>";
-					}else if(condition=="project"){
-						tableTag="<label>프로젝트명: 창의적 공헌실적의 DB화</label>"+
-						"<table class='table mt-4 table-hover'>"+
-					"<thead>"+
-						"<tr>"+
-							"<th scope='col'>아이디</th>"+
-							"<th scope='col'>성명</th>"+
-							"<th scope='col'>제기한 문제</th>"+
-							"<th scope='col'>제안한 해결책</th>"+
-						"</tr>"+
-					"</thead>"+
-					
-					"<tbody><tr><td>yb931116</td><td>유병욱</td><td>5</td><td>13</td></tr>"+
-					"<tr><td>rudxor456</td><td>오경택</td><td>0</td><td>4</td></tr><tr>"+
-					"<td>gmlrjs95020</td><td>김희건</td><td>18</td><td>5</td></tr>"+
-					"</tbody></table>";
-					}
-					
-					
-				  $('#statistics_content').html(tableTag);
-				
-              },
-              error : function(xhr,status, exception) {
-                 alert("Failure \n ("+ status + ")");
-                 return false;
-              }
-           });
-  }
+	var condition= $("#squareSelect").val();				
+	var tableTag="";
+	
+	if (condition == "whole") {
+			tableTag = "<table class='table mt-4 table-hover'>"
+					+ "				<thead>"
+					+ "					<tr>"
+					+ "						<th scope = 'col'>아이디</th>"
+					+ "						<th scope = 'col'>성명 </th>"
+					+ "						<th scope = 'col'>제기한 문제</th>"
+					+ "						<th scope = 'col'>제안한 해결책</th>"
+					+ "						<th scope = 'col'>참여한 프로젝트</th>"
+					+ "					</tr>"
+					+ "				</thead>"
+					+ "				<tbody>"
+					+ "					<c:forEach items='${resultList}' var='resultData' varStatus='loop'>"
+					+ "						<tr>"
+					+ "							<th scope = 'col'>${resultData.ID}</th>"
+					+ "							<th scope = 'col'>${resultData.NAME}</th>"
+					+ "							<th scope = 'col'>${resultData.PRONUM}</th>"
+					+ "							<th scope = 'col'>${resultData.ANSNUM}</th>"
+					+ "							<th scope = 'col'>${resultData.PROJECTNUM}</th>"
+					+ "						</tr>" + "					</c:forEach>				" + "				</tbody>"
+					+ "				</table>";
+		} else if (condition == "individual") {
 
+			tableTag ="<div class='input-group col-lg-5 pl-0'>"
+					+ "<input id = 'searchid' type='text' placeholder='아이디 검색' class='form-control'  >"
+					+ "<button id ='search' type='button' class='btn btn-primary btn-sm' onclick='fn_button()'>검색</button>"
+					+ "</div>"
+					+ "<table class='table mt-4 table-hover'>"
+					+ "<thead>"
+					+ "<tr>"
+					+ "<th scope='col'>아이디</th>"
+					+ "<th scope='col'>성명</th>"
+					+ "<th scope='col'>제기한 문제</th>"
+					+ "<th scope='col'>제안한 해결책</th>"
+					+ "<th scope='col'>참여한 프로젝트</th>"
+					+ "</tr>"
+					+ "</thead>"
+					+ "<tbody>"
+					+ "<td class='id' scope='col'></td>"
+					+ "<td class='name' scope='col'></td>"
+					+ "<td class='problem' scope='col'> </td>"
+					+ "<td class='answer' scope='col'> </td>"
+					+ "<td class='project' scope='col'> </td>"
+					+ "</tbody>"
+					+ "</table>";
 
-  function statistics_function() {
-     fn_statistics();
-  }
-	/*========= END OF Ajax  ===========*/
-	
-	
-	var fn_individual = function(params) {
-	
-		var condition= $("#squareSelect").val();
-		
-		
-     $.ajax({
-              type : "POST",
-              url : null,
-              data : params, 
-              dataType: "text",
-              cache : false,
-              success : function(data) {
-            	  var tableTag="";
-            	  
-            	  tableTag="<table class='table mt-4 table-hover'>"+
-					"<thead>"+
-						"<tr>"+
-							"<th scope='col'>아이디</th>"+
-							"<th scope='col'>성명</th>"+
-							"<th scope='col'>제기한 문제</th>"+
-							"<th scope='col'>제안한 해결책</th>"+
-							"<th scope='col'>참여한 프로젝트</th>"+
-						"</tr>"+
-					"</thead>"+
-					"<tbody><tr><td>yb931116</td><td>유병욱</td><td>21</td><td>32</td><td>8</td></tr>"+
-					"</tbody></table>";
+			$('#statistics_content').html(tableTag);
 
-					$('#statistics_content').html("<form class='navbar-left navbar-form nav-search mr-md-3 form-inline'  style='width: 400px;' action=''>"+
-							"<div class='input-group'>"+
-							"<input type='text' placeholder='아이디 검색' class='form-control'>"+
-							"<div class='input-group-append'>"+
-								"<span class='input-group-text'>"+
-									"<i class='la la-search search-icon'></i></span></div></div>"+
-									"<button type='button' class='btn btn-primary btn-sm' onclick='statistics_individual()'>"+
-									"검색</button></form>");
-				  $('#statistics_content').html($('#statistics_content').html()+tableTag);
-				
-              },
-              error : function(xhr,status, exception) {
-                 alert("Failure \n ("+ status + ")");
-                 return false;
-              }
-           });
-  }
+		} else if (condition == "project") {
+			tableTag = "<label>프로젝트명: 창의적 공헌실적의 DB화</label>"
+					+ "<table class='table mt-4 table-hover'>"
+					+ "<thead>"
+					+ "<tr>"
+					+ "<th scope='col'>아이디</th>"
+					+ "<th scope='col'>성명</th>"
+					+ "<th scope='col'>제기한 문제</th>"
+					+ "<th scope='col'>제안한 해결책</th>"
+					+ "</tr>"
+					+ "</thead>"
+					+
 
+					"<tbody><tr><td>yb931116</td><td>유병욱</td><td>5</td><td>13</td></tr>"
+					+ "<tr><td>rudxor456</td><td>오경택</td><td>0</td><td>4</td></tr><tr>"
+					+ "<td>gmlrjs95020</td><td>김희건</td><td>18</td><td>5</td></tr>"
+					+ "</tbody></table>";
+		}
 
-  function statistics_individual() {
-     fn_individual();
-  }
-	
-	
-	
+		$('#statistics_content').html(tableTag);
+
+	}
+
 </script>
 
