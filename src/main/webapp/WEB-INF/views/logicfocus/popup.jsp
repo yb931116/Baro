@@ -89,16 +89,7 @@
 				</div>
 			</div>
 		</div>
-		
-		<c:if test="${resultMap.values.category eq 'problem'}">
-				<c:set var="category"
-				value="answer" />
-		</c:if>
-							
-		<c:if test="${resultMap.values.category eq 'answer'}">
-				<c:set var="category"
-				value="problem" />
-		</c:if>
+
 	
 
 <div class='col-md-12' style="display:none" id='insert' >
@@ -118,7 +109,7 @@
 					<textarea class='form-control' rows="6" id ='contents' name='contents'></textarea>
 			 		<input type="hidden" value="${resultMap.business_no}"  name="business_no">
 					<input type="hidden" value="${pageContext.request.userPrincipal.name}"  name="id">
-					<input type="hidden" value='${category}' name="category">
+					<input type="hidden" value='${resultMap.category}' name="category">
 					<input type="hidden" value="${resultMap.original_no}"  name="original_no">
 					<input type="hidden" value="${resultMap.source_no}"  name="source_no">
 				</div>
@@ -201,7 +192,7 @@ var clickCount=0;
 			});
 			
 			
-	document.addEventListener('keydown', function(event) {
+	document.getElementById("submit").addEventListener('keydown', function(event) {
 	    if (event.keyCode === 13) {
 	        event.preventDefault();
 	    }
