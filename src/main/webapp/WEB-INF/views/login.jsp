@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+ 
 <body>
 <form class="form-horizontal" role="form" action="<c:url value ='/j_spring_security_check'/>" method="POST">
 	<div class="main-panel" style="background-color: white;">
@@ -59,6 +59,7 @@
 </body>
 
 <script>
+
 //Modal - findID
 	$(document).ready(function() {
 	   $("#findID").click(function() {
@@ -75,7 +76,7 @@
 	   var url ;
 	   
 	   url= "<c:url value='/login/open_findID'/>"; 
-	   common.layerPopup(url, "#myModal"); 
+	   commonOriginal.layerPopup(url, "#myModal"); 
 	};
 	
 	//Modal - findPW
@@ -90,7 +91,7 @@
 	   var url ;
 	   
 	   url= "<c:url value='/login/open_findPW'/>"; 
-	   common.layerPopup(url, "#myModal1"); 
+	   commonOriginal.layerPopup(url, "#myModal1"); 
 	};
 
 
