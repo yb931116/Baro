@@ -4,6 +4,37 @@
 <body>
 	<div class="row" id="modal">
 	
+		<div class="col-md-6" id="readPrevious" style="display: none;">
+			<div class="card">
+				<div class="card-header">
+					<div class="card-title">상세</div>
+				</div>
+				<div class="card-body">
+
+					<div class="form-group">
+
+						<div class="form-group">
+							<label for="source_detailsummary">Summary</label>
+							<textarea class="form-control" disabled="disabled"
+								id="source_detailsummary" rows="4">${resultMap.source_summary}</textarea>
+						</div>
+						<div class="form-group">
+							<label for="source_detailcomment">Detail</label>
+							<textarea class="form-control" disabled="disabled"
+								id="source_detailcomment" rows="6">${resultMap.source_contents}</textarea>
+						</div>
+
+						<div class="form-group">
+							<label for="FormControlFile">증빙 사진파일</label> <input type="text"
+								class="form-control-file" id="FormControlFile"
+								disabled="disabled">
+						</div>
+					</div>
+						</div>
+						</div>
+					</div>
+				
+	
 		<div class="col-md-12" id="detail" style="display: none;">
 			<div class="card">
 				<div class="card-header">
@@ -16,14 +47,14 @@
 			<!--1. original_no    2. Source_no  3. summary 4. contents  -->
 			
 						<div class="form-group">
-							<label for="comment">Summary</label>
+							<label for="detailsummary">Summary</label>
 							<textarea class="form-control" disabled="disabled"
-								id="detailsummary" rows="4">${resultMap.source_summary}</textarea>
+								id="detailsummary" rows="4">${resultMap.summary}</textarea>
 						</div>
 						<div class="form-group">
-							<label for="comment">Detail</label>
+							<label for="detailcomment">Detail</label>
 							<textarea class="form-control" disabled="disabled"
-								id="detailcomment" rows="6">${resultMap.source_contents}</textarea>
+								id="detailcomment" rows="6">${resultMap.contents}</textarea>
 						</div>
 
 						<div class="form-group">
@@ -38,7 +69,8 @@
 						<div id="readLeftButtons">
 						<button class="btn btn-success mr-2" data-dismiss="modal"
 							aria-hidden="true">확인</button>
-						<button id="insertButton" class="btn btn-default ml-6">추가</button>
+						<button id="insertButton" class="btn btn-default ml-3">추가</button>
+						<button id="detailReadPrevious" class="btn btn-default">이전 항목 보기</button>
 						</div>
 						</div>
 						<div class=" col-6">
@@ -99,43 +131,62 @@
 				<button id="submit" class='btn btn-success'>확인</button>
 				<button type="button" class='btn btn-danger' data-dismiss='modal'
 					aria-hidden='true'>취소</button>
-					<button id="readPrevious" class="btn btn-default ml-6 pull-right">이전 항목 보기</button>
+					<button id="insertReadPrevious" class="btn btn-default ml-6 pull-right">이전 항목 보기</button>
 			</div>
 			</form>
 		</div>
-	</div>
-</div>
+		</div>
+		</div>
 	</div>
 </body>
 
 
 
 
-
 <script>
+var original_no = "<c:out value="${resultMap.original_no}" />";
+
 	$(function() {
 		
-		if(${category}=="")
-			
+		if(original_no!=""){
+			$("#detail").css("display","block");
+		}else{
+			$("#insert").css("display","block");
+		}
 
 			$("#insertButton").click(function() {
 				$(".modal-dialog").css("max-width", "1000px");
 				var html = $("#modal").html();
 				$("#detail").removeClass("col-md-12");
 				$("#detail").addClass("col-md-6");
+				
 				$("#insert").css("display","block");
-				$("#readLeftButtons").html("");
-				$("#readPrevious").css("display","none");
+				$("#insert").removeClass("col-md-12");
+				$("#insert").addClass("col-md-6");
+				
+				$("#readLeftButtons").css("display","none");
 			});
 			
-			$("#readPrevious").click(function() {
+			
+			$("#insertReadPrevious").click(function() {
 				$(".modal-dialog").css("max-width", "1000px");
 				var html = $("#modal").html();
 				$("#insert").removeClass("col-md-12");
 				$("#insert").addClass("col-md-6");
-				$("#detail").css("display","block");
-				$("#readLeftButtons").html("");
-				$("#readPrevious").css("display","none");
+				
+				$("#readPrevious").css("display","block");
+				$("#readLeftButtons").css("display","none");
+				$("#insertReadPrevious").css("display","none");
+			});
+			
+			$("#detailReadPrevious").click(function() {
+				$(".modal-dialog").css("max-width", "1000px");
+				var html = $("#modal").html();
+				$("#detail").removeClass("col-md-12");
+				$("#detail").addClass("col-md-6");
+				
+				$("#readPrevious").css("display","block");
+				$("#detailReadPrevious").css("display","none");
 			});
 			
 			

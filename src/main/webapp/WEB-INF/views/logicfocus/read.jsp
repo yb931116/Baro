@@ -109,8 +109,7 @@
 				}
 				if ($trLine.eq(i).find(".colAns").find(".original_no").val() == $trLine.eq(j).find(".colPro").find(".source_no").val()) {
 					dest.push(j);
-					/* 					console.log((i+1)+"번째 ans의 orignal: "+ $trLine.eq(i).find(".colAns").find(".original_no").val());
-					 console.log((j+1)+"번째 pro의 source: "+ $trLine.eq(j).find(".colPro").find(".source_no").val()); */
+					
 				}
 			}
 			if (dest.length == 0) {
@@ -167,59 +166,7 @@
 		var url = "<c:url value='/logicfocus/read/detail'/>";
 		var values={};
 		var source_values={};
-		var test=[];
-/*
-		if (td.find(".original_no").val() == "" || td.find(".original_no").val() == null) {
-			if (td.hasClass("originalPro")) {
 
-			} else if (td.hasClass("originalAns") || td.hasClass("depAns")) {
-
-				source_values = [ td.prev().find(".original_no").val(),
-								  td.prev().find(".source_no").val(),
-								  td.prev().find(".summary").val(),
-							 	  td.prev().find(".contents").val(),
-								  td.prev().find(".category").val(),
-								  business_no ];
-				values[4]="answer"; // 확인해봐야함
-
-			} else if (td.hasClass("depPro")) {
-
-				source_values = [ td.prev().prev().find(".original_no").val(),
-								  td.prev().prev().find(".source_no").val(),
-								  td.prev().prev().find(".summary").val(),
-								  td.prev().prev().find(".contents").val(),
-								  td.prev().prev().find(".category").val(), 
-								  business_no ];
-				values[4]="problem";
-			} 
-
-		} else {
-
-			values = [td.find(".original_no").val(),
-					  td.find(".source_no").val(),
-					  td.find(".summary").val(),
-					  td.find(".contents").val(),
-					  td.find(".category").val(), 
-					  business_no ];
-			
-			if(td.hasClass("originalAns") || td.hasClass("depAns")){
-				source_value = [td.prev().prev().find(".original_no").val(),
-							    td.prev().prev().find(".source_no").val(),
-							    td.prev().prev().find(".summary").val(),
-							    td.prev().prev().find(".contents").val(),
-							    td.prev().prev().find(".category").val(), 
-							    business_no ];
-			}else if(td.hasClass("depPro")){
-				source_values = [ td.prev().prev().find(".original_no").val(),
-					  td.prev().prev().find(".source_no").val(),
-					  td.prev().prev().find(".summary").val(),
-					  td.prev().prev().find(".contents").val(),
-					  td.prev().prev().find(".category").val(), 
-					  business_no ];
-			}
-		}
-		
-		*/
 		values = [td.find(".original_no").val(),
 			  td.find(".source_no").val(),
 			  td.find(".summary").val(),
@@ -232,27 +179,16 @@
 			values[4] = "problem";
 		}else if(td.hasClass("originalAns") || td.hasClass("depAns")){
 
-			source_values = [ td.prev().prev().find(".original_no").val(),
+			source_values = [ td.prev().find(".original_no").val(),
 				  td.prev().find(".source_no").val(),
 				  td.prev().find(".summary").val(),
 				  td.prev().find(".contents").val(),
 				  td.prev().find(".category").val(), 
 				  business_no ]; 
 			
-			/* source_values= {"original_no" : td.prev().find(".original_no").val(),
-							"source_no" :  td.prev().find(".source_no").val(),
-							"summary" : td.prev().find(".summary").val(),
-							"contents" : td.prev().find(".contents").val(),
-							"category" : td.prev().find(".category").val(),
-							"business_no" : business_no}; */
-			/* values = {"source_no": td.prev().find(".original_no").val(),
-					  "category" : "answer"}; */
+			values[1] = td.prev().find(".original_no").val();
+			values[4] = "answer";
 			
-			 
-			values[2] = td.prev().find(".original_no").val();
-			values[4] = "answer"; 
-			console.log(source_values);
-			console.log(values);
 			
 		}else if(td.hasClass("depPro")){
 			source_values = [ td.prev().prev().find(".original_no").val(),
@@ -261,24 +197,12 @@
 							  td.prev().prev().find(".contents").val(),
 							  td.prev().prev().find(".category").val(), 
 							  business_no ]; 
-/* 			source_values= {"original_no" : td.prev().prev().find(".original_no").val(),
-							"source_no" :  td.prev().prev().find(".source_no").val(),
-							"summary" : td.prev().prev().find(".summary").val(),
-							"contents" : td.prev().prev().find(".contents").val(),
-							"category" : td.prev().prev().find(".category").val(),
-							"business_no" : business_no}
- */					
-/* 			values = {"source_no": td.prev().prev().find(".original_no").val(),
-					  "category" : "answer"};  */
-			values[2] = td.prev().prev().find(".original_no").val();
-			values[4] = "problem"; 
-			console.log(source_values);
-			console.log(values);
+
+			values[1] = td.prev().prev().find(".original_no").val();
+			values[4] = "problem";
 		}
 		
-		test.push(values);
-		console.log(test);
-
-		common.layerPopup(url, source_values ,test, "#myModal");
+	console.log(source_values,values);
+		common.layerPopup(url, source_values ,values, "#myModal");
 	};
 </script>
