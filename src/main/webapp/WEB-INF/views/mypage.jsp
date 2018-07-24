@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <body>
-	<div class="main-panel">
+	<div class="main-panel" style="background-color: white;">
 		<div class="content">
 			<div class="container-fluid">
 				<h4 class="page-title">마이페이지</h4>
@@ -137,7 +137,7 @@
 								<form class="form-inline">
 									
 									<label class="col-md-3" style = "display: block" for = "text">아이디</label><input type="text"
-										class="form-control form-control-sm col-md-9" id="text" name="id" value="아이디" disabled>
+										class="form-control form-control-sm col-md-9" id="text" name="id" value="${pageContext.request.userPrincipal.name}" disabled>
 									
 									<hr style="margin-top: 3px; margin-bottom: 3px">
 

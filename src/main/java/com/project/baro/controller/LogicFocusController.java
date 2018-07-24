@@ -35,24 +35,24 @@ public class LogicFocusController {
 
 		String forwardView = (String) paramMap.get("forwardView");
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		String viewName;
+		String viewName = "";
 		
-		if ("insert".equalsIgnoreCase(action)) {
+		if ("detail".equalsIgnoreCase(action)) {
+			resultMap = paramMap;
+			viewName = "logicfocus/popup";
+		}
+		else if ("insert".equalsIgnoreCase(action)) {
 			service.saveProject(paramMap);
 			resultMap = (Map)service.getProject(paramMap);
-		
+			viewName = "logicfocus/read";
 		}
 		
-
-		viewName = "logicfocus/popup";
 		
-		resultMap = paramMap;
 		if (forwardView != null) {
 			viewName = forwardView;
 		}
 
 		modelandView.setViewName(viewName);
-
 		modelandView.addObject("paramMap", paramMap);
 		modelandView.addObject("resultMap", resultMap);
 		return modelandView;
@@ -100,11 +100,11 @@ public class LogicFocusController {
 			viewName = MAPPING + "list";
 			resultList = (List) service.getList(paramMap);
 			
-			}else if ("logicInsert".equalsIgnoreCase(action)) {
-				service.saveLogic(paramMap);
-				resultMap = (Map)service.getProject(paramMap);
-				viewName = MAPPING + "read";
-			
+		}else if ("logicInsert".equalsIgnoreCase(action)) {
+			service.saveLogic(paramMap);
+			resultMap = (Map)service.getProject(paramMap);
+			viewName = MAPPING + "read";
+			modelandView.addObject("redirect:"+"/logicfocus/read");
 			
 		} else if ("read".equalsIgnoreCase(action)) {
 			resultMap = (Map)service.getProject(paramMap);

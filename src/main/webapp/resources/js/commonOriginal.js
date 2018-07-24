@@ -1,4 +1,4 @@
-var common = new Object();
+var commonOriginal = new Object();
 /*
  * ################# CONSTANTS ####################
  */
@@ -7,38 +7,21 @@ var common = new Object();
  * common
  */
 
-common.CONTEXT_PATH = '';
+commonOriginal.CONTEXT_PATH = '';
 /*
  * for ajax form
  */
-common.SUCCESS_FLAG = 'SUCCESS_FLAG';
-common.URL_FOR_REDIRECT = 'URL_FOR_REDIRECT';
-common.MSG_FOR_ALERT = 'MSG_FOR_ALERT';
+commonOriginal.SUCCESS_FLAG = 'SUCCESS_FLAG';
+commonOriginal.URL_FOR_REDIRECT = 'URL_FOR_REDIRECT';
+commonOriginal.MSG_FOR_ALERT = 'MSG_FOR_ALERT';
 
 /**
  * 공통 레이어 팝업
  */
-common.layerPopup = function(url, _source_values, _values, id){
-
-	
+commonOriginal.layerPopup = function(url, id){
 	$.ajax({
         type : "POST",
         url : url,
-        data: {
-        	"source_original_no": _source_values[0] ,
-			"source_source_no": _source_values[1] ,
-			"source_summary": _source_values[2],
-			"source_contents": _source_values[3],
-			"source_category": _source_values[4],
-			"source_business_no": _source_values[5],
-        	"original_no":_values[0] ,
-			"source_no": _values[1] ,
-			"summary": _values[2],
-			"contents": _values[3],
-			"category": _values[4],
-			"business_no": _values[5]
-	},
-        traditional : true,
         cache: false,
         success : function(data) {
         	common.popupCallback(data, id);
@@ -50,9 +33,7 @@ common.layerPopup = function(url, _source_values, _values, id){
     });
 };
 
-common.layerPopupParam = function(url, id, params){
-	
-	
+commonOriginal.layerPopupParam = function(url, id, params){
 	$.ajax({
         type : "POST",
         url : url,
@@ -71,7 +52,7 @@ common.layerPopupParam = function(url, id, params){
 /**
  * 팝업콜백함수
  */
-common.popupCallback = function(data, id) {
+commonOriginal.popupCallback = function(data, id) {
 	$(id).html(data);
 	$(id).modal({
 		modal: true,

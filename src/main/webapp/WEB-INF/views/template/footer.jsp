@@ -23,8 +23,10 @@
 								</li>
 							</ul>
 						</nav>
-						<div class="copyright ml-auto">
-							2018, made by Baro
+						<div class="copyright ml-auto mt-2 text-right">
+							2018, made by TEAM Baro <br>
+							Kim Hee Guen, Oh Gyueng Teak, Yu Byoung Uk
 						</div>				
+						
 					</div>
 				</footer>

@@ -11,7 +11,7 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 <!-- 	<annotation-driven /> -->
-	<annotation-driven> 
+	<annotation-driven>  
 		<argument-resolvers>
 		<beans:bean
 			class="com.project.baro.component.CustomizeMethodArgumentResolver" />

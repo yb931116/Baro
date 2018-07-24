@@ -32,7 +32,7 @@
 			#{contents},
 			#{category},
 			now(),
-			#{original_no},
+			#{source_no},
 			(select user_id from user_info where id = #{id})
 		)
 		 

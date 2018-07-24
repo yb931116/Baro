@@ -11,7 +11,7 @@ import com.project.baro.dao.ShareDao;
 import com.project.baro.util.CommonUtil;
 
 @Service
-public class GroupService {
+public class AdminGroupService {
 
 	@Autowired
 	private ShareDao dao;
@@ -37,7 +37,7 @@ public class GroupService {
 	}
 
 	public Object getGroupList(String string, Object paramMap) {
-		String sqlMapId = "group.list";
+		String sqlMapId = "admin_group.list";
 		Object resultData = dao.getList(sqlMapId, paramMap); 
 		for(int i = 0 ; i < ((List<Object>)resultData).size(); i ++) {			
 			if( ((Map<String, Object>)((List<Object>)resultData).get(i)).get("id").equals("dummy_data")) {
@@ -49,7 +49,7 @@ public class GroupService {
 	}
 	
 	public Object getGroupNameList(String string, Object paramMap) {
-		String sqlMapId = "group.groupname_list";
+		String sqlMapId = "admin_group.groupname_list";
 		Object resultData = dao.getList(sqlMapId, paramMap);
 		return resultData;
 	}
