@@ -174,7 +174,19 @@
 			  td.find(".category").val(), 
 			  business_no ];
 		
-		if(td.hasClass("orignalPro")){
+		if(td.hasClass("originalPro")){
+			
+			for(var i = 0 ; i < $("td").length ; i++){
+				if($("td").eq(i).find(".original_no").val()==td.find(".source_no").val()){
+					source_values = [ $("td").eq(i).find(".original_no").val(),
+						$("td").eq(i).find(".source_no").val(),
+						$("td").eq(i).find(".summary").val(),
+						$("td").eq(i).find(".contents").val(),
+						$("td").eq(i).find(".category").val(), 
+						  business_no ];
+				}
+			}
+			
 			
 			values[4] = "problem";
 		}else if(td.hasClass("originalAns") || td.hasClass("depAns")){
