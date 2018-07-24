@@ -18,12 +18,12 @@
 						<div class="form-group">
 							<label for="comment">Summary</label>
 							<textarea class="form-control" disabled="disabled"
-								id="detailsummary" rows="4">${resultMap.values.summary}</textarea>
+								id="detailsummary" rows="4">${resultMap.source_summary}</textarea>
 						</div>
 						<div class="form-group">
 							<label for="comment">Detail</label>
 							<textarea class="form-control" disabled="disabled"
-								id="detailcomment" rows="6">${resultMap.values.contents}</textarea>
+								id="detailcomment" rows="6">${resultMap.source_contents}</textarea>
 						</div>
 
 						<div class="form-group">
@@ -84,7 +84,7 @@
 				<div class='form-group'>
 					<label for='contents'>상세 설명을 입력하세요.</label>
 					<input class='form-control' id ='contents' name='contents'>
-			 		<input type="hidden" value="${resultMap.source_values.business_no}"  name="business_no">
+			 		<input type="hidden" value="${resultMap.business_no}"  name="business_no">
 					<input type="hidden" value="${pageContext.request.userPrincipal.name}"  name="id">
 					<input type="hidden" value='${category}' name="category">
 					<input type="hidden" value="${resultMap.original_no}"  name="original_no">
