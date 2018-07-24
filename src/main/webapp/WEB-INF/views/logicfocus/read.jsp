@@ -189,7 +189,6 @@
 			values[1] = td.prev().find(".original_no").val();
 			values[4] = "answer";
 			
-			
 		}else if(td.hasClass("depPro")){
 			source_values = [ td.prev().prev().find(".original_no").val(),
 							  td.prev().prev().find(".source_no").val(),
@@ -202,7 +201,6 @@
 			values[4] = "problem";
 		}
 		
-	console.log(source_values,values);
 		common.layerPopup(url, source_values ,values, "#myModal");
 	};
 </script>
