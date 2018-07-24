@@ -111,11 +111,11 @@
 			<div class='form-group'>
 				<div class='form-group'>
 					<label for='summary'>표에 표시 할 내용을 간단히 작성하세요.</label>
-					<input class='form-control' name='summary' id ='summary'>
+					<textarea class='form-control' rows="4" name='summary' id ='summary'></textarea>
 				</div>
 				<div class='form-group'>
 					<label for='contents'>상세 설명을 입력하세요.</label>
-					<input class='form-control' id ='contents' name='contents'>
+					<textarea class='form-control' rows="6" id ='contents' name='contents'></textarea>
 			 		<input type="hidden" value="${resultMap.business_no}"  name="business_no">
 					<input type="hidden" value="${pageContext.request.userPrincipal.name}"  name="id">
 					<input type="hidden" value='${category}' name="category">
