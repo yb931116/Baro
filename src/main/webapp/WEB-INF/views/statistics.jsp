@@ -4,11 +4,14 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 	
 <body>
-	<div class="main-panel" style="background-color: white;">
+	<div class="main-panel" style="background-color: white;"> 
 		<div class="content">
 			<div class="container-fluid">
-			
-
+			 <h4 class="page-title">통계</h4>
+				<div class="row">
+					<div class="col-md-12">
+					<div class="card">
+						<div class="card-body">	
 		<!-- 조건을 선택하면 Ajax가 동작하여 조건 별 테이블이 표시됨 -->
 			<label for="squareSelect">통계표시 조건을 선택하세요.</label>
 				<select name="statistics_condition" onchange="fn_statistics()"
@@ -23,9 +26,10 @@
 				<!-- 조건을 선택하면 이곳에 테이블이 표시됨 -->
 				</div>
 				
-				
-				
-				
+						</div>
+					</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

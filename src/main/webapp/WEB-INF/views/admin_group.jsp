@@ -4,7 +4,7 @@
  
 <body>
 		
-		<div class="main-panel">
+		<div class="main-panel" style="background-color: white;">
 			<div class="content">
 				<div class="container-fluid">
 					<h4 class="page-title">전체 그룹</h4>

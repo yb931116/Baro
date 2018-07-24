@@ -21,45 +21,51 @@ th, td {
 </style>
 
 <body>
-	<div class="main-panel">
+	<div class="main-panel" style="background-color: white;"> 
 		<div class="content">
-			<span class="h2">Evaluation</span>
-			<hr>
+			
+<!-- 			<span class="h2">Evaluation</span> -->
+			
 			<div class="container-fluid">
-				<div class="row justify-content-md-center">
-					<div class="form-group col-lg-3">
-						<label class="mt-1">문제점 가중치</label> <input type="text" value=""
-							id="Ppoints" class="form-control">
-					</div>
-					<div class="form-group col-lg-3">
-						<label class="mt-1">해결책 가중치</label> <input type="text" value=""
-							id="Apoints" class="form-control">
-					</div>
-					<div class="form-group row align-items-end">
-						<button class="btn btn-default ml-3" onclick="apply()">적용</button>
-					</div>
-				</div>
-				<div class="row justify-content-md-center">
-					<table class="table-bordered col-lg-12" id="evaluation">
-						<tr>
-							<th>번호</th>
-							<th>ID</th>
-							<th class="name">이름</th>
-							<th>문제점 건수</th>
-							<th>문제점 점수</th>
-							<th>해결책 건수</th>
-							<th>문제점 점수</th>
-							<th>합계</th>
-							<th>삭제</th>
-						</tr>
-					</table>
-					<div class="row justify-content-md-center mt-3 col-lg-5">
-						<select>
-<!-- 							<option value="name">이름</option> -->
- 							<option value="ID">아이디</option> 
-						</select> 
-						<input type="text" id="text" class="form-control col-lg-8 mr-2">
-						<button id="plus" class="btn btn-default">추가</button>
+				<h4 class="page-title">평가</h4>
+				<div class="card">
+					<div class="card-body">
+						<div class="row justify-content-md-center">
+							<div class="form-group col-lg-3">
+								<label class="mt-1">문제점 가중치</label> <input type="text" value=""
+									id="Ppoints" class="form-control">
+							</div>
+							<div class="form-group col-lg-3">
+								<label class="mt-1">해결책 가중치</label> <input type="text" value=""
+									id="Apoints" class="form-control">
+							</div>
+							<div class="form-group row align-items-end">
+								<button class="btn btn-default ml-3" onclick="apply()">적용</button>
+							</div>
+						</div>
+						<div class="row justify-content-md-center">
+							<table class="table-bordered col-lg-12" id="evaluation">
+								<tr>
+									<th>번호</th>
+									<th>ID</th>
+									<th class="name">이름</th>
+									<th>문제점 건수</th>
+									<th>문제점 점수</th>
+									<th>해결책 건수</th>
+									<th>문제점 점수</th>
+									<th>합계</th>
+									<th>삭제</th>
+								</tr>
+							</table>
+							<div class="row justify-content-md-center mt-3 col-lg-5">
+								<select>
+		<!-- 							<option value="name">이름</option> -->
+		 							<option value="ID">아이디</option> 
+								</select> 
+								<input type="text" id="text" class="form-control col-lg-8 mr-2">
+								<button id="plus" class="btn btn-default">추가</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -4,7 +4,7 @@
 
 <body>
 		
-		<div class="main-panel">
+		<div class="main-panel" style="background-color: white;">
 			<div class="content">
 				<div class="container-fluid">
 	<form class="form-horizontal" role="form" id=make_group action="<c:url value ='/group/insert'/>" method="POST">

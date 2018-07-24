@@ -4,8 +4,8 @@
 
 <body> 
 		
-		<div class="main-panel">
-			<div class="content">
+		<div class="main-panel" style="background-color: white;">
+			<div class="content" >
 				<div class="container-fluid">
 					<h4 class="page-title">내가 만든 그룹</h4>
 					

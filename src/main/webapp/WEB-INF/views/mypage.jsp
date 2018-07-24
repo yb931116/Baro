@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <body>
-	<div class="main-panel">
+	<div class="main-panel" style="background-color: white;">
 		<div class="content">
 			<div class="container-fluid">
 				<h4 class="page-title">마이페이지</h4>
