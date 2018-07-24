@@ -1,18 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<body> 
+ 
+<body>
 		
 		<div class="main-panel">
 			<div class="content">
 				<div class="container-fluid">
-					<h4 class="page-title">내가 만든 그룹</h4>
-					
-					 
+					<h4 class="page-title">전체 그룹</h4>
 					<c:forEach items="${groupNames}" var="groupName" varStatus="loop">
-					
-					<form class="form-horizontal list_form"  action = "<c:url value ='/group/list?ID=${pageContext.request.userPrincipal.name}'/>" role="form" method="POST">
+					<form class="form-horizontal list_form"  action = "<c:url value ='/admin_group/list?ID=${pageContext.request.userPrincipal.name}'/>" role="form" method="POST">
 					<div class="row">
 						<div class="col-md-10">
 							<div class="card">
@@ -20,7 +17,7 @@
 											<h6 class="col-md-12">${groupName.group_name}</h6>
 											<input type='hidden' class = group_name name='group_name' value='${groupName.group_name}'>
 								</div>
-								<div class="card-body"> 
+								<div class="card-body">
 									<div class="col-md-12">
 										<p class="form-inline">
 											<span class="col-md-2">그룹원</span> <input type="text"
@@ -94,7 +91,6 @@
 					</div>
 					</form>
 	</c:forEach>
-	
 
 
 
