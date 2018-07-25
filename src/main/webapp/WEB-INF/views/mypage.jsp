@@ -30,22 +30,22 @@
 										</tr>
 									</thead>
 
-									<tbody>
-										<%-- 						<c:forEach items="${resultList}" var="resultData" varStatus="loop"> --%>
-										<tr>
-											<td class="business_no">1</td>
-											<td>창의적 공헌실적의 DB화</td>
-											<td>Jsn</td>
-											<td>R&D기획사업<br> 실적에 대한 사후 실적 관리
-											</td>
-										</tr>
-										<tr>
-											<td class="business_no">2</td>
-											<td>창의적 공헌실적의 DB화</td>
-											<td>Jsn</td>
-											<td>경영/행정기획사업<br> 실적에 대한 사후 실적 관리
-											</td>
-										</tr>
+									<tbody id = "myproblem">
+<%-- 										<c:forEach items="${resultList}" var="resultData" varStatus="loop"> --%>
+<!-- 										<tr> -->
+<!-- 											<td class="business_no">1</td> -->
+<!-- 											<td>창의적 공헌실적의 DB화</td> -->
+<!-- 											<td>Jsn</td> -->
+<!-- 											<td>R&D기획사업<br> 실적에 대한 사후 실적 관리 -->
+<!-- 											</td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td class="business_no">2</td> -->
+<!-- 											<td>창의적 공헌실적의 DB화</td> -->
+<!-- 											<td>Jsn</td> -->
+<!-- 											<td>경영/행정기획사업<br> 실적에 대한 사후 실적 관리 -->
+<!-- 											</td> -->
+<!-- 										</tr> -->
 
 										<%-- 						</c:forEach> --%>
 									</tbody>
@@ -80,31 +80,8 @@
 										</tr>
 									</thead>
 
-									<tbody>
-										<%-- 						<c:forEach items="${resultList}" var="resultData" varStatus="loop"> --%>
-										<tr>
-											<td class="business_no">1</td>
-											<td>창의적 공헌실적의 DB화</td>
-											<td>Jsn</td>
-											<td>R&D기획사업<br> 실적에 대한 DB 수록관리로 공유/조회가 해결된다.
-											</td>
-										</tr>
-										<tr>
-											<td class="business_no">2</td>
-											<td>창의적 공헌실적의 DB화</td>
-											<td>Jsn</td>
-											<td>경영/행정기획사업<br> 실적에 대한 DB 수록관리로 공유/조회가 해결된다.
-											</td>
-										</tr>
-										<tr>
-											<td class="business_no">3</td>
-											<td>창의적 공헌실적의 DB화</td>
-											<td>Jsn</td>
-											<td>산출주체의 특허출원등록 내용 중의 문제점과 해결책만 발췌 실명 DB화 수록 
-											</td>
-										</tr>
-
-										<%-- 						</c:forEach> --%>
+									<tbody id = "mysolve">
+	
 									</tbody>
 
 								</table>
@@ -207,15 +184,66 @@
 </body>
 
 <script>
- 	var tr = $('#problem tbody tr');
- 	document.getElementById("my_problem").innerHTML = '나의 게시물 현황 - 문제점(' + tr.length + ')'; 
-</script>
 
-<script>
-	var tr = $('#solve tbody tr');
-	document.getElementById("my_solve").innerHTML = '나의 게시물 현황 - 해결책(' + tr.length + ')';
+	var ID = '${pageContext.request.userPrincipal.name}';
+	$(function() {
+		$.ajax({
+			
+			type : "POST",
+			url : "<c:url value='/ws/myproblem_list'/>",
+			data : {
+				"ID" : ID
+				
+			},
+			traditional:true,
+			dataType : "json",
+			cache : false,
+			success : function(data) {
+				var html = "";
+				for(var i = 0; i < data.myproblemList.length; i++){
+					html = html
+					+"<tr>"
+					+ "	<td>"+ (i+1) +"</td>"
+					+ "	<td>"+data.myproblemList[i].business_name+"</td>"
+					+ "	<td>"+data.myproblemList[i].id+"</td>"
+					+ "	<td>"+data.myproblemList[i].summary+"</td>"
+					+ "</tr>";
+				}	
+					$("#myproblem").html(html);
+					document.getElementById("my_problem").innerHTML = '나의 게시물 현황 - 문제점(' + data.myproblemList.length + ')';
+					
+					html = "";
+					for(var i = 0; i < data.myanswerList.length; i++){
+						html = html
+						+"<tr>"
+						+ "	<td>"+ (i+1) +"</td>"
+						+ "	<td>"+data.myanswerList[i].business_name+"</td>"
+						+ "	<td>"+data.myanswerList[i].id+"</td>"
+						+ "	<td>"+data.myanswerList[i].summary+"</td>"
+						+ "</tr>";
+					}	
+						$("#mysolve").html(html);
+						document.getElementById("my_solve").innerHTML = '나의 게시물 현황 - 해결책(' + data.myanswerList.length + ')';	
+			},
+				
+
+
+			
+			error : function(xhr, status, exception) {
+
+
+						 
+			}
+		});
+// 	 	var tr_problem = $('#problem tbody tr').length;
+// 	 	console.log(tr_problem);
+// 	 	document.getElementById("my_problem").innerHTML = '나의 게시물 현황 - 문제점(' + tr_problem.length + ')'; 
+// 		var tr_solve = $('#solve tbody tr');
+// 		document.getElementById("my_solve").innerHTML = '나의 게시물 현황 - 해결책(' + tr_solve.length + ')';
+
+	});
 </script>
-							
+			
 							
 							
 							

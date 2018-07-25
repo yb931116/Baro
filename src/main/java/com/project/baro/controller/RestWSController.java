@@ -14,6 +14,7 @@ import com.project.baro.component.MapParamCollector;
 import com.project.baro.service.EvaluationService;
 import com.project.baro.service.GroupService;
 import com.project.baro.service.LoginService;
+import com.project.baro.service.MyPageService;
 import com.project.baro.service.SignupService;
 
 @RestController
@@ -29,6 +30,8 @@ public class RestWSController {
 	private EvaluationService evaluationService;
 	@Autowired
 	private GroupService groupservice;
+	@Autowired
+	MyPageService mypageservice;
 
 	@RequestMapping(value = MAPPING + "{action}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json") // 미디어 타입 관련 응답 생성
@@ -53,6 +56,9 @@ public class RestWSController {
 			groupservice.group_update("", paramMap2);
 		}else if ("group_delete".equalsIgnoreCase(action)) {
 			groupservice.group_delete("", paramMap);
+		}else if("myproblem_list".equalsIgnoreCase(action)) {
+			resultMap.put("myproblemList", mypageservice.myproblem_list("", paramMap));
+			resultMap.put("myanswerList", mypageservice.myanswer_list("", paramMap));
 		}
 		
 

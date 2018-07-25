@@ -22,4 +22,19 @@ public class MyPageService {
 		return resultData;
 	}
 
+	public Object myproblem_list(String string, Map<String, Object> paramMap) {
+		String sqlMapId = "mypage.myproblem_list";
+		Object resultData = dao.getList(sqlMapId, paramMap);
+		
+		return resultData;
+		
+	}
+
+	public Object myanswer_list(String string, Map<String, Object> paramMap) {
+		String sqlMapId = "mypage.myanswer_list";
+		Object resultData = dao.getList(sqlMapId, paramMap);
+		
+		return resultData;
+	}
+
 }
