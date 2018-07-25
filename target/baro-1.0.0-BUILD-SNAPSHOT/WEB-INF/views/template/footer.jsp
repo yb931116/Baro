@@ -24,7 +24,7 @@
 							</ul>
 						</nav>
 						<div class="copyright ml-auto">
-							2018, made with <i class="la la-heart heart text-danger"></i> by <a href="http://www.themekita.com">ThemeKita</a>
+							2018, made by Baro
 						</div>				
 					</div>
 				</footer>

@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Typography - Ready Bootstrap Dashboard</title>
+	<title>논심 - Logic Focus</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 	<script type="text/javascript" src="<c:url value='/resources/js/core/jquery.3.2.1.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js'/>"></script>

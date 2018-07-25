@@ -89,16 +89,7 @@
 				</div>
 			</div>
 		</div>
-		
-		<c:if test="${resultMap.values.category eq 'problem'}">
-				<c:set var="category"
-				value="answer" />
-		</c:if>
-							
-		<c:if test="${resultMap.values.category eq 'answer'}">
-				<c:set var="category"
-				value="problem" />
-		</c:if>
+
 	
 
 <div class='col-md-12' style="display:none" id='insert' >
@@ -111,14 +102,14 @@
 			<div class='form-group'>
 				<div class='form-group'>
 					<label for='summary'>표에 표시 할 내용을 간단히 작성하세요.</label>
-					<input class='form-control' name='summary' id ='summary'>
+					<textarea class='form-control' rows="4" name='summary' id ='summary'></textarea>
 				</div>
 				<div class='form-group'>
 					<label for='contents'>상세 설명을 입력하세요.</label>
-					<input class='form-control' id ='contents' name='contents'>
+					<textarea class='form-control' rows="6" id ='contents' name='contents'></textarea>
 			 		<input type="hidden" value="${resultMap.business_no}"  name="business_no">
 					<input type="hidden" value="${pageContext.request.userPrincipal.name}"  name="id">
-					<input type="hidden" value='${category}' name="category">
+					<input type="hidden" value='${resultMap.category}' name="category">
 					<input type="hidden" value="${resultMap.original_no}"  name="original_no">
 					<input type="hidden" value="${resultMap.source_no}"  name="source_no">
 				</div>
@@ -147,6 +138,7 @@
 var original_no = "<c:out value="${resultMap.original_no}" />";
 var source_original_no = "<c:out value="${resultMap.source_original_no}" />";
 var clickCount=0;
+console.log(${resultMap.original_no});
 
 	$(function() {
 		
@@ -201,7 +193,7 @@ var clickCount=0;
 			});
 			
 			
-	document.addEventListener('keydown', function(event) {
+	document.getElementById("submit").addEventListener('keydown', function(event) {
 	    if (event.keyCode === 13) {
 	        event.preventDefault();
 	    }

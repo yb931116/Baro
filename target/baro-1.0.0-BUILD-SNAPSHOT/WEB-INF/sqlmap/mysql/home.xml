@@ -11,7 +11,7 @@
 		 	b.business_no as business_no
 			 ,b.business_name as business_name
 			, u.name as user_name
-		from projectdb.business b, projectdb.user_info u
+		from business b, user_info u
         where b.user_id= u.user_id
 		Limit 2;
 	</select>
@@ -22,7 +22,7 @@
 		b.business_no as business_no
 		,b.business_name as business_name
 		, u.name as user_name
-		from projectdb.business b, projectdb.user_info u
+		from business b, user_info u
         where b.user_id= u.user_id
         order by b.business_name
 		Limit 2;
@@ -60,7 +60,7 @@
 	</select>
 
 	<insert id="insert" parameterType="Map">
-	    INSERT INTO projectdb.business (
+	    INSERT INTO business (
 			business_no
 			, business_name
 			, user_id
@@ -69,7 +69,7 @@
 			(select 
 			max(business_no)+1 
 			from 
-			( select business_no from  `projectdb`.`business`) as business_no)
+			( select business_no from  business) as business_no)
 			, #{business_name}
 			, uuid()
 		)

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.project.baro.service.LogicFocusService;
 
@@ -41,11 +43,11 @@ public class LogicFocusController {
 			resultMap = paramMap;
 			viewName = "logicfocus/popup";
 		}
-		else if ("insert".equalsIgnoreCase(action)) {
+		/*else if ("insert".equalsIgnoreCase(action)) {
 			service.saveProject(paramMap);
 			resultMap = (Map)service.getProject(paramMap);
 			viewName = "logicfocus/read";
-		}
+		}*/
 		
 		
 		if (forwardView != null) {
@@ -102,9 +104,9 @@ public class LogicFocusController {
 			
 		}else if ("logicInsert".equalsIgnoreCase(action)) {
 			service.saveLogic(paramMap);
-			resultMap = (Map)service.getProject(paramMap);
-			viewName = MAPPING + "read";
-			modelandView.addObject("redirect:"+"/logicfocus/read");
+			resultMap=paramMap;
+			viewName = "/redirect";
+			
 			
 		} else if ("read".equalsIgnoreCase(action)) {
 			resultMap = (Map)service.getProject(paramMap);

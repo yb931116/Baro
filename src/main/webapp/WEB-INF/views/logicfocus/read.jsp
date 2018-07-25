@@ -74,7 +74,7 @@
 					</c:forEach>
 						<tr >
 							<th class="colNum origin"></th>
-							<td class=" layerModal able"></td>
+							<td class=" layerModal able originalPro"></td>
 							<td class=" layerModal disable"></td>
 							<th scope="row" class="colNum "></th>
 							<td class=" layerModal disable"></td>
@@ -157,6 +157,8 @@
 			}
 
 		}
+		console.log("${resultMap.business_no}");
+		console.log("${business_no}");
 	});
 
 	//   Modal
@@ -184,10 +186,11 @@
 						$("td").eq(i).find(".contents").val(),
 						$("td").eq(i).find(".category").val(), 
 						  business_no ];
+					values[1]=$("td").eq(i).find(".original_no").val();
 				}
 			}
 			
-			
+			console.log("originalPro");
 			values[4] = "problem";
 		}else if(td.hasClass("originalAns") || td.hasClass("depAns")){
 
@@ -200,6 +203,7 @@
 			
 			values[1] = td.prev().find(".original_no").val();
 			values[4] = "answer";
+			console.log("Ans");
 			
 		}else if(td.hasClass("depPro")){
 			source_values = [ td.prev().prev().find(".original_no").val(),
@@ -211,8 +215,10 @@
 
 			values[1] = td.prev().prev().find(".original_no").val();
 			values[4] = "problem";
+			console.log("depPro"); 
 		}
-		
+		console.log(source_values,values);
 		common.layerPopup(url, source_values ,values, "#myModal");
+		
 	};
 </script>

@@ -37,15 +37,15 @@
 							<th scope="col">생성자명</th>
 							<th scope="col">제기된 문제</th>
 							<th scope="col">제안된 해결책</th>
-						</tr>
+						</t>
 					</thead>
 					
 					<tbody>
 						<c:forEach items="${resultList}" var="resultData" varStatus="loop">
-							<tr>
+							<tr class = "col">
 								<td class="business_no" style="display:none;" >${resultData.business_no}</td>
 								<td>${loop.index+1}</td>
-								<td>${resultData.business_name}</td>
+								<td class = "business_name">${resultData.business_name}</td>
 								<td>${resultData.id}</td>
 								<td>${resultData.name}</td>
 								<td>${resultData.problem_sum}</td>
@@ -63,14 +63,22 @@
 
 <script>
  	$(function() {
- 		$("tr").click(function(){
- 			var el =  $(this).find(".business_no");
+ 		$(".col").click(function(){
  			var form = document.createElement("form");
- 			var hidden = document.createElement("input");
- 			hidden.setAttribute("type","hidden");
- 			hidden.setAttribute("name","business_no");
- 			hidden.setAttribute("value",el.text());
- 			form.append(hidden);
+ 			var business_no = document.createElement("input");
+ 			var business_name = document.createElement("input");
+ 			
+ 			business_no.setAttribute("type","hidden"); 
+ 			business_no.setAttribute("name","business_no");
+ 			business_no.setAttribute("value", $(this).find(".business_no").text());
+ 			form.appendChild(business_no);
+ 			
+ 			business_name.setAttribute("type","hidden");
+ 			business_name.setAttribute("name","business_name");
+ 			business_name.setAttribute("value",$(this).find(".business_name").text());
+ 			form.appendChild(business_name);
+ 			
+ 			
  			form.setAttribute("method","POST");
  			form.setAttribute("action","<c:url value= '/logicfocus/read'/>");
  			$(document.body).append(form);

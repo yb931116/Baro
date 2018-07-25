@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="read">
+	<select id="list" resultType="Map" parameterType="Map">
+		SELECT * 
+		FROM logic 
+		WHERE business_no = #{business_no}
+		ORDER BY generating_date;
+
+	</select>
+
+	<insert id="insert" parameterType="Map">
+		INSERT INTO logic
+		(
+			original_no,
+			business_no,
+			summary,
+			contents,
+			category,
+			generating_date,
+			source_no,
+			user_id
+		)
+		VALUES
+			(uuid(),
+			#{business_no},
+			#{summary},
+			#{contents},
+			#{category},
+			now(),
+			#{original_no},
+			(select user_id from user_info where id = #{id})
+		)
+		 
+	</insert>
+
+	<update id="update" parameterType="Map">
+	</update>
+
+	<delete id="delete" parameterType="Map">
+	</delete>
+</mapper>
