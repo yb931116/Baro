@@ -111,7 +111,7 @@
 					<input type="hidden" value="${pageContext.request.userPrincipal.name}"  name="id">
 					<input type="hidden" value='${resultMap.category}' name="category">
 					<input type="hidden" value="${resultMap.original_no}"  name="original_no">
-					<input type="hidden" value="${resultMap.source_no}"  name="source_no">
+					<input type="hidden" value="${resultMap.source_original_no}"  name="source_no">
 				</div>
 				<div class='form-group'>
 					<label for='FormControlFile'>증빙 사진파일</label> 
@@ -137,11 +137,14 @@
 <script>
 var original_no = "<c:out value="${resultMap.original_no}" />";
 var source_original_no = "<c:out value="${resultMap.source_original_no}" />";
+
+var category = "<c:out value="${resultMap.category}" />";
+
 var clickCount=0;
-console.log(${resultMap.original_no});
 
 	$(function() {
-		
+		console.log(category);
+		console.log(source_original_no);
 		if(source_original_no==""){
 			$("#insertReadPrevious").css("display","none");
 			$("#detailReadPrevious").css("display","none");
