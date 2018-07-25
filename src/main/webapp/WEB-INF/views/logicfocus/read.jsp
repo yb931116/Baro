@@ -186,6 +186,8 @@
 						$("td").eq(i).find(".contents").val(),
 						$("td").eq(i).find(".category").val(), 
 						  business_no ];
+					value[1]=$("td").eq(i).find(".original_no").val();
+					value[4]="problem";
 				}
 			}
 			
@@ -214,7 +216,7 @@
 			values[1] = td.prev().prev().find(".original_no").val();
 			values[4] = "problem";
 		}
-		
+		console.log(source_values,values);
 		common.layerPopup(url, source_values ,values, "#myModal");
 		
 	};
