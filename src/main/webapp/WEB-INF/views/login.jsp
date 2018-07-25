@@ -52,6 +52,9 @@
 			</div>
 			<div class="modal fade" id="myModal"></div>
 			<div class="modal fade" id="myModal1"></div>
+	<h4>&nbspTEST용 ID<br>
+	&nbspID: wodud<br>
+	&nbspPASSWORD: 0000</h4>
 		</div>
 	</div>
 	</div>
