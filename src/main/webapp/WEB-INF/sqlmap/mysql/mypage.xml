@@ -26,6 +26,10 @@
 		where logic.category = 'answer' and user_info.id = #{ID}
     </select>
     
+     <select id = "user_info" resultType="Map" parameterType="Map">
+    	select * from user_info where id = #{ID};
+    </select>
+    
     
 	
 	

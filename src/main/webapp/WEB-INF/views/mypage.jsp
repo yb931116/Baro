@@ -31,23 +31,7 @@
 									</thead>
 
 									<tbody id = "myproblem">
-<%-- 										<c:forEach items="${resultList}" var="resultData" varStatus="loop"> --%>
-<!-- 										<tr> -->
-<!-- 											<td class="business_no">1</td> -->
-<!-- 											<td>창의적 공헌실적의 DB화</td> -->
-<!-- 											<td>Jsn</td> -->
-<!-- 											<td>R&D기획사업<br> 실적에 대한 사후 실적 관리 -->
-<!-- 											</td> -->
-<!-- 										</tr> -->
-<!-- 										<tr> -->
-<!-- 											<td class="business_no">2</td> -->
-<!-- 											<td>창의적 공헌실적의 DB화</td> -->
-<!-- 											<td>Jsn</td> -->
-<!-- 											<td>경영/행정기획사업<br> 실적에 대한 사후 실적 관리 -->
-<!-- 											</td> -->
-<!-- 										</tr> -->
-
-										<%-- 						</c:forEach> --%>
+										<!-- Ajax 활용 -->
 									</tbody>
 
 								</table>
@@ -81,7 +65,7 @@
 									</thead>
 
 									<tbody id = "mysolve">
-	
+										<!-- Ajax 활용 -->
 									</tbody>
 
 								</table>
@@ -112,54 +96,7 @@
 							</div>
 							<div class="card-body">
 								<form class="form-inline">
-									
-									<label class="col-md-3" style = "display: block" for = "text">아이디</label><input type="text"
-										class="form-control form-control-sm col-md-9" id="text" name="id" value="${pageContext.request.userPrincipal.name}" disabled>
-									
-									<hr style="margin-top: 3px; margin-bottom: 3px">
-
-
-									<label class="col-md-3" style = "display: block" for = "name">이름</label><input type="text"
-										class="form-control form-control-sm col-md-9" placeholder="이름" id="name" name="name">
-
-									<hr style="margin-top: 3px; margin-bottom: 3px">
-
-									<label class="col-md-3" style = "display: block" for = "tel">휴대폰 번호</label><input type="tel"
-										class="form-control form-control-sm col-md-9" placeholder="전화번호" id="tel" name="tel">
-
-									<hr style="margin-top: 3px; margin-bottom: 3px">
-
-									<label class="col-md-3" style = "display: block" for = "email">이메일</label><input type="email"
-										class="form-control form-control-sm col-md-9" placeholder="이메일" id="email" name="email">
-
-									<hr style="margin-top: 3px; margin-bottom: 3px">
-
-
-									<label class="col-md-3" style = "display: block" for = "password">현재비밀번호</label><input type="password"
-										class="form-control form-control-sm col-md-9" placeholder="패스워드" id="password" name="pw">
-
-									<hr style="margin-top: 3px; margin-bottom: 3px">
-
-									<label class="col-md-3" style = "display: block" for = "password1">새 비밀번호</label><input type="password"
-										class="form-control form-control-sm col-md-9" placeholder="새 비밀번호" id="password1"
-										name="pw1">
-
-									<hr style="margin-top: 3px; margin-bottom: 3px">
-
-									<label class="col-md-3" style = "display: block" for = "password2">새 비밀번호 확인</label><input type="password"
-										class="form-control form-control-sm col-md-9" placeholder="새 비밀번호 확인" id="password2"
-										name="pw2">
-
-									<hr style="margin-top: 3px; margin-bottom: 3px">
-
-									<label class="col-md-3" style = "display: block" for = "address">주소</label><input type="text"
-										class="form-control form-control-sm col-md-9" placeholder="주소" id="address" name="address">
-
-									<hr style="margin-top: 3px; margin-bottom: 3px">
-
-									<label class="col-md-3" style = "display: block" for = "address_detail">상세주소</label><input type="text"
-										class="form-control form-control-sm col-md-9" placeholder="상세주소" id="address_detail"
-										name="address_detail">
+									<!-- Ajax 활용 -->
 								</form>
 							</div>
 
@@ -167,7 +104,7 @@
 							<div class="card-footer">
 
 								<div class=float-right>
-									<button class="btn btn-default">수정하기</button>
+									<button class="btn btn-default" id ="update_button">수정하기</button>
 								</div>
 
 							</div>
@@ -185,8 +122,11 @@
 
 <script>
 
+	
+
 	var ID = '${pageContext.request.userPrincipal.name}';
 	$(function() {
+		
 		$.ajax({
 			
 			type : "POST",
@@ -199,6 +139,7 @@
 			dataType : "json",
 			cache : false,
 			success : function(data) {
+				// 나의 게시물 현황 - 문제점
 				var html = "";
 				for(var i = 0; i < data.myproblemList.length; i++){
 					html = html
@@ -211,35 +152,83 @@
 				}	
 					$("#myproblem").html(html);
 					document.getElementById("my_problem").innerHTML = '나의 게시물 현황 - 문제점(' + data.myproblemList.length + ')';
+				// 나의 게시물 현황 - 해결책	
+				html = "";
+				for(var i = 0; i < data.myanswerList.length; i++){
+					html = html
+					+"<tr>"
+					+ "	<td>"+ (i+1) +"</td>"
+					+ "	<td>"+data.myanswerList[i].business_name+"</td>"
+					+ "	<td>"+data.myanswerList[i].id+"</td>"
+					+ "	<td>"+data.myanswerList[i].summary+"</td>"
+					+ "</tr>";
+				}	
+					$("#mysolve").html(html);
+					document.getElementById("my_solve").innerHTML = '나의 게시물 현황 - 해결책(' + data.myanswerList.length + ')';	
+				
+					// 개인 정보 조회
+					html = "<label class='col-md-3' style = 'display: block' for = 'text'>"+"아이디"+"</label>"
+					 + "<input type='text' class='form-control form-control-sm col-md-9' id='text' name='id' value='"+data.user_info.id+"' disabled>"
+					 + "<hr style='margin-top: 3px; margin-bottom: 3px'>"
+					 
+					 + "<label class='col-md-3' style = 'display: block' for = 'name'>이름</label>"
+					 + "<input type='text'	class='form-control form-control-sm col-md-9' value='"+data.user_info.name+"' id='name' name='name'>" 
+					 + "<hr style='margin-top: 3px; margin-bottom: 3px'>"
+					 
+					 + "<label class='col-md-3' style = 'display: block' for = 'tel'>휴대폰 번호</label>"
+					 + "<input type='tel' class='form-control form-control-sm col-md-9' value='"+data.user_info.tel+"' id='tel' name='tel'>"
+					 + "<hr style='margin-top: 3px; margin-bottom: 3px'>"
+
+					 + "<label class='col-md-3' style = 'display: block' for = 'email'>이메일</label>"
+					 + "<input type='email' class='form-control form-control-sm col-md-9' value='"+data.user_info.email+"' id='email' name='email'>"
+  					 + "<hr style='margin-top: 3px; margin-bottom: 3px'>"
+  					 
+  					 + "<label class='col-md-3' style = 'display: block' for = 'password'>현재비밀번호</label>"
+  					 + "<input type='password'	class='form-control form-control-sm col-md-9' placeholder='현재 비밀번호' id='password' name='pw'>"
+					 + "<hr style='margin-top: 3px; margin-bottom: 3px'>"
+  					 
+					 + "<label class='col-md-3' style = 'display: block' for = 'password1'>새 비밀번호</label>"
+					 + "<input type='password'	class='form-control form-control-sm col-md-9' placeholder='새 비밀번호' id='password1'	name='pw1'>"
+					 + "<hr style='margin-top: 3px; margin-bottom: 3px'>"
+
+					 + "<label class='col-md-3' style = 'display: block' for = 'password2'>새 비밀번호 확인</label>"
+					 + "<input type='password' class='form-control form-control-sm col-md-9' placeholder='새 비밀번호 확인' id='password2'	name='pw2'>"
+					 + "<hr style='margin-top: 3px; margin-bottom: 3px'>"
+					 
+					 + "<label class='col-md-3' style = 'display: block' for = 'address'>주소</label>"
+					 + "<input type='text' class='form-control form-control-sm col-md-9' value='"+data.user_info.address+"' id='address' name='address'>"
+					 + "<hr style='margin-top: 3px; margin-bottom: 3px'>"
+
+					 + "<label class='col-md-3' style = 'display: block' for = 'address_detail'>상세주소</label>"
+					 + "<input type='text'	class='form-control form-control-sm col-md-9' value='"+data.user_info.address_detail+"' id='address_detail' name='address_detail'>"
+					 
+					 ;
+				$(".form-inline").html(html);
 					
-					html = "";
-					for(var i = 0; i < data.myanswerList.length; i++){
-						html = html
-						+"<tr>"
-						+ "	<td>"+ (i+1) +"</td>"
-						+ "	<td>"+data.myanswerList[i].business_name+"</td>"
-						+ "	<td>"+data.myanswerList[i].id+"</td>"
-						+ "	<td>"+data.myanswerList[i].summary+"</td>"
-						+ "</tr>";
-					}	
-						$("#mysolve").html(html);
-						document.getElementById("my_solve").innerHTML = '나의 게시물 현황 - 해결책(' + data.myanswerList.length + ')';	
+								
+		
+						
 			},
 				
 
 
 			
 			error : function(xhr, status, exception) {
-
+				alert("실패");
 
 						 
 			}
 		});
-// 	 	var tr_problem = $('#problem tbody tr').length;
-// 	 	console.log(tr_problem);
-// 	 	document.getElementById("my_problem").innerHTML = '나의 게시물 현황 - 문제점(' + tr_problem.length + ')'; 
-// 		var tr_solve = $('#solve tbody tr');
-// 		document.getElementById("my_solve").innerHTML = '나의 게시물 현황 - 해결책(' + tr_solve.length + ')';
+		$(document).on("focus","#tel",function(){
+			$("#tel").val("");
+		});
+		
+	$("#update_button").click(function(){
+			var val = $("#text").val();
+			console.log(val);
+			
+		});
+		
 
 	});
 </script>

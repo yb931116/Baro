@@ -28,8 +28,8 @@ public class MyPageController {
 			Map<String,Object> resultMap = new HashMap<String, Object>();
 			List<Object> resultList = new ArrayList<Object>();
 			
-			if("".equalsIgnoreCase(action)){
-				 resultList =(List<Object>) mypageservice.getID("",paramMap);
+			if("index".equalsIgnoreCase(action)){
+				 resultMap =(Map<String,Object>) mypageservice.get_user_info("",paramMap);
 			}
 			modelandView.setViewName(viewName);
 			modelandView.addObject("paramMap",paramMap);

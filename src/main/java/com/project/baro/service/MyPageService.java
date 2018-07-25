@@ -15,8 +15,8 @@ public class MyPageService {
 	@Autowired
 	private ShareDao dao;
 	
-	public Object getID(String string, Map<String, Object> paramMap) {
-		String sqlMapId = "mypage.id";
+	public Object get_user_info(String string, Map<String, Object> paramMap) {
+		String sqlMapId = "mypage.user_info";
 		Object resultData = dao.getObject(sqlMapId, paramMap);
 		
 		return resultData;
