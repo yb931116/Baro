@@ -17,13 +17,13 @@
     	<intercept-url pattern="/" access="permitAll()"/>
     	<intercept-url pattern="/index" access="permitAll()"/>
     	<intercept-url pattern="/group" access="permitAll()"/>
-    	<intercept-url pattern="/*" access="hasRole('ROLE_USER')"/>
+    	<intercept-url pattern="/*" access="hasAnyAuthority('준회원','정회원','관리자')"/>
     	<intercept-url pattern="/login/*" access="permitAll()"/>
     	<intercept-url pattern="/signup/index" access="permitAll()"/>
     	<intercept-url pattern="/signup/insert" access="permitAll()"/>
     	<intercept-url pattern="/ws/*" access="permitAll()"/>
-    	<intercept-url pattern="/*/*" access="hasRole('ROLE_USER')"/>
-    	<intercept-url pattern="/*/*/*" access="hasRole('ROLE_USER')"/>
+    	<intercept-url pattern="/*/*" access="hasAnyAuthority('준회원','정회원','관리자')"/>
+    	<intercept-url pattern="/*/*/*" access="hasAnyAuthority('준회원','정회원','관리자')"/>
 <!--     	<intercept-url pattern="/*/*" access="hasRole('ROLE_USER')"/> -->
 <!--   		<intercept-url pattern="/resources/**" access="permitAll()"/> -->
 <!--   		<intercept-url pattern="/*/*/*" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/> -->
