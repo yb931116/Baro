@@ -18,12 +18,9 @@
 												</p>
 											</div>
 										<hr>
-											<div class="col-md-3">
-												<p>작성자
-												<input type = "text" class = "form-control" 
-												 name = "business_uid" placeholder = "아이디" disabled>
-												</p>
-											</div>
+									
+												<input type = "text" hidden="true" class = "form-control" 
+												 name = "id" value="ddorai92">
 									</div>
 
 									<div class="card-body">

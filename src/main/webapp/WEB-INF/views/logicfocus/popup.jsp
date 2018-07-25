@@ -138,6 +138,7 @@
 var original_no = "<c:out value="${resultMap.original_no}" />";
 var source_original_no = "<c:out value="${resultMap.source_original_no}" />";
 var clickCount=0;
+console.log(${resultMap.original_no});
 
 	$(function() {
 		

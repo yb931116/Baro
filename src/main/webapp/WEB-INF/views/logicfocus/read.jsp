@@ -157,6 +157,8 @@
 			}
 
 		}
+		console.log("${resultMap.business_no}");
+		console.log("${business_no}");
 	});
 
 	//   Modal
@@ -214,5 +216,6 @@
 		}
 		
 		common.layerPopup(url, source_values ,values, "#myModal");
+		
 	};
 </script>
