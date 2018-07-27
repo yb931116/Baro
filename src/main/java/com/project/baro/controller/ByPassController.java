@@ -10,11 +10,19 @@ public class ByPassController {
 	/**
 	 * method default�� GET
 	 */
+
+
 	
-	@RequestMapping(value = "/*")
-	public void byPass() {	
-		
+	@RequestMapping(value = "/mypage")
+	public String byPass3() {	
+		return "/mypage";
 	}
 	
+//	@RequestMapping(value = "/group")
+//	public String byPass4() {	
+//		return "/group";
+//	}
+
+
 
 }

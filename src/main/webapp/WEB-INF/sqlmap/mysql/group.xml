@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="group">
+    
+    <insert id="member_insert" parameterType ="Map">
+<!-- 		INSERT ALL -->
+			INSERT INTO GROUPING_MEMBER(
+					GROUP_NO	
+					,USER_ID 		
+				)values
+			<foreach collection="ID_LIST" item = "item" index="index"  separator=",">
+				(
+					#{GROUP_NO}
+					,(SELECT USER_ID
+					  FROM USER_INFO
+				      WHERE ID = #{item})	 
+				)
+			</foreach>
+	</insert>
+	
+	<insert id="insert" parameterType="Map">
+	    INSERT INTO GROUPING (
+			GROUP_NO 
+			, GROUP_NAME 
+			, GENERATING_DATE 
+			, USER_ID 
+			 
+		)
+		values
+		(
+			#{GROUP_NO}  
+			, #{group_name} 
+			, now()
+			, (SELECT USER_ID
+				 FROM USER_INFO
+				 WHERE ID = #{ID})			
+		)
+	</insert>
+<!-- 	<select id = "list" resultType="Map" parameterType="Map"> -->
+	
+<!-- 		select g.group_no group_no, g.group_name gname, ui.name uname, ui.id id -->
+<!-- 		from grouping g INNER JOIN grouping_member gm -->
+<!-- 			ON g.group_no = gm.group_no RIGHT OUTER JOIN user_info ui -->
+<!--     		ON ui.user_id = gm.user_id -->
+<!-- 		where g.group_no is not null and g.user_id = (select user_id from user_info where id = #{ID}) -->
+<!-- 	</select> -->
+	
+	<select id = "list" resultType="Map" parameterType="Map">
+		
+			select g.group_no group_no, g.group_name gname, ui.name uname, ui.id id
+			from grouping g INNER JOIN grouping_member gm
+				ON g.group_no = gm.group_no RIGHT OUTER JOIN user_info ui
+	    		ON ui.user_id = gm.user_id
+			where g.group_no is not null and g.user_id = (select user_id from user_info where id = #{ID})
+			 and g.group_name = #{groupName.group_name}
+		
+	</select>
+	
+	<select id = "groupname_list" resultType="Map" parameterType="Map">
+		select group_name from grouping where user_id = (select user_id from user_info where id = #{ID})
+	</select>
+	
+	<delete id = "group_member_delete" parameterType = "Map">
+		delete from grouping_member 
+		where group_no = (select group_no from grouping where group_name = #{group_name} )
+	</delete>
+	
+	<delete id = "group_delete" parameterType = "Map">
+		delete from grouping
+		where group_name = #{group_name}
+	</delete>
+	
+	<insert id = "group_update" parameterType = "Map" >	
+		INSERT INTO GROUPING_MEMBER(
+					GROUP_NO	
+					,USER_ID 		
+				)values
+			<foreach collection="ID_LIST" item = "item" index="index"  separator=",">
+				(
+					(select group_no 
+					from grouping 
+					where group_name = #{group_name} )
+					,(SELECT USER_ID
+					  FROM USER_INFO
+				      WHERE ID = #{item})	 
+				)
+			</foreach>
+		
+		
+		
+	</insert>
+	
+	
+	
+	
+	
+	</mapper>

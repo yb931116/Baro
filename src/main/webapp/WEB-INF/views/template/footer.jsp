@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
-<footer class="footer">
+<footer class="footer" style="background-color: #dee2e6;">
 					<div class="container-fluid">
 						<nav class="pull-left">
 							<ul class="nav">
@@ -23,8 +23,10 @@
 								</li>
 							</ul>
 						</nav>
-						<div class="copyright ml-auto">
-							2018, made with <i class="la la-heart heart text-danger"></i> by <a href="http://www.themekita.com">ThemeKita</a>
+						<div class="copyright ml-auto mt-2 text-right">
+							2018, made by TEAM Baro <br>
+							Kim Hee Guen, Oh Gyueng Teak, Yu Byoung Uk
 						</div>				
+						
 					</div>
 				</footer>

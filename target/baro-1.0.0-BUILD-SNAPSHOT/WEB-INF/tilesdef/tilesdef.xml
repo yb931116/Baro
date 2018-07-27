@@ -6,9 +6,43 @@
 
 <tiles-definitions>
 
-	<!-- home by user -->
-	<definition name="home" template="/WEB-INF/views/template/layout_user_main.jsp">
-		<put-attribute name="layout.header" value="Here header" />
+	<definition name="layout.user" template="/WEB-INF/views/template/layout_main.jsp">
+		<put-attribute name="layout.header"
+			value="/WEB-INF/views/template/header.jsp" />
+	    <put-attribute name="layout.sidebar"
+			value="/WEB-INF/views/template/sidebar.jsp" />
+	    <put-attribute name="layout.top"
+			value="/WEB-INF/views/template/top.jsp" />
+	    <put-attribute name="layout.footer"
+			value="/WEB-INF/views/template/footer.jsp" />
    	</definition>
 	
+	
+<!-- 	<definition name="*" extends="layout.user"> -->
+<!-- 		 <put-attribute name="layout.title" value="{1}" />  -->
+<!-- 		<put-attribute name="layout.body" value="/WEB-INF/views/{1}.jsp" /> -->
+<!-- 	</definition> -->
+	
+	<definition name="*" template="/WEB-INF/views/template/layout_popup.jsp">
+		 <put-attribute name="layout.title" value="{1}" /> 
+		<put-attribute name="layout.body" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+
+	<definition name="/*" extends="layout.user">
+		 <put-attribute name="layout.title" value="{1}" /> 
+		<put-attribute name="layout.body" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+	
+	
+	<definition name="/*/*" extends="layout.user">
+		 <put-attribute name="layout.title" value="{1} > {2}" />
+		<put-attribute name="layout.body" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	
+	<definition name="*/*" template="/WEB-INF/views/template/layout_popup.jsp">
+		<put-attribute name="layout.title" value="{1} > {2}" />
+		<put-attribute name="layout.body" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	
 </tiles-definitions>
+
