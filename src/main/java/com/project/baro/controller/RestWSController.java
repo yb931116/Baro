@@ -60,6 +60,8 @@ public class RestWSController {
 			resultMap.put("myproblemList", mypageservice.myproblem_list("", paramMap));
 			resultMap.put("myanswerList", mypageservice.myanswer_list("", paramMap));
 			resultMap.put("user_info", mypageservice.get_user_info("", paramMap));
+		}else if("myinfo".equalsIgnoreCase(action)) {
+			resultMap = (Map)mypageservice.get_user_info("", paramMap);
 		}
 		
 

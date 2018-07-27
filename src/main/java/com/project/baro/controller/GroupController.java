@@ -36,7 +36,6 @@ public class GroupController {
 		if("insert".equalsIgnoreCase(action)){	// login 화면
 			groupservice.group_insert("", paramMap);
 			groupNames = (List<Object>) groupservice.getGroupNameList("", paramMap2);
-			
 			viewName = "/group";
 		}else if("index".equalsIgnoreCase(action)){
 			groupNames = (List<Object>) groupservice.getGroupNameList("", paramMap2);
