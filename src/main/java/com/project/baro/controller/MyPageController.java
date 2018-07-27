@@ -17,7 +17,7 @@ import com.project.baro.service.MyPageService;
 
 @Controller
 public class MyPageController {
-	private final static String MAPPING = "/mypage";
+	private final static String MAPPING = "/mypage/";
 	
 	@Autowired
 	MyPageService mypageservice;
@@ -28,8 +28,10 @@ public class MyPageController {
 			Map<String,Object> resultMap = new HashMap<String, Object>();
 			List<Object> resultList = new ArrayList<Object>();
 			
-			if("index".equalsIgnoreCase(action)){
-				 resultMap =(Map<String,Object>) mypageservice.get_user_info("",paramMap);
+			if("update".equalsIgnoreCase(action)){
+
+				 mypageservice.update_user_info("",paramMap);
+				 viewName = "/mypage";
 			}
 			modelandView.setViewName(viewName);
 			modelandView.addObject("paramMap",paramMap);

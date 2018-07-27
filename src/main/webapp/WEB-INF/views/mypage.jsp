@@ -91,23 +91,26 @@
 					<!-- 나의 정보 조회 및 수정 시작 -->
 					<div class="col-md-8">
 						<div class="card">
+							<form class = "mypage_update" action = "<c:url value ='/mypage/update'/>" role="form" method="POST">
 							<div class="card-header">
 								<div class="card-title">나의 정보 조회 및 수정</div>
 							</div>
 							<div class="card-body">
-								<form class="form-inline">
+								<div class="form-inline">
 									<!-- Ajax 활용 -->
-								</form>
+								</div>
 							</div>
 
 
 							<div class="card-footer">
 
 								<div class=float-right>
-									<button class="btn btn-default" id ="update_button">수정하기</button>
+									<label class = "warning text-danger" style ="color: red"></label>
+									<button class="btn btn-default" id ="update_button" type = "button">수정하기</button>
 								</div>
 
 							</div>
+							</form>
 						</div>
 					</div>
 					<!-- 나의 정보 조회 및 수정 끝 -->
@@ -168,19 +171,19 @@
 				
 					// 개인 정보 조회
 					html = "<label class='col-md-3' style = 'display: block' for = 'text'>"+"아이디"+"</label>"
-					 + "<input type='text' class='form-control form-control-sm col-md-9' id='text' name='id' value='"+data.user_info.id+"' disabled>"
-					 + "<hr style='margin-top: 3px; margin-bottom: 3px'>"
+ 					 + "<input type='text' class='form-control form-control-sm col-md-9' id='text' name='id' value='"+data.user_info.id+"'readonly>"
+ 					 + "<hr style='margin-top: 3px; margin-bottom: 3px'>"
 					 
 					 + "<label class='col-md-3' style = 'display: block' for = 'name'>이름</label>"
-					 + "<input type='text'	class='form-control form-control-sm col-md-9' value='"+data.user_info.name+"' id='name' name='name'>" 
+					 + "<input type='text'	class='form-control form-control-sm col-md-9' placeholder='이름을 입력하세요.' value='"+data.user_info.name+"' id='name' name='name'>" 
 					 + "<hr style='margin-top: 3px; margin-bottom: 3px'>"
 					 
 					 + "<label class='col-md-3' style = 'display: block' for = 'tel'>휴대폰 번호</label>"
-					 + "<input type='tel' class='form-control form-control-sm col-md-9' value='"+data.user_info.tel+"' id='tel' name='tel'>"
+					 + "<input type='tel' class='form-control form-control-sm col-md-9' placeholder='휴대전화를 입력하세요.' value='"+data.user_info.tel+"' id='tel' name='tel'>"
 					 + "<hr style='margin-top: 3px; margin-bottom: 3px'>"
 
 					 + "<label class='col-md-3' style = 'display: block' for = 'email'>이메일</label>"
-					 + "<input type='email' class='form-control form-control-sm col-md-9' value='"+data.user_info.email+"' id='email' name='email'>"
+					 + "<input type='email' class='form-control form-control-sm col-md-9' placeholder='이메일을 입력하세요.' value='"+data.user_info.email+"' id='email' name='email'>"
   					 + "<hr style='margin-top: 3px; margin-bottom: 3px'>"
   					 
   					 + "<label class='col-md-3' style = 'display: block' for = 'password'>현재비밀번호</label>"
@@ -196,11 +199,11 @@
 					 + "<hr style='margin-top: 3px; margin-bottom: 3px'>"
 					 
 					 + "<label class='col-md-3' style = 'display: block' for = 'address'>주소</label>"
-					 + "<input type='text' class='form-control form-control-sm col-md-9' value='"+data.user_info.address+"' id='address' name='address'>"
+					 + "<input type='text' class='form-control form-control-sm col-md-9'placeholder='주소를 입력하세요.' value='"+data.user_info.address+"' id='address' name='address'>"
 					 + "<hr style='margin-top: 3px; margin-bottom: 3px'>"
 
 					 + "<label class='col-md-3' style = 'display: block' for = 'address_detail'>상세주소</label>"
-					 + "<input type='text'	class='form-control form-control-sm col-md-9' value='"+data.user_info.address_detail+"' id='address_detail' name='address_detail'>"
+					 + "<input type='text'	class='form-control form-control-sm col-md-9' placeholder='상세주소를 입력하세요.' value='"+data.user_info.address_detail+"' id='address_detail' name='address_detail'>"
 					 
 					 ;
 				$(".form-inline").html(html);
@@ -219,13 +222,69 @@
 						 
 			}
 		});
+		$(document).on("focus","#name",function(){
+			$("#name").val("");
+		});
 		$(document).on("focus","#tel",function(){
 			$("#tel").val("");
 		});
+		$(document).on("focus","#email",function(){
+			$("#email").val("");
+		});
+		$(document).on("focus","#address",function(){
+			$("#address").val("");
+		});
+		$(document).on("focus","#address_detail",function(){
+			$("#address_detail").val("");
+		});
 		
 	$("#update_button").click(function(){
-			var val = $("#text").val();
-			console.log(val);
+			if($("#name").val() == ''){
+				$(".warning").text("이름을 입력하세요.");
+			}else if($("#tel").val() == ''){
+				$(".warning").text("휴대폰 번호를 입력하세요.");
+			}else if($("#email").val() == ''){
+				$(".warning").text("이메일을 입력하세요.");
+			}else if($("#password").val() == ''){
+				$(".warning").text("현재 비밀번호를 입력하세요.");
+			}else if($("#password1").val() == ''){
+				$(".warning").text("새 비밀번호를 입력하세요.");
+			}else if($("#password2").val() == ''){
+				$(".warning").text("새 비밀번호 확인을 입력하세요.");
+			}else if($("#address").val() == ''){
+				$(".warning").text("주소를 입력하세요.");
+			}else if($("#address_detail").val() == ''){
+				$(".warning").text("상세주소를 입력하세요.");
+			}else if($("#password1").val() != $("#password2").val() ){
+				$(".warning").text("새 비밀번호가 일치하지 않습니다.");
+			}else{
+				
+				$.ajax({
+					
+					type : "POST",
+					url : "<c:url value='/ws/myinfo'/>",
+					data : {
+						"ID" : ID
+						
+					},
+					traditional:true,
+					dataType : "json",
+					cache : false,
+					success : function(data) {
+						if( $("#password").val() != data.pw ){
+							$(".warning").text("현재 비밀번호가 잘못되었습니다.");
+						}else{
+// 							console.log($("#tel").val());
+ 							$(".mypage_update").submit();
+						}
+					},
+					error : function(xhr, status, exception) {
+						alert("실패");
+
+								 
+					}
+				});
+			}
 			
 		});
 		

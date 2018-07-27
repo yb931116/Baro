@@ -37,4 +37,11 @@ public class MyPageService {
 		return resultData;
 	}
 
+	public Object update_user_info(String string, Map<String, Object> paramMap) {
+		String sqlMapId = "mypage.user_info_update";
+		Object resultData = dao.saveObject(sqlMapId, paramMap);
+		
+		return resultData;
+	}
+
 }

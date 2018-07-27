@@ -14,9 +14,13 @@
 						<div class="col-md-10">
 							<div class="card">
 								<div class="card-header">
-											<h6 class="col-md-12">${groupName.group_name}</h6>
+<!-- 											<p class="form-inline"> -->
+											<h6 class="col-md-12 form-inline">${groupName.group_name}</h6>
+											<label class = "form-inline col-md-2 float-right">그룹생성자 : <span>${groupName.id}</span></label>
+											
+<!-- 											</p> -->
 											<input type='hidden' class = group_name name='group_name' value='${groupName.group_name}'>
-								</div>
+								</div> 
 								<div class="card-body">
 									<div class="col-md-12">
 										<p class="form-inline">
