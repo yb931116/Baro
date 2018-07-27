@@ -4,7 +4,7 @@
 
 <body>
 <form class="form-horizontal" role="form" id = authority_setting action="<c:url value ='/authority_setting/update'/>" method="POST">>
-	<div class="main-panel">
+	<div class="main-panel" style="background-color: white;"> 
 		<div class="content">
 			<div class="container-fluid">
 				<h4 class="page-title">회원 권한 설정</h4>

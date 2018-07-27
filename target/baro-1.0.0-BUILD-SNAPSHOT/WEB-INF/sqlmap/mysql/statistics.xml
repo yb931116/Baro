@@ -16,7 +16,7 @@
         from logic l
         where l.user_id = u.user_id and
               l.category='answer') ANSNUM,
-		(select count(b.business_no)
+		(select count(distinct b.business_no)
          from business b,logic l
          where b.business_no = l.business_no and
 			   l.user_id  = u.user_id) PROJECTNUM
