@@ -22,9 +22,6 @@
 						
 							<!----- Spacing ------>
 								<div class="mb-5">&nbsp</div>
-								<div class="mb-5">&nbsp</div>
-								<div class="mb-5">&nbsp</div>
-								<div class="mb-5">&nbsp</div>
 							<!--------------------->
 
 					<div class="row">

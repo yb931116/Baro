@@ -7,7 +7,12 @@
 	<div class="main-panel" style="background-color: white;">
 		<div class="content">
 			<div class="container-fluid">
-			
+			<h4 class="page-title">프로젝트</h4>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+					<div class="card-body"> 
+
 			<div class = float-left >
 			<div class = "col-md-1 mb-3">
 				<a href="<c:url value='/logicfocus/edit'/>">
@@ -27,6 +32,7 @@
 						</i></button>
 						</div>
 					</form>
+
 					
 				<table class="table mt-4 table-hover">
 					<thead>
@@ -37,7 +43,7 @@
 							<th scope="col">생성자명</th>
 							<th scope="col">제기된 문제</th>
 							<th scope="col">제안된 해결책</th>
-						</t>
+						</tr>
 					</thead>
 					
 					<tbody>
@@ -55,7 +61,10 @@
 					</tbody>
 					
 				</table>
-
+				</div>
+				</div>
+				</div>
+				</div>
 			</div>
 		</div>
 	</div>

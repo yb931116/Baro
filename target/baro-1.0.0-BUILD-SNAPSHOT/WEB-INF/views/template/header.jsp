@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Typography - Ready Bootstrap Dashboard</title>
+	<title>논심 - Logic Focus</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 	<script type="text/javascript" src="<c:url value='/resources/js/core/jquery.3.2.1.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js'/>"></script>
@@ -21,8 +21,10 @@
 	<script type="text/javascript" src="<c:url value='/resources/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/js/ready.min.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/js/common.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/resources/js/commonOriginal.js'/>"></script>
 	<link type="text/css" rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css'/>">
 	<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i'/>">
 	<link type="text/css" rel="stylesheet" href="<c:url value='/resources/css/ready.css'/>">
 	<link type="text/css" rel="stylesheet" href="<c:url value='/resources/css/demo.css'/>">
-</head>
+	 
+</head> 
