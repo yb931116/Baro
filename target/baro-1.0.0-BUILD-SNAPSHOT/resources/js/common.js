@@ -18,16 +18,27 @@ common.MSG_FOR_ALERT = 'MSG_FOR_ALERT';
 /**
  * 공통 레이어 팝업
  */
-common.layerPopup = function(url, values, id){
-	
-	jQuery.ajaxSettings.traditional = true;
+common.layerPopup = function(url, _source_values, _values, id){
+
 	
 	$.ajax({
         type : "POST",
         url : url,
-        data: {"original_no" : values[0], "source_no" : values[1], 
-        	"summary" : values[2], "contents" : values[3]
-        , "category" : values[4], "business_no" : values[5]},
+        data: {
+        	"source_original_no": _source_values[0] ,
+			"source_source_no": _source_values[1] ,
+			"source_summary": _source_values[2],
+			"source_contents": _source_values[3],
+			"source_category": _source_values[4],
+			"source_business_no": _source_values[5],
+        	"original_no":_values[0] ,
+			"source_no": _values[1] ,
+			"summary": _values[2],
+			"contents": _values[3],
+			"category": _values[4],
+			"business_no": _values[5]
+	},
+        traditional : true,
         cache: false,
         success : function(data) {
         	common.popupCallback(data, id);

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="mypage">
+    
+    <select id = "myproblem_list" resultType="Map" parameterType="Map">
+    	select logic.summary summary, business.business_name business_name, user_info.id id  
+		from logic
+		inner join business
+		on business.business_no = logic.business_no
+		inner join user_info
+		on user_info.user_id = logic.user_id
+		where logic.category = 'problem' and user_info.id = #{ID}
+    </select>
+    
+       <select id = "myanswer_list" resultType="Map" parameterType="Map">
+    	select logic.summary summary, business.business_name business_name, user_info.id id  
+		from logic
+		inner join business
+		on business.business_no = logic.business_no
+		inner join user_info
+		on user_info.user_id = logic.user_id
+		where logic.category = 'answer' and user_info.id = #{ID}
+    </select>
+    
+     <select id = "user_info" resultType="Map" parameterType="Map">
+    	select * from user_info where id = #{ID};
+    </select>
+    
+    
+	
+	
+	
+	
+	
+	</mapper>
