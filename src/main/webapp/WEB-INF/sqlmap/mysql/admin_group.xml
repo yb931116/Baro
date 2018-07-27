@@ -62,8 +62,11 @@
 	</select>
 	
 	<select id = "groupname_list" resultType="Map" parameterType="Map">
-		select group_name from grouping
-<!-- 		where user_id = (select user_id from user_info where id = #{ID}) -->
+<!-- 		select group_name from grouping -->
+		select grouping.group_name group_name, user_info.id id 
+		from grouping 
+		inner join user_info
+		on grouping.user_id = user_info.user_id
 	</select>
 	
 	<delete id = "group_member_delete" parameterType = "Map">
