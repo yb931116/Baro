@@ -65,29 +65,40 @@
 					</div>
 					
 					<div class="card-action row py-3">
-						<div class="col-6 d-flex align-items-center h100">
-						<div id="readLeftButtons">
-						<button class="btn btn-success mr-1" data-dismiss="modal"
-							aria-hidden="true">확인</button>
-						<button id="insertButton" class="btn btn-default ml-1">추가</button>
-						<button id="detailReadPrevious" class="btn btn-default mt-1">이전 항목 보기</button>
-						</div>
-						</div>
-						<div class=" col-6">
-							<label class="pull-right">이 항목을 평가해주세요.</label>
-							<div id="upDown" class="pull-right">
-								<button class="btn btn-primary btn-sm">
-								<i style="font-size: 22" class="la la-thumbs-up"></i>
-								</button>
-								<button class="btn btn-primary btn-sm">
-								<i style="font-size: 22" class="la la-thumbs-down"></i>
-								</button>
+						<div class=" col-12">
+							<label>이 항목을 평가해주세요.</label>
+							<div id="upDown">
+							<div class="input-group">
+							<input class = "form-control" type="text">
+							<div class="input-group-append">
+								<span class="input-group-text">
+									<button class="btn btn-primary btn-sm mr-1">
+									<i style="font-size: 20" class="la la-thumbs-up"></i>
+									</button>
+									<button class="btn btn-primary btn-sm">
+									<i style="font-size: 20" class="la la-thumbs-down"></i>
+									</button>
+								</span>
 								</div>
+							</div>
+						</div>
+						<div class="row">
+						<div class="col-6 mt-3">
+							<div id="readLeftButtons">
+								<button class="btn btn-success mr-1" data-dismiss="modal"
+									aria-hidden="true">확인</button>
+								<button id="insertButton" class="btn btn-default ml-1">추가</button>
+							</div>
+						</div>
+						<div class="col-6 mt-3">
+								<button id="detailReadPrevious" class="btn btn-default pull-right">이전 항목 보기</button>
+						</div>
 						</div>
 					</div>
 					
 				</div>
 			</div>
+		</div>
 		</div>
 
 	
@@ -129,6 +140,7 @@
 		</div>
 		</div>
 	</div>
+
 </body>
 
 
