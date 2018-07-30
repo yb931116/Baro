@@ -54,18 +54,7 @@ public class AdminGroupController {
 			}
 			viewName= "/admin_group";
 		}
-//		else if("delete".equalsIgnoreCase(action)) {
-//			groupservice.group_delete("", paramMap2);
-//			groupNames = (List<Object>) groupservice.getGroupNameList("", paramMap2);
-//			for(int i = 0 ; i< groupNames.size(); i++) {
-//				List<Object> tableList = new ArrayList<Object>();
-//				paramMap2.put("groupName", groupNames.get(i));
-//				tableList = (List<Object>) groupservice.getGroupList("",paramMap2);
-//				resultList.add(tableList);
-//			}
-//			
-//			viewName= "/group_list";
-//		}
+
 		
 		
 		modelandView.setViewName(viewName);
