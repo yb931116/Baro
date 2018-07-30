@@ -3,6 +3,7 @@
 */
 package com.project.baro.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,15 +34,16 @@ public class LogicFocusController {
 	@RequestMapping(value = "/logicfocus/read/{action}", method = { RequestMethod.GET, RequestMethod.POST }
 					, produces = "application/json")
 	public ModelAndView read(@RequestParam Map<String, Object> paramMap, @PathVariable String action,
-			ModelAndView modelandView) {
+			ModelAndView modelandView , Principal principal) {
 
 		String forwardView = (String) paramMap.get("forwardView");
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		String viewName = "";
 		
 		if ("detail".equalsIgnoreCase(action)) {
-			resultMap = paramMap;
+			resultMap = (Map<String, Object>) service.getEvaluation("getEvaluation", paramMap);
 			viewName = "logicfocus/popup";
+			
 		}
 		/*else if ("insert".equalsIgnoreCase(action)) {
 			service.saveProject(paramMap);

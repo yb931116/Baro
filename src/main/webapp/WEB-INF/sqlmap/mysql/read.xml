@@ -38,6 +38,33 @@
 		 
 	</insert>
 
+	<insert id="setEvaluation" parameterType="Map">
+		INSERT INTO evaluation
+		(evaluation_no,
+		 like,
+		 original_no,
+		 evaluating_date,
+		 user_id,
+		 comment)
+		VALUES
+		(uuid(),
+		 #{flag},
+		 #{original_no},
+		 now(),
+		 		 
+		);
+
+		 
+	</insert>
+	<select id="list" resultType="Map" parameterType="Map">
+		select
+		from
+		where
+		
+	</select>
+	
+
+
 	<update id="update" parameterType="Map">
 	</update>
 
