@@ -17,7 +17,7 @@
 						<li class="nav-item">
 							<a href="<c:url value='/logicfocus/list'/>">
 								<i class="la la-list-ul"></i>
-								<p>List</p>
+								<p>프로젝트</p>
 							</a>
 						</li>
 
@@ -42,29 +42,61 @@
 								<p>평가</p>
 							</a>
 						</li>
-						<li class="nav-item">
-							<a href="<c:url value='/group/index?ID=${pageContext.request.userPrincipal.name}'/>">
-								<i class="la la-group"></i>
-								<p>그룹 생성</p> 
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<c:url value='/group/list?ID=${pageContext.request.userPrincipal.name}'/>">
-								<i class="la la-group"></i>
-								<p>내가 만든 그룹</p> 
-							</a>
-						</li>
+						
+						
 						
 						<li class = "nav-item"> 
 
-							<a class="collapsed dropdown-toggle" data-toggle="collapse" href="#collapseExample" aria-expanded="false">
+							<a class="collapsed dropdown-toggle" data-toggle="collapse" data-target = "#collapseExample" href="#collapseExample" aria-expanded="false">
+
+								<i class="la la-group"></i>
+								<p>그룹</p>
+							</a>
+							<div class="clearfix"></div>
+
+							<div class="in collapse" id="collapseExample" aria-expanded="true" style="">
+								<ul class="nav" style = "margin-top: 0px">
+									<li class="nav-item">
+										<a href="<c:url value='/group/make_group?ID=${pageContext.request.userPrincipal.name}'/>">
+											<i class="la la-group"></i>
+											<p>그룹</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="<c:url value='/group/make_group?ID=${pageContext.request.userPrincipal.name}'/>">
+											<i class="la la-plus"></i>
+											<p>그룹 만들기</p> 
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="<c:url value='/group/list?ID=${pageContext.request.userPrincipal.name}'/>">
+											<i class="la la-list-ol"></i>
+											<p>내가 만든 그룹</p> 
+										</a>
+									</li>
+									
+								</ul>
+							</div>
+
+					</li>
+						
+						
+						
+						
+						
+						
+						
+						
+						<li class = "nav-item"> 
+
+							<a class="collapsed dropdown-toggle" data-toggle="collapse" data-target = "#collapseExample2" href="#collapseExample" aria-expanded="false">
 
 								<i class="la la-male"></i>
 								<p>관리자</p>
 							</a>
 							<div class="clearfix"></div>
 
-							<div class="in collapse" id="collapseExample" aria-expanded="true" style="">
+							<div class="in collapse" id="collapseExample2" aria-expanded="true" style="">
 								<ul class="nav" style = "margin-top: 0px">
 									<li class = "nav-item">
 										<a href="<c:url value='/authority_setting/index'/>">

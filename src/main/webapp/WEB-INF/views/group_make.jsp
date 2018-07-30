@@ -8,7 +8,7 @@
 			<div class="content">
 				<div class="container-fluid">
 	<form class="form-horizontal" role="form" id=make_group action="<c:url value ='/group/insert'/>" method="POST">
-					<h4 class="page-title">그룹 </h4>
+					<h4 class="page-title">그룹 생성 </h4>
 					<div class="row">
 						<div class="col-md-10">
 							<div class="card">
