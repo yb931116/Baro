@@ -30,6 +30,11 @@
     	select * from user_info where id = #{ID};
     </select>
     
+    <update id="user_info_update" parameterType ="Map">
+		update user_info 
+		set name = #{name}, tel = #{tel}, email = #{email}, pw = #{pw1}, address = #{address}, address_detail = #{address_detail}
+		where id = #{id} 
+	</update>
     
 	
 	

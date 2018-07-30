@@ -51,15 +51,18 @@
 		 #{flag},
 		 #{original_no},
 		 now(),
-		 		 
+		 #{user_id},
+		 #{comment}	 
 		);
 
 		 
 	</insert>
-	<select id="list" resultType="Map" parameterType="Map">
-		select
-		from
-		where
+	<select id="getEvaluation" resultType="Map" parameterType="Map">
+		select count(evaluation_no) sum,count(like) sumOfAccept
+		from evaluation e
+		where e.user_id = #{user_id} and
+			  like = 'Accept'
+		group by evaluation_no,like;
 		
 	</select>
 	

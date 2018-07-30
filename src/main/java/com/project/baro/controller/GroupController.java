@@ -36,12 +36,11 @@ public class GroupController {
 		if("insert".equalsIgnoreCase(action)){	// login 화면
 			groupservice.group_insert("", paramMap);
 			groupNames = (List<Object>) groupservice.getGroupNameList("", paramMap2);
-			
-			viewName = "/group";
-		}else if("index".equalsIgnoreCase(action)){
+			viewName = "/group_make";
+		}else if("make_group".equalsIgnoreCase(action)){
 			groupNames = (List<Object>) groupservice.getGroupNameList("", paramMap2);
 			
-			viewName= "/group";
+			viewName= "/group_make";
 		}
 		else if("list".equalsIgnoreCase(action)){
 			groupNames = (List<Object>) groupservice.getGroupNameList("", paramMap2);
@@ -51,20 +50,9 @@ public class GroupController {
 				tableList = (List<Object>) groupservice.getGroupList("",paramMap2);
 				resultList.add(tableList);
 			}
-			viewName= "/group_list";
+			viewName= "/mygroup_list";
 		}
-//		else if("delete".equalsIgnoreCase(action)) {
-//			groupservice.group_delete("", paramMap2);
-//			groupNames = (List<Object>) groupservice.getGroupNameList("", paramMap2);
-//			for(int i = 0 ; i< groupNames.size(); i++) {
-//				List<Object> tableList = new ArrayList<Object>();
-//				paramMap2.put("groupName", groupNames.get(i));
-//				tableList = (List<Object>) groupservice.getGroupList("",paramMap2);
-//				resultList.add(tableList);
-//			}
-//			
-//			viewName= "/group_list";
-//		}
+
 		
 		
 		modelandView.setViewName(viewName);

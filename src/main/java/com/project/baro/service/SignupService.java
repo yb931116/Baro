@@ -18,6 +18,7 @@ public class SignupService {
 	
 	public Object signup_insert(String sqlMapId, Map<String, Object> paramMap) {
 		String uniqueSequence = (String) paramMap.get("USER_ID");
+		String password = (String) paramMap.get("PW");
 		
 //		if("".equals(uniqueSequence)){
 //			uniqueSequence = commonUtil.getUniqueSequence();
@@ -25,7 +26,10 @@ public class SignupService {
 		if(uniqueSequence == null || "".equals(uniqueSequence) ) {
 			uniqueSequence = commonUtil.getUniqueSequence();
 		}
+		
+		
 		paramMap.put("USER_ID", uniqueSequence);
+		paramMap.put("PW", commonUtil.encodePassword(password));
 		String sqlId ="signup.insert"; 
 		Object resultData = dao.saveObject(sqlId,paramMap);
 		String sqlId2 ="signup.insert_authority_rel"; 

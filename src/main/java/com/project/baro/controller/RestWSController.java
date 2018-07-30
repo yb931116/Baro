@@ -65,6 +65,9 @@ public class RestWSController {
 			resultMap.put("user_info", mypageservice.get_user_info("", paramMap));
 		}else if("evaluation".equalsIgnoreCase(action)) {
 			logicfocusservice.setEvaluation("setEvaluation",paramMap);
+			resultMap = (Map) logicfocusservice.getEvaluation("read.getEvalutation", paramMap);
+		}else if("myinfo".equalsIgnoreCase(action)) {
+			resultMap = (Map)mypageservice.get_user_info("", paramMap);
 		}
 		
 

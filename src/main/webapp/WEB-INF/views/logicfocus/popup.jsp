@@ -63,6 +63,14 @@
                         disabled="disabled">
                   </div>
                </div>
+               <div class="card-action row py-3">
+                  <div class=" col-12">
+               		<div class="progress">
+					  <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+					</div>
+                  </div>
+               </div>
+               
                
                <div class="card-action row py-3">
                   <div class=" col-12">
@@ -147,132 +155,139 @@
 
 
 <script>
-var original_no = "<c:out value="${resultMap.original_no}" />";
-var source_original_no = "<c:out value="${resultMap.source_original_no}" />";
+	var original_no = "<c:out value="${resultMap.original_no}" />";
+	var source_original_no = "<c:out value="${resultMap.source_original_no}" />";
 
-var category = "<c:out value="${resultMap.category}" />";
+	var category = "<c:out value="${resultMap.category}" />";
 
-var clickCount=0;
+	var clickCount = 0;
 
-   $(function() {
-      console.log(category);
-      console.log(source_original_no);
-      if(source_original_no==""){
-         $("#insertReadPrevious").css("display","none");
-         $("#detailReadPrevious").css("display","none");
-      }
-      
-      
-      if(original_no!=""){
-         $("#detail").css("display","block");
-      }else{
-         $("#insert").css("display","block");
-      }
-      
-         $("#insertButton").click(function() {
-            var html = $("#modal").html();
-            $("#detail").removeClass("col-md-12");
-            $("#detail").addClass("col-md-4");
-            
-            $("#insert").css("display","block");
-            $("#insert").removeClass("col-md-12");
-            $("#insert").addClass("col-md-4");
-            $("#readLeftButtons").css("display","none");
-            
-            resoultionSetting();
-         });
-         
-         
-         $("#insertReadPrevious").click(function() {
-            var html = $("#modal").html();
-            $("#insert").removeClass("col-md-12");
-            $("#insert").addClass("col-md-4");
-            
-            $("#readPrevious").css("display","block");
-            $("#readLeftButtons").css("display","none");
-            $("#insertReadPrevious").css("display","none");
-            
-            resoultionSetting();
-         });
-         
-         $("#detailReadPrevious").click(function() {
-            var html = $("#modal").html();
-            $("#detail").removeClass("col-md-12");
-            $("#detail").addClass("col-md-4");
-            
-            $("#readPrevious").css("display","block");
-            $("#insertReadPrevious").css("display","none");
-            $("#detailReadPrevious").css("display","none");
-            
-            resoultionSetting();
-         });
-         
-         
-   document.getElementById("submit").addEventListener('keydown', function(event) {
-       if (event.keyCode === 13) {
-           event.preventDefault();
-       }
-   }, true);
-   
-   $(".eval").click(function(){
-	      
-	      var $btn = $(this);
-	      var url;
-	      var flag;
-	      var comment;
-	      if($btn.hasClass("up")){
-	         flag="Accept";
-	      }else if($btn.hasClass("down")){
-	         flag="Accept";
-	         
-	      }
-	      
-	      if(confirm("평가는 수정이 불가합니다. 평가를 완료하시겠습니까 ?")){
-	         
-	         $.ajax({
-	            type : "POST",
-	            url : url = "<c:url value='/ws/evaluation'/>",
-	            data : {
-	               "ORIGINAL_NO":original_no,
-	               "COMMENT": comment,
-	               "LIKE": flag
-	            },
-	            dataType : "json",
-	            cache : false,
-	            success : function(data) { 
-	               
-	               
-	            },
-	            error : function(xhr, status, exception) {
-	            
-	            }
-	         });
-	         
-	      }
-   
-      });
-      
-   function resoultionSetting() {
-      clickCount++;
-      if(clickCount==1){
-         $(".modal-dialog").css("max-width", "1200px");
-         $("#detail").removeClass("col-md-12");
-         $("#insert").removeClass("col-md-12");
-         $("#readPrevious").removeClass("col-md-12");
-         
-         $("#detail").addClass("col-md-6");
-         $("#insert").addClass("col-md-6");
-         $("#readPrevious").addClass("col-md-6");
-      }
-      else if(clickCount==2){
-         $(".modal-dialog").css("max-width", "1200px");
-         $("#detail").removeClass("col-md-6");
-         $("#insert").removeClass("col-md-6");
-         $("#readPrevious").removeClass("col-md-6");
-         
-         $("#detail").addClass("col-md-4");
-         $("#insert").addClass("col-md-4");
-         $("#readPrevious").addClass("col-md-4");
-      }
-   }
+	$(function() {
+		refreshEval("${resultMap.sum}","${resultMap.sumOfAccept}");
+
+		if (source_original_no == "") {
+			$("#insertReadPrevious").css("display", "none");
+			$("#detailReadPrevious").css("display", "none");
+		}
+
+		if (original_no != "") {
+			$("#detail").css("display", "block");
+		} else {
+			$("#insert").css("display", "block");
+		}
+
+		$("#insertButton").click(function() {
+			var html = $("#modal").html();
+			$("#detail").removeClass("col-md-12");
+			$("#detail").addClass("col-md-4");
+
+			$("#insert").css("display", "block");
+			$("#insert").removeClass("col-md-12");
+			$("#insert").addClass("col-md-4");
+			$("#readLeftButtons").css("display", "none");
+
+			resoultionSetting();
+		});
+
+		$("#insertReadPrevious").click(function() {
+			var html = $("#modal").html();
+			$("#insert").removeClass("col-md-12");
+			$("#insert").addClass("col-md-4");
+
+			$("#readPrevious").css("display", "block");
+			$("#readLeftButtons").css("display", "none");
+			$("#insertReadPrevious").css("display", "none");
+
+			resoultionSetting();
+		});
+
+		$("#detailReadPrevious").click(function() {
+			var html = $("#modal").html();
+			$("#detail").removeClass("col-md-12");
+			$("#detail").addClass("col-md-4");
+
+			$("#readPrevious").css("display", "block");
+			$("#insertReadPrevious").css("display", "none");
+			$("#detailReadPrevious").css("display", "none");
+
+			resoultionSetting();
+		});
+
+		document.getElementById("submit").addEventListener('keydown',
+				function(event) {
+					if (event.keyCode === 13) {
+						event.preventDefault();
+					}
+				}, true);
+
+		$(".eval").click(function() {
+
+			var $btn = $(this);
+			var url;
+			var flag;
+			var comment;
+			if ($btn.hasClass("up")) {
+				flag = "Accept";
+			} else if ($btn.hasClass("down")) {
+				flag = "Accept";
+
+			}
+
+			if (confirm("평가는 수정이 불가합니다. 평가를 완료하시겠습니까 ?")) {
+
+				$.ajax({
+					type : "POST",
+					url : url = "<c:url value='/ws/evaluation'/>",
+					data : {
+						"ORIGINAL_NO" : original_no,
+						"COMMENT" : comment,
+						"LIKE" : flag
+					},
+					dataType : "json",
+					cache : false,
+					success : function(data) {
+
+						refreshEval(data.sum,data.sumOfAccept);
+
+					},
+					error : function(xhr, status, exception) {
+
+					}
+				});
+
+			}
+			;
+		});
+
+	});
+
+	function resoultionSetting() {
+		clickCount++;
+		if (clickCount == 1) {
+			$(".modal-dialog").css("max-width", "1200px");
+			$("#detail").removeClass("col-md-12");
+			$("#insert").removeClass("col-md-12");
+			$("#readPrevious").removeClass("col-md-12");
+
+			$("#detail").addClass("col-md-6");
+			$("#insert").addClass("col-md-6");
+			$("#readPrevious").addClass("col-md-6");
+		} else if (clickCount == 2) {
+			$(".modal-dialog").css("max-width", "1200px");
+			$("#detail").removeClass("col-md-6");
+			$("#insert").removeClass("col-md-6");
+			$("#readPrevious").removeClass("col-md-6");
+
+			$("#detail").addClass("col-md-4");
+			$("#insert").addClass("col-md-4");
+			$("#readPrevious").addClass("col-md-4");
+		}
+	}
+
+	function refreshEval(sum,sumOfAccept) {
+		var AcceptPerSum = sumOfAccept / sum;
+		$(".progress-bar").css("width", AcceptPerSum + "%");
+		$(".progress-bar").attr("aria-valuenow", AcceptPerSum);
+		$(".progress-bar").text(AcceptPerSum);
+	}
 </script>
