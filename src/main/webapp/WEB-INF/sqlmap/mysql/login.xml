@@ -18,7 +18,7 @@
 	</select>
 	
 	     <select id = "user_info" resultType="Map" parameterType="Map">
-    	select user_id, id , pw password from user_info where id = #{ID};
+    	select user_id, id , name, pw password from user_info where id = #{ID};
     </select>
 	
 	
