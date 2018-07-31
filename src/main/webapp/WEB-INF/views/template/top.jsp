@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="principalName"
-	value="${pageContext.request.userPrincipal.name}" />
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
+<%-- <sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="principalBean"/>
+<c:set var="principalName"
+	value="${principalBean.name}" />
+</sec:authorize> --%>
+<c:set var="principalName"
+	value="${pageContext.request.userPrincipal.name}"/>
 
 <div class="main-header">
 	<div class="logo-header">

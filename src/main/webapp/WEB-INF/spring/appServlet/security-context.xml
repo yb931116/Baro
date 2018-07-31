@@ -28,15 +28,19 @@
 <!--   		<intercept-url pattern="/resources/**" access="permitAll()"/> -->
 <!--   		<intercept-url pattern="/*/*/*" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/> -->
 	</http>
-		
+	
+	<beans:bean id="customizedUserDetailService"
+	class="com.project.baro.security.CustomizedUserDetailService" />
+	
 	<beans:bean id="bcryptPassworEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean>
 
 	
 	<authentication-manager>
-		<authentication-provider>
-		<password-encoder ref="bcryptPassworEncoder" />
-		<jdbc-user-service data-source-ref="dataSource"
+		<authentication-provider user-service-ref="customizedUserDetailService" > <!-- user-service-ref="customizedUserDetailService" -->
+		<!-- <password-encoder hash="bcrypt"/> -->
+		<password-encoder ref="bcryptPassworEncoder"/>
+<!-- 		<jdbc-user-service data-source-ref="dataSource"
 			users-by-username-query="SELECT ID as id
 			, PW as password
 			, 1 as enabled
@@ -49,7 +53,7 @@
 	 ON a.AUTHORITY_ID = ar.AUTHORITY_ID
 	 INNER JOIN USER_INFO ui
 	 ON ui.USER_ID = ar.USER_ID 
-	 WHERE ui.ID = ?" /> 
+	 WHERE ui.ID = ?" />   -->
 		
 <!-- 			<user-service>
 				<user name="yb931116" password="123456" authorities="ROLE_USER"/>
