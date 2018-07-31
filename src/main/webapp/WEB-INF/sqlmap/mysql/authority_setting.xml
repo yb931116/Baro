@@ -14,11 +14,12 @@
 	</select>
 	
 	<select id="getAuthorities" resultType="Map" parameterType="Map">
-		SELECT user_info.USER_ID, ID, NAME, generated_date, authority_name 
+		SELECT user_info.USER_ID, ID, NAME, authority.authority_id , authority.authority_name
 		FROM user_info INNER JOIN authority_rel
-		ON user_info.user_id = #{id}
+		ON user_info.user_id = authority_rel.user_id
 		INNER JOIN authority
-		ON authority_rel.authority_id = authority.authority_id;	
+		ON authority_rel.authority_id = authority.authority_id
+        WHERE user_info.user_id =  #{USER_ID};
 	</select>
 	
 	<update id="update">

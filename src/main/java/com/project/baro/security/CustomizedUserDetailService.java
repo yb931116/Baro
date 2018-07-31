@@ -40,7 +40,7 @@ public class CustomizedUserDetailService implements UserDetailsService {
 			}
 		sqlMapId = "authority_setting.getAuthorities";
 		dataMap.put("USER_ID", resultMember.get("user_id"));
-		List<Object> resultAuthorities = (List)dao.getList(sqlMapId, resultMember);
+		List<Object> resultAuthorities = (List)dao.getList(sqlMapId, dataMap);
 		return new UserInfo(resultMember, buildUserAuthority(resultAuthorities));
 	}
 
