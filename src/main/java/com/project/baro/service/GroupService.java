@@ -1,5 +1,6 @@
 package com.project.baro.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.baro.dao.ShareDao;
 import com.project.baro.util.CommonUtil;
+import com.project.baro.util.Pagination;
 
 @Service
 public class GroupService {
@@ -101,11 +103,24 @@ public class GroupService {
 		return resultData;
 	}
 
-//	public Object login_idfind(String sqlMapId, Map<String, Object> paramMap) {
-//		sqlMapId = "login.findID";
-//		Object resultData = dao.getObject(sqlMapId, paramMap);
-//		
-//		return resultData;
-//	}
+	public Object getListPagination(String string, Object paramMap) {
+		Map<String, Object> resultMap = new HashMap<String, Object>() ;
+		String sqlMapId = "group.totalcount";
+		int totalCount = (int) dao.getObject(sqlMapId, paramMap);
+		int currentPage = 1 ;
+		if(((Map<String,Object>) paramMap).get("curPage") != null) {
+		currentPage = Integer.valueOf(((Map<String, String>) paramMap).get("curPage"));
+		}
+		
+		Pagination pagination = new Pagination(totalCount, currentPage);
+		resultMap.put("pagination", pagination);
+		sqlMapId = "group.listpagination";
+		((Map<String, Object>) paramMap).put("pagination", pagination);
+		Object resultList = dao.getList(sqlMapId, paramMap);
+		resultMap.put("resultList", resultList);
+		return resultMap;
+	}
+
+
 	
 }
