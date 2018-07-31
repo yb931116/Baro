@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.project.baro.dao.ShareDao;
+import com.project.baro.security.UserInfo;
 import com.project.baro.util.CommonUtil;
 import com.project.baro.util.Pagination;
 
@@ -22,12 +23,12 @@ public class GroupService {
 	
 	public Object group_insert(String sqlMapId, Map<Object, Object> paramMap) {
 		String uniqueSequence = null;
-		String ID = SecurityContextHolder.getContext().getAuthentication().getName();	// session으로 부터 id 가져오는 함수
+		UserInfo user = (UserInfo)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		if(uniqueSequence == null || "".equals(uniqueSequence) ) {
 			uniqueSequence = commonUtil.getUniqueSequence();
 		}
 		paramMap.put("GROUP_NO", uniqueSequence);
-		paramMap.put("ID", ID);
+		paramMap.put("ID", user.getId());
 		
 		
 		String sqlId = "group.insert";
@@ -104,20 +105,41 @@ public class GroupService {
 	}
 
 	public Object getListPagination(String string, Object paramMap) {
-		Map<String, Object> resultMap = new HashMap<String, Object>() ;
-		String sqlMapId = "group.totalcount";
-		int totalCount = (int) dao.getObject(sqlMapId, paramMap);
-		int currentPage = 1 ;
-		if(((Map<String,Object>) paramMap).get("curPage") != null) {
-		currentPage = Integer.valueOf(((Map<String, String>) paramMap).get("curPage"));
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		String sqlMapId = "";
+		int totalCount = 0;
+		int currentPage = 0;
+		if (((Map) paramMap).get("search") == null) {
+			sqlMapId = "group.totalcount";
+			totalCount = (int) dao.getObject(sqlMapId, paramMap);
+			currentPage = 1 ;
+			if(((Map<String,Object>) paramMap).get("curPage") != null) {
+			currentPage = Integer.valueOf(((Map<String, String>) paramMap).get("curPage"));
+			}
+			
+			Pagination pagination = new Pagination(totalCount, currentPage);
+			resultMap.put("pagination", pagination);
+			sqlMapId = "group.listpagination";
+			((Map<String, Object>) paramMap).put("pagination", pagination);
+			Object resultList = dao.getList(sqlMapId, paramMap);
+			resultMap.put("resultList", resultList);
+
+		}else if (((Map) paramMap).get("search").equals("true")) {
+			
+			sqlMapId = "group.totalcount_search";
+			totalCount = (int) dao.getObject(sqlMapId, paramMap);
+			currentPage = 1 ;
+			if(((Map<String,Object>) paramMap).get("curPage") != null) {
+			currentPage = Integer.valueOf(((Map<String, String>) paramMap).get("curPage"));
+			}
+			
+			Pagination pagination = new Pagination(totalCount, currentPage);
+			resultMap.put("pagination", pagination);
+			sqlMapId = "group.listpagination_search";
+			((Map<String, Object>) paramMap).put("pagination", pagination);
+			Object resultList = dao.getList(sqlMapId, paramMap);
+			resultMap.put("resultList", resultList);
 		}
-		
-		Pagination pagination = new Pagination(totalCount, currentPage);
-		resultMap.put("pagination", pagination);
-		sqlMapId = "group.listpagination";
-		((Map<String, Object>) paramMap).put("pagination", pagination);
-		Object resultList = dao.getList(sqlMapId, paramMap);
-		resultMap.put("resultList", resultList);
 		return resultMap;
 	}
 

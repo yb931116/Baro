@@ -63,13 +63,13 @@
 										</a>
 									</li>
 									<li class="nav-item">
-										<a href="<c:url value='/group/make_group?ID=${pageContext.request.userPrincipal.name}'/>">
+										<a href="<c:url value='/group/make_group'/>">
 											<i class="la la-plus"></i>
 											<p>그룹 만들기</p> 
 										</a>
 									</li>
 									<li class="nav-item">
-										<a href="<c:url value='/group/mygroup_list?ID=${pageContext.request.userPrincipal.name}'/>">
+										<a href="<c:url value='/group/mygroup_list'/>">
 											<i class="la la-list-ol"></i>
 											<p>내가 만든 그룹</p> 
 										</a>
