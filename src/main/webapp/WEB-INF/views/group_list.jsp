@@ -68,24 +68,62 @@
 <%-- 				<c:set var="page" value="${resultMap.pagination}" />  위에 table에 이미 선언해서 주석처리했음 참고하라고--%>
 				Showing ${page.pageBegin} to ${page.pageEnd} of ${page.totalCount} entries
 				<ul class="pagination pg-primary">
-					<li class="page-item"><a class="page-link" href="<c:url value="/group/group_list?curPage=${page.prevPage}"/>"
-						aria-label="Previous"> <span aria-hidden="true">«</span> <span
-							class="sr-only">Previous</span>
-					</a></li>
+					
+					
+					<c:choose>
+					<c:when test="${paramMap.search ne null}"> <!-- 검색 창 페이지 네이션 -->
+						<li class="page-item">
+							<a class="page-link" href="<c:url value="/group/group_list?group_name=${paramMap.group_name }&search=${paramMap.search}&curPage=${page.prevPage}"/>" aria-label="Previous">
+							<span aria-hidden="true">«</span> <span	class="sr-only">Previous</span></a>
+						</li>
+					</c:when>
+					<c:otherwise>	<!-- 일반 모든 그룹 리스트 페이지 네이션 -->
+						<li class="page-item">
+							<a class="page-link" href="<c:url value="/group/group_list?curPage=${page.prevPage}"/>" aria-label="Previous">
+							<span aria-hidden="true">«</span> <span	class="sr-only">Previous</span></a>
+						</li>
+					</c:otherwise>
+					</c:choose>
+					
+					
+					
+					
 					<c:forEach var="pageNum" begin="${page.blockStart}" end="${page.blockEnd}">
 					<c:choose>
 					<c:when test="${pageNum==page.curPage }">
 						<li class="page-item"><a class="page-link" href="#">${pageNum}</a></li>
 					</c:when>
-					<c:otherwise>	
-						<li class="page-item"><a class="page-link" href="<c:url value="/group/group_list?curPage=${pageNum}" />">${pageNum}</a></li>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${paramMap.search ne null}">
+								<li class="page-item"><a class="page-link" href="<c:url value="/group/group_list?group_name=${paramMap.group_name }&search=${paramMap.search}&curPage=${pageNum}" />">${pageNum}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="<c:url value="/group/group_list?curPage=${pageNum}" />">${pageNum}</a></li>
+							</c:otherwise>
+						</c:choose>
 					</c:otherwise>
 					</c:choose>
 					</c:forEach>
-					<li class="page-item"><a class="page-link" href="<c:url value="/group/group_list?curPage=${page.nextPage}" />"
-						aria-label="Next"> <span aria-hidden="true">»</span> <span
-							class="sr-only">Next</span>
-					</a></li>
+					
+					
+					<c:choose>
+					<c:when test="${paramMap.search ne null}"> <!-- 검색 창 페이지 네이션 -->
+						<li class="page-item">
+						<a class="page-link" href="<c:url value="/group/group_list?group_name=${paramMap.group_name }&search=${paramMap.search}&curPage=${page.nextPage}" />"aria-label="Next">
+						<span aria-hidden="true">»</span><span class="sr-only">Next</span></a>
+						</li>
+					</c:when>
+					<c:otherwise>	<!-- 일반 모든 그룹 리스트 페이지 네이션 -->
+						<li class="page-item">
+					<li class="page-item">
+						<a class="page-link" href="<c:url value="/group/group_list?curPage=${page.nextPage}" />"aria-label="Next">
+						<span aria-hidden="true">»</span><span class="sr-only">Next</span></a>
+					</li>
+					</c:otherwise>
+					
+					</c:choose>
+					
 				</ul>
 				
 			</div>

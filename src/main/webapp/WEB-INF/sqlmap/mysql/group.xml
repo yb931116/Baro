@@ -130,12 +130,36 @@
             ORDER by generating_date
 		) grouping INNER JOIN user_info
         ON grouping.user_id = user_info.user_id
-		WHERE grouping.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd};
-</select>
+		WHERE grouping.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}
+	</select>
+	<select id="listpagination_search" resultType="Map" parameterType="Map">
+		SELECT grouping.*, user_info.id, user_info.name, 
+				((SELECT count(*) FROM grouping_member WHERE grouping.group_no = grouping_member.group_no)-1) group_count
+		FROM (
+			SELECT @RNUM := @RNUM + 1 AS ROWNUM, groups.*
+			FROM ( select * from grouping) groups, ( SELECT @RNUM := 0 ) R
+			<![CDATA[
+			where 1= 1
+			and groups.group_name like CONCAT('%',#{group_name},'%')
+			]]>
+            ORDER by generating_date
+		) grouping INNER JOIN user_info
+        ON grouping.user_id = user_info.user_id
+		WHERE grouping.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}
+		
+	</select>
 	
 	<select id="totalcount" resultType="integer" parameterType="Map">
 		SELECT count(group_no)
 		FROM grouping
+	</select>
+	<select id="totalcount_search" resultType="integer" parameterType="Map">
+		SELECT count(group_no)
+		FROM grouping
+		<![CDATA[
+		where 1 = 1
+		and grouping.group_name like CONCAT('%',#{group_name},'%')
+		]]>
 	</select>
 	
 	

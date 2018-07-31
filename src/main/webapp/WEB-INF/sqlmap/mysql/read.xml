@@ -48,11 +48,11 @@
 		 comment)
 		VALUES
 		(uuid(),
-		 #{flag},
+		 #{SCORE},
 		 #{original_no},
 		 now(),
 		 #{user_id},
-		 #{comment}	 
+		 #{COMMENT}	 
 		);
 
 		 

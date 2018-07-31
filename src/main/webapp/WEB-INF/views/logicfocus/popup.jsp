@@ -230,24 +230,27 @@
 			if ($btn.hasClass("up")) {
 				flag = "Accept";
 			} else if ($btn.hasClass("down")) {
-				flag = "Accept";
+				flag = "Denial";
 
 			}
-
+			console.log(original_no);
+			console.log(comment);
+			console.log(flag);
+			console.log($btn);
 			if (confirm("평가는 수정이 불가합니다. 평가를 완료하시겠습니까 ?")) {
 
 				$.ajax({
 					type : "POST",
 					url : url = "<c:url value='/ws/setEvaluation'/>",
 					data : {
-						"ORIGINAL_NO" : original_no,
+						"original_no" : original_no,
 						"COMMENT" : comment,
-						"LIKE" : flag
+						"SCORE" : flag
 					},
 					dataType : "json",
 					cache : false,
 					success : function(data) {
-
+						console.log(data);
 						refreshEval(data.sum,data.sumOfAccept);
 
 					},
