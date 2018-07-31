@@ -63,8 +63,20 @@
 						</div>
 					</div>
 				</div>
-
-
+				<!--  pagination -->
+				<ul class="pagination pg-primary">
+					<li class="page-item"><a class="page-link" href="#"
+						aria-label="Previous"> <span aria-hidden="true">«</span> <span
+							class="sr-only">Previous</span>
+					</a></li>
+					<li class="page-item active"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						aria-label="Next"> <span aria-hidden="true">»</span> <span
+							class="sr-only">Next</span>
+					</a></li>
+				</ul>
 
 
 
@@ -79,30 +91,32 @@
 </body>
 
 <script>
- 	$(function() {
- 		$(".col").click(function(){
- 			var form = document.createElement("form");
- 			var group_no = document.createElement("input");
- 			var group_name = document.createElement("input");
- 			
- 			group_no.setAttribute("type","hidden"); 
- 			group_no.setAttribute("name","group_no");
- 			group_no.setAttribute("value", $(this).find(".group_no").text());
- 			form.appendChild(group_no);
- 			
- 			group_name.setAttribute("type","hidden");
- 			group_name.setAttribute("name","group_name");
- 			group_name.setAttribute("value",$(this).find(".group_name").text());
- 			form.appendChild(group_name);
- 			
- 			
- 			form.setAttribute("method","POST");
- 			form.setAttribute("action","<c:url value= '/group/group_detail'/>");
- 			$(document.body).append(form);
- 			form.submit();
- 		});
-	}); 
+	$(function() {
+		$(".col").click(
+				function() {
+					var form = document.createElement("form");
+					var group_no = document.createElement("input");
+					var group_name = document.createElement("input");
 
+					group_no.setAttribute("type", "hidden");
+					group_no.setAttribute("name", "group_no");
+					group_no.setAttribute("value", $(this).find(".group_no")
+							.text());
+					form.appendChild(group_no);
+
+					group_name.setAttribute("type", "hidden");
+					group_name.setAttribute("name", "group_name");
+					group_name.setAttribute("value", $(this)
+							.find(".group_name").text());
+					form.appendChild(group_name);
+
+					form.setAttribute("method", "POST");
+					form.setAttribute("action",
+							"<c:url value= '/group/group_detail'/>");
+					$(document.body).append(form);
+					form.submit();
+				});
+	});
 </script>
 	
 	
