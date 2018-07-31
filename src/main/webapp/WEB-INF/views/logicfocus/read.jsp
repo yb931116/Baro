@@ -33,7 +33,28 @@
 <div class="main-panel">
 	<div class="content customContent">
 		<div class="container-fluid">
+		<div class="row">
 			<h4>${resultMap.business_name}</h4>
+			<div class="pull-right">
+			 <label for="upDown" >이 항목을 평가해주세요.</label>
+                     <div id="upDown">
+                     <div class="input-group">
+                     <input id = "comment" class = "form-control" type="text">
+                     <div class="input-group-append">
+                        <span class="input-group-text">
+                           <button class="eval btn btn-primary btn-sm mr-1 up">
+                           <i style="font-size: 20" class="la la-thumbs-up"></i>
+                           </button>
+                           <button class="eval btn btn-primary btn-sm down">
+                           <i style="font-size: 20" class="la la-thumbs-down"></i>
+                           </button>
+                        </span>
+                        </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+			
 			<table class="table customTable">
 				<thead>
 					<tr>
