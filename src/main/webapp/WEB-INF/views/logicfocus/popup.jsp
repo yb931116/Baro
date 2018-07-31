@@ -77,13 +77,13 @@
                      <label>이 항목을 평가해주세요.</label>
                      <div id="upDown">
                      <div class="input-group">
-                     <input class = "form-control" type="text">
+                     <input id = "comment" class = "form-control" type="text">
                      <div class="input-group-append">
                         <span class="input-group-text">
-                           <button class="btn btn-primary btn-sm mr-1">
+                           <button class="eval btn btn-primary btn-sm mr-1 up">
                            <i style="font-size: 20" class="la la-thumbs-up"></i>
                            </button>
-                           <button class="btn btn-primary btn-sm">
+                           <button class="eval btn btn-primary btn-sm down">
                            <i style="font-size: 20" class="la la-thumbs-down"></i>
                            </button>
                         </span>
@@ -163,8 +163,10 @@
 	var clickCount = 0;
 
 	$(function() {
+		console.log("${resultMap.sum}");
+		console.log("${resultMap.sumOfAccept}");
 		refreshEval("${resultMap.sum}","${resultMap.sumOfAccept}");
-
+	
 		if (source_original_no == "") {
 			$("#insertReadPrevious").css("display", "none");
 			$("#detailReadPrevious").css("display", "none");
@@ -223,9 +225,8 @@
 		$(".eval").click(function() {
 
 			var $btn = $(this);
-			var url;
 			var flag;
-			var comment;
+			var comment = $("#comment").val();
 			if ($btn.hasClass("up")) {
 				flag = "Accept";
 			} else if ($btn.hasClass("down")) {
@@ -237,7 +238,7 @@
 
 				$.ajax({
 					type : "POST",
-					url : url = "<c:url value='/ws/evaluation'/>",
+					url : url = "<c:url value='/ws/setEvaluation'/>",
 					data : {
 						"ORIGINAL_NO" : original_no,
 						"COMMENT" : comment,
@@ -285,9 +286,15 @@
 	}
 
 	function refreshEval(sum,sumOfAccept) {
-		var AcceptPerSum = sumOfAccept / sum;
+		if(sum=="" || sum == null || sum==0)
+			sum=1;
+		if(sumOfAccept=="" || sumOfAccept == null)
+			sumOfAccept=0;	
+		
+		
+		var AcceptPerSum = Math.round(sumOfAccept / sum *100);
 		$(".progress-bar").css("width", AcceptPerSum + "%");
 		$(".progress-bar").attr("aria-valuenow", AcceptPerSum);
-		$(".progress-bar").text(AcceptPerSum);
+		$(".progress-bar").text(AcceptPerSum+"%");
 	}
 </script>

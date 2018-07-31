@@ -40,7 +40,7 @@
 
 var searchResult = new Array();
 
-function fn_searchButton(){
+function fn_searchByID(){
 	
 	searchResult = new Array();
   	var size = "${fn:length(resultList)}"; 
@@ -95,6 +95,28 @@ function fn_searchButton(){
 			
 };
 
+
+function fn_searchByProject(){
+	
+	$.ajax({
+		type : "POST",
+		url : "<c:url value='/ws/searchProject'/>",
+		data : {
+			project:$("#searchProject");
+		},
+		dataType : "json",
+		cache : false,
+		success : function(data) {
+		
+		},
+		error : function(xhr, status, exception) {
+			
+		}
+	});
+	
+};
+
+
 /*========= 조건 별 Ajax ===========*/
 function fn_statistics(){
 	
@@ -127,7 +149,7 @@ function fn_statistics(){
  
 			tableTag ="<div class='input-group col-lg-5 pl-0'>"
 					+ "<input id = 'searchid' type='text' placeholder='아이디 검색' class='form-control'  >"
-					+ "<button id ='search' type='button' class='btn btn-primary btn-sm' onclick='fn_searchButton()'>검색</button>"
+					+ "<button id ='searchbyid' type='button' class='btn btn-primary btn-sm' onclick='fn_searchByID()'>검색</button>"
 					+ "</div>"
 					+ "<table id='individualTable' class='table mt-4 table-hover'>"
 					+ "				</table>";
@@ -135,24 +157,28 @@ function fn_statistics(){
 			$('#statistics_content').html(tableTag);
 
 		} else if (condition == "project") {
-			tableTag = "<label>프로젝트명: 창의적 공헌실적의 DB화</label>"
-					+ "<table class='table mt-4 table-hover'>"
-					+ "<thead>"
-					+ "<tr>"
-					+ "<th scope='col'>아이디</th>"
-					+ "<th scope='col'>성명</th>"
-					+ "<th scope='col'>제기한 문제</th>"
-					+ "<th scope='col'>제안한 해결책</th>"
-					+ "</tr>"
-					+ "</thead>"
-					+
-
-					"<tbody><tr><td>yb931116</td><td>유병욱</td><td>5</td><td>13</td></tr>"
-					+ "<tr><td>rudxor456</td><td>오경택</td><td>0</td><td>4</td></tr><tr>"
-					+ "<td>gmlrjs95020</td><td>김희건</td><td>18</td><td>5</td></tr>"
-					+ "</tbody></table>";
+			
+			tableTag ="<div class='input-group col-lg-5 pl-0'>"
+				+ "<input id = 'searchProject' type='text' placeholder='아이디 검색' class='form-control'  >"
+				+ "<button id ='searchbyProject' type='button' class='btn btn-primary btn-sm' onclick='fn_searchByProject()'>검색</button>"
+				+ "</div>"
+				+ "<table id='individualTable' class='table mt-4 table-hover'>"
+				+ "<table class='table mt-4 table-hover'>"
+				+ "<thead>"
+				+ "<tr>"
+				+ "<th scope='col'>아이디</th>"
+				+ "<th scope='col'>성명</th>"
+				+ "<th scope='col'>제기한 문제</th>"
+				+ "<th scope='col'>제안한 해결책</th>"
+				+ "</tr>"
+				+ "</thead>"
+				+ "<tbody>"
+				+ "</tbody>"
+				+"</table>";
 		}
 
+	
+	
 		$('#statistics_content').html(tableTag);
 
 	}

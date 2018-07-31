@@ -41,7 +41,7 @@
 	<insert id="setEvaluation" parameterType="Map">
 		INSERT INTO evaluation
 		(evaluation_no,
-		 like,
+		 score,
 		 original_no,
 		 evaluating_date,
 		 user_id,
@@ -58,12 +58,11 @@
 		 
 	</insert>
 	<select id="getEvaluation" resultType="Map" parameterType="Map">
-		select count(evaluation_no) sum,count(like) sumOfAccept
-		from evaluation e
-		where e.user_id = #{user_id} and
-			  like = 'Accept'
-		group by evaluation_no,like;
-		
+		select count(e.evaluation_no) sum, count(e2.evaluation_no) sumOfAccept
+		from (select * from evaluation) e LEFT OUTER JOIN (select * from evaluation where score = 'Accept' ) e2
+		on e.evaluation_no = e2.evaluation_no
+        where e.original_no = #{original_no};
+
 	</select>
 	
 

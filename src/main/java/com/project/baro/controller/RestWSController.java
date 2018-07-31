@@ -1,9 +1,12 @@
 package com.project.baro.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.baro.component.MapParamCollector;
+import com.project.baro.security.UserInfo;
 import com.project.baro.service.EvaluationService;
 import com.project.baro.service.GroupService;
 import com.project.baro.service.LogicFocusService;
 import com.project.baro.service.LoginService;
 import com.project.baro.service.MyPageService;
 import com.project.baro.service.SignupService;
+import com.project.baro.service.StatisticsService;
 
 @RestController
 public class RestWSController {
@@ -35,12 +40,18 @@ public class RestWSController {
 	MyPageService mypageservice;
 	@Autowired
 	LogicFocusService logicfocusservice;
+	@Autowired
+	StatisticsService statisticsservice;
 
 	@RequestMapping(value = MAPPING + "{action}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json") // 미디어 타입 관련 응답 생성
-	public Object actionMethod(MapParamCollector paramMethodMap,@RequestParam Map<String, Object> paramMap, @PathVariable String action) {
+	public Object actionMethod(MapParamCollector paramMethodMap,@RequestParam Map<String, Object> paramMap, @PathVariable String action,Principal principal) {
+
 		Map resultMap = new HashMap<>();
 		Map<Object,Object> paramMap2 = paramMethodMap.getMap();
+	
+		UserInfo user = (UserInfo)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+	   
 		if ("idcheck".equalsIgnoreCase(action)) { // 아이디 중복체크
 			resultMap = (Map) signupservice.signup_idcheck("", paramMap);
 		} else if ("idfind".equalsIgnoreCase(action)) { // 아이디 찾기
@@ -63,11 +74,14 @@ public class RestWSController {
 			resultMap.put("myproblemList", mypageservice.myproblem_list("", paramMap));
 			resultMap.put("myanswerList", mypageservice.myanswer_list("", paramMap));
 			resultMap.put("user_info", mypageservice.get_user_info("", paramMap));
-		}else if("evaluation".equalsIgnoreCase(action)) {
+		}else if("setEvaluation".equalsIgnoreCase(action)) {
+			paramMap.put("user_id", user.getUserId());			
 			logicfocusservice.setEvaluation("setEvaluation",paramMap);
 			resultMap = (Map) logicfocusservice.getEvaluation("read.getEvalutation", paramMap);
 		}else if("myinfo".equalsIgnoreCase(action)) {
-			resultMap = (Map)mypageservice.get_user_info("", paramMap);
+			resultMap = (Map) mypageservice.get_user_info("", paramMap);
+		}else if("searchProject".equalsIgnoreCase(action)) {
+			resultMap = (Map)statisticsservice.SearchProject("statistics.SearchProject",paramMap);
 		}
 		
 

@@ -19,6 +19,12 @@ public class StatisticsService {
 		Object resultList = dao.getList(SqlMapId, dataMap);
 		return resultList;
 	}
+
+	public Object SearchProject(String SqlMapId, Object dataMap) {
+
+		Object resultList = dao.getList(SqlMapId, dataMap);
+		return resultList;
+	}
 	
 	
 }

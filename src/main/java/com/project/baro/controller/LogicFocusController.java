@@ -41,7 +41,7 @@ public class LogicFocusController {
 		String viewName = "";
 		
 		if ("detail".equalsIgnoreCase(action)) {
-//			paramMap.put("user_id", )
+
 			resultMap = (Map<String, Object>) service.getEvaluation("getEvaluation", paramMap);
 			viewName = "logicfocus/popup";
 			
