@@ -21,11 +21,6 @@ public class CustomizedUserDetailService implements UserDetailsService {
 	@Autowired
 	private ShareDao dao;
 	
-	private String userId;
-	private String id;
-	private String name;
-	private Set<GrantedAuthority> authorities;
-	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Map<String, Object> dataMap = new HashMap<>();
