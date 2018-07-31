@@ -33,7 +33,7 @@
 <div class="main-panel">
 	<div class="content customContent">
 		<div class="container-fluid">
-		<div class="row">
+		<div class="row mb-2">
 			<h4>${resultMap.business_name}</h4>
 			<div class="pull-right">
 			 <label for="upDown" >이 항목을 평가해주세요.</label>

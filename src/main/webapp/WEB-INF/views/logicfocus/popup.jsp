@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="principalBean"/>
+<c:set var="principalId"
+	value="${principalBean.id}" />
+</sec:authorize>
+
 <body>
    <div class="row" id="modal">
    
@@ -127,7 +135,7 @@
                <label for='contents'>상세 설명을 입력하세요.</label>
                <textarea class='form-control' rows="6" id ='contents' name='contents'></textarea>
                 <input type="hidden" value="${resultMap.business_no}"  name="business_no">
-               <input type="hidden" value="${pageContext.request.userPrincipal.name}"  name="id">
+               <input type="hidden" value="${principalId}"  name="id">
                <input type="hidden" value='${resultMap.category}' name="category">
                <input type="hidden" value="${resultMap.original_no}"  name="original_no">
                <input type="hidden" value="${resultMap.source_original_no}"  name="source_no">
