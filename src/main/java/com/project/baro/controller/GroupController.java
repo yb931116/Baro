@@ -52,7 +52,8 @@ public class GroupController {
 			}
 			viewName= "/mygroup_list";
 		}else if("group_list".equalsIgnoreCase(action)) {
-			resultList = (List<Object>)groupservice.getGroupList("", paramMap2);
+			//resultList = (List<Object>)groupservice.getGroupList("", paramMap2);
+			resultMap = (Map<String, Object>)groupservice.getListPagination("", paramMap2);
 			viewName = "/group_list";
 		}else if("group_detail".equalsIgnoreCase(action)) {
 			resultMap = paramMap2;
