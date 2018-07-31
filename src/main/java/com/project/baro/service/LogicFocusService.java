@@ -97,4 +97,16 @@ public class LogicFocusService {
 		}
 		return resultMap;
 	}
+
+	public Object setEvaluation(String sqlMapId, Object dataMap) {
+		Object resultNum = dao.saveObject("read.setEvaluation", dataMap);
+		
+		return resultNum;
+	}
+
+	public Object getEvaluation(String sqlMapId, Object dataMap) {
+		Map resultMap = (Map) dao.getObject("read.getEvaluation", dataMap);
+		resultMap.putAll((Map) dataMap);
+		return resultMap;		
+	}
 }

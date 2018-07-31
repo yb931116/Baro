@@ -36,8 +36,8 @@ public class GroupService {
 		return resultData;
 	}
 
-	public Object getGroupList(String string, Object paramMap) {
-		String sqlMapId = "group.list";
+	public Object getMyGroupList(String string, Object paramMap) {
+		String sqlMapId = "group.mygroup_list";
 		Object resultData = dao.getList(sqlMapId, paramMap); 
 		for(int i = 0 ; i < ((List<Object>)resultData).size(); i ++) {			
 			if( ((Map<String, Object>)((List<Object>)resultData).get(i)).get("id").equals("dummy_data")) {
@@ -70,6 +70,34 @@ public class GroupService {
 		dao.deleteObject(sqlMapId, paramMap);
 		sqlMapId = "group.group_update";
 		Object resultData = dao.saveObject(sqlMapId,paramMap);
+		return resultData;
+	}
+
+	public Object getGroupList(String string, Object paramMap) {
+		String sqlMapId;
+		Object resultData = null;
+		
+		if (((Map) paramMap).get("search") == null) {
+			sqlMapId = "group.group_list";
+			resultData = dao.getList(sqlMapId, paramMap);
+		} else if (((Map) paramMap).get("search").equals("true")) {
+			sqlMapId = "group.group_list_search";
+			resultData = dao.getList(sqlMapId, paramMap);
+		}
+		return resultData;
+	}
+
+	public Object getGroupEvaluationList(String string, Object paramMap) {
+		String sqlMapId = "group.group_evaluation_list";
+		Object resultData = dao.getList(sqlMapId, paramMap);
+		for(int i = 0 ; i < ((List<Object>)resultData).size(); i ++) {			
+			
+			if( ((Map<String, Object>)((List<Object>)resultData).get(i)).get("id").equals("dummy_data")) {
+				
+				((List<Object>)resultData).remove(i);
+				
+			}
+		}
 		return resultData;
 	}
 

@@ -42,15 +42,22 @@ public class GroupController {
 			
 			viewName= "/group_make";
 		}
-		else if("list".equalsIgnoreCase(action)){
+		else if("mygroup_list".equalsIgnoreCase(action)){
 			groupNames = (List<Object>) groupservice.getGroupNameList("", paramMap2);
 			for(int i = 0 ; i< groupNames.size(); i++) {
 				List<Object> tableList = new ArrayList<Object>();
 				paramMap2.put("groupName", groupNames.get(i));
-				tableList = (List<Object>) groupservice.getGroupList("",paramMap2);
+				tableList = (List<Object>) groupservice.getMyGroupList("",paramMap2);
 				resultList.add(tableList);
 			}
 			viewName= "/mygroup_list";
+		}else if("group_list".equalsIgnoreCase(action)) {
+			resultList = (List<Object>)groupservice.getGroupList("", paramMap2);
+			viewName = "/group_list";
+		}else if("group_detail".equalsIgnoreCase(action)) {
+			resultMap = paramMap2;
+			resultList = (List<Object>)groupservice.getGroupEvaluationList("", paramMap2);
+			viewName = "/group_detail";
 		}
 
 		

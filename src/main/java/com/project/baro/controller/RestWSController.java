@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.baro.component.MapParamCollector;
 import com.project.baro.service.EvaluationService;
 import com.project.baro.service.GroupService;
+import com.project.baro.service.LogicFocusService;
 import com.project.baro.service.LoginService;
 import com.project.baro.service.MyPageService;
 import com.project.baro.service.SignupService;
@@ -32,6 +33,8 @@ public class RestWSController {
 	private GroupService groupservice;
 	@Autowired
 	MyPageService mypageservice;
+	@Autowired
+	LogicFocusService logicfocusservice;
 
 	@RequestMapping(value = MAPPING + "{action}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json") // 미디어 타입 관련 응답 생성
@@ -60,6 +63,9 @@ public class RestWSController {
 			resultMap.put("myproblemList", mypageservice.myproblem_list("", paramMap));
 			resultMap.put("myanswerList", mypageservice.myanswer_list("", paramMap));
 			resultMap.put("user_info", mypageservice.get_user_info("", paramMap));
+		}else if("evaluation".equalsIgnoreCase(action)) {
+			logicfocusservice.setEvaluation("setEvaluation",paramMap);
+			resultMap = (Map) logicfocusservice.getEvaluation("read.getEvalutation", paramMap);
 		}else if("myinfo".equalsIgnoreCase(action)) {
 			resultMap = (Map)mypageservice.get_user_info("", paramMap);
 		}

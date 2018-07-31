@@ -57,7 +57,7 @@
 							<div class="in collapse" id="collapseExample" aria-expanded="true" style="">
 								<ul class="nav" style = "margin-top: 0px">
 									<li class="nav-item">
-										<a href="<c:url value='/group/make_group?ID=${pageContext.request.userPrincipal.name}'/>">
+										<a href="<c:url value='/group/group_list'/>">
 											<i class="la la-group"></i>
 											<p>그룹</p>
 										</a>
@@ -69,7 +69,7 @@
 										</a>
 									</li>
 									<li class="nav-item">
-										<a href="<c:url value='/group/list?ID=${pageContext.request.userPrincipal.name}'/>">
+										<a href="<c:url value='/group/mygroup_list?ID=${pageContext.request.userPrincipal.name}'/>">
 											<i class="la la-list-ol"></i>
 											<p>내가 만든 그룹</p> 
 										</a>
