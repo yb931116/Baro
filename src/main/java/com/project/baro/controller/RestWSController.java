@@ -50,7 +50,7 @@ public class RestWSController {
 	public Object actionMethod(MapParamCollector paramMethodMap,@RequestParam Map<String, Object> paramMap, @PathVariable String action,Principal principal) {
 
 		Map resultMap = new HashMap<>();
-		Map<Object,Object> paramMap2 = paramMethodMap.getMap();
+		Map<String,Object> paramMap2 = paramMethodMap.getMap();
 	
 		UserInfo user = (UserInfo)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 	   

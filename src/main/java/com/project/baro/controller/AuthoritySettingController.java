@@ -28,7 +28,7 @@ public class AuthoritySettingController {
 			ModelAndView modelandView) {
 		
 		String viewName = MAPPING + action; 
-		Map<Object,Object> paramMap = paramMethodMap.getMap();
+		Map<String,Object> paramMap = paramMethodMap.getMap();
 		Map<String,Object> resultMap = new HashMap<String, Object>();
 		List<Object> resultList = new ArrayList<Object>();
 		
