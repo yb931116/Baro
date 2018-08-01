@@ -97,17 +97,58 @@ function fn_searchByID(){
 
 
 function fn_searchByProject(){
-	
+	var html = "<div class='input-group col-lg-5 pl-0'>"
+				+ "<input id = 'searchProject' type='text' placeholder='프로젝트 검색' class='form-control'  >"
+				+ "<button id ='searchbyProject' type='button' class='btn btn-primary btn-sm' onclick='fn_searchByProject()'>검색</button>"
+				+ "</div> <br><br>";
 	$.ajax({
 		type : "POST",
 		url : "<c:url value='/ws/searchProject'/>",
 		data : {
-			project:$("#searchProject");
+			projectName:"%"+$("#searchProject").val()+"%"
 		},
 		dataType : "json",
 		cache : false,
 		success : function(data) {
-		
+			
+			var ProjectName = "";
+			for(var i = 0 ; i < data.dataList.length ; i++ ){
+				if(ProjectName != data.dataList[i].business_name){
+					if(i != 0){
+						html = html 
+							   + "</tbody>"
+							   + "</table>";
+					}
+					html = html + "<span class ='h5'>"
+								+ data.dataList[i].business_name
+								+ "</span>"
+								+ "<table class='table mt-4 table-hover'>"
+								+ "<thead>"
+								+ "<tr>"
+								+ "<th scope='col'>아이디</th>"
+								+ "<th scope='col'>성명</th>"
+								+ "<th scope='col'>제기한 문제</th>"
+								+ "<th scope='col'>제안한 해결책</th>"
+								+ "</tr>"
+								+ "</thead>"
+								+ "<tbody>";
+					ProjectName = data.dataList[i].business_name;
+					console.log(ProjectName);
+				}
+				
+				html = html + "<tr>"
+							+ "<td>" + data.dataList[i].id + "<td>"
+							+ "<td>" + data.dataList[i].name + "<td>"
+							+ "<td>" + data.dataList[i].PRONUM + "<td>"
+							+ "<td>" + data.dataList[i].ANSNUM + "<td>";
+							
+				
+			}
+			html = html 
+			   + "</tbody>"
+			   + "</table>"; 
+			$('#statistics_content').html(html);
+			
 		},
 		error : function(xhr, status, exception) {
 			
@@ -159,22 +200,9 @@ function fn_statistics(){
 		} else if (condition == "project") {
 			
 			tableTag ="<div class='input-group col-lg-5 pl-0'>"
-				+ "<input id = 'searchProject' type='text' placeholder='아이디 검색' class='form-control'  >"
+				+ "<input id = 'searchProject' type='text' placeholder='프로젝트 검색' class='form-control'  >"
 				+ "<button id ='searchbyProject' type='button' class='btn btn-primary btn-sm' onclick='fn_searchByProject()'>검색</button>"
-				+ "</div>"
-				+ "<table id='individualTable' class='table mt-4 table-hover'>"
-				+ "<table class='table mt-4 table-hover'>"
-				+ "<thead>"
-				+ "<tr>"
-				+ "<th scope='col'>아이디</th>"
-				+ "<th scope='col'>성명</th>"
-				+ "<th scope='col'>제기한 문제</th>"
-				+ "<th scope='col'>제안한 해결책</th>"
-				+ "</tr>"
-				+ "</thead>"
-				+ "<tbody>"
-				+ "</tbody>"
-				+"</table>";
+				+ "</div> <br><br>";
 		}
 
 	

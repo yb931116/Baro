@@ -65,7 +65,7 @@
 				</div>
 				<!--  pagination -->
 				
-<%-- 				<c:set var="page" value="${resultMap.pagination}" />  위에 table에 이미 선언해서 주석처리했음 참고하라고--%>
+<%-- 				<c:set var="page" value="${resultMap.pagination}" />  위에 table에 이미 선언해서 주석처리 참고용--%>
 				Showing ${page.pageBegin} to ${page.pageEnd} of ${page.totalCount} entries
 				<ul class="pagination pg-primary">
 					
