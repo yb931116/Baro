@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 <body> 
 		
@@ -9,10 +10,25 @@
 				<div class="container-fluid">
 					<h4 class="page-title">내가 만든 그룹</h4>
 					
+					<c:choose>
+						<c:when test="${fn:length(groupNames) eq 0}"> 
+							<div class="row">
+								<div class="col-md-10">
+									<div class="card">
+										<div class="card-header">
+											<p>내가 만든 그룹이 존재하지 않습니다.</p> 
+										</div>
+									</div>
+								</div>
+							</div>
+										
+						</c:when>
+					
+					</c:choose>
 					 
 					<c:forEach items="${groupNames}" var="groupName" varStatus="loop">
 					
-					<form class="form-horizontal list_form"  action = "<c:url value ='/group/list?ID=${pageContext.request.userPrincipal.name}'/>" role="form" method="POST">
+					<form class="form-horizontal list_form"  action = "<c:url value ='/group/mygroup_list'/>" role="form" method="POST">
 					<div class="row">
 						<div class="col-md-10">
 							<div class="card">
@@ -82,7 +98,6 @@
 											type="button">수정하기</button>
 										<button class="btn btn-default group_delete"
 											type="button">그룹삭제</button>
-											<input type='hidden' name='ID' value='${pageContext.request.userPrincipal.name}'> <!-- 그룹 리스트 다시 보여줄때 필요한 parameter 위한 hidden -->
 									</div>
 
 
