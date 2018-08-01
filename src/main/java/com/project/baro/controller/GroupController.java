@@ -30,7 +30,7 @@ public class GroupController {
 			ModelAndView modelandView, @RequestParam Map<String, Object> paramMap2) {
 		
 		String viewName = MAPPING + action;
-		Map<Object,Object> paramMap = paramMethodMap.getMap();
+		Map<String,Object> paramMap = paramMethodMap.getMap();
 		Map<String,Object> resultMap = new HashMap<String, Object>();
 		List<Object> groupNames = new ArrayList<Object>();
 		List<Object> resultList = new ArrayList<Object>();

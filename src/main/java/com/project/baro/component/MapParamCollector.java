@@ -5,10 +5,10 @@ import java.util.Map;
 
 public class MapParamCollector {
 
-	Map<Object,Object> map = new HashMap<Object,Object>();
+	Map<String,Object> map = new HashMap<String,Object>();
 	
 	
-	public Map<Object, Object> getMap(){
+	public Map<String, Object> getMap(){
 		return this.map;
 	}
 	

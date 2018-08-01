@@ -24,6 +24,25 @@
         order by PRONUM desc, ANSNUM desc;	
 	</select>
 
+	<select id="SearchProject" resultType="Map" parameterType="Map">
+		select b.business_no, b.business_name, i.name , i.user_id , i.id ,
+			   (select count(l.original_no)
+		        from logic l
+				where l.user_id = i.user_id and
+		              l.category='problem') PRONUM ,
+			   (select count(l.original_no)
+		        from logic l
+		        where l.user_id = i.user_id and
+		              l.category='answer') ANSNUM
+		from business b , logic l , user_info i
+		where b.business_no = l.business_no and
+			  l.user_id = i.user_id and
+		      b.business_name like #{projectName}
+		group by i.name
+		order by b.business_no , i.name;
+
+	</select>
+
 	<insert id="merge" parameterType="Map">
 	</insert>
 
