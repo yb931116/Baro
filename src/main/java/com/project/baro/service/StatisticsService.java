@@ -1,5 +1,6 @@
 package com.project.baro.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,9 +22,9 @@ public class StatisticsService {
 	}
 
 	public Object SearchProject(String SqlMapId, Object dataMap) {
-
-		Object resultList = dao.getList(SqlMapId, dataMap);
-		return resultList;
+		Map resultMap = new HashMap();
+		resultMap.put("dataList", dao.getList(SqlMapId, dataMap));
+		return resultMap;
 	}
 	
 	
