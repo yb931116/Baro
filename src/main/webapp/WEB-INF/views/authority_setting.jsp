@@ -87,8 +87,9 @@
 				
 				
 				<%-- 				<c:set var="page" value="${resultMap.pagination}" />  위에 table에 이미 선언해서 주석처리 참고용--%>
-				Showing ${page.pageBegin} to ${page.pageEnd} of ${page.totalCount} entries
-				<ul class="pagination pg-primary">
+				
+
+				<ul class="pagination pg-primary justify-content-center" style = "margin-bottom: 0px;">
 					
 					
 					<c:choose>
@@ -146,7 +147,7 @@
 					</c:choose>
 					
 				</ul>
-				
+				<p class = "pull-right">Showing ${page.pageBegin} to ${page.pageEnd} of ${page.totalCount} entries</p>
 			</div>
 		</div>
 	</div>

@@ -77,6 +77,40 @@
 		);
 	</insert>
 
-	<delete id="delete" parameterType="Map">
-	</delete>
+	<select id = "totalcount" resultType="integer" parameterType="Map">
+		select count(business_no) from business
+	</select>
+	<select id = "listpagination" resultType="Map" parameterType="Map">
+        select project.*
+        from
+			(select @RNUM := @RNUM + 1 AS ROWNUM, business.business_no, business.business_name, user_info.id, user_info.name,
+				   (select count(*) from logic inner join business on logic.business_no = business.business_no where logic.category = "problem") problem_sum,
+				   (select count(*) from logic inner join business on logic.business_no = business.business_no where logic.category = "anwser") anwser_sum
+			from business inner join user_info
+			on business.user_id = user_info.user_id, (select @RNUM := 0) R) project
+        where project.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}
+        order by project.business_no;
+	</select>
+	<select id = "totalcount_search" resultType="integer" parameterType="Map">
+		select count(business_no) from business
+		<![CDATA[
+			where 1 = 1 
+			and business.business_name like CONCAT('%',#{business_name},'%')
+		]]>
+	</select>
+	<select id = "listpagination_search" resultType="Map" parameterType="Map">
+		select project.*
+        from
+			(select @RNUM := @RNUM + 1 AS ROWNUM, business.business_no, business.business_name, user_info.id, user_info.name,
+				   (select count(*) from logic inner join business on logic.business_no = business.business_no where logic.category = "problem") problem_sum,
+				   (select count(*) from logic inner join business on logic.business_no = business.business_no where logic.category = "anwser") anwser_sum
+			from business inner join user_info
+			on business.user_id = user_info.user_id, (select @RNUM := 0) R
+			<![CDATA[
+				where 1 = 1
+				and business.business_name like CONCAT('%',#{business_name},'%')
+			]]> ) project
+        where project.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}
+        order by project.business_no;
+	</select>
 </mapper>

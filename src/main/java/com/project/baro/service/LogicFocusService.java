@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.baro.dao.ShareDao;
+import com.project.baro.util.Pagination;
 
 @Service
 public class LogicFocusService {
@@ -108,5 +109,45 @@ public class LogicFocusService {
 		Map resultMap = (Map) dao.getObject("read.getEvaluation", dataMap);
 		resultMap.putAll((Map) dataMap);
 		return resultMap;		
+	}
+
+	public Object getListPagination(Object paramMap) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		String sqlMapId = "";
+		int totalCount = 0;
+		int currentPage = 0;
+		if (((Map) paramMap).get("search") == null) {
+			sqlMapId = "list.totalcount";
+			totalCount = (int) dao.getObject(sqlMapId, paramMap);
+			currentPage = 1 ;
+			if(((Map<String,Object>) paramMap).get("curPage") != null) {
+			currentPage = Integer.valueOf(((Map<String, String>) paramMap).get("curPage"));
+			}
+			
+			Pagination pagination = new Pagination(totalCount, currentPage);
+			resultMap.put("pagination", pagination);
+			sqlMapId = "list.listpagination";
+			((Map<String, Object>) paramMap).put("pagination", pagination);
+			Object resultList = dao.getList(sqlMapId, paramMap);
+			resultMap.put("resultList", resultList);
+
+		}else if (((Map) paramMap).get("search").equals("true")) {
+			
+			sqlMapId = "list.totalcount_search";
+			totalCount = (int) dao.getObject(sqlMapId, paramMap);
+			currentPage = 1 ;
+			if(((Map<String,Object>) paramMap).get("curPage") != null) {
+			currentPage = Integer.valueOf(((Map<String, String>) paramMap).get("curPage"));
+			}
+			
+			Pagination pagination = new Pagination(totalCount, currentPage);
+			resultMap.put("pagination", pagination);
+			sqlMapId = "list.listpagination_search";
+			((Map<String, Object>) paramMap).put("pagination", pagination);
+			Object resultList = dao.getList(sqlMapId, paramMap);
+			resultMap.put("resultList", resultList);
+		}
+		return resultMap;
+		
 	}
 }
