@@ -16,8 +16,20 @@
 					<div class="col-md-12">
 						<div class="card">
 														
-							<div class="card-body" style ="padding-top:0">
-
+							<div class="card-body" >
+<!-- 								<form class="col-md-4 mb-3 nav-search ml-md-auto" -->
+<%-- 									action="<c:url value='/authority_setting/index'/>"> --%>
+<!-- 									<div class="input-group col-md-4 pull-right" style = "padding-bottom:24px"> -->
+<!-- 										<input type="text" name="authority_id" placeholder="이름 검색" -->
+<!-- 											class="form-control"> <input type="hidden" -->
+<!-- 											name="search" value="true"> -->
+<!-- 										<button class="btn btn-primary btn-sm"> -->
+<!-- 											<i class="la la-search search-icon" style="color: white;"> -->
+<!-- 											</i> -->
+<!-- 										</button> -->
+<!-- 									</div> -->
+<!-- 								</form> -->
+								
 								<table class="table mt-4 table-hover" id = "problem">
 									<thead>
 										<tr>
@@ -29,14 +41,13 @@
 											<th scope="col">권한변경</th>
 										</tr>
 									</thead>
-
+									<c:set var="page" value="${resultMap.pagination}" />
 									<tbody>
-										<c:forEach items="${resultList}" var="resultData" varStatus="loop">
+										<c:forEach items="${resultMap.resultList}" var="resultData" varStatus="loop">
 										<tr>
-											<td>${loop.index+1}</td>
-											
-											<td>${resultData.ID}</td>
-											<td>${resultData.NAME}</td>
+											<td>${page.pageBegin+loop.index}</td>
+											<td>${resultData.id}</td>
+											<td>${resultData.name}</td>
 											<td>${resultData.generated_date}</td>
 											<td class="originAuth">${resultData.authority_name}</td>
 											<td>
@@ -46,7 +57,7 @@
 													<option value='정회원'>정회원</option>	
 												</select>
 											</td>
-											<input type = "hidden" name = 'list' value='${resultData.ID}'>
+											<input type = "hidden" name = 'list' value='${resultData.id}'>
 										</tr>
 										</c:forEach>
 											<input type='hidden' name = 'authority' value='dummy_authority' >
@@ -57,6 +68,7 @@
 
 								</table>
 								<div class="card-footer">
+									<label class = "comment"></label>	
 									<div class = "float-right col-md-2">
 										<button class="btn btn-default" id = "authority_button" type="button">권한변경</button>
 									</div>
@@ -68,10 +80,74 @@
 						</div>
 					</div>
 
-					<!-- 나의 게시물 현황 - 문제점 끝 -->
+					
 
 
 				</div>
+				
+				
+				<%-- 				<c:set var="page" value="${resultMap.pagination}" />  위에 table에 이미 선언해서 주석처리 참고용--%>
+				
+
+				<ul class="pagination pg-primary justify-content-center" style = "margin-bottom: 0px;">
+					
+					
+					<c:choose>
+					<c:when test="${paramMap.search ne null}"> <!-- 검색 창 페이지 네이션 -->
+						<li class="page-item">
+							<a class="page-link" href="<c:url value="/authority_setting/index?authority_id=${paramMap.authority_id}&search=${paramMap.search}&curPage=${page.prevPage}"/>" aria-label="Previous">
+							<span aria-hidden="true">«</span> <span	class="sr-only">Previous</span></a>
+						</li>
+					</c:when>
+					<c:otherwise>	<!-- 일반 모든 그룹 리스트 페이지 네이션 -->
+						<li class="page-item">
+							<a class="page-link" href="<c:url value="/authority_setting/index?curPage=${page.prevPage}"/>" aria-label="Previous">
+							<span aria-hidden="true">«</span> <span	class="sr-only">Previous</span></a>
+						</li>
+					</c:otherwise>
+					</c:choose>
+					
+					
+					
+					
+					<c:forEach var="pageNum" begin="${page.blockStart}" end="${page.blockEnd}">
+					<c:choose>
+					<c:when test="${pageNum==page.curPage }">
+						<li class="page-item"><a class="page-link" href="#">${pageNum}</a></li>
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${paramMap.search ne null}">
+								<li class="page-item"><a class="page-link" href="<c:url value="/authority_setting/index?authority_id=${paramMap.authority_id}&search=${paramMap.search}&curPage=${pageNum}" />">${pageNum}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="<c:url value="/authority_setting/index?curPage=${pageNum}" />">${pageNum}</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:otherwise>
+					</c:choose>
+					</c:forEach>
+					
+					
+					<c:choose>
+					<c:when test="${paramMap.search ne null}"> <!-- 검색 창 페이지 네이션 -->
+						<li class="page-item">
+						<a class="page-link" href="<c:url value="/authority_setting/index?authority_id=${paramMap.authority_id}&search=${paramMap.search}&curPage=${page.nextPage}" />"aria-label="Next">
+						<span aria-hidden="true">»</span><span class="sr-only">Next</span></a>
+						</li>
+					</c:when>
+					<c:otherwise>	<!-- 일반 모든 그룹 리스트 페이지 네이션 -->
+						<li class="page-item">
+					<li class="page-item">
+						<a class="page-link" href="<c:url value="/authority_setting/index?curPage=${page.nextPage}" />"aria-label="Next">
+						<span aria-hidden="true">»</span><span class="sr-only">Next</span></a>
+					</li>
+					</c:otherwise>
+					
+					</c:choose>
+					
+				</ul>
+				<p class = "pull-right">Showing ${page.pageBegin} to ${page.pageEnd} of ${page.totalCount} entries</p>
 			</div>
 		</div>
 	</div>
@@ -85,17 +161,29 @@ $(function() {
 	$("#authority_button").click(function() {
 
 		var length = $(".originAuth").length;
-		for(var i = 0 ; i < length ; i++){
+		var count = 0;
+		for(var i = 0; i < length; i++){
 			if($(".originAuth").eq(i).text()==$(".Auth").eq(i).val() || $(".Auth").eq(i).val() == '권한입력'){
-				$(".originAuth").eq(i).parent().remove();
-				length--;
-				i--;
+				count = count + 1;
 			}
 		}
-		$(".main-panel").css("visibility","hidden")
-
-		 
-			$("#authority_setting").submit();
+		if(length == count){
+			$(".comment").text("변경할 권한을 입력하지 않았거나 같은 권한을 입력하였습니다. 다시한번 확인하세요.");
+		}else{
+			for(var i = 0 ; i < length ; i++){
+				if($(".originAuth").eq(i).text()==$(".Auth").eq(i).val() || $(".Auth").eq(i).val() == '권한입력'){
+					$(".originAuth").eq(i).parent().remove();
+					length--;
+					i--;
+				}
+			}
+			$(".main-panel").css("visibility","hidden")
+	
+			if($(".originAuth").length != 0){
+	 			$("#authority_setting").submit(); 
+				
+			}
+		}
  
 	});
 	
