@@ -11,7 +11,7 @@ public class UserInfo implements UserDetails {
 	
 	private String id;
 	private String userId;
-	private String name="sd";
+	private String name;
 	private String password;
 	private Set<GrantedAuthority> authorities;
 	
