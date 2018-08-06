@@ -9,21 +9,17 @@
 			<div class="container-fluid">
 				<h4 class="page-title">회원 권한 설정</h4>
 				<div class="row">
-
-					<!-- 나의 게시물 현황 - 문제점 시작점 -->
-					
-					
 					<div class="col-md-12">
 						<div class="card">
 														
 							<div class="card-body" >
 <!-- 								<form class="col-md-4 mb-3 nav-search ml-md-auto" -->
-<%-- 									action="<c:url value='/authority_setting/index'/>"> --%>
+<%-- 									formaction="<c:url value='/authority_setting/index'/>"> --%>
 <!-- 									<div class="input-group col-md-4 pull-right" style = "padding-bottom:24px"> -->
-<!-- 										<input type="text" name="authority_id" placeholder="이름 검색" -->
-<!-- 											class="form-control"> <input type="hidden" -->
-<!-- 											name="search" value="true"> -->
-<!-- 										<button class="btn btn-primary btn-sm"> -->
+<!-- 										<input type="text" name="name_search" placeholder="이름 검색" class="form-control">  -->
+<!-- 										<input type="hidden" name="search" value="true"> -->
+<%-- 										<button type = "submit" formaction ="<c:url value='/authority_setting/index'/>"  --%>
+<!-- 										class="btn btn-primary btn-sm"> -->
 <!-- 											<i class="la la-search search-icon" style="color: white;"> -->
 <!-- 											</i> -->
 <!-- 										</button> -->
@@ -75,36 +71,45 @@
 								</div>
 							</div>
 
-
-
 						</div>
 					</div>
 
-					
-
-
 				</div>
-				
 				
 				<%-- 				<c:set var="page" value="${resultMap.pagination}" />  위에 table에 이미 선언해서 주석처리 참고용--%>
 				
-
-				<ul class="pagination pg-primary justify-content-center" style = "margin-bottom: 0px;">
-					
-					
+				<ul class="pagination pg-primary justify-content-center" style = "margin-bottom: 0px;">	
 					<c:choose>
-					<c:when test="${paramMap.search ne null}"> <!-- 검색 창 페이지 네이션 -->
-						<li class="page-item">
-							<a class="page-link" href="<c:url value="/authority_setting/index?authority_id=${paramMap.authority_id}&search=${paramMap.search}&curPage=${page.prevPage}"/>" aria-label="Previous">
-							<span aria-hidden="true">«</span> <span	class="sr-only">Previous</span></a>
-						</li>
-					</c:when>
-					<c:otherwise>	<!-- 일반 모든 그룹 리스트 페이지 네이션 -->
-						<li class="page-item">
-							<a class="page-link" href="<c:url value="/authority_setting/index?curPage=${page.prevPage}"/>" aria-label="Previous">
-							<span aria-hidden="true">«</span> <span	class="sr-only">Previous</span></a>
-						</li>
-					</c:otherwise>
+						<c:when test="${paramMap.search ne null}"> <!-- 검색 창 페이지 네이션 -->
+							<c:choose>
+								<c:when test = "${page.curPage==page.blockStart}">
+										<li class="page-item" style = "display:none;">
+											<!-- 맨 처음 페이지로 가면 왼쪽 화살표 없어짐   -->
+										</li>								
+								</c:when>
+								<c:otherwise>
+									<li class="page-item">
+										<a class="page-link" href="<c:url value="/authority_setting/index?name_search=${paramMap.name_search}&search=${paramMap.search}&curPage=${page.prevPage}"/>" aria-label="Previous">
+										<span aria-hidden="true">«</span> <span	class="sr-only">Previous</span></a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>	<!-- 일반  페이지 네이션 -->
+							<c:choose>
+								<c:when test = "${page.curPage==1}">
+									<li class="page-item" style = "display:none;">
+											<!-- 맨 처음 페이지로 가면 왼쪽 화살표 없어짐   -->
+									</li>								
+								</c:when>
+								<c:otherwise>
+									<li class="page-item">
+										<a class="page-link" href="<c:url value="/authority_setting/index?curPage=${page.prevPage}"/>" aria-label="Previous">
+										<span aria-hidden="true">«</span> <span	class="sr-only">Previous</span></a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</c:otherwise>
 					</c:choose>
 					
 					
@@ -113,12 +118,12 @@
 					<c:forEach var="pageNum" begin="${page.blockStart}" end="${page.blockEnd}">
 					<c:choose>
 					<c:when test="${pageNum==page.curPage }">
-						<li class="page-item"><a class="page-link" href="#">${pageNum}</a></li>
+						<li class="page-item active"><a class="page-link" >${pageNum}</a></li>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
 							<c:when test="${paramMap.search ne null}">
-								<li class="page-item"><a class="page-link" href="<c:url value="/authority_setting/index?authority_id=${paramMap.authority_id}&search=${paramMap.search}&curPage=${pageNum}" />">${pageNum}</a></li>
+								<li class="page-item"><a class="page-link" href="<c:url value="/authority_setting/index?name_search=${paramMap.name_search}&search=${paramMap.search}&curPage=${pageNum}" />">${pageNum}</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="page-item"><a class="page-link" href="<c:url value="/authority_setting/index?curPage=${pageNum}" />">${pageNum}</a></li>
@@ -130,20 +135,37 @@
 					
 					
 					<c:choose>
-					<c:when test="${paramMap.search ne null}"> <!-- 검색 창 페이지 네이션 -->
-						<li class="page-item">
-						<a class="page-link" href="<c:url value="/authority_setting/index?authority_id=${paramMap.authority_id}&search=${paramMap.search}&curPage=${page.nextPage}" />"aria-label="Next">
-						<span aria-hidden="true">»</span><span class="sr-only">Next</span></a>
-						</li>
-					</c:when>
-					<c:otherwise>	<!-- 일반 모든 그룹 리스트 페이지 네이션 -->
-						<li class="page-item">
-					<li class="page-item">
-						<a class="page-link" href="<c:url value="/authority_setting/index?curPage=${page.nextPage}" />"aria-label="Next">
-						<span aria-hidden="true">»</span><span class="sr-only">Next</span></a>
-					</li>
-					</c:otherwise>
-					
+						<c:when test="${paramMap.search ne null}"> <!-- 검색 창 페이지 네이션 -->
+							<c:choose>
+								<c:when test = "${page.curPage==page.totPage}">
+									<li class="page-item" style = "display:none;">
+										<!-- 맨 마지막 페이지로 가면 오른쪽 화살표 없어짐   -->
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item">
+										<a class="page-link" href="<c:url value="/authority_setting/index?name_search=${paramMap.name_search}&search=${paramMap.search}&curPage=${page.nextPage}" />"aria-label="Next">
+										<span aria-hidden="true">»</span><span class="sr-only">Next</span></a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>	<!-- 일반 모든 그룹 리스트 페이지 네이션 -->
+							<c:choose>
+								<c:when test = "${page.curPage==page.totPage}">
+									<li class="page-item" style = "display:none;">
+										<!-- 맨 마지막 페이지로 가면 오른쪽 화살표 없어짐   -->
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item">
+										<a class="page-link" href="<c:url value="/authority_setting/index?curPage=${page.nextPage}" />"aria-label="Next">
+										<span aria-hidden="true">»</span><span class="sr-only">Next</span></a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</c:otherwise>
+						
 					</c:choose>
 					
 				</ul>
