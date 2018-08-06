@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	
-<body>
+<body> 
 
 	<div class="main-panel" style="background-color: white;">
 		<div class="content">
@@ -31,7 +31,7 @@
 						<i class="la la-search search-icon" style="color:white;">
 						</i></button>
 						</div>
-					</form>
+					</form> 
 
 					
 				<table class="table mt-4 table-hover">
@@ -45,12 +45,12 @@
 							<th scope="col">제안된 해결책</th>
 						</tr>
 					</thead>
-					
+					<c:set var="page" value="${resultMap.pagination}" />
 					<tbody>
-						<c:forEach items="${resultList}" var="resultData" varStatus="loop">
+						<c:forEach items="${resultMap.resultList}" var="resultData" varStatus="loop">
 							<tr class = "col">
 								<td class="business_no" style="display:none;" >${resultData.business_no}</td>
-								<td>${loop.index+1}</td>
+								<td>${page.pageBegin+loop.index}</td>
 								<td class = "business_name">${resultData.business_name}</td>
 								<td>${resultData.id}</td>
 								<td>${resultData.name}</td>
@@ -65,6 +65,106 @@
 				</div>
 				</div>
 				</div>
+				
+				<%-- 				<c:set var="page" value="${resultMap.pagination}" />  위에 table에 이미 선언해서 주석처리 참고용--%>
+				
+				<ul class="pagination pg-primary justify-content-center" style = "margin-bottom: 0px;">
+			 		<c:choose>
+						<c:when test="${paramMap.search ne null}"> <!-- 검색 창 페이지 네이션 -->
+							<c:choose>
+								<c:when test = "${page.curPage==1}">
+										<li class="page-item" style = "display:none;"> <!-- 맨 처음 페이지로 가면 왼쪽 화살표 없어짐 -->
+										<a class="page-link" href="<c:url value="/logicfocus/list?business_name=${paramMap.business_name }&search=${paramMap.search}&curPage=${page.prevPage}"/>" aria-label="Previous">
+										<span aria-hidden="true">«</span> <span	class="sr-only">Previous</span></a>  
+										</li>								
+								</c:when>
+								<c:otherwise>
+									<li class="page-item">
+										<a class="page-link" href="<c:url value="/logicfocus/list?business_name=${paramMap.business_name }&search=${paramMap.search}&curPage=${page.prevPage}"/>" aria-label="Previous">
+										<span aria-hidden="true">«</span> <span	class="sr-only">Previous</span></a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>	<!-- 일반  페이지 네이션 -->
+							<c:choose>
+								<c:when test = "${page.curPage==1}">
+									<li class="page-item" style = "display:none;">	<!-- 맨 처음 페이지로 가면 왼쪽 화살표 없어짐 -->  
+									</li>								
+								</c:when>
+								<c:otherwise>
+									<li class="page-item">
+										<a class="page-link" href="<c:url value="/logicfocus/list?curPage=${page.prevPage}"/>" aria-label="Previous">
+										<span aria-hidden="true">«</span> <span	class="sr-only">Previous</span></a>
+									</li>
+								</c:otherwise>						
+							</c:choose>
+						</c:otherwise>
+					</c:choose>
+					
+					
+					
+					
+					<c:forEach var="pageNum" begin="${page.blockStart}" end="${page.blockEnd}">
+						<c:choose>
+							<c:when test="${pageNum==page.curPage }">
+								<li class="page-item active"><a class="page-link">${pageNum}</a></li> <!-- 선택된 페이지 숫자 클릭 안됨 -->
+							</c:when>
+							<c:otherwise>
+								<c:choose>
+									<c:when test="${paramMap.search ne null}">	<!-- 검색 창 페이지 네이션 -->
+										<li class="page-item"><a class="page-link" href="<c:url value="/logicfocus/list?business_name=${paramMap.business_name }&search=${paramMap.search}&curPage=${pageNum}" />">${pageNum}</a></li>
+									</c:when>
+									<c:otherwise>	<!-- 일반  페이지 네이션 -->
+										<li class="page-item"><a class="page-link" href="<c:url value="/logicfocus/list?curPage=${pageNum}" />">${pageNum}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					
+					
+					 
+					 
+					<c:choose>
+						<c:when test="${paramMap.search ne null}"> <!-- 검색 창 페이지 네이션 -->
+							<c:choose>
+								<c:when test = "${page.curPage==page.totPage}">
+										<li class="page-item" style = "display:none;"> <!-- 맨 처음 페이지로 가면 왼쪽 화살표 없어짐 -->
+										<a class="page-link" href="<c:url value="/logicfocus/list?business_name=${paramMap.business_name }&search=${paramMap.search}&curPage=${page.nextPage}"/>" aria-label="Next">
+										<span aria-hidden="true">»</span> <span	class="sr-only">Next</span></a>  
+										</li>								
+								</c:when>
+								<c:otherwise>
+									<li class="page-item">
+										<a class="page-link" href="<c:url value="/logicfocus/list?business_name=${paramMap.business_name }&search=${paramMap.search}&curPage=${page.nextPage}"/>" aria-label="Next">
+										<span aria-hidden="true">»</span> <span	class="sr-only">Next</span></a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>	<!-- 일반  페이지 네이션 -->
+							<c:choose>
+								<c:when test = "${page.curPage==page.totPage}">
+									<li class="page-item" style = "display:none;">	<!-- 맨 처음 페이지로 가면 왼쪽 화살표 없어짐 -->  
+									</li>								
+								</c:when>
+								<c:otherwise>
+									<li class="page-item">
+										<a class="page-link" href="<c:url value="/logicfocus/list?curPage=${page.nextPage}"/>" aria-label="Next">
+										<span aria-hidden="true">»</span> <span	class="sr-only">Next</span></a>
+									</li>
+								</c:otherwise>						
+							</c:choose>
+						</c:otherwise>
+					</c:choose> 
+					
+					
+					
+				</ul>
+				<p class = "pull-right">Showing ${page.pageBegin} to ${page.pageEnd} of ${page.totalCount} entries</p>
+				
+				
 			</div>
 		</div>
 	</div>

@@ -3,7 +3,6 @@
 */
 package com.project.baro.controller;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
+import com.project.baro.component.MapParamCollector;
 import com.project.baro.service.LogicFocusService;
 
 @Controller
@@ -87,10 +85,11 @@ public class LogicFocusController {
 
 	// Sidebar의 List 메뉴에서 접근 할 수 있는 2 depth URI인 list와 read 관련 method
 	@RequestMapping(value = MAPPING + "{action}", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView actionMethod(@RequestParam Map<String, Object> paramMap, @PathVariable String action,
-			ModelAndView modelandView) {
+	public ModelAndView actionMethod(MapParamCollector paramMethodMap, @PathVariable String action,
+			ModelAndView modelandView, @RequestParam Map<String, Object> paramMap2) {
 
 		String viewName = MAPPING + action;
+		Map<String,Object> paramMap = paramMethodMap.getMap();
 		String forwardView = (String) paramMap.get("forwardView");
 		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -98,7 +97,9 @@ public class LogicFocusController {
 		
 		// divided depending on action value
 		if ("list".equalsIgnoreCase(action)) {
-			resultList = (List) service.getList(paramMap);
+//			resultList = (List) service.getList(paramMap);
+			resultMap = (Map<String, Object>)service.getListPagination(paramMap);
+			viewName = "/logicfocus/list"; 
 		} else if ("edit".equalsIgnoreCase(action)) {
 		} else if ("insert".equalsIgnoreCase(action)) {
 			service.saveProject(paramMap);

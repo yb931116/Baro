@@ -16,7 +16,7 @@
 								<div class="card-header">
 <!-- 											<p class="form-inline"> -->
 											<h6 class="col-md-12 form-inline">${groupName.group_name}</h6>
-											<label class = "form-inline col-md-2 float-right">그룹생성자 : <span>${groupName.id}</span></label>
+											<label class = "pull-right">그룹생성자 : <span>${groupName.id}</span></label>
 											
 <!-- 											</p> -->
 											<input type='hidden' class = group_name name='group_name' value='${groupName.group_name}'>

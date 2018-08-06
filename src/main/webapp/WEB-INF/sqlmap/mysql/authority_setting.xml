@@ -42,7 +42,44 @@
     
 	
 	</update>
-
+	<select id="totalcount" resultType="integer" parameterType="Map">
+		SELECT count(user_id)
+		FROM user_info
+	</select>
+	<select id="totalcount_search" resultType="integer" parameterType="Map">
+		SELECT count(user_id)
+		FROM user_info
+		<![CDATA[
+		where 1 = 1
+		and id like CONCAT('%',#{authority_id},'%')
+		]]>
+	</select>
+	<select id="listpagination" resultType="Map" parameterType="Map">
+		SELECT *
+        FROM(
+			SELECT @RNUM := @RNUM + 1 AS ROWNUM, user_info.user_id, user_info.name,user_info.id,user_info.generated_date, authority.authority_name
+			FROM user_info INNER JOIN authority_rel
+			ON user_info.user_id = authority_rel.user_id
+			INNER JOIN authority
+			ON authority_rel.authority_id = authority.authority_id
+			,( SELECT @RNUM := 0 ) R) A
+		WHERE A.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}
+	</select>
+	
+	<select id="listpagination_search" resultType="Map" parameterType="Map">
+		SELECT *
+        FROM(
+			SELECT @RNUM := @RNUM + 1 AS ROWNUM, user_info.user_id, user_info.name,user_info.id,user_info.generated_date, authority.authority_name
+			FROM user_info INNER JOIN authority_rel
+			ON user_info.user_id = authority_rel.user_id
+			INNER JOIN authority
+			ON authority_rel.authority_id = authority.authority_id
+			,( SELECT @RNUM := 0 ) R
+			<![CDATA[
+				WHERE user_info.id like CONCAT('%',#{name_search},'%')
+			]]>) A
+		WHERE A.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}
+	</select>
 <!-- 	
 	<insert id="update"  parameterType="Map" >
       INSERT INTO

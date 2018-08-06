@@ -28,15 +28,18 @@ public class AuthoritySettingController {
 			ModelAndView modelandView) {
 		
 		String viewName = MAPPING + action; 
-		Map<Object,Object> paramMap = paramMethodMap.getMap();
+		Map<String,Object> paramMap = paramMethodMap.getMap();
 		Map<String,Object> resultMap = new HashMap<String, Object>();
 		List<Object> resultList = new ArrayList<Object>();
 		
 		if("index".equalsIgnoreCase(action)){
-			resultList = (List)authoritysettingservice.getList(paramMap);
+//			resultList = (List)authoritysettingservice.getList(paramMap);
+			resultMap = (Map<String, Object>)authoritysettingservice.getListPagination("", paramMap);
 			viewName= "/authority_setting";
 		}else if("update".equalsIgnoreCase(action)) {
-			resultList = (List)authoritysettingservice.authority_setting(paramMap);
+//			resultList = (List)authoritysettingservice.authority_setting(paramMap);
+			authoritysettingservice.authority_setting(paramMap);
+			resultMap = (Map<String, Object>)authoritysettingservice.getListPagination("", paramMap);
 			viewName= "/authority_setting";
 		}
 		

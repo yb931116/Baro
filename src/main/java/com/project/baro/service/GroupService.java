@@ -21,7 +21,7 @@ public class GroupService {
 	@Autowired
 	private CommonUtil commonUtil;
 	
-	public Object group_insert(String sqlMapId, Map<Object, Object> paramMap) {
+	public Object group_insert(String sqlMapId, Map<String, Object> paramMap) {
 		String uniqueSequence = null;
 		UserInfo user = (UserInfo)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		if(uniqueSequence == null || "".equals(uniqueSequence) ) {

@@ -12,11 +12,15 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.project.baro.util.FileUtil;
+
 
 
 
 public class CustomizeMethodArgumentResolver implements HandlerMethodArgumentResolver {
 	
+	@Autowired
+	private FileUtil fileUtil;
 	
 
 	@Override
@@ -26,20 +30,28 @@ public class CustomizeMethodArgumentResolver implements HandlerMethodArgumentRes
 	}
 
 	@Override
-	public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer mavContainer,
-			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+	public Object resolveArgument(MethodParameter methodParameter, 
+			ModelAndViewContainer mavContainer, NativeWebRequest webRequest, 
+			WebDataBinderFactory binderFactory) throws Exception {
 		Class<?> clazz = methodParameter.getParameterType();
 		MapParamCollector requestMap = new MapParamCollector();
+		
 		if(clazz.equals(MapParamCollector.class)) {
 			HttpServletRequest request = (HttpServletRequest)webRequest.getNativeRequest();
 			Enumeration<?> enumeration = request.getParameterNames();
+			
 			while(enumeration.hasMoreElements()) {
 				String key = (String)enumeration.nextElement();
 				String[] values = request.getParameterValues(key);
 				if(values != null) {
 					requestMap.put(key,(values.length >1)? values:values[0]);}
 				}
-			
+			if (request instanceof MultipartHttpServletRequest) {
+				MultipartHttpServletRequest multipartRequest =
+
+				(MultipartHttpServletRequest) request;
+				requestMap.put("attachFileList", fileUtil.setMultipartList(multipartRequest));
+				}
 		}
 		return requestMap;
 	}

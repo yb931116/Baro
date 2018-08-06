@@ -18,7 +18,7 @@ public class AdminGroupService {
 	@Autowired
 	private CommonUtil commonUtil;
 	
-	public Object group_insert(String sqlMapId, Map<Object, Object> paramMap) {
+	public Object group_insert(String sqlMapId, Map<String, Object> paramMap) {
 		String uniqueSequence = null;
 		String ID = SecurityContextHolder.getContext().getAuthentication().getName();	// session으로 부터 id 가져오는 함수
 		if(uniqueSequence == null || "".equals(uniqueSequence) ) {
