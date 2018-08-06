@@ -14,12 +14,12 @@
 														
 							<div class="card-body" >
 <!-- 								<form class="col-md-4 mb-3 nav-search ml-md-auto" -->
-<%-- 									action="<c:url value='/authority_setting/index'/>"> --%>
+<%-- 									formaction="<c:url value='/authority_setting/index'/>"> --%>
 <!-- 									<div class="input-group col-md-4 pull-right" style = "padding-bottom:24px"> -->
-<!-- 										<input type="text" name="authority_id" placeholder="이름 검색" -->
-<!-- 											class="form-control"> <input type="hidden" -->
-<!-- 											name="search" value="true"> -->
-<!-- 										<button class="btn btn-primary btn-sm"> -->
+<!-- 										<input type="text" name="name_search" placeholder="이름 검색" class="form-control">  -->
+<!-- 										<input type="hidden" name="search" value="true"> -->
+<%-- 										<button type = "submit" formaction ="<c:url value='/authority_setting/index'/>"  --%>
+<!-- 										class="btn btn-primary btn-sm"> -->
 <!-- 											<i class="la la-search search-icon" style="color: white;"> -->
 <!-- 											</i> -->
 <!-- 										</button> -->
@@ -89,7 +89,7 @@
 								</c:when>
 								<c:otherwise>
 									<li class="page-item">
-										<a class="page-link" href="<c:url value="/authority_setting/index?authority_id=${paramMap.authority_id}&search=${paramMap.search}&curPage=${page.prevPage}"/>" aria-label="Previous">
+										<a class="page-link" href="<c:url value="/authority_setting/index?name_search=${paramMap.name_search}&search=${paramMap.search}&curPage=${page.prevPage}"/>" aria-label="Previous">
 										<span aria-hidden="true">«</span> <span	class="sr-only">Previous</span></a>
 									</li>
 								</c:otherwise>
@@ -123,7 +123,7 @@
 					<c:otherwise>
 						<c:choose>
 							<c:when test="${paramMap.search ne null}">
-								<li class="page-item"><a class="page-link" href="<c:url value="/authority_setting/index?authority_id=${paramMap.authority_id}&search=${paramMap.search}&curPage=${pageNum}" />">${pageNum}</a></li>
+								<li class="page-item"><a class="page-link" href="<c:url value="/authority_setting/index?name_search=${paramMap.name_search}&search=${paramMap.search}&curPage=${pageNum}" />">${pageNum}</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="page-item"><a class="page-link" href="<c:url value="/authority_setting/index?curPage=${pageNum}" />">${pageNum}</a></li>
@@ -137,14 +137,14 @@
 					<c:choose>
 						<c:when test="${paramMap.search ne null}"> <!-- 검색 창 페이지 네이션 -->
 							<c:choose>
-								<c:when test = "${page.curPage==page.totalPage}">
+								<c:when test = "${page.curPage==page.totPage}">
 									<li class="page-item" style = "display:none;">
 										<!-- 맨 마지막 페이지로 가면 오른쪽 화살표 없어짐   -->
 									</li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item">
-										<a class="page-link" href="<c:url value="/authority_setting/index?authority_id=${paramMap.authority_id}&search=${paramMap.search}&curPage=${page.nextPage}" />"aria-label="Next">
+										<a class="page-link" href="<c:url value="/authority_setting/index?name_search=${paramMap.name_search}&search=${paramMap.search}&curPage=${page.nextPage}" />"aria-label="Next">
 										<span aria-hidden="true">»</span><span class="sr-only">Next</span></a>
 									</li>
 								</c:otherwise>
@@ -152,7 +152,7 @@
 						</c:when>
 						<c:otherwise>	<!-- 일반 모든 그룹 리스트 페이지 네이션 -->
 							<c:choose>
-								<c:when test = "${page.curPage==page.blockEnd}">
+								<c:when test = "${page.curPage==page.totPage}">
 									<li class="page-item" style = "display:none;">
 										<!-- 맨 마지막 페이지로 가면 오른쪽 화살표 없어짐   -->
 									</li>

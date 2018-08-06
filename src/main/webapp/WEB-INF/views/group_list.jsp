@@ -128,7 +128,7 @@
 					<c:choose>
 						<c:when test="${paramMap.search ne null}"> <!-- 검색 창 페이지 네이션 -->
 							<c:choose>
-								<c:when test = "${page.curPage==page.totalPage}">
+								<c:when test = "${page.curPage==page.totPage}">
 									<li class="page-item" style = "display:none;">
 										<!-- 맨 마지막 페이지로 가면 오른쪽 화살표 없어짐   -->
 									</li>
@@ -143,7 +143,7 @@
 						</c:when>
 						<c:otherwise>	<!-- 일반 페이지 네이션 -->
 							<c:choose>
-								<c:when test = "${page.curPage==page.blockEnd}">
+								<c:when test = "${page.curPage==page.totPage}">
 									<li class="page-item" style = "display:none;">
 										<!-- 맨 마지막 페이지로 가면 오른쪽 화살표 없어짐   -->
 									</li>
