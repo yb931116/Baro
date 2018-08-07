@@ -34,7 +34,7 @@
 
 				
 						<li class="nav-item">
-							<a href="<c:url value='/statistics'/>">
+							<a href="<c:url value='/statistics/index'/>">
 								<i class="la la-bar-chart"></i>
 								<p>통계</p>
 							</a>

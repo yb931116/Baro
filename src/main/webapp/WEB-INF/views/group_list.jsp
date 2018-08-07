@@ -73,7 +73,7 @@
 					<c:choose>
 						<c:when test="${paramMap.search ne null}"> <!-- 검색 창 페이지 네이션 -->
 							<c:choose>
-								<c:when test = "${page.curPage==page.blockStart}">
+								<c:when test = "${page.curPage==1}">
 										<li class="page-item" style = "display:none;">
 											<!-- 맨 처음 페이지로 가면 왼쪽 화살표 없어짐   -->
 										</li>								

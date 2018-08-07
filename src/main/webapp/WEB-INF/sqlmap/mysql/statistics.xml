@@ -23,7 +23,32 @@
         from user_info u 
         order by PRONUM desc, ANSNUM desc;	
 	</select>
-
+	
+	<select id="listpagination" resultType="Map" parameterType="Map">
+	SELECT B.*
+	FROM        
+		(SELECT @RNUM := @RNUM + 1 AS ROWNUM, A.*
+		 FROM	 (SELECT 
+					  user_info.NAME, user_info.ID, 
+					  (SELECT count(logic.original_no) 
+					   FROM logic 
+					   WHERE logic.user_id = user_info.user_id and logic.category = 'problem') PRONUM,
+					  (SELECT count(logic.original_no) 
+					   FROM logic 
+					   WHERE logic.user_id = user_info.user_id and logic.category = 'answer') ANSNUM,
+					  (SELECT count(distinct business.business_no) 
+					   FROM business, logic 
+					   WHERE business.business_no = logic.business_no and logic.user_id = user_info.user_id) PROJECTNUM
+					   
+				  FROM user_info, (SELECT @RNUM := 0) R
+				  ORDER BY PRONUM desc, ANSNUM desc
+				  ) A) B
+	WHERE B.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}	
+	</select>
+	<select id = "totalcount" resultType="integer" parameterType="Map">
+		select count(*) from user_info
+	</select>
+	
 	<select id="SearchProject" resultType="Map" parameterType="Map">
 		select b.business_no, b.business_name, i.name , i.user_id , i.id ,
 			   (select count(l.original_no)
