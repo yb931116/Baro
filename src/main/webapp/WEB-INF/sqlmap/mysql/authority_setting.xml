@@ -51,7 +51,7 @@
 		FROM user_info
 		<![CDATA[
 		where 1 = 1
-		and id like CONCAT('%',#{authority_id},'%')
+		and name like CONCAT('%',#{name_search},'%')
 		]]>
 	</select>
 	<select id="listpagination" resultType="Map" parameterType="Map">
@@ -76,7 +76,7 @@
 			ON authority_rel.authority_id = authority.authority_id
 			,( SELECT @RNUM := 0 ) R
 			<![CDATA[
-				WHERE user_info.id like CONCAT('%',#{name_search},'%')
+				WHERE user_info.name like CONCAT('%',#{name_search},'%')
 			]]>) A
 		WHERE A.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}
 	</select>

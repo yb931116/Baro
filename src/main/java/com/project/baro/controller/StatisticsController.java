@@ -17,7 +17,7 @@ import com.project.baro.service.StatisticsService;
 
 @Controller
 public class StatisticsController {
-private final static String MAPPING = "/statistics";
+private final static String MAPPING = "/statistics/";
 
 	@Autowired
 	StatisticsService service;
@@ -30,8 +30,10 @@ private final static String MAPPING = "/statistics";
 		Map<String,Object> resultMap = new HashMap<String, Object>();
 		List<Object> resultList = new ArrayList<Object>();
 		System.out.println("왜그렇냐" + action);
-		if("".equalsIgnoreCase(action)){
-			 resultList =(List<Object>) service.getListbyID("statistics.getListById",paramMap);
+		if("index".equalsIgnoreCase(action)){
+//			 resultList =(List<Object>) service.getListbyID("statistics.getListById",paramMap);
+			resultMap = (Map<String, Object>)service.getListPagination("", paramMap);
+			viewName = "/statistics";
 		}
 		modelandView.setViewName(viewName);
 		modelandView.addObject("paramMap",paramMap);

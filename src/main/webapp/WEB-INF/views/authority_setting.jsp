@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <body>
-<form class="form-horizontal" role="form" id = authority_setting action="<c:url value ='/authority_setting/update'/>" method="POST">>
+
 	<div class="main-panel" style="background-color: white;"> 
 		<div class="content">
 			<div class="container-fluid">
@@ -13,19 +13,19 @@
 						<div class="card">
 														
 							<div class="card-body" >
-<!-- 								<form class="col-md-4 mb-3 nav-search ml-md-auto" -->
-<%-- 									formaction="<c:url value='/authority_setting/index'/>"> --%>
-<!-- 									<div class="input-group col-md-4 pull-right" style = "padding-bottom:24px"> -->
-<!-- 										<input type="text" name="name_search" placeholder="이름 검색" class="form-control">  -->
-<!-- 										<input type="hidden" name="search" value="true"> -->
-<%-- 										<button type = "submit" formaction ="<c:url value='/authority_setting/index'/>"  --%>
-<!-- 										class="btn btn-primary btn-sm"> -->
-<!-- 											<i class="la la-search search-icon" style="color: white;"> -->
-<!-- 											</i> -->
-<!-- 										</button> -->
-<!-- 									</div> -->
-<!-- 								</form> -->
+								<form class="form-horizontal" action="<c:url value='/authority_setting/index'/>">
+									<div class="input-group col-md-4 pull-right" style = "padding-bottom:24px">
+										<input type="text" name="name_search" placeholder="이름 검색" class="form-control"> 
+										<input type="hidden" name="search" value="true">
+										<button type = "submit" 
+										class="btn btn-primary btn-sm">
+											<i class="la la-search search-icon" style="color: white;">
+											</i>
+										</button>
+									</div>
+								</form>
 								
+							<form class="form-horizontal" role="form" id = authority_setting action="<c:url value ='/authority_setting/update'/>" method="POST">
 								<table class="table mt-4 table-hover" id = "problem">
 									<thead>
 										<tr>
@@ -69,6 +69,7 @@
 										<button class="btn btn-default" id = "authority_button" type="button">권한변경</button>
 									</div>
 								</div>
+								</form>
 							</div>
 
 						</div>
@@ -82,7 +83,7 @@
 					<c:choose>
 						<c:when test="${paramMap.search ne null}"> <!-- 검색 창 페이지 네이션 -->
 							<c:choose>
-								<c:when test = "${page.curPage==page.blockStart}">
+								<c:when test = "${page.curPage==1}">
 										<li class="page-item" style = "display:none;">
 											<!-- 맨 처음 페이지로 가면 왼쪽 화살표 없어짐   -->
 										</li>								
@@ -173,7 +174,7 @@
 			</div>
 		</div>
 	</div>
-	</form>
+	
 </body>
 
 
