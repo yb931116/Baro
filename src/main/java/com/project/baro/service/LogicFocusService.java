@@ -121,6 +121,12 @@ public class LogicFocusService {
 		return resultMap;		
 	}*/
 
+	public Object getFile(String sqlMapId, Object dataMap) {
+		Map resultMap = (Map) dao.getObject("read.getFile", dataMap);
+		return resultMap;		
+	}
+	
+	
 	public Object getListPagination(Object paramMap) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		String sqlMapId = "";
