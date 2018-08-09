@@ -39,14 +39,6 @@
 								<p>통계</p>
 							</a>
 						</li>
-						<li class="nav-item">
-							<a href="<c:url value='/evaluation'/>">
-								<i class="la la-check-square"></i>
-								<p>평가</p>
-							</a>
-						</li>
-						
-						
 						
 						<li class = "nav-item"> 
 

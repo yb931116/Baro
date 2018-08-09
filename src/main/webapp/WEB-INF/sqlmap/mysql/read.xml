@@ -37,33 +37,7 @@
 		)
 		 
 	</insert>
-
-	<insert id="setEvaluation" parameterType="Map">
-		INSERT INTO evaluation_logic
-		(evaluation_no,
-		 score,
-		 original_no,
-		 evaluating_date,
-		 user_id,
-		 comment)
-		VALUES
-		(uuid(),
-		 #{SCORE},
-		 #{original_no},
-		 now(),
-		 #{user_id},
-		 #{COMMENT}	 
-		);
-
-		 
-	</insert>
-	<select id="getEvaluation" resultType="Map" parameterType="Map">
-		select count(e.evaluation_no) sum, count(e2.evaluation_no) sumOfAccept
-		from (select * from evaluation_logic) e LEFT OUTER JOIN (select * from evaluation_logic where score = 'Accept' ) e2
-		on e.evaluation_no = e2.evaluation_no
-        where e.original_no = #{original_no};
-
-	</select>
+	
 	
 
 

@@ -92,24 +92,27 @@ public class LogicFocusService {
 		resultMap.put("project_name", ((Map) dataMap).get("project_name"));
 		resultMap.put("ProList", ProList);
 		resultMap.put("AnsList", AnsList);
-		for(int i =0 ; i < ProList.size() ; i++) {
-			System.out.println("Proble:"+((Map)ProList.get(i)));
-			System.out.println("Answer:"+((Map)AnsList.get(i)));
-		}
+		resultMap.putAll((Map)dao.getObject("getEvaluationLogic", dataMap));
 		return resultMap;
 	}
 
-	public Object setEvaluation(String sqlMapId, Object dataMap) {
-		Object resultNum = dao.saveObject("read.setEvaluation", dataMap);
+/*	public Object setEvaluation(String sqlMapId, Object dataMap) {
 		
+		Object resultNum=null;
+		
+		if(((String)(((Map)dataMap).get("category"))).equalsIgnoreCase("logic")) {
+			resultNum = dao.saveObject("read.setEvaluationLogic", dataMap);
+		}else if(((String)(((Map)dataMap).get("category"))).equalsIgnoreCase("project")) {
+			resultNum = dao.saveObject("read.setEvaluationProject", dataMap);
+		}
 		return resultNum;
 	}
 
 	public Object getEvaluation(String sqlMapId, Object dataMap) {
-		Map resultMap = (Map) dao.getObject("read.getEvaluation", dataMap);
-		resultMap.putAll((Map) dataMap);
+		Map resultMap = (Map) dao.getObject("read.getEvaluationLogic", dataMap);
+		resultMap.putAll((Map)dataMap);
 		return resultMap;		
-	}
+	}*/
 
 	public Object getListPagination(Object paramMap) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();

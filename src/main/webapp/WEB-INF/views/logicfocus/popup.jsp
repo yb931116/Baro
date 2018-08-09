@@ -241,19 +241,15 @@
 				flag = "Denial";
 
 			}
-			console.log(original_no);
-			console.log(comment);
-			console.log(flag);
-			console.log($btn);
 			if (confirm("평가는 수정이 불가합니다. 평가를 완료하시겠습니까 ?")) {
 
 				$.ajax({
 					type : "POST",
-					url : url = "<c:url value='/ws/setEvaluation'/>",
+					url : url = "<c:url value='/ws/setEvaluationLogic'/>",
 					data : {
 						"original_no" : original_no,
 						"COMMENT" : comment,
-						"SCORE" : flag
+						"SCORE" : flag,
 					},
 					dataType : "json",
 					cache : false,
@@ -267,8 +263,7 @@
 					}
 				});
 
-			}
-			;
+			};
 		});
 
 	});

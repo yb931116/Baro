@@ -81,15 +81,16 @@
 		select count(project_no) from project
 	</select>
 	<select id = "listpagination" resultType="Map" parameterType="Map">
-        select project.*
+
+        select A.*
         from
 			(select @RNUM := @RNUM + 1 AS ROWNUM, project.project_no, project.project_name, user_info.id, user_info.name,
-				   (select count(*) from logic inner join project on logic.project_no = project.project_no where logic.category = "problem") problem_sum,
-				   (select count(*) from logic inner join project on logic.project_no = project.project_no where logic.category = "anwser") anwser_sum
+				   (select count(*) from logic where logic.project_no = project.project_no and logic.category = "problem") problem_sum,
+				   (select count(*) from logic where logic.project_no = project.project_no and logic.category = "answer") anwser_sum
 			from project inner join user_info
-			on project.user_id = user_info.user_id, (select @RNUM := 0) R) project
-        where project.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}
-        order by project.project_no;
+			on project.user_id = user_info.user_id, (select @RNUM := 0) R) A
+        where A.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}
+        order by A.project_no;
 	</select>
 	<select id = "totalcount_search" resultType="integer" parameterType="Map">
 		select count(project_no) from project
@@ -102,8 +103,8 @@
 		select project.*
         from
 			(select @RNUM := @RNUM + 1 AS ROWNUM, project.project_no, project.project_name, user_info.id, user_info.name,
-				   (select count(*) from logic inner join project on logic.project_no = project.project_no where logic.category = "problem") problem_sum,
-				   (select count(*) from logic inner join project on logic.project_no = project.project_no where logic.category = "anwser") anwser_sum
+				   (select count(*) from logic where logic.project_no = project.project_no and logic.category = "problem") problem_sum,
+				   (select count(*) from logic where logic.project_no = project.project_no and logic.category = "answer") anwser_sum
 			from project inner join user_info
 			on project.user_id = user_info.user_id, (select @RNUM := 0) R
 			<![CDATA[
