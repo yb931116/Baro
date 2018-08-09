@@ -16,9 +16,9 @@
         from logic l
         where l.user_id = u.user_id and
               l.category='answer') ANSNUM,
-		(select count(distinct b.business_no)
-         from business b,logic l
-         where b.business_no = l.business_no and
+		(select count(distinct p.project_no)
+         from project p,logic l
+         where p.project_no = l.project_no and
 			   l.user_id  = u.user_id) PROJECTNUM
         from user_info u 
         order by PRONUM desc, ANSNUM desc;	
@@ -36,9 +36,9 @@
 					  (SELECT count(logic.original_no) 
 					   FROM logic 
 					   WHERE logic.user_id = user_info.user_id and logic.category = 'answer') ANSNUM,
-					  (SELECT count(distinct business.business_no) 
-					   FROM business, logic 
-					   WHERE business.business_no = logic.business_no and logic.user_id = user_info.user_id) PROJECTNUM
+					  (SELECT count(distinct project.project_no) 
+					   FROM project, logic 
+					   WHERE project.project_no = logic.project_no and logic.user_id = user_info.user_id) PROJECTNUM
 					   
 				  FROM user_info, (SELECT @RNUM := 0) R
 				  ORDER BY PRONUM desc, ANSNUM desc
@@ -50,7 +50,7 @@
 	</select>
 	
 	<select id="SearchProject" resultType="Map" parameterType="Map">
-		select b.business_no, b.business_name, i.name , i.user_id , i.id ,
+		select p.project_no, p.project_name, i.name , i.user_id , i.id ,
 			   (select count(l.original_no)
 		        from logic l
 				where l.user_id = i.user_id and
@@ -59,12 +59,12 @@
 		        from logic l
 		        where l.user_id = i.user_id and
 		              l.category='answer') ANSNUM
-		from business b , logic l , user_info i
-		where b.business_no = l.business_no and
+		from project p , logic l , user_info i
+		where p.project_no = l.project_no and
 			  l.user_id = i.user_id and
-		      b.business_name like #{projectName}
+		      p.project_name like #{projectName}
 		group by i.name
-		order by b.business_no , i.name;
+		order by p.project_no , i.name;
 
 	</select>
 

@@ -7,53 +7,53 @@
 <mapper namespace="list">
 	<select id="list" resultType="Map" parameterType="Map">
 	    select 
-			b.business_no business_no <!-- 프로젝트_SEQ -->
-			, b.business_name business_name <!-- 프로젝트명 -->
+			p.project_no project_no <!-- 프로젝트_SEQ -->
+			, p.project_name project_name <!-- 프로젝트명 -->
 			, u.id id <!-- 프로젝트 생성자 ID -->
 			,u.name name
 			
 			,(select count(*)
 		   	 from logic l
-			 where l.business_no = b.business_no and
+			 where l.project_no = p.project_no and
 			 l.category="problem") problem_sum  
 			 
 			 ,(select count(*)
 			  from logic l
-			  where l.business_no = b.business_no and
+			  where l.project_no = p.project_no and
 			  l.category="answer") anwser_sum
 			  
-		from business b, user_info u
+		from project p, user_info u
 		<![CDATA[
 		where 1 = 1 
 		and b.user_id=u.user_id
 		]]>
-		order by b.business_no
+		order by p.project_no
 	</select>
 	
 		<select id="search" resultType="Map" parameterType="Map">
 	    select 
-			b.business_no business_no <!-- 프로젝트_SEQ -->
-			, b.business_name business_name <!-- 프로젝트명 -->
+			p.project_no project_no <!-- 프로젝트_SEQ -->
+			, p.project_name project_name <!-- 프로젝트명 -->
 			, u.id id <!-- 프로젝트 생성자 ID -->
 			,u.name name
 			
 			,(select count(*)
 		   	 from logic l
-			 where l.business_no = b.business_no and
+			 where l.project_no = p.project_no and
 			 l.category="problem") problem_sum  
 			 
 			 ,(select count(*)
 			  from logic l
-			  where l.business_no = b.business_no and
+			  where l.project_no = p.project_no and
 			  l.category="answer") anwser_sum
 			  
-		from business b, user_info u
+		from project p, user_info u
 		<![CDATA[
 		where 1 = 1
-		and b.user_id=u.user_id 
-		and b.business_name like CONCAT('%',#{business_name},'%')
+		and p.user_id=u.user_id 
+		and p.project_name like CONCAT('%',#{project_name},'%')
 		]]>
-		order by business_no
+		order by project_no
 	</select>
 	
 
@@ -61,56 +61,56 @@
 	</select>
 
 	<insert id="insert" parameterType="Map">
-		INSERT INTO business
+		INSERT INTO project
 		(
-			business_no,
-			business_name,
+			project_no,
+			project_name,
 			generating_date,
 			user_id
 		)
 		VALUES
 		(
 			uuid(),
-			#{business_name},
+			#{project_name},
 			now(),
 			(select user_id from user_info where id = #{id})
 		);
 	</insert>
 
 	<select id = "totalcount" resultType="integer" parameterType="Map">
-		select count(business_no) from business
+		select count(project_no) from project
 	</select>
 	<select id = "listpagination" resultType="Map" parameterType="Map">
         select project.*
         from
-			(select @RNUM := @RNUM + 1 AS ROWNUM, business.business_no, business.business_name, user_info.id, user_info.name,
-				   (select count(*) from logic inner join business on logic.business_no = business.business_no where logic.category = "problem") problem_sum,
-				   (select count(*) from logic inner join business on logic.business_no = business.business_no where logic.category = "anwser") anwser_sum
-			from business inner join user_info
-			on business.user_id = user_info.user_id, (select @RNUM := 0) R) project
+			(select @RNUM := @RNUM + 1 AS ROWNUM, project.project_no, project.project_name, user_info.id, user_info.name,
+				   (select count(*) from logic inner join project on logic.project_no = project.project_no where logic.category = "problem") problem_sum,
+				   (select count(*) from logic inner join project on logic.project_no = project.project_no where logic.category = "anwser") anwser_sum
+			from project inner join user_info
+			on project.user_id = user_info.user_id, (select @RNUM := 0) R) project
         where project.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}
-        order by project.business_no;
+        order by project.project_no;
 	</select>
 	<select id = "totalcount_search" resultType="integer" parameterType="Map">
-		select count(business_no) from business
+		select count(project_no) from project
 		<![CDATA[
 			where 1 = 1 
-			and business.business_name like CONCAT('%',#{business_name},'%')
+			and project.project_name like CONCAT('%',#{project_name},'%')
 		]]>
 	</select>
 	<select id = "listpagination_search" resultType="Map" parameterType="Map">
 		select project.*
         from
-			(select @RNUM := @RNUM + 1 AS ROWNUM, business.business_no, business.business_name, user_info.id, user_info.name,
-				   (select count(*) from logic inner join business on logic.business_no = business.business_no where logic.category = "problem") problem_sum,
-				   (select count(*) from logic inner join business on logic.business_no = business.business_no where logic.category = "anwser") anwser_sum
-			from business inner join user_info
-			on business.user_id = user_info.user_id, (select @RNUM := 0) R
+			(select @RNUM := @RNUM + 1 AS ROWNUM, project.project_no, project.project_name, user_info.id, user_info.name,
+				   (select count(*) from logic inner join project on logic.project_no = project.project_no where logic.category = "problem") problem_sum,
+				   (select count(*) from logic inner join project on logic.project_no = project.project_no where logic.category = "anwser") anwser_sum
+			from project inner join user_info
+			on project.user_id = user_info.user_id, (select @RNUM := 0) R
 			<![CDATA[
 				where 1 = 1
-				and business.business_name like CONCAT('%',#{business_name},'%')
+				and project.project_name like CONCAT('%',#{project_name},'%')
 			]]> ) project
         where project.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}
-        order by project.business_no;
+        order by project.project_no;
 	</select>
 </mapper>

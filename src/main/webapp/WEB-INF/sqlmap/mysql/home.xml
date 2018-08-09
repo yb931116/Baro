@@ -8,23 +8,23 @@
 	<select id="recentList" resultType="Map" parameterType="Map">
 		
 		 select 
-		 	b.business_no as business_no
-			 ,b.business_name as business_name
+		 	p.project_no as project_no
+			 ,p.project_name as project_name
 			, u.name as user_name
-		from business b, user_info u
-        where b.user_id= u.user_id
+		from project p, user_info u
+        where p.user_id= u.user_id
 		Limit 10;
 	</select>
 	
 	<select id="hotList" resultType="Map" parameterType="Map">
 		
 		 select 
-		b.business_no as business_no
-		,b.business_name as business_name
+		p.project_no as project_no
+		,p.project_name as project_name
 		, u.name as user_name
-		from business b, user_info u
-        where b.user_id= u.user_id
-        order by b.business_name
+		from project p, user_info u
+        where p.user_id= u.user_id
+        order by p.project_name
 		Limit 10;
 	</select>
 
@@ -60,17 +60,17 @@
 	</select>
 
 	<insert id="insert" parameterType="Map">
-	    INSERT INTO business (
-			business_no
-			, business_name
+	    INSERT INTO project (
+			project_no
+			, project_name
 			, user_id
 		)
 		values(
 			(select 
-			max(business_no)+1 
+			max(project_no)+1 
 			from 
-			( select business_no from  business) as business_no)
-			, #{business_name}
+			( select project_no from  project) as project_no)
+			, #{project_name}
 			, uuid()
 		)
 
