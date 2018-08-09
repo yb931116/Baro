@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.baro.component.MapParamCollector;
+import com.project.baro.service.EvaluationService;
 import com.project.baro.service.LogicFocusService;
 
 @Controller
@@ -26,6 +27,8 @@ public class LogicFocusController {
 
 	@Autowired
 	private LogicFocusService service;
+	@Autowired
+	private EvaluationService evaluationService;
 
 	// Sidebar의 List 메뉴에서 접근할 수 있는 가장 깊은(3 depth) URI인 read와 insert 내의 popup Modal
 	// 관련 Method
@@ -40,7 +43,7 @@ public class LogicFocusController {
 		
 		if ("detail".equalsIgnoreCase(action)) {
 
-			resultMap = (Map<String, Object>) service.getEvaluation("getEvaluation", paramMap);
+			resultMap = (Map<String, Object>)evaluationService.getEvaluationLogic("getEvaluation", paramMap);
 			viewName = "logicfocus/popup";
 			
 		}

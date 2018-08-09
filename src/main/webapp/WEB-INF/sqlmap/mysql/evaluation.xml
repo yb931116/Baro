@@ -5,21 +5,60 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="evaluation">
-	<select id="SearchID" resultType="Map" parameterType="Map">
-		select u.name NAME,u.id ID, (select count(*)
-		   					  from logic l
-							  where l.user_id = USER.UID and
-									l.category="problem") PRONUM , 
-							  (select count(*)
-							   from logic l
-							   where l.user_id = USER.UID and
-									 l.category="answer") ANSNUM
-		from user_info u , (select user_id as UID
-						    from user_info
-						    where id = #{text}) USER
-		where u.id = #{text};	
-	</select>
+	<insert id="setEvaluationLogic" parameterType="Map">
+		INSERT INTO evaluation_logic
+		(evaluation_no,
+		 score,
+		 original_no,
+		 evaluating_date,
+		 user_id,
+		 comment)
+		VALUES
+		(uuid(),
+		 #{SCORE},
+		 #{original_no},
+		 now(),
+		 #{user_id},
+		 #{COMMENT}	 
+		);
 
+		 
+	</insert>
+	
+		<insert id="setEvaluationProject" parameterType="Map">
+		INSERT INTO evaluation_Project
+		(evaluation_no,
+		 score,
+		 project_no,
+		 evaluating_date,
+		 user_id,
+		 comment)
+		VALUES
+		(uuid(),
+		 #{SCORE},
+		 #{project_no},
+		 now(),
+		 #{user_id},
+		 #{COMMENT}	 
+		);
+
+		 
+	</insert>
+	
+	<select id="getEvaluationLogic" resultType="Map" parameterType="Map">
+		select count(e.evaluation_no) sum, count(e2.evaluation_no) sumOfAccept
+		from (select * from evaluation_logic) e LEFT OUTER JOIN (select * from evaluation_logic where score = 'Accept' ) e2
+		on e.evaluation_no = e2.evaluation_no
+        where e.original_no = #{original_no};
+	</select>
+	
+	<select id="getEvaluationProject" resultType="Map" parameterType="Map">
+		select count(e.evaluation_no) sum, count(e2.evaluation_no) sumOfAccept
+		from (select * from evaluation_Project) e LEFT OUTER JOIN (select * from evaluation_Project where score = 'Accept' ) e2
+		on e.evaluation_no = e2.evaluation_no
+        where e.project_no = #{project_no};
+	</select>
+	
 	<insert id="merge" parameterType="Map">
 	</insert>
 

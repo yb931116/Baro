@@ -23,7 +23,7 @@
 	</insert>
 	
 	<insert id="insert" parameterType="Map">
-	    INSERT INTO GROUPING (
+	    INSERT INTO _grouping (
 			GROUP_NO 
 			, GROUP_NAME 
 			, GENERATING_DATE 
@@ -43,7 +43,7 @@
 <!-- 	<select id = "list" resultType="Map" parameterType="Map"> -->
 	
 <!-- 		select g.group_no group_no, g.group_name gname, ui.name uname, ui.id id -->
-<!-- 		from grouping g INNER JOIN grouping_member gm -->
+<!-- 		from _grouping g INNER JOIN grouping_member gm -->
 <!-- 			ON g.group_no = gm.group_no RIGHT OUTER JOIN user_info ui -->
 <!--     		ON ui.user_id = gm.user_id -->
 <!-- 		where g.group_no is not null and g.user_id = (select user_id from user_info where id = #{ID}) -->
@@ -52,7 +52,7 @@
 	<select id = "mygroup_list" resultType="Map" parameterType="Map">
 		
 			select g.group_no group_no, g.group_name gname, ui.name uname, ui.id id
-			from grouping g INNER JOIN grouping_member gm
+			from _grouping g INNER JOIN _grouping_member gm
 				ON g.group_no = gm.group_no RIGHT OUTER JOIN user_info ui
 	    		ON ui.user_id = gm.user_id
 			where g.group_no is not null and g.user_id = (select user_id from user_info where id = #{ID})
@@ -61,16 +61,16 @@
 	</select>
 	
 	<select id = "groupname_list" resultType="Map" parameterType="Map">
-		select group_name from grouping where user_id = (select user_id from user_info where id = #{ID})
+		select group_name from _grouping where user_id = (select user_id from user_info where id = #{ID})
 	</select>
 	
 	<delete id = "group_member_delete" parameterType = "Map">
 		delete from grouping_member 
-		where group_no = (select group_no from grouping where group_name = #{group_name} )
+		where group_no = (select group_no from _grouping where group_name = #{group_name} )
 	</delete>
 	
 	<delete id = "group_delete" parameterType = "Map">
-		delete from grouping
+		delete from _grouping
 		where group_name = #{group_name}
 	</delete>
 	
@@ -82,7 +82,7 @@
 			<foreach collection="ID_LIST" item = "item" index="index"  separator=",">
 				(
 					(select group_no 
-					from grouping 
+					from _grouping 
 					where group_name = #{group_name} )
 					,(SELECT USER_ID
 					  FROM USER_INFO
@@ -95,20 +95,20 @@
 	</insert>
 	
 	<select id = "group_list" resultType="Map" parameterType="Map">
-		SELECT grouping.group_no, grouping.group_name, grouping.user_id, user_info.id, user_info.name, 
-		((SELECT count(*) FROM grouping_member WHERE grouping.group_no = grouping_member.group_no)-1) group_count
-		FROM grouping INNER JOIN user_info
-		ON grouping.user_id = user_info.user_id
+		SELECT _grouping.group_no, _grouping.group_name, _grouping.user_id, user_info.id, user_info.name, 
+		((SELECT count(*) FROM grouping_member WHERE _grouping.group_no = grouping_member.group_no)-1) group_count
+		FROM _grouping INNER JOIN user_info
+		ON _grouping.user_id = user_info.user_id
 	</select>
 	
 	<select id = "group_list_search" resultType="Map" parameterType="Map">
-		SELECT grouping.group_no, grouping.group_name, grouping.user_id, user_info.id, user_info.name, 
-		((SELECT count(*) FROM grouping_member WHERE grouping.group_no = grouping_member.group_no)-1) group_count
-		FROM grouping INNER JOIN user_info
-		ON grouping.user_id = user_info.user_id
+		SELECT _grouping.group_no, _grouping.group_name, _grouping.user_id, user_info.id, user_info.name, 
+		((SELECT count(*) FROM grouping_member WHERE _grouping.group_no = grouping_member.group_no)-1) group_count
+		FROM _grouping INNER JOIN user_info
+		ON _grouping.user_id = user_info.user_id
 		<![CDATA[
 		where 1 = 1
-		and grouping.group_name like CONCAT('%',#{group_name},'%')
+		and _grouping.group_name like CONCAT('%',#{group_name},'%')
 		]]>
 	</select>
 	
@@ -122,43 +122,43 @@
 	</select>
 	
 	<select id="listpagination" resultType="Map" parameterType="Map">
-		SELECT grouping.*, user_info.id, user_info.name, 
-				((SELECT count(*) FROM grouping_member WHERE grouping.group_no = grouping_member.group_no)-1) group_count
+		SELECT _grouping.*, user_info.id, user_info.name, 
+				((SELECT count(*) FROM grouping_member WHERE _grouping.group_no = grouping_member.group_no)-1) group_count
 		FROM (
 			SELECT @RNUM := @RNUM + 1 AS ROWNUM, groups.*
-			FROM ( select * from grouping) groups, ( SELECT @RNUM := 0 ) R
+			FROM ( select * from _grouping) groups, ( SELECT @RNUM := 0 ) R
             ORDER by generating_date
-		) grouping INNER JOIN user_info
-        ON grouping.user_id = user_info.user_id
-		WHERE grouping.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}
+		) _grouping INNER JOIN user_info
+        ON _grouping.user_id = user_info.user_id
+		WHERE _grouping.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}
 	</select>
 	<select id="listpagination_search" resultType="Map" parameterType="Map">
-		SELECT grouping.*, user_info.id, user_info.name, 
-				((SELECT count(*) FROM grouping_member WHERE grouping.group_no = grouping_member.group_no)-1) group_count
+		SELECT _grouping.*, user_info.id, user_info.name, 
+				((SELECT count(*) FROM grouping_member WHERE _grouping.group_no = grouping_member.group_no)-1) group_count
 		FROM (
 			SELECT @RNUM := @RNUM + 1 AS ROWNUM, groups.*
-			FROM ( select * from grouping) groups, ( SELECT @RNUM := 0 ) R
+			FROM ( select * from _grouping) groups, ( SELECT @RNUM := 0 ) R
 			<![CDATA[
 			where 1= 1
 			and groups.group_name like CONCAT('%',#{group_name},'%')
 			]]>
             ORDER by generating_date
-		) grouping INNER JOIN user_info
-        ON grouping.user_id = user_info.user_id
-		WHERE grouping.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}
+		) _grouping INNER JOIN user_info
+        ON _grouping.user_id = user_info.user_id
+		WHERE _grouping.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}
 		
 	</select>
 	
 	<select id="totalcount" resultType="integer" parameterType="Map">
 		SELECT count(group_no)
-		FROM grouping
+		FROM _grouping
 	</select>
 	<select id="totalcount_search" resultType="integer" parameterType="Map">
 		SELECT count(group_no)
-		FROM grouping
+		FROM _grouping
 		<![CDATA[
 		where 1 = 1
-		and grouping.group_name like CONCAT('%',#{group_name},'%')
+		and _grouping.group_name like CONCAT('%',#{group_name},'%')
 		]]>
 	</select>
 	
