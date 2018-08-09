@@ -4,30 +4,31 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 	
 <body>
-	<div class="main-panel" style="background-color: white;"> 
+	<div class="main-panel" style="background-color: white;">
 		<div class="content">
 			<div class="container-fluid">
-			 <h4 class="page-title">통계</h4>
+				<h4 class="page-title">통계</h4>
 				<div class="row">
 					<div class="col-md-12">
-					<div class="card">
-						<div class="card-body">	
-		<!-- 조건을 선택하면 Ajax가 동작하여 조건 별 테이블이 표시됨 -->
-			<label for="squareSelect">통계표시 조건을 선택하세요.</label>
-				<select name="statistics_condition" onchange="fn_statistics()"
-				class="form-control input-square mb-3" id="squareSelect" style="width: 300px;">
-					<option>선택하세요</option>
-					<option value="whole">전체</option>
-					<option value="individual">개인</option>
-					<option value="project">프로젝트</option>
-				</select>
-				
-				<div id="statistics_content">
-				<!-- 조건을 선택하면 이곳에 테이블이 표시됨 -->
-				</div>
-				
+						<div class="card">
+							<div class="card-body">
+								<!-- 조건을 선택하면 Ajax가 동작하여 조건 별 테이블이 표시됨 -->
+								<label for="squareSelect">통계표시 조건을 선택하세요.</label> 
+									<select name="statistics_condition" onchange="fn_statistics()"
+										class="form-control input-square mb-3" id="squareSelect"
+										style="width: 300px;">
+										<option>선택하세요</option>
+										<option value="whole">전체</option>
+										<option value="individual">개인</option>
+										<option value="project">프로젝트</option>
+									</select>
+
+								<div id="statistics_content">
+									<!-- 조건을 선택하면 이곳에 테이블이 표시됨 -->
+								</div>
+
+							</div>
 						</div>
-					</div>
 					</div>
 				</div>
 			</div>
@@ -168,6 +169,7 @@ function fn_statistics(){
 			tableTag = "<table class='table mt-4 table-hover'>"
 					+ "				<thead>"
 					+ "					<tr>"
+					+ "						<th scope = 'col'>#</th>"
 					+ "						<th scope = 'col'>아이디</th>"
 					+ "						<th scope = 'col'>성명 </th>"
 					+ "						<th scope = 'col'>제기한 문제</th>"
@@ -175,9 +177,11 @@ function fn_statistics(){
 					+ "						<th scope = 'col'>참여한 프로젝트</th>"
 					+ "					</tr>"
 					+ "				</thead>"
+					+ "				<c:set var='page' value='${resultMap.pagination}' />"
 					+ "				<tbody>"
-					+ "					<c:forEach items='${resultList}' var='resultData' varStatus='loop'>"
+					+ "					<c:forEach items='${resultMap.resultList}' var='resultData' varStatus='loop'>"
 					+ "						<tr>"
+					+ "							<th scope = 'col'>${page.pageBegin+loop.index}</th>"
 					+ "							<th scope = 'col'>${resultData.ID}</th>"
 					+ "							<th scope = 'col'>${resultData.NAME}</th>"
 					+ "							<th scope = 'col'>${resultData.PRONUM}</th>"
@@ -185,7 +189,50 @@ function fn_statistics(){
 					+ "							<th scope = 'col'>${resultData.PROJECTNUM}</th>"
 					+ "						</tr>" + "					</c:forEach>" 
 					+ "				</tbody>"
-					+ "				</table>";
+					+ "				</table>"
+					
+					
+					+ "<ul class='pagination pg-primary justify-content-center' style = 'margin-bottom: 0px;'>"
+
+					+ "			<c:if test = '${page.curPage==1}'>"
+					+ "				<li class='page-item' style = 'display:none;'>"
+										//<!-- 맨 처음 페이지로 가면 왼쪽 화살표 없어짐   -->
+					+ "				</li>"
+					+ "			</c:if>"
+					+ "			<c:if test = '${page.curPage!=1}'>"
+					+ "				<li class='page-item'>"
+					+ "					<a class='page-link' href='<c:url value='/statistics/index?curPage=${page.prevPage}'/>' aria-label='Previous'>"
+					+ "					<span aria-hidden='true'>«</span> <span	class='sr-only'>Previous</span></a>"
+					+ "				</li>"
+					+ "			</c:if>"
+					
+					+ " <c:forEach var='pageNum' begin='${page.blockStart}' end='${page.blockEnd}'>"
+					+ " 	<c:if test='${pageNum==page.curPage }'>"
+					+ "			<li class='page-item active'><a class='page-link'>${pageNum}</a></li>"	//<!-- 선택된 페이지 숫자 클릭 안됨 -->
+					+ " 	</c:if>"
+					+ " 	<c:if test='${pageNum!=page.curPage }'>"
+					+ "			<li class='page-item'><a class='page-link' href='<c:url value='/statistics/index?curPage=${pageNum}' />'>${pageNum}</a></li>"
+					+ "		</c:if>"
+					+ " </c:forEach>"
+	
+					+ "			<c:if test = '${page.curPage==page.totPage}'>"
+					+ "				<li class='page-item' style = 'display:none;'>"
+										//<!-- 맨 마지막 페이지로 가면 오른쪽 화살표 없어짐   -->
+					+ "				</li>"
+					+ "			</c:if>"
+					+ "			<c:if test = '${page.curPage!=page.totPage}'>"
+					+ "				<li class='page-item'>"
+					+ "				<a class='page-link' href='<c:url value='/statistics/index?curPage=${page.nextPage}' />'aria-label='Next'>"
+					+ "				<span aria-hidden='true'>»</span><span class='sr-only'>Next</span></a>"
+					+ "				</li>"
+					+ "			</c:if>"
+					 
+					+ " </ul>"
+					+ " <p class = 'pull-right'>Showing ${page.pageBegin} to ${page.pageEnd} of ${page.totalCount} entries</p>"
+					
+					
+					
+					;
 		} else if (condition == "individual") {
  
 			tableTag ="<div class='input-group col-lg-5 pl-0'>"
