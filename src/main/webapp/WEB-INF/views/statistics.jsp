@@ -92,7 +92,7 @@ function fn_searchByID(){
 			tableTag= tableTag + "	</tbody>";
 	$("#individualTable").html(tableTag);
 	
-};
+}
 
 
 function fn_searchByProject(){
@@ -154,7 +154,7 @@ function fn_searchByProject(){
 		}
 	});
 	
-};
+}
 
 
 /*========= 조건 별 Ajax ===========*/
@@ -258,18 +258,18 @@ function fn_statistics(){
 
 function page_move(curPage){
 	var html = "";
-	var pageNum = 
+	
 	
 	$.ajax({
 		type : "POST",
 		url : "<c:url value='/ws/move_page'/>",
 		data : {
-			
+			"curPage":curPage
 		},
 		dataType : "json",
 		cache : false,
 		success : function(data) {
-			data.pagination.curPage = curPage;
+
 			console.log(data.pagination.curPage);
 			console.log(data.pagination);
 			console.log(curPage);
@@ -286,66 +286,76 @@ function page_move(curPage){
 					+ "						<th scope = 'col'>참여한 프로젝트</th>"
 					+ "					</tr>"
 					+ "				</thead>"
-					+ "				<c:set var='page' value='${resultMap.pagination}' />"
-					+ "				<tbody>"
 
-				+ "					<c:forEach items='${resultMap.resultList}' var='resultData' varStatus='loop'>"
-				+ "						<tr>"
-				+ "							<th scope = 'col'>${page.pageBegin+loop.index}</th>"
-				+ "							<th scope = 'col'>${resultData.ID}</th>"
-				+ "							<th scope = 'col'>${resultData.NAME}</th>"
-				+ "							<th scope = 'col'>${resultData.PRONUM}</th>"
-				+ "							<th scope = 'col'>${resultData.ANSNUM}</th>"
-				+ "							<th scope = 'col'>${resultData.PROJECTNUM}</th>"
-				+ "						</tr>" + "					</c:forEach>" 
+					+ "				<tbody>";
+					for(var i = 0; i < data.resultList.length; i++){
 
-			   + "</tbody>"
-			   + "</table>"
-			   + "<ul class='pagination pg-primary justify-content-center' style = 'margin-bottom: 0px;'>"
+							html = html
+							+ "						<tr>"
+							+ "							<th scope = 'col'>"+(data.pagination.pageBegin+i)+"</th>"
+							+ "							<th scope = 'col'>"+data.resultList[i].ID+"</th>"
+							+ "							<th scope = 'col'>"+data.resultList[i].NAME+"</th>"
+							+ "							<th scope = 'col'>"+data.resultList[i].PRONUM+"</th>"
+							+ "							<th scope = 'col'>"+data.resultList[i].ANSNUM+"</th>"
+							+ "							<th scope = 'col'>"+data.resultList[i].PROJECTNUM+"</th>"
+							+ "						</tr>"; 
 
-				+ "			<c:if test = '${page.curPage==1}'>"
-				+ "				<li class='page-item' style = 'display:none;'>"
-									//<!-- 맨 처음 페이지로 가면 왼쪽 화살표 없어짐   -->
-				+ "				</li>"
-				+ "			</c:if>"
-				+ "			<c:if test = '${page.curPage!=1}'>"
-				+ "				<li class='page-item'>"
-				+ "					<a class='page-link' href='<c:url value='/statistics/index?curPage=${page.prevPage}'/>' aria-label='Previous'>"
-				+ "					<span aria-hidden='true'>«</span> <span	class='sr-only'>Previous</span></a>"
-				+ "				</li>"
-				+ "			</c:if>"
+						}
+					html = html
+					   + "</tbody>"
+					   + "</table>"
+					   + "<ul class='pagination pg-primary justify-content-center' style = 'margin-bottom: 0px;'>"
+					  if(data.pagination.curPage == 1){
+					   html = html
+					    + "				<li class='page-item' style = 'display:none;'>"
+											//<!-- 맨 처음 페이지로 가면 왼쪽 화살표 없어짐   -->
+					    + "				</li>";
+					  }else{
+						html = html
+						+ "				<li class='page-item'>"
+						+ "					<a class='page-link' href='#' onclick = 'page_move("+data.pagination.prevPage+")' aria-label='Previous'>"
+						+ "					<span aria-hidden='true'>«</span> <span	class='sr-only'>Previous</span></a>"
+						+ "				</li>";
+					  }
+						
+				for(var i = data.pagination.blockStart; i < data.pagination.blockEnd; i++){
+					
+					if(i == data.pagination.curPage){
+					html = html
+						+ "			<li class='page-item active'><a class='page-link'>"+i+"</a></li>";	//<!-- 선택된 페이지 숫자 클릭 안됨 -->
+					
+					}else{
+					html = html
+						+ "			<li class='page-item'><a class='page-link' href='#' onclick = 'page_move("+i+")'>"+i+"</a></li>";
+					
+					}
+				}
 				
-				+ " <c:forEach var='pageNum' begin='${page.blockStart}' end='${page.blockEnd}'>"
-				+ " 	<c:if test='${pageNum}=="+curPage+"'>"
-				+ "			<li class='page-item active'><a class='page-link'>${pageNum}</a></li>"	//<!-- 선택된 페이지 숫자 클릭 안됨 -->
-				+ " 	</c:if>"
-				+ " 	<c:if test='${pageNum!=page.curPage }'>"
-				+ "			<li class='page-item'><a class='page-link' href='#' onclick = 'page_move(${pageNum})'>${pageNum}</a></li>"
-				+ "		</c:if>"
-				+ " </c:forEach>"
-
-				+ "			<c:if test = '${page.curPage==page.totPage}'>"
+				html = html
+				if(data.pagination.curPage == data.pagination.totPage){
+					html = html
 				+ "				<li class='page-item' style = 'display:none;'>"
 									//<!-- 맨 마지막 페이지로 가면 오른쪽 화살표 없어짐   -->
-				+ "				</li>"
-				+ "			</c:if>"
-				+ "			<c:if test = '${page.curPage!=page.totPage}'>"
+				+ "				</li>";
+				}else{
+					html = html
 				+ "				<li class='page-item'>"
-				+ "				<a class='page-link' href='<c:url value='/statistics/index?curPage=${page.nextPage}' />'aria-label='Next'>"
+				+ "				<a class='page-link' href='#' onclick='page_move("+data.pagination.nextPage+")' aria-label='Next'>"
 				+ "				<span aria-hidden='true'>»</span><span class='sr-only'>Next</span></a>"
-				+ "				</li>"
-				+ "			</c:if>"
-				 
+				+ "				</li>";
+				}
+				html = html
 				+ " </ul>"
-				+ " <p class = 'pull-right'>Showing ${page.pageBegin} to ${page.pageEnd} of ${page.totalCount} entries</p>"; 
+				+ " <p class = 'pull-right'>Showing "+data.pagination.pageBegin+" to "+data.pagination.pageEnd+" of "+data.pagination.totalCount+" entries</p>"; 
+			
 			$('#statistics_content').html(html);
 			
-		},
+		}, 
 		error : function(xhr, status, exception) {
 			
 		}
 	});
 	
-};
+}
 </script>
 
