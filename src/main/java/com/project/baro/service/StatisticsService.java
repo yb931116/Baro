@@ -27,6 +27,7 @@ public class StatisticsService {
 		resultMap.put("dataList", dao.getList(SqlMapId, dataMap));
 		return resultMap;
 	}
+	
 	public Object getListPagination(String string, Object paramMap) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		String sqlMapId = "";

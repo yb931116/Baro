@@ -85,6 +85,8 @@ public class RestWSController {
 			resultMap = (Map) mypageservice.get_user_info("", paramMap);
 		}else if("searchProject".equalsIgnoreCase(action)) {
 			resultMap = (Map)statisticsservice.SearchProject("statistics.SearchProject",paramMap);
+		}else if("move_page".equalsIgnoreCase(action)) {
+			resultMap = (Map)statisticsservice.getListPagination("", paramMap2);
 		}
 		
 

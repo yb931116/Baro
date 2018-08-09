@@ -211,7 +211,7 @@ function fn_statistics(){
 					+ "			<li class='page-item active'><a class='page-link'>${pageNum}</a></li>"	//<!-- 선택된 페이지 숫자 클릭 안됨 -->
 					+ " 	</c:if>"
 					+ " 	<c:if test='${pageNum!=page.curPage }'>"
-					+ "			<li class='page-item'><a class='page-link' href='#' onclick = 'page_move(${pageNum})'>${pageNum}</a></li>"
+					+ "			<li class='page-item'><a class='page-link' href='<c:url value='/statistics/index?curPage=${pageNum}' />'>${pageNum}</a></li>"
 					+ "		</c:if>"
 					+ " </c:forEach>"
 	
@@ -258,96 +258,5 @@ function fn_statistics(){
 
 	}
 
-function page_move(curPage){
-	var html = "";
-	var pageNum = 
-	
-	$.ajax({
-		type : "POST",
-		url : "<c:url value='/ws/move_page'/>",
-		data : {
-			
-		},
-		dataType : "json",
-		cache : false,
-		success : function(data) {
-			data.pagination.curPage = curPage;
-			console.log(data.pagination.curPage);
-			console.log(data.pagination);
-			console.log(curPage);
-
-					html = html
-					+ "<table class='table mt-4 table-hover'>"
-					+ "				<thead>"
-					+ "					<tr>"
-					+ "						<th scope = 'col'>#</th>"
-					+ "						<th scope = 'col'>아이디</th>"
-					+ "						<th scope = 'col'>성명 </th>"
-					+ "						<th scope = 'col'>제기한 문제</th>"
-					+ "						<th scope = 'col'>제안한 해결책</th>"
-					+ "						<th scope = 'col'>참여한 프로젝트</th>"
-					+ "					</tr>"
-					+ "				</thead>"
-					+ "				<c:set var='page' value='${resultMap.pagination}' />"
-					+ "				<tbody>"
-
-				+ "					<c:forEach items='${resultMap.resultList}' var='resultData' varStatus='loop'>"
-				+ "						<tr>"
-				+ "							<th scope = 'col'>${page.pageBegin+loop.index}</th>"
-				+ "							<th scope = 'col'>${resultData.ID}</th>"
-				+ "							<th scope = 'col'>${resultData.NAME}</th>"
-				+ "							<th scope = 'col'>${resultData.PRONUM}</th>"
-				+ "							<th scope = 'col'>${resultData.ANSNUM}</th>"
-				+ "							<th scope = 'col'>${resultData.PROJECTNUM}</th>"
-				+ "						</tr>" + "					</c:forEach>" 
-
-			   + "</tbody>"
-			   + "</table>"
-			   + "<ul class='pagination pg-primary justify-content-center' style = 'margin-bottom: 0px;'>"
-
-				+ "			<c:if test = '${page.curPage==1}'>"
-				+ "				<li class='page-item' style = 'display:none;'>"
-									//<!-- 맨 처음 페이지로 가면 왼쪽 화살표 없어짐   -->
-				+ "				</li>"
-				+ "			</c:if>"
-				+ "			<c:if test = '${page.curPage!=1}'>"
-				+ "				<li class='page-item'>"
-				+ "					<a class='page-link' href='<c:url value='/statistics/index?curPage=${page.prevPage}'/>' aria-label='Previous'>"
-				+ "					<span aria-hidden='true'>«</span> <span	class='sr-only'>Previous</span></a>"
-				+ "				</li>"
-				+ "			</c:if>"
-				
-				+ " <c:forEach var='pageNum' begin='${page.blockStart}' end='${page.blockEnd}'>"
-				+ " 	<c:if test='${pageNum}=="+curPage+"'>"
-				+ "			<li class='page-item active'><a class='page-link'>${pageNum}</a></li>"	//<!-- 선택된 페이지 숫자 클릭 안됨 -->
-				+ " 	</c:if>"
-				+ " 	<c:if test='${pageNum!=page.curPage }'>"
-				+ "			<li class='page-item'><a class='page-link' href='#' onclick = 'page_move(${pageNum})'>${pageNum}</a></li>"
-				+ "		</c:if>"
-				+ " </c:forEach>"
-
-				+ "			<c:if test = '${page.curPage==page.totPage}'>"
-				+ "				<li class='page-item' style = 'display:none;'>"
-									//<!-- 맨 마지막 페이지로 가면 오른쪽 화살표 없어짐   -->
-				+ "				</li>"
-				+ "			</c:if>"
-				+ "			<c:if test = '${page.curPage!=page.totPage}'>"
-				+ "				<li class='page-item'>"
-				+ "				<a class='page-link' href='<c:url value='/statistics/index?curPage=${page.nextPage}' />'aria-label='Next'>"
-				+ "				<span aria-hidden='true'>»</span><span class='sr-only'>Next</span></a>"
-				+ "				</li>"
-				+ "			</c:if>"
-				 
-				+ " </ul>"
-				+ " <p class = 'pull-right'>Showing ${page.pageBegin} to ${page.pageEnd} of ${page.totalCount} entries</p>"; 
-			$('#statistics_content').html(html);
-			
-		},
-		error : function(xhr, status, exception) {
-			
-		}
-	});
-	
-};
 </script>
 
