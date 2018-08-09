@@ -44,23 +44,24 @@ var searchResult = new Array();
 function fn_searchByID(){
 	
 	searchResult = new Array();
-  	var size = "${fn:length(resultList)}"; 
+  	var size = "${fn:length(resultMap.resultList)}"; 
  	var List_ID = new Array();
  	var List_NAME = new Array();
  	var List_PRO = new Array();
  	var List_ANS = new Array();
  	var List_PROJECT = new Array();
- 	
- 	<c:forEach items="${resultList}" var="item">
+ 	console.log(size);
+ 	<c:forEach items="${resultMap.resultList}" var="item">
 	 	List_ID.push("${item.ID}");
 	 	List_NAME.push("${item.NAME}");
 	 	List_PRO.push("${item.PRONUM}");
 	 	List_ANS.push("${item.ANSNUM}");
 	 	List_PROJECT.push("${item.PROJECTNUM}");
  	</c:forEach>
- 	
+ 	console.log(size);
   	for(var i = 0 ; i < size ; i++){
-		if(List_ID[i].indexOf($("#searchid").val())>-1){
+	console.log(List_ID[i].indexOf($("#searchid").val()));
+  		if(List_ID[i].indexOf($("#searchid").val())>-1){
 			searchResult.push(i);
 		}  
 	}  
@@ -75,7 +76,6 @@ function fn_searchByID(){
 		+ "					</tr>"
 		+ "				</thead>"
 		+ "				<tbody>";
-		console.log(tableTag);
 		
 		for(var i=0; i<searchResult.length;i++){
 			tableTag= tableTag 
@@ -92,8 +92,6 @@ function fn_searchByID(){
 			tableTag= tableTag + "	</tbody>";
 	$("#individualTable").html(tableTag);
 	
-	console.log("what");
-			
 };
 
 

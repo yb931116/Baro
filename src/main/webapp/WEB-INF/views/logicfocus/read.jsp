@@ -33,7 +33,7 @@
 <div class="main-panel">
 	<div class="content customContent">
 		<div class="container-fluid">
-		<div class="row mb-2">
+		<div class="row mb-2" style="display:contents;">
 			<h4>${resultMap.business_name}</h4>
 			<div class="pull-right">
 			 <label for="upDown" >이 항목을 평가해주세요.</label>
@@ -113,6 +113,14 @@
 
 	// 테이블 hover
 	$(function() {
+		$(".eval").click(function(){
+			if($(this).hasClass("up")){
+				
+			}else if($(this).hasClass("down")){
+				
+			}
+		});
+		
 		$("td").hover(function() {
 			$(this).css('background-color', '#ebedf2');
 		}, function() {
