@@ -221,7 +221,7 @@ function fn_statistics(){
 					+ "			</c:if>"
 					+ "			<c:if test = '${page.curPage!=page.totPage}'>"
 					+ "				<li class='page-item'>"
-					+ "				<a class='page-link' href='<c:url value='/statistics/index?curPage=${page.nextPage}' />'aria-label='Next'>"
+					+ "				<a class='page-link' href='#' onclick = 'page_move(${page.nextPage})'aria-label='Next'>"
 					+ "				<span aria-hidden='true'>»</span><span class='sr-only'>Next</span></a>"
 					+ "				</li>"
 					+ "			</c:if>"
@@ -274,7 +274,7 @@ function page_move(curPage){
 			console.log(data.pagination.curPage);
 			console.log(data.pagination);
 			console.log(curPage);
-
+			console.log(data.resultList.length);
 					html = html
 					+ "<table class='table mt-4 table-hover'>"
 					+ "				<thead>"
@@ -319,7 +319,7 @@ function page_move(curPage){
 						+ "				</li>";
 					  }
 						
-				for(var i = data.pagination.blockStart; i < data.pagination.blockEnd; i++){
+				for(var i = data.pagination.blockStart; i <= data.pagination.blockEnd; i++){
 					
 					if(i == data.pagination.curPage){
 					html = html
