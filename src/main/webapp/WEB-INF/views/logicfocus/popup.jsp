@@ -32,10 +32,12 @@
                         id="source_detailcomment" rows="6">${resultMap.source_contents}</textarea>
                   </div>
 
-                  <div class="form-group">
-                     <label for="FormControlFile">증빙 사진파일</label> <input type="text"
-                        class="form-control-file" id="FormControlFile"
-                        disabled="disabled">
+                     <label class="ml-2">증빙 사진파일</label> 
+                  <div class="form-group row justify-content-center" id="FormControlFile">
+                     <input type="text" class="form-control col-md-9 mr-1" disabled="disabled">
+                        <button class="eval btn btn-primary btn-sm col-2">
+                           	보기
+                           </button>
                   </div>
                </div>
                   </div>
