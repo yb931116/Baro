@@ -34,7 +34,7 @@
 	<div class="content customContent">
 		<div class="container-fluid">
 		<div class="row mb-2" style="display:contents;">
-			<h4>${resultMap.business_name}</h4>
+			<h4>${resultMap.project_name}</h4>
 			<div class="pull-right">
 			 <label for="upDown" >이 항목을 평가해주세요.</label>
                      <div id="upDown">
@@ -186,14 +186,14 @@
 			}
 
 		}
-		console.log("${resultMap.business_no}");
-		console.log("${business_no}");
+		console.log("${resultMap.project_no}");
+		console.log("${project_no}");
 	});
 
 	//   Modal
 
 	var fn_selectContentsPop = function(td) {
-		var business_no = "${resultMap.business_no}";
+		var project_no = "${resultMap.project_no}";
 		var url = "<c:url value='/logicfocus/read/detail'/>";
 		var values={};
 		var source_values={};
@@ -203,7 +203,7 @@
 			  td.find(".summary").val(),
 			  td.find(".contents").val(),
 			  td.find(".category").val(), 
-			  business_no ];
+			  project_no ];
 		
 		if(td.hasClass("originalPro")){
 			
@@ -214,7 +214,7 @@
 						$("td").eq(i).find(".summary").val(),
 						$("td").eq(i).find(".contents").val(),
 						$("td").eq(i).find(".category").val(), 
-						  business_no ];
+						project_no ];
 					values[1]=$("td").eq(i).find(".original_no").val();
 				}
 			}
@@ -228,7 +228,7 @@
 				  td.prev().find(".summary").val(),
 				  td.prev().find(".contents").val(),
 				  td.prev().find(".category").val(), 
-				  business_no ]; 
+				  project_no ]; 
 			
 			values[1] = td.prev().find(".original_no").val();
 			values[4] = "answer";
@@ -240,7 +240,7 @@
 							  td.prev().prev().find(".summary").val(),
 							  td.prev().prev().find(".contents").val(),
 							  td.prev().prev().find(".category").val(), 
-							  business_no ]; 
+							  project_no ]; 
 
 			values[1] = td.prev().prev().find(".original_no").val();
 			values[4] = "problem";

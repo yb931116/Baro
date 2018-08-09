@@ -14,7 +14,7 @@
 											<div class="col-md-9">
 												<p>해당 사업명
 												<input type = "text" class = "form-control" 
-												placeholder = "제목을 입력하세요" name = "business_name">
+												placeholder = "제목을 입력하세요" name = "project_name">
 												</p>
 											</div>
 										<hr>

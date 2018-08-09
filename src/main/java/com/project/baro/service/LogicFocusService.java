@@ -88,8 +88,8 @@ public class LogicFocusService {
 
 		Map resultMap = new HashMap<>();
 
-		resultMap.put("business_no", ((Map) dataMap).get("business_no"));
-		resultMap.put("business_name", ((Map) dataMap).get("business_name"));
+		resultMap.put("project_no", ((Map) dataMap).get("project_no"));
+		resultMap.put("project_name", ((Map) dataMap).get("project_name"));
 		resultMap.put("ProList", ProList);
 		resultMap.put("AnsList", AnsList);
 		for(int i =0 ; i < ProList.size() ; i++) {

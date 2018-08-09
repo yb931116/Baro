@@ -112,14 +112,14 @@ function fn_searchByProject(){
 			
 			var ProjectName = "";
 			for(var i = 0 ; i < data.dataList.length ; i++ ){
-				if(ProjectName != data.dataList[i].business_name){
+				if(ProjectName != data.dataList[i].project_name){
 					if(i != 0){
 						html = html 
 							   + "</tbody>"
 							   + "</table>";
 					}
 					html = html + "<span class ='h5'>"
-								+ data.dataList[i].business_name
+								+ data.dataList[i].project_name
 								+ "</span>"
 								+ "<table class='table mt-4 table-hover'>"
 								+ "<thead>"
@@ -131,7 +131,7 @@ function fn_searchByProject(){
 								+ "</tr>"
 								+ "</thead>"
 								+ "<tbody>";
-					ProjectName = data.dataList[i].business_name;
+					ProjectName = data.dataList[i].project_name;
 					console.log(ProjectName);
 				}
 				

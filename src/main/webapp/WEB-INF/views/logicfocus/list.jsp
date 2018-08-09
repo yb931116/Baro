@@ -25,7 +25,7 @@
 			
 			<form class="col-md-4 mb-3 nav-search ml-md-auto" action="<c:url value='/logicfocus/list'/>">
 						<div class="input-group">
-							<input type="text" name="business_name" placeholder="프로젝트명 검색" class="form-control">
+							<input type="text" name="project_name" placeholder="프로젝트명 검색" class="form-control">
 							<input type="hidden" name="search" value="true">
 						<button class="btn btn-primary btn-sm">
 						<i class="la la-search search-icon" style="color:white;">
@@ -49,9 +49,9 @@
 					<tbody>
 						<c:forEach items="${resultMap.resultList}" var="resultData" varStatus="loop">
 							<tr class = "col">
-								<td class="business_no" style="display:none;" >${resultData.business_no}</td>
+								<td class="project_no" style="display:none;" >${resultData.project_no}</td>
 								<td>${page.pageBegin+loop.index}</td>
-								<td class = "business_name">${resultData.business_name}</td>
+								<td class = "project_name">${resultData.project_name}</td>
 								<td>${resultData.id}</td>
 								<td>${resultData.name}</td>
 								<td>${resultData.problem_sum}</td>
@@ -74,13 +74,13 @@
 							<c:choose>
 								<c:when test = "${page.curPage==1}">
 										<li class="page-item" style = "display:none;"> <!-- 맨 처음 페이지로 가면 왼쪽 화살표 없어짐 -->
-										<a class="page-link" href="<c:url value="/logicfocus/list?business_name=${paramMap.business_name }&search=${paramMap.search}&curPage=${page.prevPage}"/>" aria-label="Previous">
+										<a class="page-link" href="<c:url value="/logicfocus/list?project_name=${paramMap.project_name }&search=${paramMap.search}&curPage=${page.prevPage}"/>" aria-label="Previous">
 										<span aria-hidden="true">«</span> <span	class="sr-only">Previous</span></a>  
 										</li>								
 								</c:when>
 								<c:otherwise>
 									<li class="page-item">
-										<a class="page-link" href="<c:url value="/logicfocus/list?business_name=${paramMap.business_name }&search=${paramMap.search}&curPage=${page.prevPage}"/>" aria-label="Previous">
+										<a class="page-link" href="<c:url value="/logicfocus/list?project_name=${paramMap.project_name }&search=${paramMap.search}&curPage=${page.prevPage}"/>" aria-label="Previous">
 										<span aria-hidden="true">«</span> <span	class="sr-only">Previous</span></a>
 									</li>
 								</c:otherwise>
@@ -113,7 +113,7 @@
 							<c:otherwise>
 								<c:choose>
 									<c:when test="${paramMap.search ne null}">	<!-- 검색 창 페이지 네이션 -->
-										<li class="page-item"><a class="page-link" href="<c:url value="/logicfocus/list?business_name=${paramMap.business_name }&search=${paramMap.search}&curPage=${pageNum}" />">${pageNum}</a></li>
+										<li class="page-item"><a class="page-link" href="<c:url value="/logicfocus/list?project_name=${paramMap.project_name }&search=${paramMap.search}&curPage=${pageNum}" />">${pageNum}</a></li>
 									</c:when>
 									<c:otherwise>	<!-- 일반  페이지 네이션 -->
 										<li class="page-item"><a class="page-link" href="<c:url value="/logicfocus/list?curPage=${pageNum}" />">${pageNum}</a></li>
@@ -131,13 +131,13 @@
 							<c:choose>
 								<c:when test = "${page.curPage==page.totPage}">
 										<li class="page-item" style = "display:none;"> <!-- 맨 처음 페이지로 가면 왼쪽 화살표 없어짐 -->
-										<a class="page-link" href="<c:url value="/logicfocus/list?business_name=${paramMap.business_name }&search=${paramMap.search}&curPage=${page.nextPage}"/>" aria-label="Next">
+										<a class="page-link" href="<c:url value="/logicfocus/list?project_name=${paramMap.project_name }&search=${paramMap.search}&curPage=${page.nextPage}"/>" aria-label="Next">
 										<span aria-hidden="true">»</span> <span	class="sr-only">Next</span></a>  
 										</li>								
 								</c:when>
 								<c:otherwise>
 									<li class="page-item">
-										<a class="page-link" href="<c:url value="/logicfocus/list?business_name=${paramMap.business_name }&search=${paramMap.search}&curPage=${page.nextPage}"/>" aria-label="Next">
+										<a class="page-link" href="<c:url value="/logicfocus/list?project_name=${paramMap.project_name }&search=${paramMap.search}&curPage=${page.nextPage}"/>" aria-label="Next">
 										<span aria-hidden="true">»</span> <span	class="sr-only">Next</span></a>
 									</li>
 								</c:otherwise>
@@ -174,18 +174,18 @@
  	$(function() {
  		$(".col").click(function(){
  			var form = document.createElement("form");
- 			var business_no = document.createElement("input");
- 			var business_name = document.createElement("input");
+ 			var project_no = document.createElement("input");
+ 			var project_name = document.createElement("input");
  			
- 			business_no.setAttribute("type","hidden"); 
- 			business_no.setAttribute("name","business_no");
- 			business_no.setAttribute("value", $(this).find(".business_no").text());
- 			form.appendChild(business_no);
+ 			project_no.setAttribute("type","hidden"); 
+ 			project_no.setAttribute("name","project_no");
+ 			project_no.setAttribute("value", $(this).find(".project_no").text());
+ 			form.appendChild(project_no);
  			
- 			business_name.setAttribute("type","hidden");
- 			business_name.setAttribute("name","business_name");
- 			business_name.setAttribute("value",$(this).find(".business_name").text());
- 			form.appendChild(business_name);
+ 			project_name.setAttribute("type","hidden");
+ 			project_name.setAttribute("name","project_name");
+ 			project_name.setAttribute("value",$(this).find(".project_name").text());
+ 			form.appendChild(project_name);
  			
  			
  			form.setAttribute("method","POST");

@@ -45,9 +45,9 @@
 										<c:forEach items="${resultMap.recentList}" var="resultData"
 											varStatus="loop">
 											<tr>
-												<td class="business_no" style="display: none;">${resultData.business_no}</td>
+												<td class="project_no" style="display: none;">${resultData.project_no}</td>
 												<td>${loop.index+1}</td>
-												<td>${resultData.business_name}</td>
+												<td>${resultData.project_name}</td>
 												<td>${resultData.user_name}</td>
 											</tr>
 										</c:forEach>
@@ -78,9 +78,9 @@
 										<c:forEach items="${resultMap.hotList}" var="resultData"
 											varStatus="loop">
 											<tr>
-												<td class="business_no" style="display: none;">${resultData.business_no}</td>
+												<td class="project_no" style="display: none;">${resultData.project_no}</td>
 												<td>${loop.index+1}</td>
-												<td>${resultData.business_name}</td>
+												<td>${resultData.project_name}</td>
 												<td>${resultData.user_name}</td>
 											</tr>
 										</c:forEach>

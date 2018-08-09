@@ -148,7 +148,7 @@
 					html = html
 					+"<tr>"
 					+ "	<td>"+ (i+1) +"</td>"
-					+ "	<td>"+data.myproblemList[i].business_name+"</td>"
+					+ "	<td>"+data.myproblemList[i].project_name+"</td>"
 					+ "	<td>"+data.myproblemList[i].id+"</td>"
 					+ "	<td>"+data.myproblemList[i].summary+"</td>"
 					+ "</tr>";
@@ -161,7 +161,7 @@
 					html = html
 					+"<tr>"
 					+ "	<td>"+ (i+1) +"</td>"
-					+ "	<td>"+data.myanswerList[i].business_name+"</td>"
+					+ "	<td>"+data.myanswerList[i].project_name+"</td>"
 					+ "	<td>"+data.myanswerList[i].id+"</td>"
 					+ "	<td>"+data.myanswerList[i].summary+"</td>"
 					+ "</tr>";

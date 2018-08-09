@@ -11,7 +11,7 @@
 redirecting...
 
 	<form id= "redirectForm" method="post" action="<c:url value='/logicfocus/read'/>">
-	<input type="hidden" name="business_no" value="${resultMap.business_no}" >
+	<input type="hidden" name="project_no" value="${resultMap.project_no}" >
 	</form>
 
 </body>

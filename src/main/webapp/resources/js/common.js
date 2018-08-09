@@ -30,13 +30,13 @@ common.layerPopup = function(url, _source_values, _values, id){
 			"source_summary": _source_values[2],
 			"source_contents": _source_values[3],
 			"source_category": _source_values[4],
-			"source_business_no": _source_values[5],
+			"source_project_no": _source_values[5],
         	"original_no":_values[0] ,
 			"source_no": _values[1] ,
 			"summary": _values[2],
 			"contents": _values[3],
 			"category": _values[4],
-			"business_no": _values[5]
+			"project_no": _values[5]
 	},
         traditional : true,
         cache: false,

@@ -134,7 +134,7 @@
             <div class='form-group'>
                <label for='contents'>상세 설명을 입력하세요.</label>
                <textarea class='form-control' rows="6" id ='contents' name='contents'></textarea>
-                <input type="hidden" value="${resultMap.business_no}"  name="business_no">
+                <input type="hidden" value="${resultMap.project_no}"  name="project_no">
                <input type="hidden" value="${principalId}"  name="id">
                <input type="hidden" value='${resultMap.category}' name="category">
                <input type="hidden" value="${resultMap.original_no}"  name="original_no">
