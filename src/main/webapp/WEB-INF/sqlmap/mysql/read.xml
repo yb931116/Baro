@@ -26,7 +26,8 @@
 			user_id
 		)
 		VALUES
-			(uuid(),
+			(
+			#{original_no},
 			#{project_no},
 			#{summary},
 			#{contents},
@@ -35,7 +36,42 @@
 			#{source_no},
 			(select user_id from user_info where id = #{id})
 		)
-		 
+	</insert>
+	
+		<insert id="insertFile" parameterType="Map">
+		INSERT INTO file_detail
+		(
+			attached_file_no,
+			attached_file_directory,
+			attached_file_name,
+			attached_file_type,
+			attached_file_date
+		)
+		VALUES
+		<foreach collection="attachedFileList" item = "item" index="index"  separator=",">
+				(
+					#{item.ATTACHED_FILE_NO}, 
+					#{item.ATTACHED_FILE_DIRECTORY},
+					#{item.ATTACHED_FILE_NAME},
+					#{item.ATTACHED_FILE_TYPE}, 
+					now() 
+				)
+			</foreach>
+	</insert>
+	
+		<insert id="insertFileRel" parameterType="Map">
+		INSERT INTO attached_file
+		(
+			original_no,
+			attached_file_no
+		)
+		VALUES
+			<foreach collection="attachedFileList" item = "item" index="index"  separator=",">
+				(
+					#{original_no},
+					#{item.ATTACHED_FILE_NO}
+				)
+			</foreach>
 	</insert>
 
 	<insert id="setEvaluation" parameterType="Map">

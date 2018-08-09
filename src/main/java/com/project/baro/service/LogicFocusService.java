@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.baro.dao.ShareDao;
+import com.project.baro.util.CommonUtil;
 import com.project.baro.util.Pagination;
 
 @Service
@@ -16,6 +17,8 @@ public class LogicFocusService {
 
 	@Autowired
 	ShareDao dao;
+	@Autowired
+	CommonUtil util;
 
 	//프로젝트 List의 전체 목록 및 검색결과 탐색 Method
 	public Object getList(Object dataMap) {
@@ -51,9 +54,13 @@ public class LogicFocusService {
 				((Map)dataMap).get("source_no").equals("")) {
 			((Map)dataMap).put("source_no", null);
 		}
-		
+		((Map)dataMap).put("original_no", util.getUniqueSequence());
 		Object resultObject = dao.saveObject(sqlMapId, dataMap);
 		
+		sqlMapId = "read.insertFile";
+		dao.saveObject(sqlMapId, dataMap);
+		sqlMapId = "read.insertFileRel";
+		dao.saveObject(sqlMapId, dataMap);
 		return resultObject;
 	}
 

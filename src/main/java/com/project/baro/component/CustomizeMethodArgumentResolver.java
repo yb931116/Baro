@@ -48,9 +48,9 @@ public class CustomizeMethodArgumentResolver implements HandlerMethodArgumentRes
 				}
 			if (request instanceof MultipartHttpServletRequest) {
 				MultipartHttpServletRequest multipartRequest =
-
+				
 				(MultipartHttpServletRequest) request;
-				requestMap.put("attachFileList", fileUtil.setMultipartList(multipartRequest));
+				requestMap.put("attachedFileList", fileUtil.setMultipartList(multipartRequest));
 				}
 		}
 		return requestMap;

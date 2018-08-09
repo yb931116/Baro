@@ -44,11 +44,6 @@ public class LogicFocusController {
 			viewName = "logicfocus/popup";
 			
 		}
-		/*else if ("insert".equalsIgnoreCase(action)) {
-			service.saveProject(paramMap);
-			resultMap = (Map)service.getProject(paramMap);
-			viewName = "logicfocus/read";
-		}*/
 		
 		
 		if (forwardView != null) {
@@ -86,7 +81,7 @@ public class LogicFocusController {
 	// Sidebar의 List 메뉴에서 접근 할 수 있는 2 depth URI인 list와 read 관련 method
 	@RequestMapping(value = MAPPING + "{action}", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView actionMethod(MapParamCollector paramMethodMap, @PathVariable String action,
-			ModelAndView modelandView, @RequestParam Map<String, Object> paramMap2) {
+			ModelAndView modelandView) {
 
 		String viewName = MAPPING + action;
 		Map<String,Object> paramMap = paramMethodMap.getMap();
