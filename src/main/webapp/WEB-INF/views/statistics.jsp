@@ -136,17 +136,18 @@ function fn_searchByProject(){
 				}
 				
 				html = html + "<tr>"
-							+ "<td>" + data.dataList[i].id + "<td>"
-							+ "<td>" + data.dataList[i].name + "<td>"
-							+ "<td>" + data.dataList[i].PRONUM + "<td>"
-							+ "<td>" + data.dataList[i].ANSNUM + "<td>";
+							+ "<td>" + data.dataList[i].id + "</td>"
+							+ "<td>" + data.dataList[i].name + "</td>"
+							+ "<td>" + data.dataList[i].PRONUM + "</td>"
+							+ "<td>" + data.dataList[i].ANSNUM + "</td>";
 							
 				
 			}
 			html = html 
 			   + "</tbody>"
 			   + "</table>"; 
-			$('#statistics_content').html(html);
+			   console.log(html);
+			   $('#statistics_content').html(html);
 			
 		},
 		error : function(xhr, status, exception) {
