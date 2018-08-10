@@ -1,5 +1,7 @@
 package com.project.baro.util;
 
+
+// 페이지네이션에 필요한 bean파일
 public class Pagination {
 	public static final int PAGE_SCALE = 10; // 페이지당 게시물 수
 	public static final int BLOCK_SCALE = 5; // 블록당 페이지수

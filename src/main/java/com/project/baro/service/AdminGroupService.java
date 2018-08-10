@@ -16,27 +16,9 @@ public class AdminGroupService {
 	@Autowired
 	private ShareDao dao;
 	@Autowired
-	private CommonUtil commonUtil;
+	private CommonUtil commonUtil; // 시퀀스 생성 위한 변수
 	
-	public Object group_insert(String sqlMapId, Map<String, Object> paramMap) {
-		String uniqueSequence = null;
-		String ID = SecurityContextHolder.getContext().getAuthentication().getName();	// session으로 부터 id 가져오는 함수
-		if(uniqueSequence == null || "".equals(uniqueSequence) ) {
-			uniqueSequence = commonUtil.getUniqueSequence();
-		}
-		paramMap.put("GROUP_NO", uniqueSequence);
-		paramMap.put("ID", ID);
-		
-		
-		String sqlId = "group.insert";
-		Object resultData = dao.saveObject(sqlId,paramMap);
-		String sqlId2 = "group.member_insert";
-		
-		dao.saveObject(sqlId2, paramMap);
-		return resultData;
-	}
-
-	public Object getGroupList(String string, Object paramMap) {
+	public Object getGroupList(String string, Object paramMap) {	// 그룹 정보 가져오기
 		String sqlMapId = "admin_group.list";
 		Object resultData = dao.getList(sqlMapId, paramMap); 
 		for(int i = 0 ; i < ((List<Object>)resultData).size(); i ++) {			
@@ -48,13 +30,13 @@ public class AdminGroupService {
 		return resultData;	
 	}
 	
-	public Object getGroupNameList(String string, Object paramMap) {
+	public Object getGroupNameList(String string, Object paramMap) {  // 그룹 이름 가져오기
 		String sqlMapId = "admin_group.groupname_list";
 		Object resultData = dao.getList(sqlMapId, paramMap);
 		return resultData;
 	}
 
-	public Object group_delete(String string, Object paramMap) {
+	public Object group_delete(String string, Object paramMap) { // 그룹 삭제
 		String sqlMapId = "group.group_member_delete";
 		dao.deleteObject(sqlMapId, paramMap);
 
@@ -64,7 +46,7 @@ public class AdminGroupService {
 		
 	}
 
-	public Object group_update(String string, Object paramMap) {
+	public Object group_update(String string, Object paramMap) { // 그룹 수정 ( 삭제하고 추가하는 방식)
 		
 		String sqlMapId = "group.group_member_delete";
 		dao.deleteObject(sqlMapId, paramMap);
@@ -73,11 +55,6 @@ public class AdminGroupService {
 		return resultData;
 	}
 
-//	public Object login_idfind(String sqlMapId, Map<String, Object> paramMap) {
-//		sqlMapId = "login.findID";
-//		Object resultData = dao.getObject(sqlMapId, paramMap);
-//		
-//		return resultData;
-//	}
+
 	
 }

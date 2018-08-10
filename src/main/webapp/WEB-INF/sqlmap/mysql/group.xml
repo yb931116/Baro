@@ -7,7 +7,6 @@
     <mapper namespace="group">
     
     <insert id="member_insert" parameterType ="Map">
-<!-- 		INSERT ALL -->
 			INSERT INTO GROUPING_MEMBER(
 					GROUP_NO	
 					,USER_ID 		

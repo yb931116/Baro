@@ -18,17 +18,8 @@ public class AuthoritySettingService {
 		@Autowired
 		private CommonUtil commonUtil;
 		
-
-		public Object getList(Object dataMap) {
-			String sqlMapId = "authority_setting.list";
-			Object resultObject = dao.getList(sqlMapId, dataMap);
-
-			return resultObject;
-		}
-		
+//		회원의 권한을 변경
 		public Object authority_setting(Object dataMap) {
-//			Map<String,Object> resultMap = new HashMap<String, Object>();
-//			resultMap.put("authority_setting", dataMap );  
 			
 			List<Object> authoritySettingList = new ArrayList<>();
 			
@@ -44,16 +35,13 @@ public class AuthoritySettingService {
 			
 			String sqlMapId = "authority_setting.update";
 			Object resultObject = dao.saveObject(sqlMapId, dataMap);
-//			sqlMapId = "authority_setting.list";
-//			Object resultObject = dao.getList(sqlMapId, dataMap);
 			
 			return resultObject;
 		}
 
+		
+//		회원의 권한정보를 불러옴 (pagination)
 		public Object getListPagination(String string, Object paramMap) {
-//			String sqlMapId = "authority_setting.list";
-//			Object resultObject = dao.getList(sqlMapId, dataMap);
-//			return resultObject;
 			
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			String sqlMapId = "";

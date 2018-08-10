@@ -3,7 +3,7 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head>	<!-- 지우지 말 것 -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<title>논심 - Logic Focus</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
