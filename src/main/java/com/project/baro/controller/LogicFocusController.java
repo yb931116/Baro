@@ -45,9 +45,9 @@ public class LogicFocusController {
 		// 각 logic의 detail정보 출력
 		if ("detail".equalsIgnoreCase(action)) {
 			
-			resultMap.putAll((Map) logicFocusService.getFile("read.getFile", paramMap));
 
 			resultMap = (Map<String, Object>)evaluationService.getEvaluationLogic("getEvaluation", paramMap);
+			resultMap.putAll((Map) logicFocusService.getFile("read.getFile", paramMap));
 			viewName = "logicfocus/popup";
 			
 		// 각 logic의 detail 정보 출력시 첨부 file의 내용 출력

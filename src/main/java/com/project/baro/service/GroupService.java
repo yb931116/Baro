@@ -22,8 +22,8 @@ public class GroupService {
 	private CommonUtil commonUtil;
 	
 	public Object group_insert(String sqlMapId, Map<String, Object> paramMap) {
-		String uniqueSequence = null;
-		UserInfo user = (UserInfo)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		String uniqueSequence = null;	// 시퀀스 만들기 위한 변수
+		UserInfo user = (UserInfo)(SecurityContextHolder.getContext().getAuthentication().getPrincipal()); // 로그인 된 유저의 id, user_id, name, password 등을 parameter로 사용 가능
 		if(uniqueSequence == null || "".equals(uniqueSequence) ) {
 			uniqueSequence = commonUtil.getUniqueSequence();
 		}
