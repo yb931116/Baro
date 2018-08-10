@@ -50,7 +50,7 @@ common.layerPopup = function(url, _source_values, _values, id){
     });
 };
 
-common.layerPopupViewFile = function(url, directory){
+common.layerPopupViewFile = function(url, directory, id){
 
 	
 	$.ajax({

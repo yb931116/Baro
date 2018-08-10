@@ -40,7 +40,7 @@ public class FileUtil {
 			String fileName = multiFileList.next();
 			MultipartFile multiFile = multipartRequest.getFile(fileName);
 			multiFileName = multiFile.getOriginalFilename();
-			String fileDirectory = req.getSession().getServletContext().getRealPath("/")+"resources/upload/" + multiFileName;
+			String fileDirectory = req.getSession().getServletContext().getRealPath("resources/upload/") + multiFileName;
 			String fileType =  FilenameUtils.getExtension(multiFile.getOriginalFilename()); // 
 			try { // DB information
 				multiFile.transferTo(new File(fileDirectory));

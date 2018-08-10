@@ -43,9 +43,9 @@ public class LogicFocusController {
 		
 		if ("detail".equalsIgnoreCase(action)) {;
 			
-			resultMap.putAll((Map) logicFocusService.getFile("read.getFile", paramMap));
 
 			resultMap = (Map<String, Object>)evaluationService.getEvaluationLogic("getEvaluation", paramMap);
+			resultMap.putAll((Map) logicFocusService.getFile("read.getFile", paramMap));
 			viewName = "logicfocus/popup";
 			
 		}else if("file".equalsIgnoreCase(action)) {
