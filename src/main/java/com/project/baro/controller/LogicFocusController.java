@@ -26,9 +26,9 @@ public class LogicFocusController {
 	private final static String MAPPING = "/logicfocus/";
 
 	@Autowired
-	private LogicFocusService service;
+	private LogicFocusService logicFocusService;
 	@Autowired
-	private EvaluationService evaluationservice;
+	private EvaluationService evaluationService;
 
 	// Sidebar의 List 메뉴에서 접근할 수 있는 가장 깊은(3 depth) URI인 read와 insert 내의 popup Modal
 	// 관련 Method
@@ -43,9 +43,9 @@ public class LogicFocusController {
 		
 		if ("detail".equalsIgnoreCase(action)) {;
 			
-			resultMap.putAll((Map) service.getFile("read.getFile", paramMap));
+			resultMap.putAll((Map) logicFocusService.getFile("read.getFile", paramMap));
 
-			resultMap = (Map<String, Object>)evaluationservice.getEvaluationLogic("getEvaluation", paramMap);
+			resultMap = (Map<String, Object>)evaluationService.getEvaluationLogic("getEvaluation", paramMap);
 			viewName = "logicfocus/popup";
 			
 		}else if("file".equalsIgnoreCase(action)) {
@@ -102,23 +102,23 @@ public class LogicFocusController {
 		// divided depending on action value
 		if ("list".equalsIgnoreCase(action)) {
 //			resultList = (List) service.getList(paramMap);
-			resultMap = (Map<String, Object>)service.getListPagination(paramMap);
+			resultMap = (Map<String, Object>)logicFocusService.getListPagination(paramMap);
 			viewName = "/logicfocus/list"; 
 		} else if ("edit".equalsIgnoreCase(action)) {
 		} else if ("insert".equalsIgnoreCase(action)) {
-			service.saveProject(paramMap);
+			logicFocusService.saveProject(paramMap);
 			viewName = MAPPING + "list";
-			resultList = (List) service.getList(paramMap);
+			resultList = (List) logicFocusService.getList(paramMap);
 			
 		}else if ("logicInsert".equalsIgnoreCase(action)) {
-			service.saveLogic(paramMap);
+			logicFocusService.saveLogic(paramMap);
 			resultMap=paramMap;
 			viewName = "/redirect";
 			
 			
 		} else if ("read".equalsIgnoreCase(action)) {
-			resultMap = (Map)service.getProject(paramMap);
-			resultMap.putAll( (Map) evaluationservice.getEvaluationProject("evaluation.getEvalutationProject", paramMap));
+			resultMap = (Map)logicFocusService.getProject(paramMap);
+			resultMap.putAll( (Map) evaluationService.getEvaluationProject("evaluation.getEvalutationProject", paramMap));
 
 		}
 		
