@@ -12,8 +12,19 @@
 		ORDER BY generating_date;
 	</select>
 	
-		<select id="getCurrentFile" resultType="Map" parameterType="Map">
-
+	<select id="getCurrentUserName" resultType="Map" parameterType="Map">
+		SELECT name user_name
+		FROM user_info 
+		WHERE user_id = #{user_id};
+	</select>
+	
+	<select id="getSourceUserName" resultType="Map" parameterType="Map">
+		SELECT u.name source_user_name
+		FROM user_info u, logic l
+		WHERE l.original_no = #{source_no} and l.user_id= u.user_id
+	</select>
+	
+	<select id="getCurrentFile" resultType="Map" parameterType="Map">
 				SELECT 
 					fd.attached_file_name attached_file_name, 
 					fd.attached_file_directory attached_file_directory
