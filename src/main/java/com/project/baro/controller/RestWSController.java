@@ -25,6 +25,8 @@ import com.project.baro.service.MyPageService;
 import com.project.baro.service.SignupService;
 import com.project.baro.service.StatisticsService;
 
+
+// ajax를 처리하는 controller
 @RestController
 public class RestWSController {
 
@@ -53,34 +55,54 @@ public class RestWSController {
 		Map<String,Object> paramMap2 = paramMethodMap.getMap();
 	
 		UserInfo user = (UserInfo)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-	   
-		if ("idcheck".equalsIgnoreCase(action)) { // 아이디 중복체크
+
+//		아이디 중복체크
+		if ("idcheck".equalsIgnoreCase(action)) { 
 			resultMap = (Map) signupservice.signup_idcheck("", paramMap);
-		} else if ("idfind".equalsIgnoreCase(action)) { // 아이디 찾기
+
+//		아이디 찾기
+		} else if ("idfind".equalsIgnoreCase(action)) { 
 			resultMap = (Map) loginservice.login_idfind("", paramMap);
 
-		} else if ("pwfind".equalsIgnoreCase(action)) { // 비밀번호 찾기
+//		비밀번호 찾기
+		} else if ("pwfind".equalsIgnoreCase(action)) {
 			resultMap = (Map) loginservice.login_pwfind("", paramMap);
+
+//		그룹 업데이트
 		} else if ("group_update".equalsIgnoreCase(action)) {
 			groupservice.group_update("", paramMap2);
+
+//		그룹 삭제
 		}else if ("group_delete".equalsIgnoreCase(action)) {
 			groupservice.group_delete("", paramMap);
+			
+//		mypage 메뉴 중 내가 제시한 문제 List 출력
 		}else if("myproblem_list".equalsIgnoreCase(action)) {
 			resultMap.put("myproblemList", mypageservice.myproblem_list("", paramMap));
 			resultMap.put("myanswerList", mypageservice.myanswer_list("", paramMap));
 			resultMap.put("user_info", mypageservice.get_user_info("", paramMap));
+			
+//		Logic 평가를 등록
 		}else if("setEvaluationLogic".equalsIgnoreCase(action)) {
 			paramMap.put("user_id", user.getUserId());			
 			resultMap.put("result", evaluationservice.setEvaluationLogic("evaluation.setEvaluationLogic",paramMap));
 			resultMap.putAll((Map) evaluationservice.getEvaluationLogic("evaluation.getEvalutationLogic", paramMap));
+		
+//		Project 평가를 등록
 		}else if("setEvaluationProject".equalsIgnoreCase(action)) {
 			paramMap.put("user_id", user.getUserId());			
 			resultMap.put("result",evaluationservice.setEvaluationProject("evaluation.setEvaluationProject",paramMap));
 			resultMap.putAll((Map) evaluationservice.getEvaluationProject("evaluation.getEvalutationProject", paramMap));
+		
+//		나의 정보를 출력
 		}else if("myinfo".equalsIgnoreCase(action)) {
 			resultMap = (Map) mypageservice.get_user_info("", paramMap);
+			
+//		통계 메뉴의 pjt 찾기
 		}else if("searchProject".equalsIgnoreCase(action)) {
 			resultMap = (Map)statisticsservice.SearchProject("statistics.SearchProject",paramMap);
+			
+//		pagination 다음 화면으로 전환
 		}else if("move_page".equalsIgnoreCase(action)) {
 			resultMap = (Map)statisticsservice.getListPagination("", paramMap2);
 		}

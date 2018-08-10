@@ -98,7 +98,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="<c:url value='/admin_group/list?ID=${pageContext.request.userPrincipal.name}'/>">
+										<a href="<c:url value='/admin_group/list'/>">
 											<i class="la la-group"></i>
 											<p>관리자 그룹 관리</p>
 										</a>

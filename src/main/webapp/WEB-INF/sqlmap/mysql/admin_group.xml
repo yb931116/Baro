@@ -23,7 +23,7 @@
 	</insert>
 	
 	<insert id="insert" parameterType="Map">
-	    INSERT INTO GROUPING (
+	    INSERT INTO _grouping (
 			GROUP_NO 
 			, GROUP_NAME 
 			, GENERATING_DATE 
@@ -52,7 +52,7 @@
 	<select id = "list" resultType="Map" parameterType="Map">
 		
 			select g.group_no group_no, g.group_name gname, ui.name uname, ui.id id
-			from grouping g INNER JOIN grouping_member gm
+			from _grouping g INNER JOIN grouping_member gm
 				ON g.group_no = gm.group_no RIGHT OUTER JOIN user_info ui
 	    		ON ui.user_id = gm.user_id
 			where g.group_no is not null  
@@ -63,19 +63,19 @@
 	
 	<select id = "groupname_list" resultType="Map" parameterType="Map">
 <!-- 		select group_name from grouping -->
-		select grouping.group_name group_name, user_info.id id 
-		from grouping 
+		select _grouping.group_name group_name, user_info.id id 
+		from _grouping 
 		inner join user_info
-		on grouping.user_id = user_info.user_id
+		on _grouping.user_id = user_info.user_id
 	</select>
 	
 	<delete id = "group_member_delete" parameterType = "Map">
 		delete from grouping_member 
-		where group_no = (select group_no from grouping where group_name = #{group_name} )
+		where group_no = (select group_no from _grouping where group_name = #{group_name} )
 	</delete>
 	
 	<delete id = "group_delete" parameterType = "Map">
-		delete from grouping
+		delete from _grouping
 		where group_name = #{group_name}
 	</delete>
 	
@@ -87,7 +87,7 @@
 			<foreach collection="ID_LIST" item = "item" index="index"  separator=",">
 				(
 					(select group_no 
-					from grouping 
+					from _grouping 
 					where group_name = #{group_name} )
 					,(SELECT USER_ID
 					  FROM USER_INFO
