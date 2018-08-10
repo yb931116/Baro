@@ -132,16 +132,16 @@ public class LogicFocusService {
 		sqlMapId="read.getCurrentFile";
 		tempFileMap= (Map) dao.getObject(sqlMapId, dataMap);
 		
-		if(tempFileMap!=null) // tempFileMap 값이 null이 아닐때만 fileMap에 저장
+		if(!tempFileMap.isEmpty()) // tempFileMap에 값이 있을때만 fileMap에 저장
 		fileMap.putAll(tempFileMap);
 		
 		sqlMapId="read.getSourceFile";
 		tempFileMap=(Map) dao.getObject(sqlMapId, dataMap);
 		
-		if(tempFileMap!=null) // tempFileMap 값이 null이 아닐때만 fileMap에 저장
+		if(!tempFileMap.isEmpty()) // tempFileMap에 값이 있을때만 fileMap에 저장
 		fileMap.putAll(tempFileMap);
 		
-		if(fileMap!=null) { // fileMap 값이 null이 아닐때만 resultMap에 저장 --> NullPointException 방지를 위한 처리
+		if(!fileMap.isEmpty()) { // fileMap에 값이 있을때만 resultMap에 저장 --> NullPointException 방지를 위한 처리
 			resultMap.putAll(fileMap);
 			
 			//현재 선택 항목과 이전 항목의 파일 중 한 개 파일만 존재 하는 경우 파일이 존재하지 않는 쪽은 '없음' 처리
