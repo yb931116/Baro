@@ -79,6 +79,7 @@
 								<input class = "summary" type = "hidden" value ="${resultMap.ProList[loop.index].summary}">
 								<input class = "contents" type = "hidden" value ="${resultMap.ProList[loop.index].contents}">
 								<input class = "category" type = "hidden" value ="${resultMap.ProList[loop.index].category}">
+								<input class = "user_id" type = "hidden" value ="${resultMap.ProList[loop.index].user_id}">
 								${resultMap.ProList[loop.index].summary}
 							</td>
 							<td class="colAns layerModal originalAns">
@@ -87,6 +88,7 @@
 								<input class = "summary" type = "hidden" value ="${resultMap.AnsList[loop.index].summary}">
 								<input class = "contents" type = "hidden" value ="${resultMap.AnsList[loop.index].contents}">
 								<input class = "category" type = "hidden" value ="${resultMap.AnsList[loop.index].category}">
+								<input class = "user_id" type = "hidden" value ="${resultMap.AnsList[loop.index].user_id}">
 								${resultMap.AnsList[loop.index].summary}
 							</td>
 							<th scope="row" class="colNum source"></th>
@@ -238,6 +240,7 @@ var project_no = "<c:out value="${resultMap.project_no}" />";
 			  td.find(".summary").val(),
 			  td.find(".contents").val(),
 			  td.find(".category").val(), 
+			 // td.find(".user_id").val(), 
 			  project_no ];
 		
 		if(td.hasClass("originalPro")){
@@ -248,7 +251,8 @@ var project_no = "<c:out value="${resultMap.project_no}" />";
 						$("td").eq(i).find(".source_no").val(),
 						$("td").eq(i).find(".summary").val(),
 						$("td").eq(i).find(".contents").val(),
-						$("td").eq(i).find(".category").val(), 
+						$("td").eq(i).find(".category").val(),
+						//$("td").eq(i).find(".user_id").val(),
 						project_no ];
 					values[1]=$("td").eq(i).find(".original_no").val();
 				}
@@ -262,7 +266,8 @@ var project_no = "<c:out value="${resultMap.project_no}" />";
 				  td.prev().find(".source_no").val(),
 				  td.prev().find(".summary").val(),
 				  td.prev().find(".contents").val(),
-				  td.prev().find(".category").val(), 
+				  td.prev().find(".category").val(),
+				  //td.prev().find(".user_id").val(),
 				  project_no ]; 
 			
 			values[1] = td.prev().find(".original_no").val();
@@ -275,6 +280,7 @@ var project_no = "<c:out value="${resultMap.project_no}" />";
 							  td.prev().prev().find(".summary").val(),
 							  td.prev().prev().find(".contents").val(),
 							  td.prev().prev().find(".category").val(), 
+							 // td.prev().prev().find(".user_id").val(), 
 							  project_no ]; 
 
 			values[1] = td.prev().prev().find(".original_no").val();
@@ -299,11 +305,4 @@ var project_no = "<c:out value="${resultMap.project_no}" />";
 		$(".progress-bar-project").text(AcceptPerSum+"%");
 	}
 	
-	$(document).on('show.bs.modal', '.modal', function () {
-	    var zIndex = 1040 + (10 * $('.modal:visible').length);
-	    $(this).css('z-index', zIndex);
-	    setTimeout(function() {
-	        $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
-	    }, 0);
-	});
 </script>

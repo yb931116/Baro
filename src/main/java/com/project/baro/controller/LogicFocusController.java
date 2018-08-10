@@ -47,7 +47,7 @@ public class LogicFocusController {
 			
 
 			resultMap = (Map<String, Object>)evaluationService.getEvaluationLogic("getEvaluation", paramMap);
-			resultMap.putAll((Map) logicFocusService.getFile("read.getFile", paramMap));
+			resultMap.putAll((Map) logicFocusService.getFileAndUserName("", paramMap));
 			viewName = "logicfocus/popup";
 			
 		// 각 logic의 detail 정보 출력시 첨부 file의 내용 출력
