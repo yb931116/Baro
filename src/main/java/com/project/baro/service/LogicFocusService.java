@@ -72,9 +72,12 @@ public class LogicFocusService {
 		List resultObject = (List) dao.getList(SqlMapId, dataMap);
 		List ProList = new ArrayList<>();
 		List AnsList = new ArrayList<>();
+		Map user = new HashMap<Object, Object>();
+		
 		Boolean insert = false;
 
 		for (int i = 0; i < resultObject.size(); i++) {
+			user.put(((Map)(resultObject.get(i))).get("original_no"),((Map)(resultObject.get(i))).get("user_id"));
 			Map temp_Pro = new HashMap<>();
 			if (((String) ((temp_Pro = (Map) resultObject.get(i)).get("category"))).equalsIgnoreCase("problem")) {
 				for (int j = 0; j < resultObject.size(); j++) {
@@ -157,12 +160,18 @@ public class LogicFocusService {
 				resultMap.put("attached_file_name", "없음");
 				resultMap.put("source_attached_file_name", "없음");
 		}
+		sqlMapId="read.getCurrentUserName";  // 현재 선택 항목에 대한 작성자 정보 가져옴
+		Map tempUserId=(Map) dao.getObject(sqlMapId, dataMap);
 		
-	/*	sqlMapId="read.getCurrentUserName";  // 현재 선택 항목에 대한 작성자 정보 가져옴
-		resultMap.putAll((Map) dao.getObject(sqlMapId, dataMap));
+		if(tempUserId!=null)
+			resultMap.putAll((Map) dao.getObject(sqlMapId, dataMap));
+		
 		
 		sqlMapId="read.getSourceUserName";  // 이전 항목에 대한 작성자 정보 가져옴
-		resultMap.putAll((Map) dao.getObject(sqlMapId, dataMap));*/
+		tempUserId=(Map) dao.getObject(sqlMapId, dataMap);
+		
+		if(tempUserId!=null)		
+			resultMap.putAll((Map) dao.getObject(sqlMapId, dataMap));
 		
 		return resultMap;		
 	}

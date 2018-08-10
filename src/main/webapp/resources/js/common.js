@@ -36,7 +36,8 @@ common.layerPopup = function(url, _source_values, _values, id){
 			"summary": _values[2],
 			"contents": _values[3],
 			"category": _values[4],
-			"project_no": _values[5]
+			"user_id": _values[5],
+			"project_no": _values[6]
 	},
         traditional : true,
         cache: false,
