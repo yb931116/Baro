@@ -13,7 +13,7 @@
 		on project.project_no = logic.project_no
 		inner join user_info
 		on user_info.user_id = logic.user_id
-		where logic.category = 'problem' and user_info.id = #{ID}
+		where logic.category = 'problem' and user_info.id = #{id}
     </select>
     
        <select id = "myanswer_list" resultType="Map" parameterType="Map">
@@ -23,11 +23,11 @@
 		on project.project_no = logic.project_no
 		inner join user_info
 		on user_info.user_id = logic.user_id
-		where logic.category = 'answer' and user_info.id = #{ID}
+		where logic.category = 'answer' and user_info.id = #{id}
     </select>
     
      <select id = "user_info" resultType="Map" parameterType="Map">
-    	select * from user_info where id = #{ID};
+    	select * from user_info where id = #{id};
     </select>
     
     <update id="user_info_update" parameterType ="Map">

@@ -27,8 +27,8 @@ public class GroupService {
 		if(uniqueSequence == null || "".equals(uniqueSequence) ) {
 			uniqueSequence = commonUtil.getUniqueSequence();
 		}
-		paramMap.put("GROUP_NO", uniqueSequence);
-		paramMap.put("ID", user.getId());
+		paramMap.put("group_no", uniqueSequence);
+		paramMap.put("id", user.getId());
 		
 		
 		String sqlId = "group.insert"; // 그룹 삽입
