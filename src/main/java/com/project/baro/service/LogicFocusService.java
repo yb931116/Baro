@@ -141,15 +141,15 @@ public class LogicFocusService {
 		if(tempFileMap!=null) // tempFileMap 값이 null이 아닐때만 fileMap에 저장
 		fileMap.putAll(tempFileMap);
 		
-		if(fileMap!=null) { // fileMap 값이 null이 아닐때만 resultMap에 저장
+		if(fileMap!=null) { // fileMap 값이 null이 아닐때만 resultMap에 저장 --> NullPointException 방지를 위한 처리
 			resultMap.putAll(fileMap);
 			
 			//현재 선택 항목과 이전 항목의 파일 중 한 개 파일만 존재 하는 경우 파일이 존재하지 않는 쪽은 '없음' 처리
-			if(resultMap.get("attached_file_name")==null)
-				resultMap.put("attached_file_name", "없음");
+			if(resultMap.get("attached_file_name")==null) {
+				resultMap.put("attached_file_name", "없음");}
 			
-			if(resultMap.get("source_attached_file_name")==null)
-				resultMap.put("source_attached_file_name", "없음");
+			if(resultMap.get("source_attached_file_name")==null) {
+				resultMap.put("source_attached_file_name", "없음");}
 			
 			}else { //현재 선택 항목과 이전 항목의 파일 중 양 쪽 모두 파일이 존재 하지 않는 경우 모두 '없음' 처리
 				resultMap.put("attached_file_name", "없음");
