@@ -28,20 +28,11 @@ private static final Logger logger = LoggerFactory.getLogger(MainController.clas
 @Autowired
 MainService service;
 
-@RequestMapping(value = "/", method = RequestMethod.GET)
+@RequestMapping(value = "/", method = RequestMethod.GET)	// "/"로 접근했을 때
 public ModelAndView home(@RequestParam Map<String, Object> paramMap ,Locale locale, ModelAndView modelandView) {
-	logger.info("Welcome home! The client locale is {}.", locale);
-	
-	Date date = new Date();
-	DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-	
-	String formattedDate = dateFormat.format(date);
-	
-	
-	modelandView.addObject("serverTime", formattedDate);
 	
 	Map<String,Object> resultMap = new HashMap<String, Object>();
-	resultMap = (Map)service.getLists(resultMap);
+	resultMap = (Map)service.getLists(resultMap); // 최근 정보와 인기있는 정보 가져오기
 	
 	modelandView.setViewName("/index");
 	modelandView.addObject("paramMap",paramMap);
@@ -49,7 +40,7 @@ public ModelAndView home(@RequestParam Map<String, Object> paramMap ,Locale loca
 	return modelandView;
 }
 
-@RequestMapping(value = MAPPING+"{action}", method = { RequestMethod.GET, RequestMethod.POST })
+@RequestMapping(value = MAPPING+"{action}", method = { RequestMethod.GET, RequestMethod.POST }) // 위와 같은 기능 "/index"로 접근했을 때
 public ModelAndView actionMethod(@RequestParam Map<String, Object> paramMap ,@PathVariable String action,
 		ModelAndView modelandView) {
 		

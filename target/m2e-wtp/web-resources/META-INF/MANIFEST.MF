@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: Administrator
 Build-Jdk: 1.8.0_181
-=======
-Built-By: DELL
-Build-Jdk: 1.8.0_121
->>>>>>> branch 'master' of https://github.com/yb931116/Baro.git
 Created-By: Maven Integration for Eclipse
 
