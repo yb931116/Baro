@@ -38,14 +38,9 @@ public class AdminGroupController {
 		List<Object> resultList = new ArrayList<Object>();
 		UserInfo user = (UserInfo)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
-//		관리자 그룹 추가
-		if("insert".equalsIgnoreCase(action)){	
-			admingroupservice.group_insert("", paramMap);
-			
-			viewName = "/group";
 			
 //		전체 그룹 리스트 출력
-		}else if("list".equalsIgnoreCase(action)){
+		 if("list".equalsIgnoreCase(action)){
 			paramMap2.put("ID",user.getId() );
 			groupNames = (List<Object>) admingroupservice.getGroupNameList("", paramMap2);
 			for(int i = 0 ; i< groupNames.size(); i++) {
@@ -57,8 +52,6 @@ public class AdminGroupController {
 			viewName= "/admin_group";
 		}
 
-		
-		
 		modelandView.setViewName(viewName);
 		modelandView.addObject("paramMap",paramMap);
 		modelandView.addObject("resultMap",resultMap);

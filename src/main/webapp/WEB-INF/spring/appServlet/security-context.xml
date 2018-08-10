@@ -6,14 +6,14 @@
     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd"
     >
     
-	<http pattern="/favicon.ico" security="none" />
+	<http pattern="/favicon.ico" security="none" /> <!--  안 넣으면 흰 화면 나옴 -->
    	<http use-expressions="true">
-    	<!-- return boolean -->
+    	
     	<form-login login-page="/login/index" login-processing-url="/j_spring_security_check" authentication-failure-url="/login/index?fail=true" username-parameter="id" password-parameter="password"/>
     	<logout logout-success-url="/" logout-url="/j_spring_security_logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
-    	<csrf disabled = "true"/>
+    	<csrf disabled = "true"/> <!-- 로그인, 로그아웃 시 세션관리 및 화면 전환 -->
     	
-    	<intercept-url pattern="/resources/**" access="permitAll()"/>
+    	<intercept-url pattern="/resources/**" access="permitAll()"/>	<!-- url에 따른 권한 부여 -->
     	<intercept-url pattern="/" access="permitAll()"/>
     	<intercept-url pattern="/index" access="permitAll()"/>
     	<intercept-url pattern="/group" access="permitAll()"/>
@@ -24,9 +24,7 @@
     	<intercept-url pattern="/ws/*" access="permitAll()"/>
     	<intercept-url pattern="/*/*" access="hasAnyAuthority('준회원','정회원','관리자')"/>
     	<intercept-url pattern="/*/*/*" access="hasAnyAuthority('준회원','정회원','관리자')"/>
-<!--     	<intercept-url pattern="/*/*" access="hasRole('ROLE_USER')"/> -->
-<!--   		<intercept-url pattern="/resources/**" access="permitAll()"/> -->
-<!--   		<intercept-url pattern="/*/*/*" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/> -->
+
 	</http>
 	
 	<beans:bean id="customizedUserDetailService"
@@ -37,28 +35,10 @@
 
 	
 	<authentication-manager>
-		<authentication-provider user-service-ref="customizedUserDetailService" > <!-- user-service-ref="customizedUserDetailService" -->
-		<!-- <password-encoder hash="bcrypt"/> -->
-		<password-encoder ref="bcryptPassworEncoder"/>
-<!-- 		<jdbc-user-service data-source-ref="dataSource"
-			users-by-username-query="SELECT ID as id
-			, PW as password
-			, 1 as enabled
-			FROM USER_INFO 
- 			WHERE ID = ?"  
-
-	 authorities-by-username-query="SELECT ID as id 
-	 , AUTHORITY_NAME as authority 
-	 FROM AUTHORITY a INNER JOIN AUTHORITY_REL ar
-	 ON a.AUTHORITY_ID = ar.AUTHORITY_ID
-	 INNER JOIN USER_INFO ui
-	 ON ui.USER_ID = ar.USER_ID 
-	 WHERE ui.ID = ?" />   -->
+		<authentication-provider user-service-ref="customizedUserDetailService" > 
 		
-<!-- 			<user-service>
-				<user name="yb931116" password="123456" authorities="ROLE_USER"/>
-				<user name="Inhog" password ="inhog" authorities="ROLE_ADMIN"/>
-			</user-service> -->
+		<password-encoder ref="bcryptPassworEncoder"/>	<!-- 패스워드 암호화를 위한 기능 -->
+
 		</authentication-provider>
 	</authentication-manager>
 </beans:beans>
