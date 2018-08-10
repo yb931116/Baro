@@ -115,7 +115,7 @@
 var project_no = "<c:out value="${resultMap.project_no}" />";
 	// 테이블 hover
 	$(function() {
-		refreshEval("${resultMap.sum}","${resultMap.sumOfAccept}");
+		refreshEvalProject("${resultMap.sum}","${resultMap.sumOfAccept}");
 		$(".eval-project").click(function(){
 			var flag;
 			var comment = $("#comment").val();
@@ -144,7 +144,7 @@ var project_no = "<c:out value="${resultMap.project_no}" />";
 						if(data.result=="-1"){
 							alert("이미 평가하였습니다.");
 						}
-						refreshEval(data.sum,data.sumOfAccept);
+						refreshEvalProject(data.sum,data.sumOfAccept);
 
 					},
 					error : function(xhr, status, exception) {
@@ -286,7 +286,7 @@ var project_no = "<c:out value="${resultMap.project_no}" />";
 		
 	};
 	
-	function refreshEval(sum,sumOfAccept) {
+	function refreshEvalProject(sum,sumOfAccept) {
 		if(sum=="" || sum == null || sum==0)
 			sum=1;
 		if(sumOfAccept=="" || sumOfAccept == null)

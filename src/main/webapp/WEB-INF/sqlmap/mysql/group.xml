@@ -125,8 +125,8 @@
 		SELECT _grouping.*, user_info.id, user_info.name, 
 				((SELECT count(*) FROM grouping_member WHERE _grouping.group_no = grouping_member.group_no)-1) group_count
 		FROM (
-			SELECT @RNUM := @RNUM + 1 AS ROWNUM, groups.*
-			FROM ( select * from _grouping) groups, ( SELECT @RNUM := 0 ) R
+			SELECT @RNUM := @RNUM + 1 AS ROWNUM, groups_.*
+			FROM ( select * from _grouping) groups_, ( SELECT @RNUM := 0 ) R
             ORDER by generating_date
 		) _grouping INNER JOIN user_info
         ON _grouping.user_id = user_info.user_id
@@ -136,11 +136,11 @@
 		SELECT _grouping.*, user_info.id, user_info.name, 
 				((SELECT count(*) FROM grouping_member WHERE _grouping.group_no = grouping_member.group_no)-1) group_count
 		FROM (
-			SELECT @RNUM := @RNUM + 1 AS ROWNUM, groups.*
-			FROM ( select * from _grouping) groups, ( SELECT @RNUM := 0 ) R
+			SELECT @RNUM := @RNUM + 1 AS ROWNUM, groups_.*
+			FROM ( select * from _grouping) groups_, ( SELECT @RNUM := 0 ) R
 			<![CDATA[
 			where 1= 1
-			and groups.group_name like CONCAT('%',#{group_name},'%')
+			and groups_.group_name like CONCAT('%',#{group_name},'%')
 			]]>
             ORDER by generating_date
 		) _grouping INNER JOIN user_info
