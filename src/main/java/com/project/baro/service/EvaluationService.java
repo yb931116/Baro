@@ -13,6 +13,7 @@ public class EvaluationService {
 	@Autowired
 	ShareDao dao ;
 	
+	//Logic 평가 저장
 	public Object setEvaluationLogic(String sqlMapId, Object dataMap) {
 		Object resultNum =null;
 		if(dao.getObject("evaluation.SearchEvaluationLogic", dataMap)==null){
@@ -22,13 +23,15 @@ public class EvaluationService {
 		}
 			return resultNum;
 	}
-
+	
+	// Logic 평가 내용 출력
 	public Object getEvaluationLogic(String sqlMapId, Object dataMap) {
 		Map resultMap = (Map) dao.getObject("evaluation.getEvaluationLogic", dataMap);
 		resultMap.putAll((Map)dataMap);
 		return resultMap;		
 	}
 	
+	// Project 평가 내용 저장
 	public Object setEvaluationProject(String sqlMapId, Object dataMap) {
 		
 		Object resultNum =  null;
@@ -39,7 +42,8 @@ public class EvaluationService {
 		}
 		return resultNum;
 	}
-
+	
+	// Project 평가 내용 출력
 	public Object getEvaluationProject(String sqlMapId, Object dataMap) {
 		Map resultMap = (Map) dao.getObject("evaluation.getEvaluationProject", dataMap);
 		resultMap.putAll((Map)dataMap);

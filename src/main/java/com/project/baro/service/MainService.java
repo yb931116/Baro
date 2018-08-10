@@ -12,6 +12,7 @@ import com.project.baro.dao.ShareDao;
 public class MainService {
 	@Autowired ShareDao dao;
 	
+	// main 화면에 출력될 최신 프로젝트와 조회수가 높은 프로젝트(미완) 출력
 	public Object getLists(Object dataMap) {
 		Map<String, Object> resultMap = new HashMap<>();
 		String sqlMapId = "home.recentList";
