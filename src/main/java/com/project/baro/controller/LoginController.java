@@ -29,14 +29,20 @@ public class LoginController {
 		Map<String,Object> resultMap = new HashMap<String, Object>();
 		List<Object> resultList = new ArrayList<Object>();
 		
-		
-		if("index".equalsIgnoreCase(action)){	// login 화면
+//		login 화면
+		if("index".equalsIgnoreCase(action)){	
 			viewName= "/login";
-		}else if("open_findID".equalsIgnoreCase(action)) {	// 아이디찾기 팝업열기
+			
+//		아이디찾기 팝업열기
+		}else if("open_findID".equalsIgnoreCase(action)) {	
 			viewName = "id_find_popup";
-		}else if("open_findPW".equalsIgnoreCase(action)) {	// 패스워드 찾기 팝업열기
+
+//		패스워드 찾기 팝업열기
+		}else if("open_findPW".equalsIgnoreCase(action)) {	
 			viewName = "pw_find_popup";
-		}else if("findID".equalsIgnoreCase(action)) {	// 아이디 찾고 화면에 표시
+
+//		 아이디 찾고 화면에 표시
+		}else if("findID".equalsIgnoreCase(action)) {	
 			resultMap = (Map)loginservice.login_idfind("", paramMap);
 			viewName = "/login";
 		}

@@ -22,6 +22,7 @@ private final static String MAPPING = "/statistics/";
 	@Autowired
 	StatisticsService service;
 
+//	sidebar 메뉴 중 통계 메뉴를 접근하는 메소드
 	@RequestMapping(value = MAPPING+"{action}", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView actionMethod(@RequestParam Map<String, Object> paramMap ,@PathVariable String action,
 			ModelAndView modelandView) {
@@ -29,9 +30,9 @@ private final static String MAPPING = "/statistics/";
 		String viewName = MAPPING + action;
 		Map<String,Object> resultMap = new HashMap<String, Object>();
 		List<Object> resultList = new ArrayList<Object>();
-		System.out.println("왜그렇냐" + action);
+
+//		/statistics/index 접근
 		if("index".equalsIgnoreCase(action)){
-//			 resultList =(List<Object>) service.getListbyID("statistics.getListById",paramMap);
 			resultMap = (Map<String, Object>)service.getListPagination("", paramMap);
 			viewName = "/statistics";
 		}

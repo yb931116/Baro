@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.baro.component.MapParamCollector;
+import com.project.baro.security.UserInfo;
 import com.project.baro.service.EvaluationService;
 import com.project.baro.service.LogicFocusService;
 
@@ -30,8 +32,7 @@ public class LogicFocusController {
 	@Autowired
 	private EvaluationService evaluationService;
 
-	// Sidebar의 List 메뉴에서 접근할 수 있는 가장 깊은(3 depth) URI인 read와 insert 내의 popup Modal
-	// 관련 Method
+	// Sidebar 프로젝트 메뉴 중 3depth URI에 접근하는 메소드 
 	@RequestMapping(value = "/logicfocus/read/{action}", method = { RequestMethod.GET, RequestMethod.POST }
 					, produces = "application/json")
 	public ModelAndView read(@RequestParam Map<String, Object> paramMap, @PathVariable String action,
@@ -41,13 +42,15 @@ public class LogicFocusController {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		String viewName = "";
 		
-		if ("detail".equalsIgnoreCase(action)) {;
+		// 각 logic의 detail정보 출력
+		if ("detail".equalsIgnoreCase(action)) {
 			
 			resultMap.putAll((Map) logicFocusService.getFile("read.getFile", paramMap));
 
 			resultMap = (Map<String, Object>)evaluationService.getEvaluationLogic("getEvaluation", paramMap);
 			viewName = "logicfocus/popup";
 			
+		// 각 logic의 detail 정보 출력시 첨부 file의 내용 출력
 		}else if("file".equalsIgnoreCase(action)) {
 			resultMap=paramMap;
 			viewName="logicfocus/fileViewPopup";
@@ -65,29 +68,8 @@ public class LogicFocusController {
 		return modelandView;
 	}
 
-	@RequestMapping(value = "/logicfocus/insert/{action}", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView insert(@RequestParam Map<String, Object> paramMap, @PathVariable String action,
-			ModelAndView modelandView) {
 
-		String viewName = "logicfocus/popup";
-		String forwardView = (String) paramMap.get("forwardView");
-
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		List<Object> resultList = new ArrayList<Object>();
-
-		if (forwardView != null) {
-			viewName = forwardView;
-		}
-
-		modelandView.setViewName(viewName);
-
-		modelandView.addObject("paramMap", paramMap);
-		modelandView.addObject("resultMap", resultMap);
-		modelandView.addObject("resultList", resultList);
-		return modelandView;
-	}
-
-	// Sidebar의 List 메뉴에서 접근 할 수 있는 2 depth URI인 list와 read 관련 method
+	// Sidebar의 프로젝트 메뉴 중  2depth URI에 접근하는 method
 	@RequestMapping(value = MAPPING + "{action}", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView actionMethod(MapParamCollector paramMethodMap, @PathVariable String action,
 			ModelAndView modelandView) {
@@ -96,26 +78,33 @@ public class LogicFocusController {
 		Map<String,Object> paramMap = paramMethodMap.getMap();
 		String forwardView = (String) paramMap.get("forwardView");
 		
+//		로그인된 user의 정보를 가져옴
+		UserInfo user = (UserInfo)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<Object> resultList = new ArrayList<Object>();
 		
-		// divided depending on action value
+//		logicfocus/list -> 각 프로젝트 list를 출력
 		if ("list".equalsIgnoreCase(action)) {
-//			resultList = (List) service.getList(paramMap);
-			resultMap = (Map<String, Object>)logicFocusService.getListPagination(paramMap);
+			resultMap = (Map<String, Object>)logicFocusService.getListPagination("",paramMap);
 			viewName = "/logicfocus/list"; 
+
+// 		logicfocus/edit -> 프로젝트 추가 화면 
 		} else if ("edit".equalsIgnoreCase(action)) {
+			
+//		logicfocus/insert -> 프로젝트 추가 (redirect 추가필요)
 		} else if ("insert".equalsIgnoreCase(action)) {
 			logicFocusService.saveProject(paramMap);
 			viewName = MAPPING + "list";
-			resultList = (List) logicFocusService.getList(paramMap);
-			
+			resultMap = (Map<String, Object>)logicFocusService.getListPagination("",paramMap);
+
+//		logicfocus/logicInsert -> logic을 추가
 		}else if ("logicInsert".equalsIgnoreCase(action)) {
 			logicFocusService.saveLogic(paramMap);
 			resultMap=paramMap;
 			viewName = "/redirect";
 			
-			
+//		logicfocus/read -> 논심표 출력
 		} else if ("read".equalsIgnoreCase(action)) {
 			resultMap = (Map)logicFocusService.getProject(paramMap);
 			resultMap.putAll( (Map) evaluationService.getEvaluationProject("evaluation.getEvalutationProject", paramMap));

@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.baro.service.MyPageService;
 
+
+// MYPAGE controller
 @Controller
 public class MyPageController {
 	private final static String MAPPING = "/mypage/";
@@ -28,6 +30,8 @@ public class MyPageController {
 			Map<String,Object> resultMap = new HashMap<String, Object>();
 			List<Object> resultList = new ArrayList<Object>();
 			
+			
+//			개인정보 수정 메소드
 			if("update".equalsIgnoreCase(action)){
 
 				 mypageservice.update_user_info("",paramMap);

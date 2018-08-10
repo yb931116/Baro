@@ -142,9 +142,8 @@ public class LogicFocusService {
 	}
 	
 	
-	public Object getListPagination(Object paramMap) {
+	public Object getListPagination(String sqlMapId,Object paramMap) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		String sqlMapId = "";
 		int totalCount = 0;
 		int currentPage = 0;
 		if (((Map) paramMap).get("search") == null) {

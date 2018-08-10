@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.baro.component.MapParamCollector;
 import com.project.baro.service.AuthoritySettingService;
 
-
+//	관리자용 메뉴인 회원 권한 변경 controller
 @Controller
 public class AuthoritySettingController {
 	private final static String MAPPING = "/authority_setting/";
@@ -31,13 +31,14 @@ public class AuthoritySettingController {
 		Map<String,Object> paramMap = paramMethodMap.getMap();
 		Map<String,Object> resultMap = new HashMap<String, Object>();
 		List<Object> resultList = new ArrayList<Object>();
-		
+
+//		회원들의 권한을 출력
 		if("index".equalsIgnoreCase(action)){
-//			resultList = (List)authoritysettingservice.getList(paramMap);
 			resultMap = (Map<String, Object>)authoritysettingservice.getListPagination("", paramMap);
 			viewName= "/authority_setting";
+			
+//		회원들의 권한을 변경
 		}else if("update".equalsIgnoreCase(action)) {
-//			resultList = (List)authoritysettingservice.authority_setting(paramMap);
 			authoritysettingservice.authority_setting(paramMap);
 			resultMap = (Map<String, Object>)authoritysettingservice.getListPagination("", paramMap);
 			viewName= "/authority_setting";

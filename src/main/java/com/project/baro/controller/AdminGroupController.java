@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,13 +15,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.baro.component.MapParamCollector;
+import com.project.baro.security.UserInfo;
 import com.project.baro.service.AdminGroupService;
 import com.project.baro.service.GroupService;
 
-
+//	관리자전용 그룹 화면
 @Controller
 public class AdminGroupController {
 	private final static String MAPPING = "/admin_group/";
+	
 	@Autowired
 	private AdminGroupService admingroupservice;
 	
@@ -33,18 +36,17 @@ public class AdminGroupController {
 		Map<String,Object> resultMap = new HashMap<String, Object>();
 		List<Object> groupNames = new ArrayList<Object>();
 		List<Object> resultList = new ArrayList<Object>();
-		
-		if("insert".equalsIgnoreCase(action)){	// login 화면
+		UserInfo user = (UserInfo)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+
+//		관리자 그룹 추가
+		if("insert".equalsIgnoreCase(action)){	
 			admingroupservice.group_insert("", paramMap);
-			groupNames = (List<Object>) admingroupservice.getGroupNameList("", paramMap2);
 			
 			viewName = "/group";
-		}else if("index".equalsIgnoreCase(action)){
-			groupNames = (List<Object>) admingroupservice.getGroupNameList("", paramMap2);
 			
-			viewName= "/group";
-		}
-		else if("list".equalsIgnoreCase(action)){
+//		전체 그룹 리스트 출력
+		}else if("list".equalsIgnoreCase(action)){
+			paramMap2.put("ID",user.getId() );
 			groupNames = (List<Object>) admingroupservice.getGroupNameList("", paramMap2);
 			for(int i = 0 ; i< groupNames.size(); i++) {
 				List<Object> tableList = new ArrayList<Object>();
