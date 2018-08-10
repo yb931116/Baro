@@ -34,8 +34,10 @@
 
                      <label class="ml-2">증빙 사진파일</label> 
                   <div class="form-group row justify-content-center" id="FormControlFile">
-                     <input type="text" class="form-control col-md-9 mr-1" disabled="disabled">
-                        <button class="eval btn btn-primary btn-sm col-2">
+                     <input type="text" class="form-control col-md-9 mr-1" value="${resultMap.source_attached_file_name}" 
+                     disabled="disabled">
+                     <input type="hidden" id="source_attached_file_directory" value="${resultMap.source_attached_file_directory}">
+                        <button type="button" id="viewSourceFile" class="btn btn-primary btn-sm col-2">
                            	보기
                            </button>
                   </div>
@@ -67,11 +69,16 @@
                         id="detailcomment" rows="6">${resultMap.contents}</textarea>
                   </div>
 
-                  <div class="form-group">
-                     <label for="FormControlFile">증빙 사진파일</label> <input type="text"
-                        class="form-control-file" id="FormControlFile"
-                        disabled="disabled">
+                   <label class="ml-2">증빙 사진파일</label> 
+                  <div class="form-group row justify-content-center" id="FormControlFile">
+                     <input type="text" class="form-control col-md-9 mr-1" value="${resultMap.attached_file_name}" 
+                     disabled="disabled">
+                     <input type="hidden" id="attached_file_directory" value="${resultMap.attached_file_directory}">
+                        <button type="button" id="viewOriginalFile" class="btn btn-primary btn-sm col-2">
+                           	보기
+                           </button>
                   </div>
+                  
                </div>
                <div class="card-action row py-3">
                   <div class=" col-12">
@@ -157,6 +164,7 @@
       </div>
       </div>
       </div>
+      <div class="modal fade" id="fileModal"></div>
    </div>
 
 </body>
@@ -304,5 +312,16 @@
 		$(".progress-bar").css("width", AcceptPerSum + "%");
 		$(".progress-bar").attr("aria-valuenow", AcceptPerSum);
 		$(".progress-bar").text(AcceptPerSum+"%");
+	}
+	
+	function viewOriginalFile() {
+		var url="<c:url value='/logicfocus/read/file'/>";
+		var directory="${resultMap.attached_file_directory}";
+		var fileName="${resultMap.attached_file_name}";
+		
+		if(fileName=="없음"){
+			alert("파일이 없습니다.");
+		}else
+		common.layerPopupViewFile(url, directory, "#fileModal");
 	}
 </script>

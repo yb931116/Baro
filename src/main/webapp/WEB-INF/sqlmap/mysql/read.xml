@@ -10,7 +10,34 @@
 		FROM logic 
 		WHERE project_no = #{project_no}
 		ORDER BY generating_date;
-
+	</select>
+	
+		<select id="getFile" resultType="Map" parameterType="Map">
+		
+		SELECT
+			of.attached_file_name attached_file_name, of.attached_file_directory attached_file_directory,
+			sf.attached_file_name source_attached_file_name, sf.attached_file_directory source_attached_file_directory
+		FROM
+			(
+				SELECT 
+					COALESCE(fd.attached_file_name,'없음') attached_file_name, 
+					COALESCE(fd.attached_file_directory,'없음') attached_file_directory
+				FROM 
+					attached_file af, file_detail fd 
+				WHERE 
+					af.original_no=#{original_no} and 
+					af.attached_file_no = fd.attached_file_no
+			) of ,
+			(
+				SELECT 
+					COALESCE(fd.attached_file_name,'없음') attached_file_name, 
+					COALESCE(fd.attached_file_directory,'없음') attached_file_directory
+				FROM 
+					attached_file af, file_detail fd 
+				WHERE 
+					af.original_no=#{source_no} and 
+					af.attached_file_no = fd.attached_file_no
+			) sf
 	</select>
 
 	<insert id="insert" parameterType="Map">

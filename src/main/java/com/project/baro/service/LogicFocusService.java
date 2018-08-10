@@ -122,7 +122,22 @@ public class LogicFocusService {
 	}*/
 
 	public Object getFile(String sqlMapId, Object dataMap) {
-		Map resultMap = (Map) dao.getObject("read.getFile", dataMap);
+		Map resultMap = new HashMap();
+		Map fileMap =(Map) dao.getObject(sqlMapId, dataMap);
+		
+		if(fileMap!=null) {
+			resultMap.putAll(fileMap);
+			
+			if(resultMap.get("attached_file_name")==null)
+				resultMap.put("attached_file_name", "없음");
+			
+			if(resultMap.get("source_attached_file_name")==null)
+				resultMap.put("source_attached_file_name", "없음");
+		}else {
+			resultMap.put("attached_file_name", "없음");
+			resultMap.put("source_attached_file_name", "없음");
+		}
+		
 		return resultMap;		
 	}
 	

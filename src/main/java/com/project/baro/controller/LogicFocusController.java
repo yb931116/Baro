@@ -42,11 +42,19 @@ public class LogicFocusController {
 		String viewName = "";
 		
 		if ("detail".equalsIgnoreCase(action)) {
-
+			
 			resultMap = (Map<String, Object>)evaluationService.getEvaluationLogic("getEvaluation", paramMap);
+
+			
+			resultMap.putAll((Map) service.getFile("read.getFile", paramMap));
+				
 			viewName = "logicfocus/popup";
 			
+		}else if("file".equalsIgnoreCase(action)) {
+			resultMap=paramMap;
+			viewName="logicfocus/fileViewPopup";
 		}
+		
 		
 		
 		if (forwardView != null) {
