@@ -45,6 +45,7 @@
 				  ) A) B
 	WHERE B.ROWNUM between #{pagination.pageBegin} and #{pagination.pageEnd}	
 	</select>
+	
 	<select id = "totalcount" resultType="integer" parameterType="Map">
 		select count(*) from user_info
 	</select>
@@ -67,16 +68,4 @@
 		order by p.project_no , i.name;
 
 	</select>
-
-	<insert id="merge" parameterType="Map">
-	</insert>
-
-	<insert id="insert" parameterType="Map">
-	</insert>
-
-	<update id="update" parameterType="Map">
-	</update>
-
-	<delete id="delete" parameterType="Map">
-	</delete>
 </mapper>
