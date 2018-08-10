@@ -6,6 +6,3 @@
 	<button type="button" class='btn btn-danger' data-dismiss='modal'
 	               aria-hidden='true'>닫기</button>
 	               
-	               <script>
-	               console.log(${resultMap.directory});
-	               </script>
