@@ -35,8 +35,6 @@ public class RestWSController {
 	@Autowired
 	private LoginService loginservice;
 	@Autowired
-	private EvaluationService evaluationService;
-	@Autowired
 	private GroupService groupservice;
 	@Autowired
 	MyPageService mypageservice;
@@ -44,6 +42,8 @@ public class RestWSController {
 	LogicFocusService logicfocusservice;
 	@Autowired
 	StatisticsService statisticsservice;
+	@Autowired
+	EvaluationService evaluationservice;
 
 	@RequestMapping(value = MAPPING + "{action}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json") // 미디어 타입 관련 응답 생성
@@ -61,14 +61,7 @@ public class RestWSController {
 
 		} else if ("pwfind".equalsIgnoreCase(action)) { // 비밀번호 찾기
 			resultMap = (Map) loginservice.login_pwfind("", paramMap);
-		} else if ("evaluation".equalsIgnoreCase(action)) {
-
-			if (((String) (paramMap.get("type"))).equalsIgnoreCase("ID"))
-				resultMap = (Map) evaluationService.SearchByID("", paramMap);
-			else if (((String) (paramMap.get("type"))).equalsIgnoreCase("NAME"))
-				resultMap = (Map) evaluationService.SearchByName("", paramMap);
-		}
-		else if ("group_update".equalsIgnoreCase(action)) {
+		} else if ("group_update".equalsIgnoreCase(action)) {
 			groupservice.group_update("", paramMap2);
 		}else if ("group_delete".equalsIgnoreCase(action)) {
 			groupservice.group_delete("", paramMap);
@@ -76,11 +69,14 @@ public class RestWSController {
 			resultMap.put("myproblemList", mypageservice.myproblem_list("", paramMap));
 			resultMap.put("myanswerList", mypageservice.myanswer_list("", paramMap));
 			resultMap.put("user_info", mypageservice.get_user_info("", paramMap));
-		}else if("setEvaluation".equalsIgnoreCase(action)) {
+		}else if("setEvaluationLogic".equalsIgnoreCase(action)) {
 			paramMap.put("user_id", user.getUserId());			
-			logicfocusservice.setEvaluation("setEvaluation",paramMap);
-			resultMap = (Map) logicfocusservice.getEvaluation("read.getEvalutation", paramMap);
-			System.out.println(resultMap);
+			resultMap.put("result", evaluationservice.setEvaluationLogic("evaluation.setEvaluationLogic",paramMap));
+			resultMap.putAll((Map) evaluationservice.getEvaluationLogic("evaluation.getEvalutationLogic", paramMap));
+		}else if("setEvaluationProject".equalsIgnoreCase(action)) {
+			paramMap.put("user_id", user.getUserId());			
+			resultMap.put("result",evaluationservice.setEvaluationProject("evaluation.setEvaluationProject",paramMap));
+			resultMap.putAll((Map) evaluationservice.getEvaluationProject("evaluation.getEvalutationProject", paramMap));
 		}else if("myinfo".equalsIgnoreCase(action)) {
 			resultMap = (Map) mypageservice.get_user_info("", paramMap);
 		}else if("searchProject".equalsIgnoreCase(action)) {

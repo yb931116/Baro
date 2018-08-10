@@ -32,10 +32,14 @@
                         id="source_detailcomment" rows="6">${resultMap.source_contents}</textarea>
                   </div>
 
-                  <div class="form-group">
-                     <label for="FormControlFile">증빙 사진파일</label> <input type="text"
-                        class="form-control-file" id="FormControlFile"
-                        disabled="disabled">
+                     <label class="ml-2">증빙 사진파일</label> 
+                  <div class="form-group row justify-content-center" id="FormControlFile">
+                     <input type="text" class="form-control col-md-9 mr-1" value="${resultMap.source_attached_file_name}" 
+                     disabled="disabled">
+                     <input type="hidden" id="source_attached_file_directory" value="${resultMap.source_attached_file_directory}">
+                        <button type="button" id="viewSourceFile" class="btn btn-primary btn-sm col-2">
+                           	보기
+                           </button>
                   </div>
                </div>
                   </div>
@@ -65,16 +69,21 @@
                         id="detailcomment" rows="6">${resultMap.contents}</textarea>
                   </div>
 
-                  <div class="form-group">
-                     <label for="FormControlFile">증빙 사진파일</label> <input type="text"
-                        class="form-control-file" id="FormControlFile"
-                        disabled="disabled">
+                   <label class="ml-2">증빙 사진파일</label> 
+                  <div class="form-group row justify-content-center" id="FormControlFile">
+                     <input type="text" class="form-control col-md-9 mr-1" value="${resultMap.attached_file_name}" 
+                     disabled="disabled">
+                     <input type="hidden" id="attached_file_directory" value="${resultMap.attached_file_directory}">
+                        <button type="button" id="viewOriginalFile" class="btn btn-primary btn-sm col-2">
+                           	보기
+                           </button>
                   </div>
+                  
                </div>
                <div class="card-action row py-3">
                   <div class=" col-12">
                		<div class="progress">
-					  <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+					  <div class="progress-bar progress-bar-logic" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
 					</div>
                   </div>
                </div>
@@ -88,10 +97,10 @@
                      <input id = "comment" class = "form-control" type="text">
                      <div class="input-group-append">
                         <span class="input-group-text">
-                           <button class="eval btn btn-primary btn-sm mr-1 up">
+                           <button class="eval-logic btn btn-primary btn-sm mr-1 up">
                            <i style="font-size: 20" class="la la-thumbs-up"></i>
                            </button>
-                           <button class="eval btn btn-primary btn-sm down">
+                           <button class="eval-logic btn btn-primary btn-sm down">
                            <i style="font-size: 20" class="la la-thumbs-down"></i>
                            </button>
                         </span>
@@ -155,6 +164,7 @@
       </div>
       </div>
       </div>
+      <div class="modal fade" id="fileModal"></div>
    </div>
 
 </body>
@@ -230,7 +240,7 @@
 					}
 				}, true);
 
-		$(".eval").click(function() {
+		$(".eval-logic").click(function() {
 
 			var $btn = $(this);
 			var flag;
@@ -241,24 +251,22 @@
 				flag = "Denial";
 
 			}
-			console.log(original_no);
-			console.log(comment);
-			console.log(flag);
-			console.log($btn);
 			if (confirm("평가는 수정이 불가합니다. 평가를 완료하시겠습니까 ?")) {
 
 				$.ajax({
 					type : "POST",
-					url : url = "<c:url value='/ws/setEvaluation'/>",
+					url : url = "<c:url value='/ws/setEvaluationLogic'/>",
 					data : {
 						"original_no" : original_no,
 						"COMMENT" : comment,
-						"SCORE" : flag
+						"SCORE" : flag,
 					},
 					dataType : "json",
 					cache : false,
 					success : function(data) {
-						console.log(data);
+						if(data.result=="-1"){
+							alert("이미 평가하였습니다.");
+						}
 						refreshEval(data.sum,data.sumOfAccept);
 
 					},
@@ -267,8 +275,7 @@
 					}
 				});
 
-			}
-			;
+			};
 		});
 
 	});
@@ -304,8 +311,19 @@
 		
 		
 		var AcceptPerSum = Math.round(sumOfAccept / sum *100);
-		$(".progress-bar").css("width", AcceptPerSum + "%");
-		$(".progress-bar").attr("aria-valuenow", AcceptPerSum);
-		$(".progress-bar").text(AcceptPerSum+"%");
+		$(".progress-bar-logic").css("width", AcceptPerSum + "%");
+		$(".progress-bar-logic").attr("aria-valuenow", AcceptPerSum);
+		$(".progress-bar-logic").text(AcceptPerSum+"%");
+	}
+	
+	function viewOriginalFile() {
+		var url="<c:url value='/logicfocus/read/file'/>";
+		var directory="${resultMap.attached_file_directory}";
+		var fileName="${resultMap.attached_file_name}";
+		
+		if(fileName=="없음"){
+			alert("파일이 없습니다.");
+		}else
+		common.layerPopupViewFile(url, directory, "#fileModal");
 	}
 </script>

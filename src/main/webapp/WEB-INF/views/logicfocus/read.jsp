@@ -37,21 +37,23 @@
 			<h4>${resultMap.project_name}</h4>
 			<div class="pull-right">
 			 <label for="upDown" >이 항목을 평가해주세요.</label>
-                     <div id="upDown">
-                     <div class="input-group">
+                     <div id="upDown" class=" mb-1">
+                     <div class="input-group" style="height:30px;">
                      <input id = "comment" class = "form-control" type="text">
                      <div class="input-group-append">
-                        <span class="input-group-text">
-                           <button class="eval btn btn-primary btn-sm mr-1 up">
-                           <i style="font-size: 20" class="la la-thumbs-up"></i>
+                           <button class="eval-project btn btn-primary btn-sm mr-1 up" style="height:30px;">
+                           <i style="font-size: 20" class="la la-thumbs-up" ></i>
                            </button>
-                           <button class="eval btn btn-primary btn-sm down">
-                           <i style="font-size: 20" class="la la-thumbs-down"></i>
+                           <button class="eval-project btn btn-primary btn-sm down" style="height:30px;">
+                           <i style="font-size: 20" class="la la-thumbs-down" ></i>
                            </button>
-                        </span>
                         </div>
+                        
                      </div>
                     </div>
+		             <div class="row progress mr-1 ml-1 mt-2 mb-2">
+						<div class="progress-bar progress-bar-project" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+					</div>
                    </div>
                   </div>
 			
@@ -110,15 +112,48 @@
 </div>
 
 <script>
-
+var project_no = "<c:out value="${resultMap.project_no}" />";
 	// 테이블 hover
 	$(function() {
-		$(".eval").click(function(){
-			if($(this).hasClass("up")){
-				
-			}else if($(this).hasClass("down")){
-				
+		refreshEvalProject("${resultMap.sum}","${resultMap.sumOfAccept}");
+		$(".eval-project").click(function(){
+			var flag;
+			var comment = $("#comment").val();
+			if ($(this).hasClass("up")) {
+				flag = "Accept";
+			} else if ($(this).hasClass("down")) {
+				flag = "Denial";
+
 			}
+			console.log($(this));
+			console.log($(this).hasClass("up"));
+			console.log(flag);
+			if (confirm("평가는 수정이 불가합니다. 평가를 완료하시겠습니까 ?")) {
+				console.log("왜");
+				$.ajax({
+					type : "POST",
+					url : url = "<c:url value='/ws/setEvaluationProject'/>",
+					data : {
+						"project_no" : project_no,
+						"COMMENT" : comment,
+						"SCORE" : flag,
+					},
+					dataType : "json",
+					cache : false,
+					success : function(data) {
+						if(data.result=="-1"){
+							alert("이미 평가하였습니다.");
+						}
+						refreshEvalProject(data.sum,data.sumOfAccept);
+
+					},
+					error : function(xhr, status, exception) {
+
+					}
+				});
+
+			};
+			
 		});
 		
 		$("td").hover(function() {
@@ -250,4 +285,25 @@
 		common.layerPopup(url, source_values ,values, "#myModal");
 		
 	};
+	
+	function refreshEvalProject(sum,sumOfAccept) {
+		if(sum=="" || sum == null || sum==0)
+			sum=1;
+		if(sumOfAccept=="" || sumOfAccept == null)
+			sumOfAccept=0;	
+		
+		
+		var AcceptPerSum = Math.round(sumOfAccept / sum *100);
+		$(".progress-bar-project").css("width", AcceptPerSum + "%");
+		$(".progress-bar-project").attr("aria-valuenow", AcceptPerSum);
+		$(".progress-bar-project").text(AcceptPerSum+"%");
+	}
+	
+	$(document).on('show.bs.modal', '.modal', function () {
+	    var zIndex = 1040 + (10 * $('.modal:visible').length);
+	    $(this).css('z-index', zIndex);
+	    setTimeout(function() {
+	        $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+	    }, 0);
+	});
 </script>

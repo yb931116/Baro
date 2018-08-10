@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.baro.component.MapParamCollector;
+import com.project.baro.service.EvaluationService;
 import com.project.baro.service.LogicFocusService;
 
 @Controller
@@ -25,7 +26,9 @@ public class LogicFocusController {
 	private final static String MAPPING = "/logicfocus/";
 
 	@Autowired
-	private LogicFocusService service;
+	private LogicFocusService logicFocusService;
+	@Autowired
+	private EvaluationService evaluationService;
 
 	// Sidebar의 List 메뉴에서 접근할 수 있는 가장 깊은(3 depth) URI인 read와 insert 내의 popup Modal
 	// 관련 Method
@@ -38,17 +41,18 @@ public class LogicFocusController {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		String viewName = "";
 		
-		if ("detail".equalsIgnoreCase(action)) {
+		if ("detail".equalsIgnoreCase(action)) {;
+			
+			resultMap.putAll((Map) logicFocusService.getFile("read.getFile", paramMap));
 
-			resultMap = (Map<String, Object>) service.getEvaluation("getEvaluation", paramMap);
+			resultMap = (Map<String, Object>)evaluationService.getEvaluationLogic("getEvaluation", paramMap);
 			viewName = "logicfocus/popup";
 			
+		}else if("file".equalsIgnoreCase(action)) {
+			resultMap=paramMap;
+			viewName="logicfocus/fileViewPopup";
 		}
-		/*else if ("insert".equalsIgnoreCase(action)) {
-			service.saveProject(paramMap);
-			resultMap = (Map)service.getProject(paramMap);
-			viewName = "logicfocus/read";
-		}*/
+		
 		
 		
 		if (forwardView != null) {
@@ -86,7 +90,7 @@ public class LogicFocusController {
 	// Sidebar의 List 메뉴에서 접근 할 수 있는 2 depth URI인 list와 read 관련 method
 	@RequestMapping(value = MAPPING + "{action}", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView actionMethod(MapParamCollector paramMethodMap, @PathVariable String action,
-			ModelAndView modelandView, @RequestParam Map<String, Object> paramMap2) {
+			ModelAndView modelandView) {
 
 		String viewName = MAPPING + action;
 		Map<String,Object> paramMap = paramMethodMap.getMap();
@@ -98,22 +102,24 @@ public class LogicFocusController {
 		// divided depending on action value
 		if ("list".equalsIgnoreCase(action)) {
 //			resultList = (List) service.getList(paramMap);
-			resultMap = (Map<String, Object>)service.getListPagination(paramMap);
+			resultMap = (Map<String, Object>)logicFocusService.getListPagination(paramMap);
 			viewName = "/logicfocus/list"; 
 		} else if ("edit".equalsIgnoreCase(action)) {
 		} else if ("insert".equalsIgnoreCase(action)) {
-			service.saveProject(paramMap);
+			logicFocusService.saveProject(paramMap);
 			viewName = MAPPING + "list";
-			resultList = (List) service.getList(paramMap);
+			resultList = (List) logicFocusService.getList(paramMap);
 			
 		}else if ("logicInsert".equalsIgnoreCase(action)) {
-			service.saveLogic(paramMap);
+			logicFocusService.saveLogic(paramMap);
 			resultMap=paramMap;
 			viewName = "/redirect";
 			
 			
 		} else if ("read".equalsIgnoreCase(action)) {
-			resultMap = (Map)service.getProject(paramMap);
+			resultMap = (Map)logicFocusService.getProject(paramMap);
+			resultMap.putAll( (Map) evaluationService.getEvaluationProject("evaluation.getEvalutationProject", paramMap));
+
 		}
 		
 		if (forwardView != null) {

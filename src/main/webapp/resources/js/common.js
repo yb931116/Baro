@@ -50,6 +50,28 @@ common.layerPopup = function(url, _source_values, _values, id){
     });
 };
 
+common.layerPopupViewFile = function(url, directory){
+
+	
+	$.ajax({
+        type : "POST",
+        url : url,
+        data: {
+        	"directory": directory
+			
+	},
+        traditional : true,
+        cache: false,
+        success : function(data) {
+        	common.popupCallback(data, id);
+	    },
+        error : function(xhr, status, exception){
+        	alert("전송에 실패하였습니다. \n ("+status+")");
+			return false;
+        }
+    });
+};
+
 common.layerPopupParam = function(url, id, params){
 	
 	

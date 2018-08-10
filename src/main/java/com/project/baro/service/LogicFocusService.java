@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.baro.dao.ShareDao;
+import com.project.baro.util.CommonUtil;
 import com.project.baro.util.Pagination;
 
 @Service
@@ -16,6 +17,8 @@ public class LogicFocusService {
 
 	@Autowired
 	ShareDao dao;
+	@Autowired
+	CommonUtil util;
 
 	//프로젝트 List의 전체 목록 및 검색결과 탐색 Method
 	public Object getList(Object dataMap) {
@@ -51,9 +54,13 @@ public class LogicFocusService {
 				((Map)dataMap).get("source_no").equals("")) {
 			((Map)dataMap).put("source_no", null);
 		}
-		
+		((Map)dataMap).put("original_no", util.getUniqueSequence());
 		Object resultObject = dao.saveObject(sqlMapId, dataMap);
 		
+		sqlMapId = "read.insertFile";
+		dao.saveObject(sqlMapId, dataMap);
+		sqlMapId = "read.insertFileRel";
+		dao.saveObject(sqlMapId, dataMap);
 		return resultObject;
 	}
 
@@ -92,25 +99,49 @@ public class LogicFocusService {
 		resultMap.put("project_name", ((Map) dataMap).get("project_name"));
 		resultMap.put("ProList", ProList);
 		resultMap.put("AnsList", AnsList);
-		for(int i =0 ; i < ProList.size() ; i++) {
-			System.out.println("Proble:"+((Map)ProList.get(i)));
-			System.out.println("Answer:"+((Map)AnsList.get(i)));
-		}
+		resultMap.putAll((Map)dao.getObject("getEvaluationLogic", dataMap));
 		return resultMap;
 	}
 
-	public Object setEvaluation(String sqlMapId, Object dataMap) {
-		Object resultNum = dao.saveObject("read.setEvaluation", dataMap);
+/*	public Object setEvaluation(String sqlMapId, Object dataMap) {
 		
+		Object resultNum=null;
+		
+		if(((String)(((Map)dataMap).get("category"))).equalsIgnoreCase("logic")) {
+			resultNum = dao.saveObject("read.setEvaluationLogic", dataMap);
+		}else if(((String)(((Map)dataMap).get("category"))).equalsIgnoreCase("project")) {
+			resultNum = dao.saveObject("read.setEvaluationProject", dataMap);
+		}
 		return resultNum;
 	}
 
 	public Object getEvaluation(String sqlMapId, Object dataMap) {
-		Map resultMap = (Map) dao.getObject("read.getEvaluation", dataMap);
-		resultMap.putAll((Map) dataMap);
+		Map resultMap = (Map) dao.getObject("read.getEvaluationLogic", dataMap);
+		resultMap.putAll((Map)dataMap);
+		return resultMap;		
+	}*/
+
+	public Object getFile(String sqlMapId, Object dataMap) {
+		Map resultMap = new HashMap();
+		Map fileMap =(Map) dao.getObject(sqlMapId, dataMap);
+		
+		if(fileMap!=null) {
+			resultMap.putAll(fileMap);
+			
+			if(resultMap.get("attached_file_name")==null)
+				resultMap.put("attached_file_name", "없음");
+			
+			if(resultMap.get("source_attached_file_name")==null)
+				resultMap.put("source_attached_file_name", "없음");
+		}else {
+			resultMap.put("attached_file_name", "없음");
+			resultMap.put("source_attached_file_name", "없음");
+		}
+		
 		return resultMap;		
 	}
-
+	
+	
 	public Object getListPagination(Object paramMap) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		String sqlMapId = "";
