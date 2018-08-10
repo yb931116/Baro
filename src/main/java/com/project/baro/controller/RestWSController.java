@@ -78,6 +78,7 @@ public class RestWSController {
 			
 //		mypage 메뉴 중 내가 제시한 문제 List 출력
 		}else if("myproblem_list".equalsIgnoreCase(action)) {
+			paramMap.put("id", user.getId());
 			resultMap.put("myproblemList", mypageservice.myproblem_list("", paramMap));
 			resultMap.put("myanswerList", mypageservice.myanswer_list("", paramMap));
 			resultMap.put("user_info", mypageservice.get_user_info("", paramMap));
@@ -96,6 +97,7 @@ public class RestWSController {
 		
 //		나의 정보를 출력
 		}else if("myinfo".equalsIgnoreCase(action)) {
+			paramMap.put("id", user.getId());
 			resultMap = (Map) mypageservice.get_user_info("", paramMap);
 			
 //		통계 메뉴의 pjt 찾기

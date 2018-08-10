@@ -7,36 +7,36 @@
     <mapper namespace="group">
     
     <insert id="member_insert" parameterType ="Map">
-			INSERT INTO GROUPING_MEMBER(
-					GROUP_NO	
-					,USER_ID 		
+			INSERT INTO grouping_member(
+					group_no	
+					,user_id 		
 				)values
 			<foreach collection="ID_LIST" item = "item" index="index"  separator=",">
 				(
-					#{GROUP_NO}
-					,(SELECT USER_ID
-					  FROM USER_INFO
-				      WHERE ID = #{item})	 
+					#{group_no}
+					,(SELECT user_id
+					  FROM user_info
+				      WHERE id = #{item})	 
 				)
 			</foreach>
 	</insert>
 	
 	<insert id="insert" parameterType="Map">
 	    INSERT INTO _grouping (
-			GROUP_NO 
-			, GROUP_NAME 
-			, GENERATING_DATE 
-			, USER_ID 
+			group_no 
+			, group_name 
+			, generating_date 
+			, user_id 
 			 
 		)
 		values
 		(
-			#{GROUP_NO}  
+			#{group_no}  
 			, #{group_name} 
 			, now()
-			, (SELECT USER_ID
-				 FROM USER_INFO
-				 WHERE ID = #{ID})			
+			, (SELECT user_id
+				 FROM user_info
+				 WHERE id = #{id})			
 		)
 	</insert>
 
