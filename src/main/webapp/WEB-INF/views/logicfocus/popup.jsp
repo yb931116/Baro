@@ -74,8 +74,8 @@
                      <input type="text" class="form-control col-md-9 mr-1" value="${resultMap.attached_file_name}" 
                      disabled="disabled">
                      <input type="hidden" id="attached_file_directory" value="${resultMap.attached_file_directory}">
-                        <button type="button" id="viewOriginalFile" class="btn btn-primary btn-sm col-2">
-                           	보기
+                        <button onclick="" type="button" id="viewOriginalFile" class="btn btn-primary btn-sm col-2">
+                           	보기         <!--onclick에 들어갈 viewOriginalFile() 함수 아직 미완성  -->
                            </button>
                   </div>
                   
@@ -323,7 +323,8 @@
 		
 		if(fileName=="없음"){
 			alert("파일이 없습니다.");
-		}else
+		}else{
 		common.layerPopupViewFile(url, directory, "#fileModal");
+		}
 	}
 </script>
