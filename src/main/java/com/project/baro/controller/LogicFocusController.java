@@ -41,18 +41,11 @@ public class LogicFocusController {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		String viewName = "";
 		
-		if ("detail".equalsIgnoreCase(action)) {
-<<<<<<< HEAD
-			
-			resultMap = (Map<String, Object>)evaluationService.getEvaluationLogic("getEvaluation", paramMap);
-
+		if ("detail".equalsIgnoreCase(action)) {;
 			
 			resultMap.putAll((Map) service.getFile("read.getFile", paramMap));
-				
-=======
 
 			resultMap = (Map<String, Object>)evaluationservice.getEvaluationLogic("getEvaluation", paramMap);
->>>>>>> branch 'master' of https://github.com/yb931116/Baro.git
 			viewName = "logicfocus/popup";
 			
 		}else if("file".equalsIgnoreCase(action)) {
