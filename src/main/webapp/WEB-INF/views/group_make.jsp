@@ -129,11 +129,11 @@
 																		+ "	<td class = 'count'>"
 																		+ count
 																		+ "</td>"
-																		+ "	<td class = 'id'><input type='hidden' id = 'ID_LIST' name = 'ID_LIST' value="+data.ID+" >"
-																		+ data.ID
+																		+ "	<td class = 'id'><input type='hidden' id = 'ID_LIST' name = 'ID_LIST' value="+data.id+" >"
+																		+ data.id
 																		+ "</td>"
 																		+ "	<td>"
-																		+ data.NAME
+																		+ data.name
 																		+ "</td>"
 																		+ "	<td style='text-align:center;'><i class=\"minus la la-minus-circle iconsize20\"></i></td>"
 																		+ "</tr>"

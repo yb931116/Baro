@@ -156,10 +156,10 @@
 																		+ $count
 																		+ "</td>"
 																		+ "	<td class = 'id'>"
-																		+ data.ID
+																		+ data.id
 																		+ "</td>"
 																		+ "	<td>"
-																		+ data.NAME
+																		+ data.name
 																		+ "</td>"
 																		+ "	<td style='text-align:center;'><i class=\"minus la la-minus-circle iconsize20\"></i></td>"
 																		+ "</tr>"

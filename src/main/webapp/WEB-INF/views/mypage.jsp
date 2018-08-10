@@ -127,7 +127,7 @@
 
 	
 
-	var ID = '${pageContext.request.userPrincipal.name}';
+// 	var ID = '${pageContext.request.userPrincipal.name}';
 	$(function() {
 		
 		$.ajax({
@@ -135,7 +135,7 @@
 			type : "POST",
 			url : "<c:url value='/ws/myproblem_list'/>",
 			data : {
-				"ID" : ID
+// 				"ID" : ID
 				
 			},
 			traditional:true,
@@ -264,7 +264,7 @@
 					type : "POST",
 					url : "<c:url value='/ws/myinfo'/>",
 					data : {
-						"ID" : ID
+						
 						
 					},
 					traditional:true,
