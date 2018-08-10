@@ -19,12 +19,12 @@ import com.project.baro.service.SignupService;
 
 @Controller
 public class SignUpController {
-	private final static String MAPPING = "/signup/";
+	private final static String MAPPING = "/signup/";	// 공통 경로
 	
 	@Autowired
 	private SignupService service;
 
-	@RequestMapping(value = MAPPING+"{action}", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = MAPPING+"{action}", method = { RequestMethod.GET, RequestMethod.POST })	// /signup 다음에 지정되는 {action} 경로에 따라 실행 결과 달라짐
 	public ModelAndView actionMethod(@RequestParam Map<String, Object> paramMap, @PathVariable String action,
 			ModelAndView modelandView) {
 		
@@ -34,10 +34,10 @@ public class SignUpController {
 		Map<String, Object> resultMap = new HashMap<String, Object>() ;
 		List<Object> resultList = new ArrayList<Object>();
 		
-		if("index".equalsIgnoreCase(action)){
+		if("index".equalsIgnoreCase(action)){	// /signup/index 일 경우 signup.jsp(회원가입 창) 실행
 
 			viewName= "/signup";
-		}else if("insert".equalsIgnoreCase(action)) {
+		}else if("insert".equalsIgnoreCase(action)) { // /signup/insert일 경우 가입 회원정보 db에 삽입 후 index.jsp(메인화면) 실행
 
 			service.signup_insert("",paramMap);
 			viewName= "/index";

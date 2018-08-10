@@ -21,23 +21,23 @@ import com.project.baro.service.GroupService;
 
 @Controller
 public class GroupController {
-	private final static String MAPPING = "/group/";
+	private final static String MAPPING = "/group/"; // 공통 경로
 	@Autowired
 	private GroupService groupservice;
 	
 	@RequestMapping(value = MAPPING+"{action}", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView actionMethod(MapParamCollector paramMethodMap ,@PathVariable String action,
-			ModelAndView modelandView, @RequestParam Map<String, Object> paramMap2) {
+			ModelAndView modelandView, @RequestParam Map<String, Object> paramMap2) { 
 		
-		String viewName = MAPPING + action;
-		Map<String,Object> paramMap = paramMethodMap.getMap();
-		Map<String,Object> resultMap = new HashMap<String, Object>();
-		List<Object> groupNames = new ArrayList<Object>();
-		List<Object> resultList = new ArrayList<Object>();
-		UserInfo user = (UserInfo)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-		if("insert".equalsIgnoreCase(action)){	// login 화면
-			groupservice.group_insert("", paramMap);
-			groupNames = (List<Object>) groupservice.getGroupNameList("", paramMap2);
+		String viewName = MAPPING + action;	// 보여 줄 jsp 파일 이름 위한 변수
+		Map<String,Object> paramMap = paramMethodMap.getMap(); // list를 map으로 mapping 해서 가져오기 위해 paramMethodMap 사용
+		Map<String,Object> resultMap = new HashMap<String, Object>();  // 결과 값을 Map 으로 사용하기 위한 변수
+		List<Object> groupNames = new ArrayList<Object>();	// groupName들을 가져오기 위한 List 변수
+		List<Object> resultList = new ArrayList<Object>();  // 결과 값을 list로 사용하기 위한 변수
+		UserInfo user = (UserInfo)(SecurityContextHolder.getContext().getAuthentication().getPrincipal()); // 로그인 된 유저의 id, user_id, name, password 등을 parameter로 사용 가능 
+		if("insert".equalsIgnoreCase(action)){	// /group/insert일 경우 
+			groupservice.group_insert("", paramMap); // 그룹 만들기 기능 (만든 그룹 정보 db에 삽입)
+			groupNames = (List<Object>) groupservice.getGroupNameList("", paramMap2); // 만든 그룹 리스트 보여주는 함수
 			viewName = "/group_make";
 		}else if("make_group".equalsIgnoreCase(action)){
 			paramMap2.put("ID", user.getId());
