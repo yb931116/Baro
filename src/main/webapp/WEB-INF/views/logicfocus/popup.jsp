@@ -22,6 +22,7 @@
                <div class="form-group">
 
                   <div class="form-group">
+                  	 <p>${resultMap.source_user_id}</p>
                      <label for="source_detailsummary">요약</label>
                      <textarea class="form-control" disabled="disabled"
                         id="source_detailsummary" rows="4">${resultMap.source_summary}</textarea>
@@ -59,6 +60,7 @@
          <!--1. original_no    2. Source_no  3. summary 4. contents  -->
          
                   <div class="form-group">
+                  <p>${resultMap.user_id}</p>
                      <label for="detailsummary">요약</label>
                      <textarea class="form-control" disabled="disabled"
                         id="detailsummary" rows="4">${resultMap.summary}</textarea>
