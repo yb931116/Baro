@@ -72,9 +72,12 @@ public class LogicFocusService {
 		List resultObject = (List) dao.getList(SqlMapId, dataMap);
 		List ProList = new ArrayList<>();
 		List AnsList = new ArrayList<>();
+		Map user = new HashMap<Object, Object>();
+		
 		Boolean insert = false;
 
 		for (int i = 0; i < resultObject.size(); i++) {
+			user.put(((Map)(resultObject.get(i))).get("original_no"),((Map)(resultObject.get(i))).get("user_id"));
 			Map temp_Pro = new HashMap<>();
 			if (((String) ((temp_Pro = (Map) resultObject.get(i)).get("category"))).equalsIgnoreCase("problem")) {
 				for (int j = 0; j < resultObject.size(); j++) {
@@ -101,6 +104,7 @@ public class LogicFocusService {
 		resultMap.put("project_name", ((Map) dataMap).get("project_name"));
 		resultMap.put("ProList", ProList);
 		resultMap.put("AnsList", AnsList);
+		resultMap.put("userID", user);
 		resultMap.putAll((Map)dao.getObject("getEvaluationLogic", dataMap));
 		return resultMap;
 	}
