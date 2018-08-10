@@ -117,6 +117,7 @@
 var project_no = "<c:out value="${resultMap.project_no}" />";
 	// 테이블 hover
 	$(function() {
+		console.log("${resultMap}");
 		refreshEvalProject("${resultMap.sum}","${resultMap.sumOfAccept}");
 		$(".eval-project").click(function(){
 			var flag;
@@ -240,7 +241,7 @@ var project_no = "<c:out value="${resultMap.project_no}" />";
 			  td.find(".summary").val(),
 			  td.find(".contents").val(),
 			  td.find(".category").val(), 
-			 // td.find(".user_id").val(), 
+			  td.find(".user_id").val(), 
 			  project_no ];
 		
 		if(td.hasClass("originalPro")){
@@ -252,7 +253,7 @@ var project_no = "<c:out value="${resultMap.project_no}" />";
 						$("td").eq(i).find(".summary").val(),
 						$("td").eq(i).find(".contents").val(),
 						$("td").eq(i).find(".category").val(),
-						//$("td").eq(i).find(".user_id").val(),
+						$("td").eq(i).find(".user_id").val(),
 						project_no ];
 					values[1]=$("td").eq(i).find(".original_no").val();
 				}
@@ -267,7 +268,7 @@ var project_no = "<c:out value="${resultMap.project_no}" />";
 				  td.prev().find(".summary").val(),
 				  td.prev().find(".contents").val(),
 				  td.prev().find(".category").val(),
-				  //td.prev().find(".user_id").val(),
+				  td.prev().find(".user_id").val(),
 				  project_no ]; 
 			
 			values[1] = td.prev().find(".original_no").val();
@@ -280,7 +281,7 @@ var project_no = "<c:out value="${resultMap.project_no}" />";
 							  td.prev().prev().find(".summary").val(),
 							  td.prev().prev().find(".contents").val(),
 							  td.prev().prev().find(".category").val(), 
-							 // td.prev().prev().find(".user_id").val(), 
+							  td.prev().prev().find(".user_id").val(), 
 							  project_no ]; 
 
 			values[1] = td.prev().prev().find(".original_no").val();

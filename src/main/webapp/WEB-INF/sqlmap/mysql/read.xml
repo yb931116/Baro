@@ -13,13 +13,13 @@
 	</select>
 	
 	<select id="getCurrentUserName" resultType="Map" parameterType="Map">
-		SELECT name user_name
+		SELECT name user_name, id
 		FROM user_info 
 		WHERE user_id = #{user_id};
 	</select>
 	
 	<select id="getSourceUserName" resultType="Map" parameterType="Map">
-		SELECT u.name source_user_name
+		SELECT u.name source_user_name,id source_id
 		FROM user_info u, logic l
 		WHERE l.original_no = #{source_no} and l.user_id= u.user_id
 	</select>

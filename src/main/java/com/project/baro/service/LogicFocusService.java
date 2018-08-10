@@ -104,7 +104,6 @@ public class LogicFocusService {
 		resultMap.put("project_name", ((Map) dataMap).get("project_name"));
 		resultMap.put("ProList", ProList);
 		resultMap.put("AnsList", AnsList);
-		resultMap.put("userID", user);
 		resultMap.putAll((Map)dao.getObject("getEvaluationLogic", dataMap));
 		return resultMap;
 	}
@@ -161,12 +160,18 @@ public class LogicFocusService {
 				resultMap.put("attached_file_name", "없음");
 				resultMap.put("source_attached_file_name", "없음");
 		}
+		sqlMapId="read.getCurrentUserName";  // 현재 선택 항목에 대한 작성자 정보 가져옴
+		Map tempUserId=(Map) dao.getObject(sqlMapId, dataMap);
 		
-	/*	sqlMapId="read.getCurrentUserName";  // 현재 선택 항목에 대한 작성자 정보 가져옴
-		resultMap.putAll((Map) dao.getObject(sqlMapId, dataMap));
+		if(tempUserId!=null)
+			resultMap.putAll((Map) dao.getObject(sqlMapId, dataMap));
+		
 		
 		sqlMapId="read.getSourceUserName";  // 이전 항목에 대한 작성자 정보 가져옴
-		resultMap.putAll((Map) dao.getObject(sqlMapId, dataMap));*/
+		tempUserId=(Map) dao.getObject(sqlMapId, dataMap);
+		
+		if(tempUserId!=null)		
+			resultMap.putAll((Map) dao.getObject(sqlMapId, dataMap));
 		
 		return resultMap;		
 	}

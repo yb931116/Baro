@@ -40,7 +40,10 @@ public class FileUtil {
 			String fileName = multiFileList.next();
 			MultipartFile multiFile = multipartRequest.getFile(fileName);
 			multiFileName = multiFile.getOriginalFilename();
+			
 			String fileDirectory = req.getSession().getServletContext().getRealPath("/")+"resources/upload/" + multiFileName;
+			//파일 저장 경로가 로컬로 잡히는것으로 보임. 수정 필요
+			
 			String fileType =  FilenameUtils.getExtension(multiFile.getOriginalFilename()); // 
 			try { // DB information
 				multiFile.transferTo(new File(fileDirectory));
