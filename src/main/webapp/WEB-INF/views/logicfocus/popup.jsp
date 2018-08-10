@@ -83,7 +83,7 @@
                <div class="card-action row py-3">
                   <div class=" col-12">
                		<div class="progress">
-					  <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+					  <div class="progress-bar progress-bar-logic" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
 					</div>
                   </div>
                </div>
@@ -97,10 +97,10 @@
                      <input id = "comment" class = "form-control" type="text">
                      <div class="input-group-append">
                         <span class="input-group-text">
-                           <button class="eval btn btn-primary btn-sm mr-1 up">
+                           <button class="eval-logic btn btn-primary btn-sm mr-1 up">
                            <i style="font-size: 20" class="la la-thumbs-up"></i>
                            </button>
-                           <button class="eval btn btn-primary btn-sm down">
+                           <button class="eval-logic btn btn-primary btn-sm down">
                            <i style="font-size: 20" class="la la-thumbs-down"></i>
                            </button>
                         </span>
@@ -240,7 +240,7 @@
 					}
 				}, true);
 
-		$(".eval").click(function() {
+		$(".eval-logic").click(function() {
 
 			var $btn = $(this);
 			var flag;
@@ -264,7 +264,9 @@
 					dataType : "json",
 					cache : false,
 					success : function(data) {
-						console.log(data);
+						if(data.result=="-1"){
+							alert("이미 평가하였습니다.");
+						}
 						refreshEval(data.sum,data.sumOfAccept);
 
 					},
@@ -309,9 +311,9 @@
 		
 		
 		var AcceptPerSum = Math.round(sumOfAccept / sum *100);
-		$(".progress-bar").css("width", AcceptPerSum + "%");
-		$(".progress-bar").attr("aria-valuenow", AcceptPerSum);
-		$(".progress-bar").text(AcceptPerSum+"%");
+		$(".progress-bar-logic").css("width", AcceptPerSum + "%");
+		$(".progress-bar-logic").attr("aria-valuenow", AcceptPerSum);
+		$(".progress-bar-logic").text(AcceptPerSum+"%");
 	}
 	
 	function viewOriginalFile() {

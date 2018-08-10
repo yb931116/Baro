@@ -14,9 +14,13 @@ public class EvaluationService {
 	ShareDao dao ;
 	
 	public Object setEvaluationLogic(String sqlMapId, Object dataMap) {
-		
-		Object resultNum = dao.saveObject("evaluation.setEvaluationLogic", dataMap);
-		return resultNum;
+		Object resultNum =null;
+		if(dao.getObject("evaluation.SearchEvaluationLogic", dataMap)==null){
+			resultNum = dao.saveObject("evaluation.setEvaluationLogic", dataMap);
+		}else {
+			resultNum = -1;
+		}
+			return resultNum;
 	}
 
 	public Object getEvaluationLogic(String sqlMapId, Object dataMap) {
@@ -27,7 +31,12 @@ public class EvaluationService {
 	
 	public Object setEvaluationProject(String sqlMapId, Object dataMap) {
 		
-		Object resultNum = dao.saveObject("evaluation.setEvaluationProject", dataMap);
+		Object resultNum =  null;
+		if(dao.getObject("evaluation.SearchEvaluationProject", dataMap)==null) {
+			resultNum = dao.saveObject("evaluation.setEvaluationProject", dataMap);
+		}else {
+			resultNum = -1;
+		}
 		return resultNum;
 	}
 

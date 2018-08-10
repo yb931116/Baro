@@ -59,6 +59,20 @@
         where e.project_no = #{project_no};
 	</select>
 	
+	<select id = "SearchEvaluationLogic" resultType="Map" parameterType="Map">
+		select *
+		from evaluation_Logic
+		where original_no = #{original_no} and
+			  user_id = #{user_id};
+	</select>
+
+	<select id = "SearchEvaluationProject" resultType="Map" parameterType="Map">
+		select *
+		from evaluation_Project
+		where project_no = #{project_no} and
+			  user_id = #{user_id};
+	</select>
+	
 	<insert id="merge" parameterType="Map">
 	</insert>
 

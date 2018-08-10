@@ -71,12 +71,12 @@ public class RestWSController {
 			resultMap.put("user_info", mypageservice.get_user_info("", paramMap));
 		}else if("setEvaluationLogic".equalsIgnoreCase(action)) {
 			paramMap.put("user_id", user.getUserId());			
-			evaluationservice.setEvaluationLogic("evaluation.setEvaluationLogic",paramMap);
-			resultMap = (Map) evaluationservice.getEvaluationLogic("evaluation.getEvalutationLogic", paramMap);
+			resultMap.put("result", evaluationservice.setEvaluationLogic("evaluation.setEvaluationLogic",paramMap));
+			resultMap.putAll((Map) evaluationservice.getEvaluationLogic("evaluation.getEvalutationLogic", paramMap));
 		}else if("setEvaluationProject".equalsIgnoreCase(action)) {
 			paramMap.put("user_id", user.getUserId());			
-			evaluationservice.setEvaluationProject("evaluation.setEvaluationProject",paramMap);
-			resultMap = (Map) evaluationservice.getEvaluationProject("evaluation.getEvalutationProject", paramMap);
+			resultMap.put("result",evaluationservice.setEvaluationProject("evaluation.setEvaluationProject",paramMap));
+			resultMap.putAll((Map) evaluationservice.getEvaluationProject("evaluation.getEvalutationProject", paramMap));
 		}else if("myinfo".equalsIgnoreCase(action)) {
 			resultMap = (Map) mypageservice.get_user_info("", paramMap);
 		}else if("searchProject".equalsIgnoreCase(action)) {

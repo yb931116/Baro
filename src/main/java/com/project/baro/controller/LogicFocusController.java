@@ -28,7 +28,7 @@ public class LogicFocusController {
 	@Autowired
 	private LogicFocusService service;
 	@Autowired
-	private EvaluationService evaluationService;
+	private EvaluationService evaluationservice;
 
 	// Sidebar의 List 메뉴에서 접근할 수 있는 가장 깊은(3 depth) URI인 read와 insert 내의 popup Modal
 	// 관련 Method
@@ -42,12 +42,17 @@ public class LogicFocusController {
 		String viewName = "";
 		
 		if ("detail".equalsIgnoreCase(action)) {
+<<<<<<< HEAD
 			
 			resultMap = (Map<String, Object>)evaluationService.getEvaluationLogic("getEvaluation", paramMap);
 
 			
 			resultMap.putAll((Map) service.getFile("read.getFile", paramMap));
 				
+=======
+
+			resultMap = (Map<String, Object>)evaluationservice.getEvaluationLogic("getEvaluation", paramMap);
+>>>>>>> branch 'master' of https://github.com/yb931116/Baro.git
 			viewName = "logicfocus/popup";
 			
 		}else if("file".equalsIgnoreCase(action)) {
@@ -120,6 +125,8 @@ public class LogicFocusController {
 			
 		} else if ("read".equalsIgnoreCase(action)) {
 			resultMap = (Map)service.getProject(paramMap);
+			resultMap.putAll( (Map) evaluationservice.getEvaluationProject("evaluation.getEvalutationProject", paramMap));
+
 		}
 		
 		if (forwardView != null) {

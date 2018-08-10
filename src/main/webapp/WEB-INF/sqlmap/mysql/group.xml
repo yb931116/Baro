@@ -43,7 +43,7 @@
 <!-- 	<select id = "list" resultType="Map" parameterType="Map"> -->
 	
 <!-- 		select g.group_no group_no, g.group_name gname, ui.name uname, ui.id id -->
-<!-- 		from _grouping g INNER JOIN grouping_member gm -->
+<!-- 		from grouping g INNER JOIN grouping_member gm -->
 <!-- 			ON g.group_no = gm.group_no RIGHT OUTER JOIN user_info ui -->
 <!--     		ON ui.user_id = gm.user_id -->
 <!-- 		where g.group_no is not null and g.user_id = (select user_id from user_info where id = #{ID}) -->
@@ -52,7 +52,7 @@
 	<select id = "mygroup_list" resultType="Map" parameterType="Map">
 		
 			select g.group_no group_no, g.group_name gname, ui.name uname, ui.id id
-			from _grouping g INNER JOIN _grouping_member gm
+			from _grouping g INNER JOIN grouping_member gm
 				ON g.group_no = gm.group_no RIGHT OUTER JOIN user_info ui
 	    		ON ui.user_id = gm.user_id
 			where g.group_no is not null and g.user_id = (select user_id from user_info where id = #{ID})
@@ -125,8 +125,8 @@
 		SELECT _grouping.*, user_info.id, user_info.name, 
 				((SELECT count(*) FROM grouping_member WHERE _grouping.group_no = grouping_member.group_no)-1) group_count
 		FROM (
-			SELECT @RNUM := @RNUM + 1 AS ROWNUM, groups.*
-			FROM ( select * from _grouping) groups, ( SELECT @RNUM := 0 ) R
+			SELECT @RNUM := @RNUM + 1 AS ROWNUM, groups_.*
+			FROM ( select * from _grouping) groups_, ( SELECT @RNUM := 0 ) R
             ORDER by generating_date
 		) _grouping INNER JOIN user_info
         ON _grouping.user_id = user_info.user_id
@@ -136,11 +136,11 @@
 		SELECT _grouping.*, user_info.id, user_info.name, 
 				((SELECT count(*) FROM grouping_member WHERE _grouping.group_no = grouping_member.group_no)-1) group_count
 		FROM (
-			SELECT @RNUM := @RNUM + 1 AS ROWNUM, groups.*
-			FROM ( select * from _grouping) groups, ( SELECT @RNUM := 0 ) R
+			SELECT @RNUM := @RNUM + 1 AS ROWNUM, groups_.*
+			FROM ( select * from _grouping) groups_, ( SELECT @RNUM := 0 ) R
 			<![CDATA[
 			where 1= 1
-			and groups.group_name like CONCAT('%',#{group_name},'%')
+			and groups_.group_name like CONCAT('%',#{group_name},'%')
 			]]>
             ORDER by generating_date
 		) _grouping INNER JOIN user_info
