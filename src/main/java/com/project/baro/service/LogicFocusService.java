@@ -59,12 +59,12 @@ public class LogicFocusService {
 		((Map)dataMap).put("original_no", util.getUniqueSequence());
 		Object resultObject = dao.saveObject(sqlMapId, dataMap);
 		
-		//if(!((List)(dataMap.get("fileList"))).isEmpty()) {
-		sqlMapId = "read.insertFile";
-		dao.saveObject(sqlMapId, dataMap);
-		sqlMapId = "read.insertFileRel";
-		dao.saveObject(sqlMapId, dataMap);
-		//}
+		if(!((List)(dataMap.get("attachedFileList"))).isEmpty()) {
+			sqlMapId = "read.insertFile";
+			dao.saveObject(sqlMapId, dataMap);
+			sqlMapId = "read.insertFileRel";
+			dao.saveObject(sqlMapId, dataMap);
+		}
 		
 		return resultObject;
 	}
